@@ -1,7 +1,17 @@
+import { Outlet, NavLink } from "react-router-dom";
 import "./App.css";
 
-function App() {
-  return <h1>Hello</h1>;
-}
-
-export default App;
+export const App = () => {
+  return (
+    <div>
+      <div>
+        <Outlet />
+        {/*Empty slot where render the results of the routes contained in this APP*/}
+      </div>
+      <div className="footer">
+        <NavLink to="/terms-and-conditions">Términos y condiciones</NavLink>
+        <NavLink to="/privacy">Privacy</NavLink>
+      </div>
+    </div>
+  );
+};
