@@ -1,6 +1,8 @@
 import '../firebaseConfig.js'
 import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
-import { User, UserFromApi } from '../models'
+import uuid4 from "uuid4";
+
+import { User, UserFromApi } from '../models/index.js'
 const db = getFirestore();
 
 const undefinedUser = {
@@ -11,10 +13,11 @@ const undefinedUser = {
     mail: ""
 }
 
-export const postUser = async (userData:User ) =>{
+export const createUser = async (userData:User ) =>{
     try {
+        var id = uuid4();
         const docRef = await addDoc(collection(db, 'users'), {
-            id: userData.id,
+            id: id,
             name: userData.name,
             surname: userData.surname,
             username: userData.username,
@@ -26,7 +29,7 @@ export const postUser = async (userData:User ) =>{
         return undefined;
     }
 }
-export const getUser = async (userId:string) => {
+export const getUser = async (userId:string): Promise<UserFromApi> => {
     try {
         const usersCollection = collection(db, 'users');
         const querySnapshot = await getDocs(query(usersCollection, where('id', '==', userId)));
@@ -36,7 +39,7 @@ export const getUser = async (userId:string) => {
         querySnapshot.forEach((doc) => {
             userData = doc.data() as UserFromApi;
         });
-        
+        console.log(userData);
         return userData;
     } catch (error) {
         console.error('Error fetching user: ', error);
