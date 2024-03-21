@@ -1,0 +1,14 @@
+.login{
+    height: 100svh;
+    width: auto;
+    display: grid;
+    place-content: center;
+}
+.login__form{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    height: 40%;
+    width: auto;
+    padding: 16px;
+}
