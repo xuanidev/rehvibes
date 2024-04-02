@@ -1,14 +1,25 @@
-.login{
+.survey{
     height: 100svh;
     width: auto;
     display: grid;
     place-content: center;
 }
-.login__form{
+.survey__form{
     display: flex;
     flex-direction: column;
     gap:16px;
     height: 40%;
     width: auto;
     padding: 16px;
+}
+.survey__label{
+    padding: 0px 0px 8px 16px;
+}
+.survey__actions{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.btn__survey{
+    width: 100%;
 }

@@ -1,0 +1,42 @@
+.step{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    height: 40%;
+    width: auto;
+    height: auto;
+    padding: 16px;
+}
+.step__btn{
+    background-color: #ffffff;
+    border: 1.5px solid black;
+    border-radius: 4px;
+    padding: 4px 6px;
+}
+.step__btn:hover{
+    cursor: pointer;
+}
+.disabled {
+    background-color: #ececec; /* Change to the desired shade of gray */
+}
+.step__input::placeholder{
+    color: black;
+}
+
+.two-columns {
+    display: flex;
+    gap:16px;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .two-columns {
+      flex-direction: column;
+    }
+  }
