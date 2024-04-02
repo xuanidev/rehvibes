@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import "./App.css";
+import { Outlet, NavLink } from "react-router-dom";
 
 export const App = () => {
-  return <div></div>;
+  return (
+    <div>
+      <div>NAV</div>
+      <div>
+        <Outlet />
+      </div>
+    </div>
+  );
 };

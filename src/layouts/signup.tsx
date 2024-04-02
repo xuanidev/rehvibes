@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./signup.scss";
 import { signup } from "../api/login";
 import { createUser } from "../api/users";
 import { User } from "../models";

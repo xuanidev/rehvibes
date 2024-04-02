@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./login.scss";
 import { login } from "../api/login";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +15,7 @@ export const Login = () => {
     console.log(loginValue);
     if (loginValue) {
       localStorage.setItem("authenticated", JSON.stringify(true));
-      navigate("/");
+      navigate("/app");
     }
   };
 
