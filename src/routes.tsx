@@ -5,28 +5,33 @@ import { Signup } from "./layouts/signup";
 import { Survey } from "./layouts/survey";
 import { Main } from "./layouts/main";
 import { Landing } from "./layouts/landing";
-// RequireAuth component to check authentication
-/*const RequireAuth: React.FC<any> = ({ children }) => {
-  const storedAuthenticated = localStorage.getItem("authenticated") === "true";
-  return storedAuthenticated ? children : <Navigate to="/login" />;
-};*/
-const isAuthenticated = () => {
-  return localStorage.getItem("authenticated") === "true";
-};
+import Cookies from "js-cookie";
 
-// Your router setup
+function PrivateRoute({ children }: any) {
+  const isAuthenticated =
+    Cookies.get("uuid") !== undefined && Cookies.get("uuid") !== "";
+  return isAuthenticated ? children : <Landing />;
+}
+function PrivateRouteSurvey({ children }: any) {
+  const isAuthenticated =
+    Cookies.get("uuid") !== undefined && Cookies.get("uuid") !== "";
+  return isAuthenticated ? children : <Login />;
+}
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: isAuthenticated() ? <App /> : <Landing />,
-    children: isAuthenticated()
-      ? [
-          {
-            path: "/app",
-            element: <Main />,
-          },
-        ]
-      : [],
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <App />
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/login",
@@ -38,6 +43,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/survey",
-    element: <Survey />,
+    element: (
+      <PrivateRouteSurvey>
+        <Survey />
+      </PrivateRouteSurvey>
+    ),
   },
 ]);

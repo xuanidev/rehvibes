@@ -20,12 +20,18 @@ export const signup = async (email: string, password: string ): Promise<boolean>
         return false
     }
 }
+interface loginProps {
+    isLogged: boolean,
+    uuid: string
+}
 
-export const login = async (email: string, password: string ): Promise<boolean> =>{
+export const login = async (email: string, password: string ): Promise<loginProps> =>{
+    let uuid = "";
     try {
         const isLogged = await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            const user = userCredential.user;
+            const userLogged = userCredential.user;
+            uuid = userLogged.uid;
             return true;
         })
         .catch((error) => {
@@ -35,9 +41,9 @@ export const login = async (email: string, password: string ): Promise<boolean> 
             //implement messages to show state
             return true;
         });
-        return isLogged;
+        return {isLogged,uuid};
     } catch (error) {
-       return true;
+       return {isLogged:false, uuid:""};
     }
 }
 

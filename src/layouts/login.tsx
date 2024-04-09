@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { login } from "../api/login";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,11 +11,11 @@ export const Login = () => {
 
   const handleLogin = async () => {
     //login("revibes@gmail.com", "mandatorico");
-    const loginValue = await login(email, password);
-    console.log(loginValue);
-    if (loginValue) {
-      localStorage.setItem("authenticated", JSON.stringify(true));
-      navigate("/app");
+    const { isLogged, uuid } = await login(email, password);
+    console.log(uuid);
+    if (isLogged) {
+      Cookies.set("uuid", uuid, { path: "" });
+      navigate("/");
     }
   };
 
