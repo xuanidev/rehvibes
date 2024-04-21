@@ -1,5 +1,16 @@
-@use 'base.scss';
+@import './base';
 
 * {
     box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+
+.container__center{
+    height: 100svh;
+    width: auto;
+    display: grid;
+    place-content: center;
+    background-color: white;
 }

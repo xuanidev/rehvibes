@@ -1,0 +1,31 @@
+@use 'constants' as *;
+
+@mixin breakpoint($point) {
+    // Find corresponding index of $point in $names list
+    $index: map-has-key($breakpoints, $point);
+    
+    // If index exists, generate media query
+    @if $index {
+      $size: map-get($breakpoints, $point);
+      @media (min-width: $size) {
+        @content;
+      }
+    }
+}
+
+@mixin generateBreakpoints($points, $property, $values...) {
+  @for $i from 1 through length($points) {
+   $point: nth($points, $i);
+    @if map-has-key($breakpoints, $point) {
+        // Point exists in $names list
+        $size: map-get($breakpoints, $point);
+        @media (min-width: $size) {
+            #{$property}: nth($values, $i);
+        }
+    } @else {
+      // Point does not exist in $names list
+      @error "Breakpoint point '#{$point}' does not exist in $names list.";
+    }
+  }
+}
+

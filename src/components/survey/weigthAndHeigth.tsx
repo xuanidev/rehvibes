@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { StepWeigthAndHeigth } from "../../models";
 
-function BirthDate({
-  setStepValid,
-  handleStep,
-  currentValueWeigth,
-  currentValueHeigth,
-}: StepWeigthAndHeigth) {
+function WeigthAndHeigth(props: StepWeigthAndHeigth) {
+  const { setStepValid, handleStep, currentValueWeigth, currentValueHeigth } =
+    props;
   const [formData, setFormData] = useState({ weight: 0, height: 0 });
 
   useEffect(() => {
@@ -51,7 +48,6 @@ function BirthDate({
         <label htmlFor="peso">Weight (Kg): </label>
         <input
           type="number"
-          id="peso"
           name="weight"
           value={formData.weight.toString()}
           onChange={(event) =>
@@ -63,7 +59,6 @@ function BirthDate({
         <label htmlFor="height">Height (Cm): </label>
         <input
           type="number"
-          id="height"
           name="height"
           value={formData.height.toString()}
           onChange={(event) =>
@@ -77,4 +72,4 @@ function BirthDate({
   );
 }
 
-export default BirthDate;
+export default WeigthAndHeigth;

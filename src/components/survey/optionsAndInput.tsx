@@ -2,15 +2,8 @@ import { useEffect, useState } from "react";
 import "./survey.scss";
 import { StepOptionsAndInput } from "../../models";
 
-function OptionsAndInput({
-  setStepValid,
-  handleStep,
-  inputs,
-  question,
-  otherText,
-  fieldName,
-  currentValue,
-}: StepOptionsAndInput) {
+function OptionsAndInput(props: StepOptionsAndInput) {
+  const { setStepValid, handleStep, stepInfo, currentValue } = props;
   const [clickedButton, setClickedButton] = useState<string | null>(
     currentValue
   );
@@ -18,7 +11,7 @@ function OptionsAndInput({
 
   useEffect(() => {
     if (currentValue !== null && currentValue !== "") {
-      if (inputs.includes(currentValue)) {
+      if (stepInfo.inputs.includes(currentValue)) {
         setClickedButton(currentValue);
         setStepValid({ state: true, error: "" });
       } else {
@@ -38,7 +31,7 @@ function OptionsAndInput({
       setOther("");
       setStepValid({ state: true, error: "" });
       setClickedButton(value);
-      handleStep(fieldName, value, undefined);
+      handleStep(stepInfo.fieldName, value, undefined);
     }
   };
 
@@ -52,22 +45,23 @@ function OptionsAndInput({
       });
     } else {
       setStepValid({ state: true, error: "" });
-      handleStep(fieldName, value, undefined);
+      handleStep(stepInfo.fieldName, value, undefined);
     }
   };
 
   return (
     <>
       <div className="step">
-        <p>{question}</p>
-        {inputs.map((input, index) => (
-          <div
+        <p>{stepInfo.question}</p>
+        {stepInfo.inputs.map((input, index) => (
+          <button
+            type="button"
             key={index}
             className={`step__btn ${clickedButton === input ? "disabled" : ""}`}
             onClick={() => handleButtonClick(input)}
           >
             {input}
-          </div>
+          </button>
         ))}
         <input
           type="text"
@@ -78,7 +72,7 @@ function OptionsAndInput({
             handleOtherInputChange(e.target.value);
           }}
           onClick={() => setClickedButton(null)}
-          placeholder={otherText}
+          placeholder={stepInfo.otherText}
         />
       </div>
     </>

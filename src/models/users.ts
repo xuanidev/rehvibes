@@ -1,9 +1,7 @@
 export interface User {
-    id?: string,
+    uid?: string,
     name: string;
-    surname: string;
-    username: string;
-    mail: string;
+    email: string;
 }
 
 export interface UserFromApi {

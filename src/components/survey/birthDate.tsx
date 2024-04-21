@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Step } from "../../models";
 
-function BirthDate({
-  setStepValid,
-  handleStep,
-  fieldName,
-  currentValue,
-}: Step) {
+function BirthDate(props: Step) {
+  const { setStepValid, handleStep, stepInfo, currentValue } = props;
   const [currentDate, setCurrentDate] = useState("0000-00-00");
 
   useEffect(() => {
@@ -44,7 +40,7 @@ function BirthDate({
     }
 
     setStepValid({ state: true, error: "" });
-    handleStep(fieldName || "birthDate", newDateOfBirth);
+    handleStep(stepInfo.fieldName || "birthDate", newDateOfBirth);
   };
 
   return (

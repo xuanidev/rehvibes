@@ -2,8 +2,17 @@ const genero = {
   fieldName: "genero",
   question: "¿Cuál es tú genero?",
   options: ["Hombre", "Mujer"],
+  fieldType: "Options",
 };
 
+const birthDate = {
+  fieldName: "dateOfBirth",
+  fieldType: "BirthDate",
+};
+const weigthAndHeigth = {
+  fieldType: "WeigthAndHeigth",
+  fieldName: "weigthAndHeigth",
+};
 const operationCuello = {
   fieldName: "operationCuello",
   question: "¿Qué lesión tienes en el cuello?",
@@ -15,6 +24,7 @@ const operationCuello = {
     "Artritis cervical",
     "Latigazo cervical",
   ],
+  fieldType: "Options",
 };
 
 const operationColumna = {
@@ -28,6 +38,7 @@ const operationColumna = {
     "Escoliosis",
     "Sindrome facetario",
   ],
+  fieldType: "Options",
 };
 
 const operationHombro = {
@@ -41,6 +52,7 @@ const operationHombro = {
     "Síndrome de impacto",
     "Capsulitis adhesiva",
   ],
+  fieldType: "Options",
 };
 
 const operationEspalda = {
@@ -54,6 +66,7 @@ const operationEspalda = {
     "Postura incorrecta",
     "Dolor de cuello asociado con la espalda",
   ],
+  fieldType: "Options",
 };
 
 const operationCadera = {
@@ -67,6 +80,7 @@ const operationCadera = {
     "Tenidinitis",
     "Síndrome del piramidal",
   ],
+  fieldType: "Options",
 };
 
 const operationCodo = {
@@ -80,6 +94,7 @@ const operationCodo = {
     "Lesión del ligamento",
     "Síndrome de sobrecarga del codo",
   ],
+  fieldType: "Options",
 };
 
 const operationMuneca = {
@@ -93,6 +108,7 @@ const operationMuneca = {
     "Artritis de muñeca",
     "Tenosinovitis",
   ],
+  fieldType: "Options",
 };
 
 const operationRodilla = {
@@ -106,6 +122,7 @@ const operationRodilla = {
     "Síndrome de fricción de la banda iliotibial",
     "Rotura",
   ],
+  fieldType: "Options",
 };
 
 const operationPie = {
@@ -119,6 +136,7 @@ const operationPie = {
     "Síndrome del túnel del tarso",
     "Espolón calcáneo",
   ],
+  fieldType: "Options",
 };
 
 const operationTobillo = {
@@ -132,6 +150,7 @@ const operationTobillo = {
     "Lesión de tejidos blandos",
     "Inestabilidad crónica del tobillo",
   ],
+  fieldType: "Options",
 };
 
 const goals = {
@@ -145,6 +164,7 @@ const goals = {
     "Mejorar mi calidad de vida",
     "Crear hábitos saludables",
   ],
+  fieldType: "Options",
 };
 
 const desire = {
@@ -154,6 +174,7 @@ const desire = {
     "Tengo molestias y quiero mejorar mis hábitos",
     "Recuperarme de una lesión o cirugía",
   ],
+  fieldType: "Options",
 };
 
 const zones = {
@@ -175,12 +196,14 @@ const zones = {
     "Rodilla",
     "Gluteos",
   ],
+  fieldType: "MultipleChoices",
 };
 
 const lastOperation = {
   fieldName: "lastOperation",
   question: "¿Has tenido alguna operación recientemente?",
   options: ["Si", "No", "No, pero hace más de 3 sí"],
+  fieldType: "Options",
 };
 
 const lesionZones = {
@@ -198,6 +221,7 @@ const lesionZones = {
     "Codo",
     "Columna vertebral",
   ],
+  fieldType: "Options",
 };
 
 const lesionBeforeZones = {
@@ -205,6 +229,7 @@ const lesionBeforeZones = {
   question: "¿Has sufrido alguna lesión en estas zonas?",
   exclusiveOption: "No",
   options: ["Cuello", "Hombro", "Espalda", "Cadera", "Muñeca", "Pies", "No"],
+  fieldType: "MultipleChoices",
 };
 
 const rehabilitation = {
@@ -216,6 +241,7 @@ const rehabilitation = {
     "He hecho rehabilitación o entrenamiento pero hace más de 6 meses",
     "No",
   ],
+  fieldType: "Options",
 };
 const objetivos = {
   fieldName: "objetivos",
@@ -229,6 +255,7 @@ const objetivos = {
     "Prevenir o aliviar enfermedades",
     "Mejorar mi salud mental y reducir el estrés",
   ],
+  fieldType: "Options",
 };
 
 const tipoEjercicios = {
@@ -243,12 +270,14 @@ const tipoEjercicios = {
     "Equilibrio y coordinación",
     "Sin preferencias",
   ],
+  fieldType: "Options",
 };
 
 const nivel = {
   fieldName: "nivel",
   question: "Elige el nivel de entrenamiento que prefieras:",
   options: ["Principiante", "Intermedio", "Avanzado"],
+  fieldType: "Options",
 };
 
 const lugar = {
@@ -260,6 +289,7 @@ const lugar = {
     "Al aire libre: realizar ejercicios conectando con el medio ambiente",
     "En cualquier lugar: deja que Revibes decida por ti",
   ],
+  fieldType: "Options",
 };
 
 const equipamiento = {
@@ -285,6 +315,8 @@ const equipamiento = {
     "Comba",
     "Ninguna de las anteriores",
   ],
+  fieldType: "MultipleChoicesAndInput",
+  otherText: "Otro",
 };
 
 const condiciones = {
@@ -303,6 +335,8 @@ const condiciones = {
     "Esclerosis múltiple",
     "Ninguna",
   ],
+  fieldType: "MultipleChoicesAndInput",
+  otherText: "Otro",
 };
 const movilidad = {
   fieldName: "movilidad",
@@ -315,6 +349,8 @@ const movilidad = {
     "Falta de equilibrio",
     "Ninguna",
   ],
+  fieldType: "MultipleChoicesAndInput",
+  otherText: "Otro",
 };
 const enfermedadCardiovascular = {
   fieldName: "enfermedadCardiovascular",
@@ -328,6 +364,8 @@ const enfermedadCardiovascular = {
     "Arritmia",
     "Accidente cerebrovascular previo",
   ],
+  fieldType: "MultipleChoicesAndInput",
+  otherText: "Otro",
 };
 const condicionRespiratoria = {
   fieldName: "condicionRespiratoria",
@@ -341,6 +379,8 @@ const condicionRespiratoria = {
     "Fibrosis pulmonar",
     "Apnea del sueño",
   ],
+  fieldType: "MultipleChoicesAndInput",
+  otherText: "Otro",
 };
 const nivelActividadActual = {
   fieldName: "nivelActividadActual",
@@ -351,17 +391,20 @@ const nivelActividadActual = {
     "Moderadamente activo: hago ejercicio 2 o 3 veces por semanas",
     "Muy activo: hago ejercicio todos o casi todos los días",
   ],
+  fieldType: "Options",
 };
 const practicaRegular = {
   fieldName: "practicaRegular",
   question: "¿Practicas algún deporte o actividad física de manera regular?",
   options: ["Si", "No"],
+  fieldType: "Options",
 };
 const trabajoSentado = {
   fieldName: "trabajoSentado",
   question:
     "¿Tienes un trabajo en el que estés la mayor parte del tiempo sentado?",
   options: ["Si", "No"],
+  fieldType: "Options",
 };
 const estres = {
   fieldName: "estres",
@@ -371,12 +414,14 @@ const estres = {
     "Sí, de vez en cuando me siento estresado",
     "No, nunca me siento estresado",
   ],
+  fieldType: "Options",
 };
 const rehabilitacionPreviamente = {
   fieldName: "rehabilitacionPreviamente",
   question:
     "¿Has realizado algún tipo de programa de rehabilitación o entrenamiento anteriormente?",
   options: ["Si", "No"],
+  fieldType: "Options",
 };
 const dolor = {
   fieldName: "dolor",
@@ -386,6 +431,7 @@ const dolor = {
     "Moderado: me duele pero es soportable",
     "Intenso: me duele muchísimo",
   ],
+  fieldType: "Options",
 };
 
 export const operationComponents = {
@@ -435,4 +481,6 @@ export {
   rehabilitacionPreviamente,
   trabajoSentado,
   genero,
+  birthDate,
+  weigthAndHeigth,
 };

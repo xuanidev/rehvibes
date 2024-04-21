@@ -1,22 +1,21 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { App } from "./App";
-import { Login } from "./layouts/login";
-import { Signup } from "./layouts/signup";
-import { Survey } from "./layouts/survey";
-import { Main } from "./layouts/main";
-import { Landing } from "./layouts/landing";
+import { Login } from "./layouts/Login";
+import { Signup } from "./layouts/Signup";
+import { Survey } from "./layouts/Survey";
+import { Main } from "./layouts/Main";
+import { Landing } from "./layouts/Landing";
 import Cookies from "js-cookie";
+import { redirect } from "react-router-dom";
 
-function PrivateRoute({ children }: any) {
+const loader = () => {
   const isAuthenticated =
     Cookies.get("uuid") !== undefined && Cookies.get("uuid") !== "";
-  return isAuthenticated ? children : <Landing />;
-}
-function PrivateRouteSurvey({ children }: any) {
-  const isAuthenticated =
-    Cookies.get("uuid") !== undefined && Cookies.get("uuid") !== "";
-  return isAuthenticated ? children : <Login />;
-}
+  if (!isAuthenticated) {
+    return redirect("/login");
+  }
+  return null;
+};
 
 export const router = createBrowserRouter([
   {
@@ -25,13 +24,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <PrivateRoute>
-            <App />
-          </PrivateRoute>
-        ),
+        element: <Landing />,
+      },
+      {
+        path: "/app",
+        element: <Main />,
+        loader: loader,
       },
     ],
+  },
+  {
+    path: "/app",
+    element: <Main />,
+    loader: loader,
   },
   {
     path: "/login",
@@ -43,10 +48,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/survey",
-    element: (
-      <PrivateRouteSurvey>
-        <Survey />
-      </PrivateRouteSurvey>
-    ),
+    element: <Survey />,
+    //loader: loader,
   },
 ]);

@@ -1,0 +1,17 @@
+@import '../styles/base';
+
+.cta{
+    background-color: var(--color-primary);
+    color: white;
+    font-family: 'Satoshi-Medium';
+    font-size: 18px;
+    width: 100%;
+    @include generateBreakpoints(('small','tablet', 'large'), 'padding', 16px 20px, 16px 24px, 24px 32px);
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--color-primary-dark);
+}
+.cta:hover{
+    background-color: var(--color-primary-fluorescent);
+    cursor: pointer;
+}

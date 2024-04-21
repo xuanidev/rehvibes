@@ -2,16 +2,8 @@ import { useState, useEffect } from "react";
 import "./survey.scss";
 import { StepMultipleChoices } from "../../models";
 
-function MultipleChoices(optionsData: StepMultipleChoices) {
-  const {
-    handleStep,
-    setStepValid,
-    fieldName,
-    options,
-    question,
-    exclusiveOption,
-    currentValue,
-  } = optionsData;
+function MultipleChoices(props: StepMultipleChoices) {
+  const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     currentValue !== null ? [currentValue] : []
   );
@@ -25,58 +17,74 @@ function MultipleChoices(optionsData: StepMultipleChoices) {
     }
   }, [currentValue]);
 
-  const handleClick = (name: string, value: string) => {
-    if (value === exclusiveOption) {
-      // If "Ninguna de las anteriores" is selected, disable all other options
-      const isSelected = selectedOptions.includes(exclusiveOption);
-      setSelectedOptions(isSelected ? [] : [value]);
-      setStepValid({
-        state: !isSelected,
-        error: isSelected ? "Select a field" : "",
-      });
-      handleStep(fieldName, isSelected ? "" : exclusiveOption);
+  const handleExclusiveOption = (value: string) => {
+    const isSelected = selectedOptions.includes(stepInfo.exclusiveOption);
+    setSelectedOptions(isSelected ? [] : [value]);
+    setStepValid({
+      state: !isSelected,
+      error: isSelected ? "Select a field" : "",
+    });
+    handleStep(stepInfo.fieldName, isSelected ? "" : stepInfo.exclusiveOption);
+  };
+
+  const handleNotAlreadySelected = (
+    newSelectedOptions: string[],
+    value: string
+  ): string[] => {
+    if (!selectedOptions.includes(stepInfo.exclusiveOption)) {
+      if (value !== stepInfo.exclusiveOption) {
+        newSelectedOptions.push(value);
+        return newSelectedOptions;
+      }
     } else {
-      const index = selectedOptions.indexOf(value);
-      let newSelectedOptions = [...selectedOptions];
+      return [value];
+    }
+    return [];
+  };
 
-      if (index === -1) {
-        // If not already selected, add it to the selectedOptions
-        if (!selectedOptions.includes(exclusiveOption)) {
-          if (value !== exclusiveOption) {
-            newSelectedOptions.push(value);
-          }
-        } else {
-          newSelectedOptions = [value];
-        }
-      } else {
-        // If already selected, remove it from the selectedOptions
-        newSelectedOptions.splice(index, 1);
-      }
-      setSelectedOptions(newSelectedOptions);
+  const handleOption = (name: string, value: string) => {
+    const index = selectedOptions.indexOf(value);
+    let newSelectedOptions = [...selectedOptions];
 
-      // If there are selected options, set step as valid
-      if (newSelectedOptions.length > 0) {
-        setStepValid({ state: true, error: "" });
-      } else {
-        setStepValid({ state: false, error: "Select a field" });
-      }
-      // Pass selected options to handleStep
-      handleStep(name, newSelectedOptions.toString());
+    if (index === -1) {
+      // If not already selected, add it to the selectedOptions
+      newSelectedOptions = handleNotAlreadySelected(newSelectedOptions, value);
+    } else {
+      // If already selected, remove it from the selectedOptions
+      newSelectedOptions.splice(index, 1);
+    }
+
+    setSelectedOptions(newSelectedOptions);
+    if (newSelectedOptions.length > 0) {
+      setStepValid({ state: true, error: "" });
+    } else {
+      setStepValid({ state: false, error: "Select a field" });
+    }
+    handleStep(name, newSelectedOptions.toString());
+  };
+
+  const handleClick = (name: string, value: string) => {
+    if (value === stepInfo.exclusiveOption) {
+      // If "Ninguna de las anteriores" is selected, disable all other options
+      handleExclusiveOption(value);
+    } else {
+      handleOption(name, value);
     }
   };
 
   return (
     <>
       <div className="step">
-        <p>{question}</p>
-        {options.length < 8 ? (
-          options.map((option, index) => (
+        <p>{stepInfo.question}</p>
+        {stepInfo.options.length < 8 ? (
+          stepInfo.options.map((option, index) => (
             <button
+              type="button"
               key={index}
               className={`step__btn ${
                 selectedOptions.includes(option) ? "disabled" : ""
               }`}
-              onClick={() => handleClick(fieldName, option)}
+              onClick={() => handleClick(stepInfo.fieldName, option)}
             >
               {option}
             </button>
@@ -84,30 +92,32 @@ function MultipleChoices(optionsData: StepMultipleChoices) {
         ) : (
           <div className="two-columns">
             <div className="column">
-              {options
-                .slice(0, Math.ceil(options.length / 2))
+              {stepInfo.options
+                .slice(0, Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
                   <button
+                    type="button"
                     key={index}
                     className={`step__btn ${
                       selectedOptions.includes(option) ? "disabled" : ""
                     }`}
-                    onClick={() => handleClick(fieldName, option)}
+                    onClick={() => handleClick(stepInfo.fieldName, option)}
                   >
                     {option}
                   </button>
                 ))}
             </div>
             <div className="column">
-              {options
-                .slice(Math.ceil(options.length / 2))
+              {stepInfo.options
+                .slice(Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
                   <button
+                    type="button"
                     key={index}
                     className={`step__btn ${
                       selectedOptions.includes(option) ? "disabled" : ""
                     }`}
-                    onClick={() => handleClick(fieldName, option)}
+                    onClick={() => handleClick(stepInfo.fieldName, option)}
                   >
                     {option}
                   </button>

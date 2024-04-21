@@ -1,109 +1,163 @@
 import { useState, useEffect } from "react";
-import { signup } from "../api/login";
+import { loginGoogle, signup } from "../api/login";
 import { createUser } from "../api/users";
+import Cookies from "js-cookie";
 import { User } from "../models";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import InputIcon from "../components/InputIcon";
+import Cta from "../components/Cta";
+import {
+  UserIcon,
+  UserRounded,
+  PassIcon,
+  GoogleLoginIcon,
+  AppleLoginIcon,
+} from "../components/icons/Icons";
+import SignupMain from "../assets/signupMain.png";
+
+import { LogoWordmark } from "../components/branding/LogoWordmark";
 
 export const Signup = () => {
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordRepeated, setPasswordRepeated] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {});
 
-  const handleSignUp = async () => {
-    //login("revibes@gmail.com", "mandatorico");
-    //validation
-    const loginValue = await signup(email, password);
-    if (loginValue) {
+  const handleLoginGoogle = async () => {
+    const { isLogged, uid, message, imgUrl } = await loginGoogle();
+    if (isLogged) {
+      Cookies.set("uuid", uid, { path: "" });
+      navigate("/app");
+    } else {
+      alert(message);
+    }
+  };
+  const handleSignup = async () => {
+    const signupValue = await signup(email, password);
+    if (signupValue.succesfull) {
       const user: User = {
         name: name,
-        surname: surname,
-        username: username,
-        mail: email,
+        email: email,
       };
-
       const created = await createUser(user);
-      if (created) {
+      if (created ?? false) {
         console.log("created !");
         localStorage.setItem("authenticated", JSON.stringify(true));
         navigate("/");
       }
+    } else {
+      alert(signupValue.errorMsg);
+    }
+  };
+
+  const handleSubmit = async () => {
+    //signup("revibes@gmail.com", "mandatorico");
+    //validation
+    if (password === passwordRepeated) {
+      await handleSignup();
+    } else {
+      alert("Las contraseñas no coinciden");
     }
   };
 
   return (
     <div className="signup">
-      <form className="signup__form">
-        <div>
-          <label>Name</label>
-          <input
-            name="name"
-            type="text"
-            required
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+      <img src={SignupMain} className="signup__img" />
+      <div className="signup__content">
+        <div className="signup__logo">
+          <LogoWordmark height={50} />
         </div>
-        <div>
-          <label>Surname</label>
-          <input
-            name="surname"
-            type="text"
-            required
-            placeholder="Surname"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
+        <div className="signup__info">
+          <div className="signup__title">Crea tu cuenta</div>
+          <p className="signup__text">
+            ¡Bienvenido a Revibes! Únete ahora y empieza tu transformación.
+          </p>
         </div>
-        <div>
-          <label>User name</label>
-          <input
-            name="username"
-            type="text"
-            required
-            placeholder="User name"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+        <form className="signup__form">
+          <div className="signup__form_email">
+            <InputIcon
+              icon={UserRounded}
+              iconWidth={19}
+              iconHeight={19}
+              label="Nombre"
+              name="surname"
+              value={name}
+              setValue={setName}
+              type="text"
+            />
+            <InputIcon
+              icon={UserIcon}
+              iconWidth={19}
+              iconHeight={19}
+              label="Correo electrónico"
+              name="email"
+              value={email}
+              setValue={setEmail}
+              type="email"
+            />
+            <InputIcon
+              icon={PassIcon}
+              iconWidth={19}
+              iconHeight={19}
+              label="Contraseña"
+              name="password"
+              value={password}
+              setValue={setPassword}
+              type="password"
+            />
+            <InputIcon
+              icon={PassIcon}
+              iconWidth={19}
+              iconHeight={19}
+              label="Repetir Contraseña"
+              name="passwordRepeated"
+              value={passwordRepeated}
+              setValue={setPasswordRepeated}
+              type="password"
+            />
+          </div>
+          <div>
+            <div className="signup__cta">
+              <Cta
+                text="Registrarse"
+                action={async (event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleSubmit();
+                }}
+              />
+              <p>
+                ¿Ya tienes cuenta?
+                <Link to={"/signup"} className="signup__cta-register">
+                  Inicia sesión ahora
+                </Link>
+              </p>
+            </div>
+          </div>
+        </form>
+        <div className="signup__form_alternatives">
+          <p className="divider">O si lo prefieres, inicia sesión con</p>
+          <div className="signup__form_alternatives__btns">
+            <button
+              type="button"
+              className="signup_alternatives__btn"
+              onClick={handleLoginGoogle}
+            >
+              <GoogleLoginIcon height={40} width={40} />
+            </button>
+            <button
+              type="button"
+              className="signup_alternatives__btn"
+              onClick={handleLoginGoogle}
+            >
+              <AppleLoginIcon height={40} width={40} />
+            </button>
+          </div>
         </div>
-        <div>
-          <label>Email address</label>
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <button
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              handleSignUp();
-            }}
-          >
-            Login
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
+import "./styles/style.scss";
 
 export const App = () => {
   return (

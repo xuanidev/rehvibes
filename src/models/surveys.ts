@@ -1,50 +1,106 @@
 export interface Step {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    fieldName?: string;
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        fieldName?: string;
+    }
     currentValue: string | null;
 }
 export interface StepWeigthAndHeigth {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    fieldName?: string;
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        fieldName?: string;
+    }
     currentValueWeigth: string | null,
     currentValueHeigth:string | null
 }
 export interface StepOptions {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    question: string;
-    fieldName: string;
-    options: string[];
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        question: string;
+        fieldName: string;
+        options: string[];
+    }
     currentValue: string | null;
 }
 export interface StepMultipleChoices {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    question: string;
-    fieldName: string;
-    exclusiveOption: string;
-    options: string[];
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        question: string;
+        fieldName: string;
+        exclusiveOption: string;
+        options: string[];
+        otherText: string;
+    }
     currentValue: string | null;
+
 }
 export interface StepMultipleChoicesInput {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    question: string;
-    fieldName: string;
-    exclusiveOption: string;
-    options: string[];
-    otherText: string;
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        question: string;
+        fieldName: string;
+        exclusiveOption: string;
+        options: string[];
+        otherText: string;
+    }
     currentValue: string | null;
 }
 export interface StepOptionsAndInput {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
-    inputs: string[];
-    question: string;
-    otherText:string;
-    fieldName: string;
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        inputs: string[];
+        question: string;
+        otherText:string;
+        fieldName: string;
+    }
     currentValue: string | null;
 }
 

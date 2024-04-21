@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./survey.scss";
 import { StepOptions } from "../../models";
 
-function Options(optionsData: StepOptions) {
-  const {
-    handleStep,
-    setStepValid,
-    fieldName,
-    options,
-    question,
-    currentValue,
-  } = optionsData;
+function Options(props: StepOptions) {
+  const { handleStep, setStepValid, stepInfo, currentValue } = props;
 
   const [clickedButton, setClickedButton] = useState<string | null>(
     currentValue
@@ -41,15 +34,16 @@ function Options(optionsData: StepOptions) {
   return (
     <>
       <div className="step">
-        <p>{question}</p>
-        {options.length < 8 ? (
-          options.map((option, index) => (
+        <p>{stepInfo.question}</p>
+        {stepInfo.options.length < 8 ? (
+          stepInfo.options.map((option, index) => (
             <button
+              type="button"
               key={index}
               className={`step__btn ${
                 clickedButton === option ? "disabled" : ""
               }`}
-              onClick={() => handleClick(fieldName, option)}
+              onClick={() => handleClick(stepInfo.fieldName, option)}
             >
               {option}
             </button>
@@ -57,30 +51,32 @@ function Options(optionsData: StepOptions) {
         ) : (
           <div className="two-columns">
             <div className="column">
-              {options
-                .slice(0, Math.ceil(options.length / 2))
+              {stepInfo.options
+                .slice(0, Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
                   <button
+                    type="button"
                     key={index}
                     className={`step__btn ${
                       clickedButton === option ? "disabled" : ""
                     }`}
-                    onClick={() => handleClick(fieldName, option)}
+                    onClick={() => handleClick(stepInfo.fieldName, option)}
                   >
                     {option}
                   </button>
                 ))}
             </div>
             <div className="column">
-              {options
-                .slice(Math.ceil(options.length / 2))
+              {stepInfo.options
+                .slice(Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
                   <button
+                    type="button"
                     key={index}
                     className={`step__btn ${
                       clickedButton === option ? "disabled" : ""
                     }`}
-                    onClick={() => handleClick(fieldName, option)}
+                    onClick={() => handleClick(stepInfo.fieldName, option)}
                   >
                     {option}
                   </button>

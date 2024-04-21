@@ -6,27 +6,34 @@ import { User, UserFromApi } from '../models/index.js'
 const db = getFirestore();
 
 const undefinedUser = {
-    id: "",
-    name: "",
-    surname: "",
-    username: "",
-    mail: ""
+    id: '',
+    name: '',
+    surname: '',
+    username: '',
+    mail: '',
+    createdAt: '',
+    photoURL: ''
 }
 
-export const createUser = async (userData:User ) =>{
+const usersRef = collection(db, "users");
+export const createUser = async (userData:User ): Promise<boolean> =>{
+    const {name, email, uid} = userData;
     try {
-        var id = uuid4();
-        const docRef = await addDoc(collection(db, 'users'), {
-            id: id,
-            name: userData.name,
-            surname: userData.surname,
-            username: userData.username,
-            mail: userData.mail
+        const docRef = await setDoc(doc(usersRef, uid ?? uuid4()), {
+            uid: uid ?? uuid4(),
+            name: name ?? '',
+            email: email,
+            createdAt: new Date().getTime().toString(),
+            verified: false
         });
-        return docRef.id;
+        console.log(docRef);
+        if(docRef !== null){
+            return true;
+        }
+        return false;
     } catch (error) {
         console.error('Error adding user: ', error);
-        return undefined;
+        return false;
     }
 }
 export const getUser = async (userId:string): Promise<UserFromApi> => {
