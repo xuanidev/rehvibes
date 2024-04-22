@@ -21,6 +21,21 @@
     flex-direction: row;
     gap: 16px;
 }
-.btn__survey{
-    width: 100%;
+.survey__btn {
+    font-family: 'Satoshi-Medium';
+    padding: 14px 50px; 
+    border-radius: 10px;
+    box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.survey__btn--back {
+    background-color: white;
+    border: 1px solid #ff662d;
+    color: #ff662d;
+}
+
+.survey__btn--next {
+    background-color: #ff662d;
+    border: 1px solid #d55425;
+    color: white;
 }
