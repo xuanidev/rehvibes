@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { SurveyStep } from "../components/survey/SurveyStep";
 import { useNavigate } from "react-router-dom";
 import {
@@ -37,16 +37,19 @@ import {
   practicaRegular,
   rehabilitacionPreviamente,
   trabajoSentado,
+  toastError,
 } from "../optionsData";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Survey = () => {
   const [data, setData] = useState<SurveyData>({});
   const [currentStep, setCurrentStep] = useState(0);
   const [isStepValid, setIsStepValid] = useState({
     state: false,
-    error: "Fill all the fields",
+    error: "Rellena todos los campos",
   });
-
+  const [toastId, setToastId] = useState<any>("");
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
       if (name === "desire") {
@@ -81,9 +84,11 @@ export const Survey = () => {
   const nextStep = () => {
     if (isStepValid.state) {
       setCurrentStep((prevStep) => prevStep + 1);
-      setIsStepValid({ state: false, error: "Fill all the fields" });
+      setIsStepValid({ state: false, error: "Rellena todos los campos" });
+      toast.dismiss(toastId);
     } else {
-      alert(isStepValid.error);
+      const toastIdAux = toast.error(isStepValid.error, toastError);
+      setToastId(toastIdAux);
     }
   };
 
@@ -197,6 +202,7 @@ export const Survey = () => {
           )}
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

@@ -10,7 +10,7 @@ function BirthDate(props: Step) {
       setCurrentDate(currentValue);
       setStepValid({ state: true, error: "" });
     } else {
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
     }
   }, [currentDate]);
 

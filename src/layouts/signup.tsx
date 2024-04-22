@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { User } from "../models";
 import { useNavigate, Link } from "react-router-dom";
 import InputIcon from "../components/InputIcon";
-import Cta from "../components/Cta";
+import BtnCta from "../components/BtnCta";
 import {
   UserIcon,
   UserRounded,
@@ -14,6 +14,9 @@ import {
   AppleLoginIcon,
 } from "../components/icons/Icons";
 import SignupMain from "../assets/signupMain.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastError } from "../optionsData";
 
 import { LogoWordmark } from "../components/branding/LogoWordmark";
 
@@ -23,16 +26,18 @@ export const Signup = () => {
   const [password, setPassword] = useState("");
   const [passwordRepeated, setPasswordRepeated] = useState("");
   const navigate = useNavigate();
+  const classIcons = "color-brand";
 
   useEffect(() => {});
 
   const handleLoginGoogle = async () => {
-    const { isLogged, uid, message, imgUrl } = await loginGoogle();
+    const { isLogged, uid, errorMsg, imgUrl } = await loginGoogle();
     if (isLogged) {
-      Cookies.set("uuid", uid, { path: "" });
+      Cookies.set("uid", uid, { path: "" });
+      Cookies.set("currentSurvey", true, { path: "" });
       navigate("/app");
     } else {
-      alert(message);
+      toast.error(errorMsg, toastError);
     }
   };
   const handleSignup = async () => {
@@ -45,11 +50,11 @@ export const Signup = () => {
       const created = await createUser(user);
       if (created ?? false) {
         console.log("created !");
-        localStorage.setItem("authenticated", JSON.stringify(true));
-        navigate("/");
+        Cookies.set("uid", signupValue.uid, { path: "" });
+        navigate("/app");
       }
     } else {
-      alert(signupValue.errorMsg);
+      toast.error(signupValue.errorMsg, toastError);
     }
   };
 
@@ -59,7 +64,7 @@ export const Signup = () => {
     if (password === passwordRepeated) {
       await handleSignup();
     } else {
-      alert("Las contraseñas no coinciden");
+      toast.error("Las contraseñas no coinciden", toastError);
     }
   };
 
@@ -80,16 +85,18 @@ export const Signup = () => {
           <div className="signup__form_email">
             <InputIcon
               icon={UserRounded}
+              className={classIcons}
               iconWidth={19}
               iconHeight={19}
               label="Nombre"
-              name="surname"
+              name="name"
               value={name}
               setValue={setName}
               type="text"
             />
             <InputIcon
               icon={UserIcon}
+              className={classIcons}
               iconWidth={19}
               iconHeight={19}
               label="Correo electrónico"
@@ -100,6 +107,7 @@ export const Signup = () => {
             />
             <InputIcon
               icon={PassIcon}
+              className={classIcons}
               iconWidth={19}
               iconHeight={19}
               label="Contraseña"
@@ -110,6 +118,7 @@ export const Signup = () => {
             />
             <InputIcon
               icon={PassIcon}
+              className={classIcons}
               iconWidth={19}
               iconHeight={19}
               label="Repetir Contraseña"
@@ -121,9 +130,9 @@ export const Signup = () => {
           </div>
           <div>
             <div className="signup__cta">
-              <Cta
+              <BtnCta
                 text="Registrarse"
-                action={async (event) => {
+                onClick={async (event) => {
                   event.preventDefault();
                   event.stopPropagation();
                   handleSubmit();
@@ -131,7 +140,7 @@ export const Signup = () => {
               />
               <p>
                 ¿Ya tienes cuenta?
-                <Link to={"/signup"} className="signup__cta-register">
+                <Link to={"/login"} className="signup__cta-register">
                   Inicia sesión ahora
                 </Link>
               </p>
@@ -158,6 +167,7 @@ export const Signup = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

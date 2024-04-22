@@ -8,11 +8,23 @@ import { Landing } from "./layouts/Landing";
 import Cookies from "js-cookie";
 import { redirect } from "react-router-dom";
 
-const loader = () => {
+const loaderToLogin = () => {
   const isAuthenticated =
-    Cookies.get("uuid") !== undefined && Cookies.get("uuid") !== "";
+    Cookies.get("uid") !== undefined && Cookies.get("uid") !== "";
   if (!isAuthenticated) {
     return redirect("/login");
+  }
+  return null;
+};
+const loaderToMain = () => {
+  if (Cookies.get("uid") !== undefined && Cookies.get("uid") !== "") {
+    return redirect("/app");
+  }
+  return null;
+};
+const loaderSurvey = () => {
+  if (Cookies.get("currentSurvey") !== true) {
+    return redirect("/app");
   }
   return null;
 };
@@ -29,26 +41,28 @@ export const router = createBrowserRouter([
       {
         path: "/app",
         element: <Main />,
-        loader: loader,
+        loader: loaderToLogin,
       },
     ],
   },
   {
     path: "/app",
     element: <Main />,
-    loader: loader,
+    loader: loaderToLogin,
   },
   {
     path: "/login",
     element: <Login />,
+    loader: loaderToMain,
   },
   {
     path: "/signup",
     element: <Signup />,
+    loader: loaderToMain,
   },
   {
     path: "/survey",
     element: <Survey />,
-    //loader: loader,
+    loader: loaderSurvey,
   },
 ]);

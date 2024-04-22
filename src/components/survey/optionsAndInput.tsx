@@ -19,7 +19,7 @@ function OptionsAndInput(props: StepOptionsAndInput) {
         setStepValid({ state: true, error: "" });
       }
     } else {
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
     }
   }, [currentValue]);
 
@@ -37,7 +37,7 @@ function OptionsAndInput(props: StepOptionsAndInput) {
 
   const handleOtherInputChange = (value: string) => {
     if (value === "") {
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
     } else if (value.length < 4) {
       setStepValid({
         state: false,

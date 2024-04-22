@@ -1,3 +1,5 @@
+import { ToastOptions, ToastPosition } from "react-toastify";
+
 const genero = {
   fieldName: "genero",
   question: "¿Cuál es tú genero?",
@@ -446,7 +448,6 @@ export const operationComponents = {
   Tobillo: operationTobillo,
   "Columna vertebral": operationColumna,
 };
-
 export {
   operationCuello,
   operationColumna,
@@ -483,4 +484,18 @@ export {
   genero,
   birthDate,
   weigthAndHeigth,
+};
+
+export const toastError: ToastOptions<ToastPosition> = {
+  position: "top-center",
+  hideProgressBar: true,
+  closeOnClick: true,
+  autoClose: 5000,
+  draggable: true,
+  style: {
+    fontFamily: "Satoshi-Regular",
+    color: "black",
+    border: "1px solid #E53E00",
+    borderRadius: "12px",
+  },
 };

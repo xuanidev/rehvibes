@@ -1,0 +1,45 @@
+.divider {
+    font-family: "Satoshi-Light";
+    display: flex;
+    align-items: center;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+.divider::before,
+.divider::after {
+    flex: 1;
+    content: "";
+    border: 0.6px solid var(--color-primary);
+    background-color: var(--color-primary);
+    margin: auto 10px;
+}
+
+.color-brand {
+    fill: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.gradient-border {
+    background: radial-gradient(
+          circle at 100% 100%,
+          #ffffff 0,
+          #ffffff 9px,
+          transparent 9px
+        )
+        0% 0%/12px 12px no-repeat,
+      radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 9px, transparent 9px)
+        100% 0%/12px 12px no-repeat,
+      radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 9px, transparent 9px)
+        0% 100%/12px 12px no-repeat,
+      radial-gradient(circle at 0 0, #ffffff 0, #ffffff 9px, transparent 9px) 100%
+        100%/12px 12px no-repeat,
+      linear-gradient(#ffffff, #ffffff) 50% 50% / calc(100% - 6px)
+        calc(100% - 24px) no-repeat,
+      linear-gradient(#ffffff, #ffffff) 50% 50% / calc(100% - 24px)
+        calc(100% - 6px) no-repeat,
+      linear-gradient(90deg, #ffa238 0%, #ff662d 100%);
+    border-radius: 12px;
+    padding: 16px;
+    box-sizing: content-box;
+  }
+  

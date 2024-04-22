@@ -8,10 +8,22 @@ export interface InputIconProps extends InputProps {
   icon: React.ComponentType<SVGProps<SVGSVGElement>>;
   iconWidth: number;
   iconHeight: number;
+  className?: string;
+  required?: boolean;
 }
 
 const InputText = (props: InputIconProps) => {
-  const { iconWidth, iconHeight, name, label, type, setValue, value } = props;
+  const {
+    iconWidth,
+    iconHeight,
+    className,
+    name,
+    label,
+    type,
+    setValue,
+    value,
+    required,
+  } = props;
 
   const textInput = useRef<HTMLInputElement>(null!);
 
@@ -22,13 +34,17 @@ const InputText = (props: InputIconProps) => {
   return (
     <>
       <div className="inputText__container" onClick={handleClick}>
-        <props.icon width={iconWidth} height={iconHeight} />
+        <props.icon
+          width={iconWidth}
+          height={iconHeight}
+          className={className}
+        />
         <input
           name={name}
           type={type}
-          required
           placeholder={label}
           value={value}
+          {...(required && { required: true })}
           className="input__field"
           ref={textInput}
           onChange={(e) => setValue(e.target.value)}

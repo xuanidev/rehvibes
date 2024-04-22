@@ -95,20 +95,6 @@
         }
     }
 }
-.divider {
-    font-family: 'Satoshi-Light';
-    display: flex;
-    align-items: center;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-}
-.divider::before, .divider::after {
-    flex: 1;
-    content: '';
-    border: 0.6px solid black;
-    background-color: var(--color-black);
-    margin: auto 10px;
-}
 .signup__form_email{
     display: flex;
     flex-direction: column;

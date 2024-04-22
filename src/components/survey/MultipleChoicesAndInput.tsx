@@ -12,7 +12,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
   useEffect(() => {
     if (!currentValue || currentValue === "") {
       setSelectedOptions([]);
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
 
       return;
     }
@@ -32,7 +32,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
   const handleInput = (value: string) => {
     setSelectedOptions([]);
     if (value === "") {
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
     } else if (value.length < 4) {
       setStepValid({
         state: false,
@@ -97,7 +97,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
       handleStep(name, stepInfo.exclusiveOption);
     } else {
       setSelectedOptions([]);
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: "Rellena todos los campos" });
     }
   };
 
