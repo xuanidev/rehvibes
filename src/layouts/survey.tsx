@@ -186,12 +186,12 @@ export const Survey = () => {
         />
         <div className="survey__actions">
           {currentStep > 0 && (
-            <button type="button" className="btn__survey" onClick={prevStep}>
-              Atrás
+            <button type="button" className="survey__btn survey__btn--back" onClick={prevStep}>
+              Volver
             </button>
           )}
           {currentStep < steps.length - 1 && (
-            <button type="button" className="btn__survey" onClick={nextStep}>
+            <button type="button" className="survey__btn survey__btn--next" onClick={nextStep}>
               Siguiente
             </button>
           )}

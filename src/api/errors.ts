@@ -1,9 +1,9 @@
 export const errorsSignup = {
-    generalMsg: "Ha ocurrido un error con el login, vuelva a intentarlo más tarde por favor",
-    emailMsg: "El correo indicado ya tiene una cuenta asignada",
-    invalidMsg: 'El correo introducido no es valido',
-    weakPassMsg: 'La contraseña introduciza es demasiado debil',
-    credentialMsg: 'Las credenciales introducidas ya están siendo utilizadas en otro usuario',
+    generalMsg: "Ha ocurrido un error con tu inicio de sesión, vuelva a intentarlo más tarde por favor",
+    emailMsg: "El correo indicado ya tiene una cuenta asignada.",
+    invalidMsg: 'El correo introducido no es válido.',
+    weakPassMsg: 'La contraseña introducida es demasiado débil.',
+    credentialMsg: 'Las credenciales introducidas ya están siendo utilizadas en otro usuario.',
   };
 
 export const handleErrorMessageSignup = (message: string):string =>{
