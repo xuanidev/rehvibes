@@ -23,9 +23,10 @@ const loaderToMain = () => {
   return null;
 };
 const loaderSurvey = () => {
-  if (Cookies.get("currentSurvey") !== true) {
-    return redirect("/app");
-  }
+  if (Cookies.get("currentSurvey") !== true) 
+  // {
+  //   return redirect("/app");
+  // }
   return null;
 };
 
