@@ -13,7 +13,7 @@ export interface Step {
     }
     currentValue: string | null;
 }
-export interface StepWeigthAndHeigth {
+export interface StepWeightAndHeight {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
     stepInfo:{

@@ -39,6 +39,7 @@ import {
   trabajoSentado,
   toastError,
 } from "../optionsData";
+import { surveyErrors } from "../components/survey/errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -47,9 +48,10 @@ export const Survey = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isStepValid, setIsStepValid] = useState({
     state: false,
-    error: "Rellena todos los campos",
+    error: surveyErrors.generalMsg,
   });
   const [toastId, setToastId] = useState<any>("");
+  const navigate = useNavigate();
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
       if (name === "desire") {
@@ -92,10 +94,9 @@ export const Survey = () => {
     }
   };
 
-  const handleSubmit = (e: any) => {
-    const navigate = useNavigate();
-    e.preventDefault();
-    navigate("/");
+  const handleSubmit = () => {
+    console.log(data);
+    navigate("/app");
   };
 
   const steps = [goals, genero, birthDate, weigthAndHeigth, desire];
@@ -112,7 +113,7 @@ export const Survey = () => {
     "Columna vertebral": operationColumna,
   };
 
-  if (data.desire == "Recuperarme de una lesión o cirugía") {
+  if (data.desire === desire.conditionOption) {
     steps.push(lesionZones);
 
     const isValidLesionKey = (
@@ -121,7 +122,7 @@ export const Survey = () => {
       return key in lesionComponents;
     };
     if (
-      data.desire === "Recuperarme de una lesión o cirugía" &&
+      data.desire === desire.conditionOption &&
       data.lesionZones &&
       isValidLesionKey(data.lesionZones)
     ) {
@@ -162,7 +163,14 @@ export const Survey = () => {
   const currentStepInfo = steps[currentStep] as SurveyData;
   return (
     <div className="survey">
-      <form onSubmit={handleSubmit} className="survey__form">
+      <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          handleSubmit();
+        }}
+        className="survey__form"
+      >
         <SurveyStep
           key={currentStepInfo.fieldName}
           handleStep={handleStep}
@@ -186,17 +194,29 @@ export const Survey = () => {
         />
         <div className="survey__actions">
           {currentStep > 0 && (
-            <button type="button" className="survey__btn survey__btn--back" onClick={prevStep}>
+            <button
+              type="button"
+              className="survey__btn survey__btn--back"
+              onClick={prevStep}
+            >
               Volver
             </button>
           )}
           {currentStep < steps.length - 1 && (
-            <button type="button" className="survey__btn survey__btn--next" onClick={nextStep}>
+            <button
+              type="button"
+              className="survey__btn survey__btn--right"
+              onClick={nextStep}
+            >
               Siguiente
             </button>
           )}
           {currentStep === steps.length - 1 && (
-            <button type="submit" disabled={!isStepValid.state}>
+            <button
+              type="submit"
+              className="survey__btn survey__btn--right"
+              disabled={!isStepValid.state}
+            >
               Enviar
             </button>
           )}

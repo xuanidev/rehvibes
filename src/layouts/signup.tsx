@@ -12,7 +12,7 @@ import {
   PassIcon,
   GoogleLoginIcon,
   AppleLoginIcon,
-} from "../components/icons/Icons";
+} from "../components/icons";
 import SignupMain from "../assets/signupMain.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -60,7 +60,6 @@ export const Signup = () => {
 
   const handleSubmit = async () => {
     //signup("revibes@gmail.com", "mandatorico");
-    //validation
     if (password === passwordRepeated) {
       await handleSignup();
     } else {
@@ -93,6 +92,7 @@ export const Signup = () => {
               value={name}
               setValue={setName}
               type="text"
+              regex="/^[a-z ,.'-]+$/i"
             />
             <InputIcon
               icon={UserIcon}
@@ -104,6 +104,7 @@ export const Signup = () => {
               value={email}
               setValue={setEmail}
               type="email"
+              regex="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
             <InputIcon
               icon={PassIcon}
@@ -115,6 +116,7 @@ export const Signup = () => {
               value={password}
               setValue={setPassword}
               type="password"
+              regex="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/"
             />
             <InputIcon
               icon={PassIcon}

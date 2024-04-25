@@ -1,10 +1,22 @@
 import { useState, useEffect } from "react";
-import { StepWeigthAndHeigth } from "../../models";
+import { StepWeightAndHeight } from "../../models";
+import "./weigthAndHeight.scss";
+import { surveyErrors } from "./errors";
 
-function WeigthAndHeigth(props: StepWeigthAndHeigth) {
+export const WeightAndHeight = (props: StepWeightAndHeight) => {
   const { setStepValid, handleStep, currentValueWeigth, currentValueHeigth } =
     props;
   const [formData, setFormData] = useState({ weight: 0, height: 0 });
+  const [imc, setImc] = useState(0);
+
+  const calculateImc = (weight: number, height: number) => {
+    console.log(weight);
+    const heightInMeters = height / 100;
+    console.log(heightInMeters);
+    const imcValue = weight / (heightInMeters * heightInMeters);
+    console.log(imcValue);
+    setImc(imcValue);
+  };
 
   useEffect(() => {
     if (currentValueWeigth !== null && currentValueHeigth !== null) {
@@ -12,9 +24,11 @@ function WeigthAndHeigth(props: StepWeigthAndHeigth) {
         weight: parseInt(currentValueWeigth),
         height: parseInt(currentValueHeigth),
       });
+      calculateImc(Number(currentValueWeigth), Number(currentValueHeigth));
       setStepValid({ state: true, error: "" });
     } else {
-      setStepValid({ state: false, error: "Fill all the fields" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
+      setImc(0);
     }
   }, [currentValueWeigth, currentValueHeigth]);
 
@@ -25,16 +39,19 @@ function WeigthAndHeigth(props: StepWeigthAndHeigth) {
     if (validated) {
       handleStep("weigth", undefined, updatedFormData.weight);
       handleStep("heigth", undefined, updatedFormData.height);
+      calculateImc(updatedFormData.weight, updatedFormData.height);
+    } else {
+      setImc(0);
     }
   };
 
   const validate = (formData: { weight: number; height: number }): boolean => {
     const { weight, height } = formData;
     if (weight < 20 || weight > 350) {
-      setStepValid({ state: false, error: "Write a valid weight" });
+      setStepValid({ state: false, error: surveyErrors.pesoMsg });
       return false;
     } else if (height < 20 || height > 250) {
-      setStepValid({ state: false, error: "Write a valid height" });
+      setStepValid({ state: false, error: surveyErrors.alturaMsg });
       return false;
     } else {
       setStepValid({ state: true, error: "" });
@@ -44,32 +61,36 @@ function WeigthAndHeigth(props: StepWeigthAndHeigth) {
 
   return (
     <>
-      <div>
-        <label htmlFor="peso">Weight (Kg): </label>
+      <div className="weigth_and_height__field">
+        <label>Peso (Kg): </label>
         <input
           type="number"
           name="weight"
+          className="weigth_and_height__input"
           value={formData.weight.toString()}
           onChange={(event) =>
             handleChange(event.target.name, parseInt(event.target.value))
           }
         />
       </div>
-      <div>
-        <label htmlFor="height">Height (Cm): </label>
+      <div className="weigth_and_height__field">
+        <label htmlFor="height">¿Cuál es tu estatura en cm?: </label>
         <input
           type="number"
           name="height"
+          className="weigth_and_height__input"
           value={formData.height.toString()}
           onChange={(event) =>
             handleChange(event.target.name, parseInt(event.target.value))
           }
           pattern="[0-9]+([.,][0-9]+)?"
-          title="Enter a valid number with decimals (e.g., 175)"
         />
+      </div>
+      <div className="weigth_and_height__imc">
+        <p>IMC: {imc.toFixed(2)}</p>
       </div>
     </>
   );
-}
+};
 
-export default WeigthAndHeigth;
+export default WeightAndHeight;

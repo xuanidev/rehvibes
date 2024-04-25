@@ -79,3 +79,4 @@ export const LogoWordmark = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
+export default LogoWordmark;

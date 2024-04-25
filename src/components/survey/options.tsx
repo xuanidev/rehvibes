@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import "../../styles/style.scss";
 import "./survey.scss";
 import { StepOptions } from "../../models";
+import { surveyErrors } from "./errors";
 
-function Options(props: StepOptions) {
+export const Options = (props: StepOptions) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
 
   const [clickedButton, setClickedButton] = useState<string | null>(
@@ -21,7 +23,7 @@ function Options(props: StepOptions) {
       setStepValid({ state: true, error: "" });
     } else if (clickedButton === value) {
       setClickedButton(null);
-      setStepValid({ state: false, error: "Select a field" });
+      setStepValid({ state: false, error: surveyErrors.optionsMsg });
     } else {
       setClickedButton(value);
       setStepValid({ state: true, error: "" });
@@ -37,16 +39,14 @@ function Options(props: StepOptions) {
         <p>{stepInfo.question}</p>
         {stepInfo.options.length < 8 ? (
           stepInfo.options.map((option, index) => (
-            <button
-              type="button"
-              key={index}
-              className={`step__btn ${
-                clickedButton === option ? "disabled" : ""
-              }`}
-              onClick={() => handleClick(stepInfo.fieldName, option)}
-            >
+            <label key={index} className="step__option gradient-border">
+              <input
+                type="checkbox"
+                checked={clickedButton === option}
+                onChange={() => handleClick(stepInfo.fieldName, option)}
+              />
               {option}
-            </button>
+            </label>
           ))
         ) : (
           <div className="two-columns">
@@ -54,32 +54,28 @@ function Options(props: StepOptions) {
               {stepInfo.options
                 .slice(0, Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    className={`step__btn ${
-                      clickedButton === option ? "disabled" : ""
-                    }`}
-                    onClick={() => handleClick(stepInfo.fieldName, option)}
-                  >
+                  <label key={index} className="step__option gradient-border">
+                    <input
+                      type="checkbox"
+                      checked={clickedButton === option}
+                      onChange={() => handleClick(stepInfo.fieldName, option)}
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
             </div>
             <div className="column">
               {stepInfo.options
                 .slice(Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    className={`step__btn ${
-                      clickedButton === option ? "disabled" : ""
-                    }`}
-                    onClick={() => handleClick(stepInfo.fieldName, option)}
-                  >
+                  <label key={index} className="step__option gradient-border">
+                    <input
+                      type="checkbox"
+                      checked={clickedButton === option}
+                      onChange={() => handleClick(stepInfo.fieldName, option)}
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
             </div>
           </div>
@@ -87,6 +83,6 @@ function Options(props: StepOptions) {
       </div>
     </>
   );
-}
+};
 
 export default Options;

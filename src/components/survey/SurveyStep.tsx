@@ -1,9 +1,11 @@
-import Options from "./Options";
-import OptionsAndInput from "./OptionsAndInput";
-import MultipleChoices from "./MultipleChoices";
-import MultipleChoicesAndInput from "./MultipleChoicesAndInput";
-import BirthDate from "./BirthDate";
-import WeigthAndHeigth from "./WeigthAndHeigth";
+import {
+  Options,
+  OptionsAndInput,
+  MultipleChoices,
+  MultipleChoicesAndInput,
+  BirthDate,
+  WeightAndHeight,
+} from "./index";
 
 interface SurveyStepsProps {
   setStepValid: (value: { state: boolean; error: string }) => void;
@@ -40,7 +42,7 @@ export const SurveyStep = (props: SurveyStepsProps) => {
     }
     case "WeigthAndHeigth": {
       return (
-        <WeigthAndHeigth
+        <WeightAndHeight
           currentValueHeigth={currentValueHeigth ?? null}
           currentValueWeigth={currentValueWeigth ?? null}
           {...props}

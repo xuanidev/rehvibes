@@ -11,7 +11,7 @@ import {
   PassIcon,
   AppleLoginIcon,
   GoogleLoginIcon,
-} from "../components/icons/Icons";
+} from "../components/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastError } from "../optionsData";
