@@ -1,0 +1,61 @@
+@use '../../styles/base' as *;
+.birth_date{
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+.birth_date__input{
+    background-color: #ffffff;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    @include gradient-border(1px, 12px);
+    input[type="date"]{
+      border:none;
+    }
+    input[type="date"]:focus{
+      outline: none;
+    }
+    input::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+    input::-webkit-datetime-edit-fields-wrapper{
+      border-radius: 8px;
+    }
+  
+  }
+//DatePicker
+.react-datepicker-wrapper{
+    width: 100% !important;
+} 
+.react-datepicker__input-container{
+    input{
+      border: none !important;
+    }
+  }
+  .react-datepicker__day--selected{
+    background-color: var(--color-primary) !important;
+  }
+  .react-datepicker__header{
+    background-color: var(--color-primary-light) !important;
+  }
+  .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle {
+    fill: var(--color-primary-light) !important;
+    color: var(--color-primary-light) !important;
+  }
+  .datepicker__btn{
+    background-color: var(--color-white);
+    border: 1.1px solid var(--color-black);
+    border-radius: 4px;
+  }
+  .react-datepicker__input-container input {
+     width: 100%;
+     font-family: 'Satoshi-Regular';
+     font-size: 16px;
+     text-align: center;
+  }
+  .react-datepicker__input-container input:focus-visible {
+    outline: none;
+  }

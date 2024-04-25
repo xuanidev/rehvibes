@@ -176,6 +176,7 @@ const desire = {
     "Tengo molestias y quiero mejorar mis hábitos",
     "Recuperarme de una lesión o cirugía",
   ],
+  conditionOption: "Recuperarme de una lesión o cirugía",
   fieldType: "Options",
 };
 
@@ -300,20 +301,8 @@ const equipamiento = {
   exclusiveOption: "Ninguna de las anteriores",
   options: [
     "Mancuernas",
-    "Pesas para tobillos",
-    "Bandas elásticas",
-    "Bicicleta estática",
-    "Cinta de correr",
-    "Máquina elíptica",
-    "Barra de dominadas",
     "Pesa rusa",
-    "Bola de equilibrio",
-    "Tabla de equilibrio",
     "Esterilla de yoga",
-    "Step",
-    "Rueda abdominal",
-    "Rodillo de espuma",
-    "Pelota de pilates",
     "Comba",
     "Ninguna de las anteriores",
   ],
@@ -448,6 +437,20 @@ export const operationComponents = {
   Tobillo: operationTobillo,
   "Columna vertebral": operationColumna,
 };
+const months = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
 export {
   operationCuello,
   operationColumna,
@@ -484,6 +487,7 @@ export {
   genero,
   birthDate,
   weigthAndHeigth,
+  months,
 };
 
 export const toastError: ToastOptions<ToastPosition> = {

@@ -1,0 +1,31 @@
+@use '../../styles/base' as *;
+
+.weigth_and_height__input{
+    width: 100%;
+    background-color: #ffffff;
+    padding: 12px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    @include gradient-border(1px, 12px);
+}
+.weigth_and_height__input:focus-visible{
+    outline: none;
+}
+.weigth_and_height__field{
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+.weigth_and_height__imc{
+    background-color: var(--color-primary);
+    padding: 12px 16px;
+    border-radius: 14px;
+    color: var(--color-white);
+    font-size: 18px;
+    margin-top: 16px;
+    p{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+}

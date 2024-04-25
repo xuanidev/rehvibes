@@ -1,7 +1,10 @@
 :root{
-    --color-primary: #FF662D;
-    --color-primary-dark: #D55425;
-    --color-primary-fluorescent: #E53E00;
-    --color-white: #ffffff;
-    --color-black: #000000;
+    --color-primary: hsl(32, 100%, 61%);
+    --color-primary-light: hsl(32, 94%, 88%);
+    --color-primary-10: hsla(32, 100%, 61%, 0.05);
+    --color-secondary: hsl(16, 100%, 59%);
+    --color-secondary-dark: hsl(16, 70%, 49%);
+    --color-primary-fluorescent: hsl(16, 100%, 45%);
+    --color-white: hsl(0, 0%, 100%);
+    --color-black: hsl(0, 0%, 0%);
 }

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./survey.scss";
 import { StepMultipleChoicesInput } from "../../models";
+import { surveyErrors } from "./errors";
 
-function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
+export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     currentValue !== null ? [currentValue] : []
@@ -12,7 +13,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
   useEffect(() => {
     if (!currentValue || currentValue === "") {
       setSelectedOptions([]);
-      setStepValid({ state: false, error: "Rellena todos los campos" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
 
       return;
     }
@@ -32,11 +33,11 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
   const handleInput = (value: string) => {
     setSelectedOptions([]);
     if (value === "") {
-      setStepValid({ state: false, error: "Rellena todos los campos" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     } else if (value.length < 4) {
       setStepValid({
         state: false,
-        error: "Other field must be larger than 3 characters",
+        error: surveyErrors.inputMsg,
       });
     } else {
       setStepValid({ state: true, error: "" });
@@ -65,7 +66,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
       newSelectedOptions.splice(index, 1);
       return newSelectedOptions;
     } else {
-      setStepValid({ state: false, error: "Fill all the fieldss" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
       return [];
     }
   };
@@ -85,7 +86,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
     if (newSelectedOptions.length > 0) {
       setStepValid({ state: true, error: "" });
     } else {
-      setStepValid({ state: false, error: "Select a field" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     }
     handleStep(name, newSelectedOptions.toString());
   };
@@ -97,7 +98,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
       handleStep(name, stepInfo.exclusiveOption);
     } else {
       setSelectedOptions([]);
-      setStepValid({ state: false, error: "Rellena todos los campos" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     }
   };
 
@@ -120,7 +121,7 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
     if (other.length < 3) {
       setStepValid({
         state: false,
-        error: "Other field must be larger than 3 characters",
+        error: surveyErrors.inputMsg,
       });
     }
     setSelectedOptions([]);
@@ -133,20 +134,25 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
         {stepInfo.options.length < 8 ? (
           <div className="column">
             {stepInfo.options.map((option, index) => (
-              <button
-                type="button"
+              <label
                 key={index}
-                className={`step__btn ${
+                className={`step__option gradient-border ${
                   selectedOptions.includes(option) ? "disabled" : ""
                 }`}
-                onClick={() => handleClick(stepInfo.fieldName, option, false)}
               >
+                <input
+                  type="checkbox"
+                  checked={selectedOptions.includes(option)}
+                  onChange={() =>
+                    handleClick(stepInfo.fieldName, option, false)
+                  }
+                />
                 {option}
-              </button>
+              </label>
             ))}
             <input
               type="text"
-              className={`step__btn step__input`}
+              className="step__input"
               value={other}
               onChange={(e) => {
                 setOther(e.target.value);
@@ -162,22 +168,25 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
               {stepInfo.options
                 .slice(0, Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
+                  <label
                     key={index}
-                    className={`step__btn ${
+                    className={`step__option gradient-border ${
                       selectedOptions.includes(option) ? "disabled" : ""
                     }`}
-                    onClick={() =>
-                      handleClick(stepInfo.fieldName, option, false)
-                    }
                   >
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.includes(option)}
+                      onChange={() =>
+                        handleClick(stepInfo.fieldName, option, false)
+                      }
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
               <input
                 type="text"
-                className={`step__btn step__input`}
+                className="step__input"
                 value={other}
                 onChange={(e) => {
                   setOther(e.target.value);
@@ -191,18 +200,21 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
               {stepInfo.options
                 .slice(Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
+                  <label
                     key={index}
-                    className={`step__btn ${
+                    className={`step__option gradient-border ${
                       selectedOptions.includes(option) ? "disabled" : ""
                     }`}
-                    onClick={() =>
-                      handleClick(stepInfo.fieldName, option, false)
-                    }
                   >
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.includes(option)}
+                      onChange={() =>
+                        handleClick(stepInfo.fieldName, option, false)
+                      }
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
             </div>
           </div>
@@ -210,6 +222,6 @@ function MultipleChoicesAndInput(props: StepMultipleChoicesInput) {
       </div>
     </>
   );
-}
+};
 
 export default MultipleChoicesAndInput;

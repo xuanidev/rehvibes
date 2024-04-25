@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./survey.scss";
 import { StepOptionsAndInput } from "../../models";
+import { surveyErrors } from "./errors";
 
-function OptionsAndInput(props: StepOptionsAndInput) {
+export const OptionsAndInput = (props: StepOptionsAndInput) => {
   const { setStepValid, handleStep, stepInfo, currentValue } = props;
   const [clickedButton, setClickedButton] = useState<string | null>(
     currentValue
@@ -19,14 +20,14 @@ function OptionsAndInput(props: StepOptionsAndInput) {
         setStepValid({ state: true, error: "" });
       }
     } else {
-      setStepValid({ state: false, error: "Rellena todos los campos" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     }
   }, [currentValue]);
 
   const handleButtonClick = (value: string) => {
     if (clickedButton === value) {
       setClickedButton(null);
-      setStepValid({ state: false, error: "Fill all fields" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     } else {
       setOther("");
       setStepValid({ state: true, error: "" });
@@ -37,11 +38,11 @@ function OptionsAndInput(props: StepOptionsAndInput) {
 
   const handleOtherInputChange = (value: string) => {
     if (value === "") {
-      setStepValid({ state: false, error: "Rellena todos los campos" });
+      setStepValid({ state: false, error: surveyErrors.generalMsg });
     } else if (value.length < 4) {
       setStepValid({
         state: false,
-        error: "Other field must be larger than 3 characters",
+        error: surveyErrors.inputMsg,
       });
     } else {
       setStepValid({ state: true, error: "" });
@@ -57,7 +58,7 @@ function OptionsAndInput(props: StepOptionsAndInput) {
           <button
             type="button"
             key={index}
-            className={`step__btn ${clickedButton === input ? "disabled" : ""}`}
+            className="step__btn"
             onClick={() => handleButtonClick(input)}
           >
             {input}
@@ -65,7 +66,7 @@ function OptionsAndInput(props: StepOptionsAndInput) {
         ))}
         <input
           type="text"
-          className={`step__btn step__input`}
+          className="step__btn step__input"
           value={other}
           onChange={(e) => {
             setOther(e.target.value);
@@ -77,6 +78,6 @@ function OptionsAndInput(props: StepOptionsAndInput) {
       </div>
     </>
   );
-}
+};
 
 export default OptionsAndInput;

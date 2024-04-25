@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./survey.scss";
 import { StepMultipleChoices } from "../../models";
+import { surveyErrors } from "./errors";
 
-function MultipleChoices(props: StepMultipleChoices) {
+export const MultipleChoices = (props: StepMultipleChoices) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     currentValue !== null ? [currentValue] : []
@@ -13,7 +14,7 @@ function MultipleChoices(props: StepMultipleChoices) {
       setSelectedOptions(currentValue.split(","));
       setStepValid({ state: true, error: "" });
     } else {
-      setStepValid({ state: false, error: "Select a field" });
+      setStepValid({ state: false, error: surveyErrors.optionsMsg });
     }
   }, [currentValue]);
 
@@ -22,7 +23,7 @@ function MultipleChoices(props: StepMultipleChoices) {
     setSelectedOptions(isSelected ? [] : [value]);
     setStepValid({
       state: !isSelected,
-      error: isSelected ? "Select a field" : "",
+      error: isSelected ? surveyErrors.optionsMsg : "",
     });
     handleStep(stepInfo.fieldName, isSelected ? "" : stepInfo.exclusiveOption);
   };
@@ -58,7 +59,7 @@ function MultipleChoices(props: StepMultipleChoices) {
     if (newSelectedOptions.length > 0) {
       setStepValid({ state: true, error: "" });
     } else {
-      setStepValid({ state: false, error: "Select a field" });
+      setStepValid({ state: false, error: surveyErrors.optionsMsg });
     }
     handleStep(name, newSelectedOptions.toString());
   };
@@ -78,16 +79,14 @@ function MultipleChoices(props: StepMultipleChoices) {
         <p>{stepInfo.question}</p>
         {stepInfo.options.length < 8 ? (
           stepInfo.options.map((option, index) => (
-            <button
-              type="button"
-              key={index}
-              className={`step__btn ${
-                selectedOptions.includes(option) ? "disabled" : ""
-              }`}
-              onClick={() => handleClick(stepInfo.fieldName, option)}
-            >
+            <label key={index} className="step__option gradient-border">
+              <input
+                type="checkbox"
+                checked={selectedOptions.includes(option)}
+                onChange={() => handleClick(stepInfo.fieldName, option)}
+              />
               {option}
-            </button>
+            </label>
           ))
         ) : (
           <div className="two-columns">
@@ -95,32 +94,28 @@ function MultipleChoices(props: StepMultipleChoices) {
               {stepInfo.options
                 .slice(0, Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    className={`step__btn ${
-                      selectedOptions.includes(option) ? "disabled" : ""
-                    }`}
-                    onClick={() => handleClick(stepInfo.fieldName, option)}
-                  >
+                  <label key={index} className="step__option gradient-border">
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.includes(option)}
+                      onChange={() => handleClick(stepInfo.fieldName, option)}
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
             </div>
             <div className="column">
               {stepInfo.options
                 .slice(Math.ceil(stepInfo.options.length / 2))
                 .map((option, index) => (
-                  <button
-                    type="button"
-                    key={index}
-                    className={`step__btn ${
-                      selectedOptions.includes(option) ? "disabled" : ""
-                    }`}
-                    onClick={() => handleClick(stepInfo.fieldName, option)}
-                  >
+                  <label key={index} className="step__option gradient-border">
+                    <input
+                      type="checkbox"
+                      checked={selectedOptions.includes(option)}
+                      onChange={() => handleClick(stepInfo.fieldName, option)}
+                    />
                     {option}
-                  </button>
+                  </label>
                 ))}
             </div>
           </div>
@@ -128,6 +123,6 @@ function MultipleChoices(props: StepMultipleChoices) {
       </div>
     </>
   );
-}
+};
 
 export default MultipleChoices;

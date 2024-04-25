@@ -10,6 +10,7 @@ export interface InputIconProps extends InputProps {
   iconHeight: number;
   className?: string;
   required?: boolean;
+  regex?: string;
 }
 
 const InputText = (props: InputIconProps) => {
@@ -23,6 +24,7 @@ const InputText = (props: InputIconProps) => {
     setValue,
     value,
     required,
+    regex,
   } = props;
 
   const textInput = useRef<HTMLInputElement>(null!);
@@ -48,6 +50,7 @@ const InputText = (props: InputIconProps) => {
           className="input__field"
           ref={textInput}
           onChange={(e) => setValue(e.target.value)}
+          pattern={regex}
         />
       </div>
     </>
