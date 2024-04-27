@@ -6,9 +6,3 @@ export interface InputProps {
     setValue: (value: string) => void;
 }
 
-export interface CTAProps {
-    text: string;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-    type?: "button" | "submit" | "reset" | undefined;
-}
-

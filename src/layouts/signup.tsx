@@ -4,8 +4,7 @@ import { createUser } from "../api/users";
 import Cookies from "js-cookie";
 import { User } from "../models";
 import { useNavigate, Link } from "react-router-dom";
-import InputIcon from "../components/InputIcon";
-import BtnCta from "../components/BtnCta";
+import { InputIcon, BtnCta } from "../components";
 import {
   UserIcon,
   UserRounded,
@@ -17,7 +16,6 @@ import SignupMain from "../assets/signupMain.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastError } from "../optionsData";
-
 import { LogoWordmark } from "../components/branding/LogoWordmark";
 
 export const Signup = () => {

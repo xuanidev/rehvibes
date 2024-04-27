@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { login, loginGoogle } from "../api/login";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import InputIcon from "../components/InputIcon";
-import BtnCta from "../components/BtnCta";
+import { InputIcon, BtnCta } from "../components";
 import loginMain from "../assets/loginMain.png";
 import { LogoWordmark } from "../components/branding/LogoWordmark";
 import {
