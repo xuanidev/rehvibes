@@ -1,9 +1,9 @@
 import "../styles/style.scss";
-import "./inputText.scss";
+import "./input.scss";
 import { useRef } from "react";
 import { InputProps } from "../models";
 
-const Input = (props: InputProps) => {
+export const Input = (props: InputProps) => {
   const { name, label, type, setValue, value } = props;
 
   const textInput = useRef<HTMLInputElement>(null!);

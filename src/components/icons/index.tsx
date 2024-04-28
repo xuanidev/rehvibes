@@ -3,3 +3,7 @@ export { GoogleLoginIcon } from "./GoogleLoginIcon";
 export { PassIcon } from "./PassIcon";
 export { UserIcon } from "./UserIcon";
 export { UserRounded } from "./UserRounded";
+export { Time } from "./Time";
+export { Level } from "./Level";
+export { AddToFavorites } from "./AddToFavorites";
+export { Share } from "./Share";

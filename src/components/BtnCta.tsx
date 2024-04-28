@@ -1,8 +1,13 @@
 import "../styles/style.scss";
 import "./btnCta.scss";
-import { CTAProps } from "../models";
 
-function BtnCta(optionsData: CTAProps) {
+export interface CTAProps {
+  text: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  type?: "button" | "submit" | undefined;
+}
+
+export const BtnCta = (optionsData: CTAProps) => {
   const { text, onClick, type } = optionsData;
 
   return (
@@ -12,6 +17,6 @@ function BtnCta(optionsData: CTAProps) {
       </button>
     </>
   );
-}
+};
 
 export default BtnCta;

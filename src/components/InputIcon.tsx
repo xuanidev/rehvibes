@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { SVGProps } from "react";
 import { InputProps } from "../models";
 
-export interface InputIconProps extends InputProps {
+interface InputIconProps extends InputProps {
   icon: React.ComponentType<SVGProps<SVGSVGElement>>;
   iconWidth: number;
   iconHeight: number;
@@ -13,7 +13,7 @@ export interface InputIconProps extends InputProps {
   regex?: string;
 }
 
-const InputText = (props: InputIconProps) => {
+export const InputIcon = (props: InputIconProps) => {
   const {
     iconWidth,
     iconHeight,
@@ -35,7 +35,7 @@ const InputText = (props: InputIconProps) => {
 
   return (
     <>
-      <div className="inputText__container" onClick={handleClick}>
+      <div className="inputIcon__container" onClick={handleClick}>
         <props.icon
           width={iconWidth}
           height={iconHeight}
@@ -57,4 +57,4 @@ const InputText = (props: InputIconProps) => {
   );
 };
 
-export default InputText;
+export default InputIcon;
