@@ -7,3 +7,4 @@ export { Time } from "./Time";
 export { Level } from "./Level";
 export { AddToFavorites } from "./AddToFavorites";
 export { Share } from "./Share";
+export { Home } from "./Home";

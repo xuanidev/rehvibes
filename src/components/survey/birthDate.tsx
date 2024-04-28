@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash.range";
 import "react-datepicker/dist/react-datepicker.css";
-import { months } from "../../optionsData";
+import { months } from "../../constants";
 import { surveyErrors } from "./errors";
 
 export const BirthDate = (props: Step) => {

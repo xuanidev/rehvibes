@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { SurveyStep } from "../components/survey/SurveyStep";
 import { useNavigate } from "react-router-dom";
 import {
@@ -37,8 +37,8 @@ import {
   practicaRegular,
   rehabilitacionPreviamente,
   trabajoSentado,
-  toastError,
 } from "../optionsData";
+import { toastError } from "../constants";
 import { surveyErrors } from "../components/survey/errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
