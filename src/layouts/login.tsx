@@ -13,7 +13,7 @@ import {
 } from "../components/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { toastError } from "../optionsData";
+import { toastError } from "../constants";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -49,7 +49,7 @@ export const Login = () => {
       <img src={loginMain} className="login__img" />
       <div className="login__content">
         <div className="login__logo">
-          <LogoWordmark height={50} width={"auto"} />
+          <LogoWordmark height={50} />
         </div>
         <div className="login__info">
           <div className="login__title">Login</div>

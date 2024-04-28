@@ -1,13 +1,12 @@
 import { Outlet, NavLink } from "react-router-dom";
 import "./styles/style.scss";
+import SideBar from "./components/Sidebar";
 
 export const App = () => {
   return (
-    <div>
-      <div>NAV</div>
-      <div>
-        <Outlet />
-      </div>
+    <div className="app">
+      <SideBar />
+      <Outlet />
     </div>
   );
 };

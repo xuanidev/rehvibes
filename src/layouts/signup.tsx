@@ -15,7 +15,7 @@ import {
 import SignupMain from "../assets/signupMain.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { toastError } from "../optionsData";
+import { toastError } from "../constants";
 import { LogoWordmark } from "../components/branding/LogoWordmark";
 
 export const Signup = () => {

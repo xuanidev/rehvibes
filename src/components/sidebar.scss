@@ -1,0 +1,205 @@
+@use '../styles/base' as *;
+
+.sidebar{
+    height: auto;
+    width: 100vw;
+    position: fixed;
+    overflow: auto;
+        bottom: 0;
+        border-top: 1px solid var(--color-gray-border);
+        transition: all 0.2s;
+        padding: 6px 12px;
+    @include breakpoint('sm'){
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+    }
+    @include breakpoint('md'){
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 24px 16px;
+        width: 250px;
+        border-top: none;
+        border-right: 1px solid var(--color-gray-border);
+    }
+    @include breakpoint('lg'){
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+        padding: 40px 32px;
+        width: 250px;
+        border-right: 1px solid var(--color-gray-border);
+    }
+    @include breakpoint('xl'){
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        padding: 40px 32px;
+        width: 300px;
+    }
+}
+.sidebar__user{
+    display: none;
+    @include breakpoint('md'){
+        display: grid;
+        place-content: center;
+    }
+}
+.profile__info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -18px;
+    gap: 8px;
+}
+.profile__name{
+    font-family: 'Satoshi-Bold';
+    background-color: var(--color-white);
+    border: 1px solid var(--color-secondary);
+    padding: 6px 12px;
+    border-radius: 8px;
+
+}
+.sidebar__bar{
+    list-style-type: none;
+    margin-block-start: 0em;
+    padding-inline-start: 0px;
+    margin-block-end: 0em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 9px;
+    transition: all 0.2s;
+    gap: 8px;
+    @include breakpoint('xs'){
+        font-size: 10px;
+    }
+    @include breakpoint('sm'){
+        font-size: 12px;
+    }
+    @include breakpoint('md'){
+        flex-direction: column;
+        gap: 12px;
+        font-size: 16px;
+        justify-content: space-between;
+    }
+    @include breakpoint('xl'){
+        flex-direction: column;
+        gap: 16px;
+        font-size: 18px;
+        justify-content: space-between;
+    }
+}
+.sidebar_bar_option{
+    a{
+        color: var(--color-black);
+        text-decoration: none;
+        padding: 4px 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+        margin: auto;
+        svg{
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @include breakpoint('sm'){
+            gap: 4px;
+        }
+        @include breakpoint('md'){
+            flex-direction: row;
+            gap: 8px;
+            padding: 6px 12px;
+            svg{
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+        }
+        @include breakpoint('xl'){
+            flex-direction: row;
+            padding: 12px 24px;
+            svg{
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+        }
+    }
+    a:hover{
+        background-color: var(--color-primary-light);
+        border-radius: 8px;
+    }
+    a.active{
+        background-color: var(--color-primary-light);
+        border: 1px solid var(--color-secondary);
+        border-radius: 8px;
+        font-family: 'Satoshi-Bold';
+    }
+    a.active:hover{
+        margin-bottom: 0px;
+        cursor: pointer;
+    }
+}
+.hidden_option{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+}
+.profile_img{
+    border-radius: 50%;
+    padding: 6px 12px;
+}
+.sidebar__icon{
+    height: 24px;
+    width: 24px;
+}
+.sidebar__exit{
+    display: flex;
+    display: none;
+
+    a{
+        display: flex;
+        align-items: flex-end;
+        padding: 6px 12px;
+        color: var(--color-black);
+        text-decoration: none;
+        gap: 12px;
+        @include breakpoint('xl'){
+            padding: 12px 24px;
+        }
+    }
+
+    &:hover{
+        @include breakpoint('md'){
+            background-color: var(--color-primary-light);
+            cursor: pointer;
+        }
+    }
+    @include breakpoint('md'){
+        width: calc(250px - 64px);
+        margin-bottom: 16px;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        border-radius: 8px;
+
+    }
+    @include breakpoint('lg'){
+        margin-bottom: 30px;
+        a{
+            gap: 8px;
+        }
+    }
+    @include breakpoint('xl'){
+        margin-bottom: 64px;
+        width: calc(300px - 64px);
+    }
+
+}

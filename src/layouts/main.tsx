@@ -2,7 +2,7 @@ import { Card } from "../components";
 import PechoSuperior from "../assets/routinesLibrary/pecho superior.png";
 export const Main = () => {
   return (
-    <div className="login">
+    <div className="main">
       <Card
         img={PechoSuperior}
         difficulty="Intermedia"
