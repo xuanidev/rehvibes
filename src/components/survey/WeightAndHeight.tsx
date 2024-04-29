@@ -61,33 +61,37 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
 
   return (
     <>
-      <div className="weigth_and_height__field">
-        <label>Peso (Kg): </label>
-        <input
-          type="number"
-          name="weight"
-          className="weigth_and_height__input"
-          value={formData.weight.toString()}
-          onChange={(event) =>
-            handleChange(event.target.name, parseInt(event.target.value))
-          }
-        />
-      </div>
-      <div className="weigth_and_height__field">
-        <label htmlFor="height">¿Cuál es tu estatura en cm?: </label>
-        <input
-          type="number"
-          name="height"
-          className="weigth_and_height__input"
-          value={formData.height.toString()}
-          onChange={(event) =>
-            handleChange(event.target.name, parseInt(event.target.value))
-          }
-          pattern="[0-9]+([.,][0-9]+)?"
-        />
-      </div>
-      <div className="weigth_and_height__imc">
-        <p>IMC: {imc.toFixed(2)}</p>
+      <div className="weight_and_height">
+        <div className="weight_and_height__field">
+          <label className="weight_and_height__question">Peso (Kg): </label>
+          <input
+            type="number"
+            name="weight"
+            className="weight_and_height__input"
+            value={formData.weight.toString()}
+            onChange={(event) =>
+              handleChange(event.target.name, parseInt(event.target.value))
+            }
+          />
+        </div>
+        <div className="weight_and_height__field">
+          <label className="weight_and_height__question">
+            ¿Cuál es tu estatura en cm?:{" "}
+          </label>
+          <input
+            type="number"
+            name="height"
+            className="weight_and_height__input"
+            value={formData.height.toString()}
+            onChange={(event) =>
+              handleChange(event.target.name, parseInt(event.target.value))
+            }
+            pattern="[0-9]+([.,][0-9]+)?"
+          />
+        </div>
+        <div className="weight_and_height__imc">
+          <p>IMC ( Índice de Masa Corporal ): {imc.toFixed(2)}</p>
+        </div>
       </div>
     </>
   );

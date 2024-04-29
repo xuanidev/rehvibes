@@ -57,75 +57,77 @@ export const BirthDate = (props: Step) => {
   return (
     <>
       <div className="birth_date">
-        <label>Fecha de nacimiento:</label>
-        <label htmlFor="dateOfBirth" className="birth_date__input">
-          <DatePicker
-            renderCustomHeader={({
-              date,
-              changeYear,
-              changeMonth,
-              decreaseMonth,
-              increaseMonth,
-              prevMonthButtonDisabled,
-              nextMonthButtonDisabled,
-            }: any) => (
-              <div
-                style={{
-                  margin: 10,
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <button
-                  onClick={(event) => {
-                    event.preventDefault();
-                    decreaseMonth();
+        <label className="birth_date__title">Fecha de nacimiento:</label>
+        <div className="birth_date__date">
+          <label htmlFor="dateOfBirth" className="birth_date__input">
+            <DatePicker
+              renderCustomHeader={({
+                date,
+                changeYear,
+                changeMonth,
+                decreaseMonth,
+                increaseMonth,
+                prevMonthButtonDisabled,
+                nextMonthButtonDisabled,
+              }: any) => (
+                <div
+                  style={{
+                    margin: 10,
+                    display: "flex",
+                    justifyContent: "space-between",
                   }}
-                  disabled={prevMonthButtonDisabled}
-                  className="datepicker__btn"
                 >
-                  {"<"}
-                </button>
-                <select
-                  value={months[getMonth(date)]}
-                  onChange={({ target: { value } }) =>
-                    changeMonth(months.indexOf(value))
-                  }
-                  className="datepicker__btn"
-                >
-                  {months.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={getYear(date)}
-                  onChange={({ target: { value } }) => changeYear(value)}
-                  className="datepicker__btn"
-                >
-                  {years.map((option: any) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  onClick={(event) => {
-                    event.preventDefault();
-                    increaseMonth();
-                  }}
-                  disabled={nextMonthButtonDisabled}
-                  className="datepicker__btn"
-                >
-                  {">"}
-                </button>
-              </div>
-            )}
-            selected={currentDate}
-            onChange={handleChange}
-          />
-        </label>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      decreaseMonth();
+                    }}
+                    disabled={prevMonthButtonDisabled}
+                    className="datepicker__btn"
+                  >
+                    {"<"}
+                  </button>
+                  <select
+                    value={months[getMonth(date)]}
+                    onChange={({ target: { value } }) =>
+                      changeMonth(months.indexOf(value))
+                    }
+                    className="datepicker__btn"
+                  >
+                    {months.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={getYear(date)}
+                    onChange={({ target: { value } }) => changeYear(value)}
+                    className="datepicker__btn"
+                  >
+                    {years.map((option: any) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={(event) => {
+                      event.preventDefault();
+                      increaseMonth();
+                    }}
+                    disabled={nextMonthButtonDisabled}
+                    className="datepicker__btn"
+                  >
+                    {">"}
+                  </button>
+                </div>
+              )}
+              selected={currentDate}
+              onChange={handleChange}
+            />
+          </label>
+        </div>
       </div>
     </>
   );

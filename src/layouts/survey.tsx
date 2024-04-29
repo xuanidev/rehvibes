@@ -42,6 +42,7 @@ import { toastError } from "../constants";
 import { surveyErrors } from "../components/survey/errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ImgDefault from "../assets/ImgDefault.png";
 
 export const Survey = () => {
   const [data, setData] = useState<SurveyData>({});
@@ -163,65 +164,76 @@ export const Survey = () => {
   const currentStepInfo = steps[currentStep] as SurveyData;
   return (
     <div className="survey">
-      <form
-        onSubmit={async (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          handleSubmit();
+      <img
+        style={{
+          backgroundImage: `url(${currentStepInfo.src ?? ImgDefault})`,
         }}
-        className="survey__form"
-      >
-        <SurveyStep
-          key={currentStepInfo.fieldName}
-          handleStep={handleStep}
-          setStepValid={setIsStepValid}
-          stepInfo={currentStepInfo}
-          currentValue={
-            currentStepInfo.fieldName && data[currentStepInfo.fieldName]
-              ? data[currentStepInfo.fieldName]
-              : null
-          }
-          currentValueWeigth={
-            currentStepInfo.fieldName === "weigthAndHeigth" && data["weigth"]
-              ? data["weigth"]
-              : null
-          }
-          currentValueHeigth={
-            currentStepInfo.fieldName === "weigthAndHeigth" && data["heigth"]
-              ? data["heigth"]
-              : null
-          }
-        />
-        <div className="survey__actions">
-          {currentStep > 0 && (
-            <button
-              type="button"
-              className="survey__btn survey__btn--back"
-              onClick={prevStep}
-            >
-              Volver
-            </button>
-          )}
-          {currentStep < steps.length - 1 && (
-            <button
-              type="button"
-              className="survey__btn survey__btn--right"
-              onClick={nextStep}
-            >
-              Siguiente
-            </button>
-          )}
-          {currentStep === steps.length - 1 && (
-            <button
-              type="submit"
-              className="survey__btn survey__btn--right"
-              disabled={!isStepValid.state}
-            >
-              Enviar
-            </button>
-          )}
+        className="background_image"
+      />
+      <div className="survey__content">
+        <div className="progress_bar_container">
+          <div className="progress_bar__bar" style={{ width: `${25}%` }}></div>
         </div>
-      </form>
+        <form
+          onSubmit={async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            handleSubmit();
+          }}
+          className="survey__form"
+        >
+          <SurveyStep
+            key={currentStepInfo.fieldName}
+            handleStep={handleStep}
+            setStepValid={setIsStepValid}
+            stepInfo={currentStepInfo}
+            currentValue={
+              currentStepInfo.fieldName && data[currentStepInfo.fieldName]
+                ? data[currentStepInfo.fieldName]
+                : null
+            }
+            currentValueWeigth={
+              currentStepInfo.fieldName === "weigthAndHeigth" && data["weigth"]
+                ? data["weigth"]
+                : null
+            }
+            currentValueHeigth={
+              currentStepInfo.fieldName === "weigthAndHeigth" && data["heigth"]
+                ? data["heigth"]
+                : null
+            }
+          />
+          <div className="survey__actions">
+            {currentStep > 0 && (
+              <button
+                type="button"
+                className="survey__btn survey__btn--back"
+                onClick={prevStep}
+              >
+                Volver
+              </button>
+            )}
+            {currentStep < steps.length - 1 && (
+              <button
+                type="button"
+                className="survey__btn survey__btn--right"
+                onClick={nextStep}
+              >
+                Siguiente
+              </button>
+            )}
+            {currentStep === steps.length - 1 && (
+              <button
+                type="submit"
+                className="survey__btn survey__btn--right"
+                disabled={!isStepValid.state}
+              >
+                Enviar
+              </button>
+            )}
+          </div>
+        </form>
+      </div>
       <ToastContainer />
     </div>
   );
