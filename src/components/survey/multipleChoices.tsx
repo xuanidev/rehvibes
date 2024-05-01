@@ -76,8 +76,8 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
   return (
     <>
       <div className="step">
-        <p>{stepInfo.question}</p>
-        {stepInfo.options.length < 8 ? (
+        <h4 className="step__question">{stepInfo.question}</h4>
+        {stepInfo.options.length < 4 ? (
           stepInfo.options.map((option, index) => (
             <label key={index} className="step__option gradient-border">
               <input
@@ -89,35 +89,30 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
             </label>
           ))
         ) : (
-          <div className="two-columns">
-            <div className="column">
-              {stepInfo.options
-                .slice(0, Math.ceil(stepInfo.options.length / 2))
-                .map((option, index) => (
-                  <label key={index} className="step__option gradient-border">
-                    <input
-                      type="checkbox"
-                      checked={selectedOptions.includes(option)}
-                      onChange={() => handleClick(stepInfo.fieldName, option)}
-                    />
-                    {option}
-                  </label>
-                ))}
-            </div>
-            <div className="column">
-              {stepInfo.options
-                .slice(Math.ceil(stepInfo.options.length / 2))
-                .map((option, index) => (
-                  <label key={index} className="step__option gradient-border">
-                    <input
-                      type="checkbox"
-                      checked={selectedOptions.includes(option)}
-                      onChange={() => handleClick(stepInfo.fieldName, option)}
-                    />
-                    {option}
-                  </label>
-                ))}
-            </div>
+          <div className="columns">
+            {stepInfo.options.map((_option, index) =>
+              index % 3 === 0 ? (
+                <div className="column" key={index}>
+                  {stepInfo.options
+                    .slice(index, index + 3)
+                    .map((option, innerIndex) => (
+                      <label
+                        key={innerIndex}
+                        className="step__option gradient-border"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedOptions.includes(option)}
+                          onChange={() =>
+                            handleClick(stepInfo.fieldName, option)
+                          }
+                        />
+                        {option}
+                      </label>
+                    ))}
+                </div>
+              ) : null
+            )}
           </div>
         )}
       </div>

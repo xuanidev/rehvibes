@@ -1,5 +1,7 @@
 import { ToastOptions, ToastPosition } from "react-toastify";
 
+const days = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
+
 const months = [
     "Enero",
     "Febrero",
@@ -20,14 +22,15 @@ const toastError: ToastOptions<ToastPosition> = {
     position: "top-center",
     hideProgressBar: true,
     closeOnClick: true,
-    autoClose: 5000,
+    autoClose: 4000,
     draggable: true,
     style: {
-      fontFamily: "Satoshi-Regular",
+      fontFamily: "Satoshi-Medium",
       color: "black",
-      border: "1px solid #E53E00",
+      border: "1px solid white",
+      backgroundColor: "hsla(0, 0%, 100%, 0.8)",
       borderRadius: "12px",
     },
   };
 
-export {months, toastError} 
+export {days, months, toastError} 

@@ -43,16 +43,32 @@ import { surveyErrors } from "../components/survey/errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ImgDefault from "../assets/ImgDefault.png";
+import { Information } from "../components/icons";
+import { Logo } from "../components/branding";
+
+const preloadImage = (url: string) => {
+  return new Promise((resolve, reject) => {
+    if (url) {
+      const img = new Image();
+      img.src = url;
+      img.onload = resolve;
+      img.onerror = reject;
+    }
+  });
+};
 
 export const Survey = () => {
   const [data, setData] = useState<SurveyData>({});
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const [isStepValid, setIsStepValid] = useState({
     state: false,
     error: surveyErrors.generalMsg,
   });
   const [toastId, setToastId] = useState<any>("");
+  const [numSteps, setNumSteps] = useState<number>(20);
+  const [percentage, setPercentage] = useState<number>(0);
   const navigate = useNavigate();
+
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
       if (name === "desire") {
@@ -82,13 +98,24 @@ export const Survey = () => {
   const prevStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
     setIsStepValid({ state: true, error: "" });
+    setPercentage(((currentStep - 1) / numSteps) * 100);
+  };
+
+  const calculatePercentage = () => {
+    if (data.desire === desire.conditionOption) {
+      setNumSteps(numSteps + 3);
+      setPercentage(((currentStep + 1) / (numSteps + 3)) * 100);
+    } else {
+      setPercentage(((currentStep + 1) / numSteps) * 100);
+    }
   };
 
   const nextStep = () => {
     if (isStepValid.state) {
       setCurrentStep((prevStep) => prevStep + 1);
-      setIsStepValid({ state: false, error: "Rellena todos los campos" });
+      setIsStepValid({ state: false, error: surveyErrors.generalMsg });
       toast.dismiss(toastId);
+      calculatePercentage();
     } else {
       const toastIdAux = toast.error(isStepValid.error, toastError);
       setToastId(toastIdAux);
@@ -116,7 +143,6 @@ export const Survey = () => {
 
   if (data.desire === desire.conditionOption) {
     steps.push(lesionZones);
-
     const isValidLesionKey = (
       key: string
     ): key is keyof typeof lesionComponents => {
@@ -161,6 +187,13 @@ export const Survey = () => {
   interface SurveyData {
     [key: string]: any;
   }
+
+  if (steps.length > currentStep + 1) {
+    const nextStepInfo = steps[currentStep + 1] as SurveyData;
+    const imgSrc = nextStepInfo.src;
+    preloadImage(imgSrc ?? undefined);
+  }
+
   const currentStepInfo = steps[currentStep] as SurveyData;
   return (
     <div className="survey">
@@ -170,10 +203,13 @@ export const Survey = () => {
         }}
         className="background_image"
       />
+      <div className="progress_bar_container">
+        <div
+          className="progress_bar__bar"
+          style={{ width: `${percentage}%` }}
+        ></div>
+      </div>
       <div className="survey__content">
-        <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${25}%` }}></div>
-        </div>
         <form
           onSubmit={async (event) => {
             event.preventDefault();
@@ -233,6 +269,17 @@ export const Survey = () => {
             )}
           </div>
         </form>
+      </div>
+      <div className="information_icon">
+        <Information fill="white" height={25} width={25} />
+      </div>
+      <div className="logo_icon">
+        <Logo
+          fill="white"
+          height={40}
+          width={40}
+          style={{ filter: "brightness(3)" }}
+        />
       </div>
       <ToastContainer />
     </div>

@@ -3,6 +3,7 @@ import "../../styles/style.scss";
 import "./survey.scss";
 import { StepOptions } from "../../models";
 import { surveyErrors } from "./errors";
+import classNames from "classnames";
 
 export const Options = (props: StepOptions) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
@@ -37,7 +38,7 @@ export const Options = (props: StepOptions) => {
     <>
       <div className="step">
         <h4 className="step__question">{stepInfo.question}</h4>
-        {stepInfo.options.length < 3 ? (
+        {stepInfo.options.length < 4 ? (
           <div className="one_column">
             {stepInfo.options.map((option, index) => (
               <label key={index} className="step__option gradient-border">
@@ -51,16 +52,27 @@ export const Options = (props: StepOptions) => {
             ))}
           </div>
         ) : (
-          <div className="columns">
+          <div
+            className={classNames("columns", {
+              columns_horizontal: stepInfo.options.length > 6,
+            })}
+          >
             {stepInfo.options.map((_option, index) =>
               index % 3 === 0 ? (
-                <div className="column" key={index}>
+                <div
+                  className={classNames("column", {
+                    column_horizontal: stepInfo.options.length > 6,
+                  })}
+                  key={index}
+                >
                   {stepInfo.options
                     .slice(index, index + 3)
                     .map((option, innerIndex) => (
                       <label
                         key={innerIndex}
-                        className="step__option gradient-border"
+                        className={classNames("step__option gradient-border", {
+                          step__option_horizontal: stepInfo.options.length > 6,
+                        })}
                       >
                         <input
                           type="checkbox"

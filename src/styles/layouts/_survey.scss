@@ -23,6 +23,7 @@
     padding: 16px;
     margin-top: 64px;
   }
+  
   .background_image {
     position: absolute;
     z-index: -20;
@@ -30,6 +31,7 @@
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    transition: all 0.5s;
   }
   .progress_bar_container{
     margin-left: auto;
@@ -38,14 +40,15 @@
     height: 9px;
     border-radius: 16px;
     overflow: hidden;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-secondary-dark);
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--color-white);
     outline-offset: -1px;
   }
   .progress_bar__bar{
     height: 100%;
     border-radius: 16px;
     background-color: var(--color-secondary);
+    transition: width 0.5s;
   }
   .survey__label {
     padding: 0px 0px 8px 16px;
@@ -68,16 +71,15 @@
   }
   
   .survey__btn--back {
-    background-color: white;
-    border: 1px solid var(--color-secondary);
-    color: var(--color-secondary-dark);
+    background-color: transparent;
+    border: 1px solid var(--color-white);
+    color: var(--color-white);
   }
   
   .survey__btn--back:hover {
     cursor: pointer;
-        background-color: var(--color-secondary-dark);
+    background-color: rgba(255, 255, 255, 0.2);
         color: white;
-        border: 1px solid var(--color-secondary-dark);
   }
   
   .survey__btn--right {

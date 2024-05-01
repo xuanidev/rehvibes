@@ -14,3 +14,4 @@ export { Calendar } from "./Calendar";
 export { StarCircle } from "./StarCircle";
 export { Conf } from "./Conf";
 export { Exit } from "./Exit";
+export { Information } from "./Information";

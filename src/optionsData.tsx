@@ -1,8 +1,9 @@
 const genero = {
   fieldName: "genero",
   question: "¿Cuál es tú genero?",
-  options: ["Hombre", "Mujer"],
+  options: ["Hombre", "Mujer", "Prefiero no contestar"],
   fieldType: "Options",
+  src: "/src/assets/genero.png",
 };
 
 const birthDate = {
@@ -332,7 +333,6 @@ const movilidad = {
   question: "¿Tienes alguna limitación de movilidad?",
   exclusiveOption: "Ninguna",
   options: [
-    "Movilidad reducida en las extremidades inferiores",
     "Movilidad reducida en las extremidades inferiores",
     "Rigidez articular",
     "Falta de equilibrio",

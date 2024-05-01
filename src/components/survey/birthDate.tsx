@@ -5,8 +5,9 @@ import DatePicker from "react-datepicker";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash.range";
 import "react-datepicker/dist/react-datepicker.css";
-import { months } from "../../constants";
+import { days, months } from "../../constants";
 import { surveyErrors } from "./errors";
+import { Calendar } from "../icons";
 
 export const BirthDate = (props: Step) => {
   const { setStepValid, handleStep, stepInfo, currentValue } = props;
@@ -54,6 +55,15 @@ export const BirthDate = (props: Step) => {
     );
   };
 
+  const locale = {
+    localize: {
+      day: (n) => days[n],
+      month: (n) => months[n],
+    },
+    formatLong: {
+      date: () => "mm/dd/yyyy",
+    },
+  };
   return (
     <>
       <div className="birth_date">
@@ -125,6 +135,8 @@ export const BirthDate = (props: Step) => {
               )}
               selected={currentDate}
               onChange={handleChange}
+              locale={locale}
+              popperPlacement="right"
             />
           </label>
         </div>
