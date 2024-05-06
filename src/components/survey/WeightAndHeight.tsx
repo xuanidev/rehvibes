@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StepWeightAndHeight } from "../../models";
 import "./weigthAndHeight.scss";
 import { surveyErrors } from "./errors";
@@ -63,31 +63,36 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
     <>
       <div className="weight_and_height">
         <div className="weight_and_height__field">
-          <label className="weight_and_height__question">Peso (Kg): </label>
-          <input
-            type="number"
-            name="weight"
-            className="weight_and_height__input"
-            value={formData.weight.toString()}
-            onChange={(event) =>
-              handleChange(event.target.name, parseInt(event.target.value))
-            }
-          />
+          <label className="weight_and_height__question">Peso</label>
+          <div className="weight_and_height__input">
+            <input
+              type="text"
+              name="weight"
+              max={350}
+              value={formData.weight.toString()}
+              onChange={(event) =>
+                handleChange(event.target.name, parseInt(event.target.value))
+              }
+            />
+            <p>kg</p>
+          </div>
         </div>
         <div className="weight_and_height__field">
           <label className="weight_and_height__question">
-            ¿Cuál es tu estatura en cm?:{" "}
+            ¿Cuál es tu estatura?
           </label>
-          <input
-            type="number"
-            name="height"
-            className="weight_and_height__input"
-            value={formData.height.toString()}
-            onChange={(event) =>
-              handleChange(event.target.name, parseInt(event.target.value))
-            }
-            pattern="[0-9]+([.,][0-9]+)?"
-          />
+          <div className="weight_and_height__input">
+            <input
+              type="text"
+              name="height"
+              max={250}
+              value={formData.height.toString()}
+              onChange={(event) =>
+                handleChange(event.target.name, parseInt(event.target.value))
+              }
+            />
+            <p>cm</p>
+          </div>
         </div>
         <div className="weight_and_height__imc">
           <p>IMC ( Índice de Masa Corporal ): {imc.toFixed(2)}</p>

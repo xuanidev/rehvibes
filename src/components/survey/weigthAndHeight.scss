@@ -15,19 +15,37 @@
 }
 .weight_and_height__input{
     width: 100%;
-    font-family: 'Satoshi-Bold';
-    text-align: center;
-    font-size: 16px;
     background-color: transparent;
+    font-family: 'Satoshi-Bold';
     padding: 12px 16px;
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
     border: 1px solid var(--color-white);
     border-radius: 14px;
-    color: var(--color-white);
-    appearance: none;
-    -moz-appearance: textfield;
+    input{
+        width: 50%;
+        color: var(--color-white);
+        appearance: none;
+        -moz-appearance: textfield;
+        background-color: transparent;
+        border: none;
+        text-align: end;
+        font-family: 'Satoshi-Bold';
+        font-size: 16px;
+    }
+    input:focus-visible{
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+    }
+    p{
+        width: 50%;
+        margin-block-start: 1px;
+        margin-block-end: 0em;
+        font-size: 16px;
+        color: var(--color-white);
+        
+    }
 }
 .weight_and_height__input::-webkit-inner-spin-button {
     -webkit-appearance: none;

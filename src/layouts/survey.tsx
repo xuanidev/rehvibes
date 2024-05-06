@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { SurveyStep } from "../components/survey/SurveyStep";
+import { useState, useEffect } from "react";
+import { SurveyStep, SurveyActions } from "../components/survey/index";
 import { useNavigate } from "react-router-dom";
 import {
   genero,
@@ -42,6 +42,7 @@ import { toastError } from "../constants";
 import { surveyErrors } from "../components/survey/errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 import ImgDefault from "../assets/ImgDefault.png";
 import { Information } from "../components/icons";
 import { Logo } from "../components/branding";
@@ -65,9 +66,24 @@ export const Survey = () => {
     error: surveyErrors.generalMsg,
   });
   const [toastId, setToastId] = useState<any>("");
-  const [numSteps, setNumSteps] = useState<number>(20);
+  const [numSteps, setNumSteps] = useState<number>(22);
   const [percentage, setPercentage] = useState<number>(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const hasData =
+      Cookies.get("data") !== undefined && Cookies.get("data") !== null;
+    const hasCurrentStep =
+      Cookies.get("currentStep") !== undefined &&
+      Cookies.get("currentStep") !== null;
+    if (hasData && hasCurrentStep) {
+      const dataObject = Cookies.get("data");
+      setData(JSON.parse(dataObject));
+      let step = Cookies.get("currentStep");
+      setPercentage(((Number(step) + 1) / numSteps) * 100);
+      setCurrentStep(Number(step) + 1);
+    }
+  }, []);
 
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
@@ -104,9 +120,15 @@ export const Survey = () => {
   const calculatePercentage = () => {
     if (data.desire === desire.conditionOption) {
       setNumSteps(numSteps + 3);
+      console.log(currentStep + 1);
+      console.log(numSteps + 3);
+      console.log(((currentStep + 1) / (numSteps + 3)) * 100);
       setPercentage(((currentStep + 1) / (numSteps + 3)) * 100);
     } else {
       setPercentage(((currentStep + 1) / numSteps) * 100);
+      console.log(currentStep + 1);
+      console.log(numSteps);
+      console.log(((currentStep + 1) / numSteps) * 100);
     }
   };
 
@@ -116,6 +138,8 @@ export const Survey = () => {
       setIsStepValid({ state: false, error: surveyErrors.generalMsg });
       toast.dismiss(toastId);
       calculatePercentage();
+      Cookies.set("data", JSON.stringify(data), { path: "" });
+      Cookies.set("currentStep", currentStep, { path: "" });
     } else {
       const toastIdAux = toast.error(isStepValid.error, toastError);
       setToastId(toastIdAux);
@@ -123,7 +147,8 @@ export const Survey = () => {
   };
 
   const handleSubmit = () => {
-    console.log(data);
+    Cookies.remove("currentStep");
+    Cookies.remove("data");
     navigate("/app");
   };
 
@@ -196,18 +221,22 @@ export const Survey = () => {
 
   const currentStepInfo = steps[currentStep] as SurveyData;
   return (
-    <div className="survey">
-      <img
-        style={{
-          backgroundImage: `url(${currentStepInfo.src ?? ImgDefault})`,
-        }}
-        className="background_image"
-      />
-      <div className="progress_bar_container">
-        <div
-          className="progress_bar__bar"
-          style={{ width: `${percentage}%` }}
-        ></div>
+    <div
+      className="survey"
+      style={{
+        backgroundImage: `url(${currentStepInfo.src ?? ImgDefault})`,
+      }}
+    >
+      <div className="survey__top">
+        <div className="progress_bar_container">
+          <div
+            className="progress_bar__bar"
+            style={{ width: `${percentage}%` }}
+          ></div>
+        </div>
+        <div className="information_icon">
+          <Information fill="white" height={25} width={25} />
+        </div>
       </div>
       <div className="survey__content">
         <form
@@ -239,39 +268,14 @@ export const Survey = () => {
                 : null
             }
           />
-          <div className="survey__actions">
-            {currentStep > 0 && (
-              <button
-                type="button"
-                className="survey__btn survey__btn--back"
-                onClick={prevStep}
-              >
-                Volver
-              </button>
-            )}
-            {currentStep < steps.length - 1 && (
-              <button
-                type="button"
-                className="survey__btn survey__btn--right"
-                onClick={nextStep}
-              >
-                Siguiente
-              </button>
-            )}
-            {currentStep === steps.length - 1 && (
-              <button
-                type="submit"
-                className="survey__btn survey__btn--right"
-                disabled={!isStepValid.state}
-              >
-                Enviar
-              </button>
-            )}
-          </div>
+          <SurveyActions
+            currentStep={currentStep}
+            nextStep={nextStep}
+            prevStep={prevStep}
+            length={steps.length}
+            isStepValid={isStepValid}
+          />
         </form>
-      </div>
-      <div className="information_icon">
-        <Information fill="white" height={25} width={25} />
       </div>
       <div className="logo_icon">
         <Logo

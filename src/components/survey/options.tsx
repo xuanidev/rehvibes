@@ -38,7 +38,7 @@ export const Options = (props: StepOptions) => {
     <>
       <div className="step">
         <h4 className="step__question">{stepInfo.question}</h4>
-        {stepInfo.options.length < 4 ? (
+        {stepInfo.options.length < 7 ? (
           <div className="one_column">
             {stepInfo.options.map((option, index) => (
               <label key={index} className="step__option gradient-border">
@@ -52,27 +52,16 @@ export const Options = (props: StepOptions) => {
             ))}
           </div>
         ) : (
-          <div
-            className={classNames("columns", {
-              columns_horizontal: stepInfo.options.length > 6,
-            })}
-          >
+          <div className="columns">
             {stepInfo.options.map((_option, index) =>
-              index % 3 === 0 ? (
-                <div
-                  className={classNames("column", {
-                    column_horizontal: stepInfo.options.length > 6,
-                  })}
-                  key={index}
-                >
+              index % 6 === 0 ? (
+                <div className="column" key={index}>
                   {stepInfo.options
-                    .slice(index, index + 3)
+                    .slice(index, index + 6)
                     .map((option, innerIndex) => (
                       <label
                         key={innerIndex}
-                        className={classNames("step__option gradient-border", {
-                          step__option_horizontal: stepInfo.options.length > 6,
-                        })}
+                        className="step__option gradient-border"
                       >
                         <input
                           type="checkbox"

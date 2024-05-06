@@ -34,13 +34,13 @@
 }
 .signup__content{
     height: 100%;
-    @include generateBreakpoints(('md','lg'), 'width',70%, 50%);
+    @include generateBreakpoints(('md','xl'), 'width',70%, 50%);
     min-height: 550px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include generateBreakpoints(('md','xl'), 'gap',24px, 32px);
+    @include generateBreakpoints(('md','2xl'), 'gap',24px, 32px);
     gap:16px;
     @include generateBreakpoints(('xs','sm','xl'), 'padding',24px 64px, 24px 96px, 24px 128px);
     padding: 24px 48px;

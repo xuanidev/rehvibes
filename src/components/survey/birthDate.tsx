@@ -136,7 +136,7 @@ export const BirthDate = (props: Step) => {
               selected={currentDate}
               onChange={handleChange}
               locale={locale}
-              popperPlacement="right"
+              popperPlacement="bottom"
             />
           </label>
         </div>

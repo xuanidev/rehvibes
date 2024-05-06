@@ -97,3 +97,7 @@
   .react-datepicker__input-container input:focus-visible {
     outline: none;
   }
+  .react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time] {
+    appearance: text !important;
+    -moz-appearance: textfield !important;
+}

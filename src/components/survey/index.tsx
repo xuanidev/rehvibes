@@ -6,3 +6,4 @@ export { BirthDate } from "./BirthDate";
 export { WeightAndHeight } from "./WeightAndHeight";
 
 export { SurveyStep } from "./SurveyStep";
+export { SurveyActions } from "./SurveyActions";
