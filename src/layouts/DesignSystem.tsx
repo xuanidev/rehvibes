@@ -1,6 +1,9 @@
+import { Btn, Card, InputIcon } from "../components";
+import { Plus, UserIcon } from "../components/icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastError } from "../constants";
+import PechoSuperior from "../assets/routinesLibrary/pecho superior.png";
 
 export const DesignSystem = () => {
   return (
@@ -89,45 +92,86 @@ export const DesignSystem = () => {
         </ul>
       </section>
 
-      <section>
+      <section className="ds_section">
         <h2>3. Espaciado</h2>
-        <div style={{ margin: "10px", padding: "20px" }}>
-          Contenido con márgenes y relleno definidos
+        <div className="spaces_section">
+          <div className="spaces_section__8px">8px</div>
+          <div className="spaces_section__16px">16px</div>
+          <div className="spaces_section__24px">24px</div>
+          <div className="spaces_section__32px">32px</div>
+          <div className="spaces_section__40px">40px</div>
         </div>
       </section>
 
-      <section>
-        <h2>4. Iconos</h2>
-        <i className="fas fa-home">Icono</i>
-      </section>
-
-      <section>
-        <h2>5. Botones</h2>
-        <button>Default</button>
-        <button>Disabled</button>
-        <button>Primary</button>
-        <button>Warning</button>
-        <button>Error</button>
-      </section>
-
-      <section>
-        <h2>6. Formularios</h2>
-        <input
-          type="text"
-          style={{ borderRadius: "5px", border: "1px solid #ccc" }}
+      <section className="ds_section">
+        <h2>4. Botones</h2>
+        <Btn text="Primary" btnClass="primary" />
+        <Btn text="Disabled" btnClass="disabled" />
+        <Btn
+          btnClass="borderGradient"
+          leftIcon={Plus}
+          iconHeight={24}
+          iconWidth={24}
+          iconClass="color-brand icon"
+        />
+        <Btn text="Gradient" btnClass="borderGradient" />
+        <Btn
+          text="Left Icon"
+          btnClass="borderGradient"
+          leftIcon={Plus}
+          iconHeight={24}
+          iconWidth={24}
+          iconClass="color-brand icon"
+        />
+        <Btn
+          text="Right Icon"
+          btnClass="borderGradient"
+          rightIcon={Plus}
+          iconHeight={24}
+          iconWidth={24}
+          iconClass="color-brand icon"
+        />
+        <Btn
+          text="Both Icons"
+          btnClass="borderGradient"
+          leftIcon={Plus}
+          rightIcon={Plus}
+          iconHeight={24}
+          iconWidth={24}
+          iconClass="color-brand icon"
         />
       </section>
 
-      <section>
-        <h2>7. Componentes</h2>
-        <div>
-          <p>Título de la tarjeta</p>
-          <p>Contenido de la tarjeta</p>
+      <section className="ds_section">
+        <h2>5. Componentes</h2>
+        <div className="components_section">
+          <InputIcon
+            icon={UserIcon}
+            className={"color-brand"}
+            iconWidth={19}
+            iconHeight={19}
+            label="Input"
+            name="email"
+            value={""}
+            setValue={() => {}}
+            type="email"
+            required={true}
+          />
+          <Card
+            img={PechoSuperior}
+            difficulty="Intermedia"
+            duration={"40min" + "."}
+            onClick={() => {
+              console.log("click");
+            }}
+            size="sm"
+            text="Pecho Superior"
+          ></Card>
         </div>
       </section>
 
       <section>
-        <h2>8. Grids</h2>
+        <h2>6. Grids</h2>
         <div
           style={{
             display: "grid",
@@ -141,18 +185,13 @@ export const DesignSystem = () => {
       </section>
 
       <section>
-        <h2>9. Reactividad y Animaciones</h2>
+        <h2>7. Reactividad y Animaciones</h2>
         <button
           onClick={() => toast.error("Error", toastError)}
           style={{ cursor: "pointer", transition: "background-color 0.3s" }}
         >
           Error
         </button>
-      </section>
-
-      <section>
-        <h2>10. Documentación y Guía de Estilo</h2>
-        <a href="/docs">Documentación</a>
       </section>
       <ToastContainer />
     </div>

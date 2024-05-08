@@ -29,8 +29,8 @@
   }
 }
 
-@mixin gradient-border($border-width, $border-radius) {
-  background-image: linear-gradient(45deg, white, white),
+@mixin gradient-border($border-width, $border-radius, $color) {
+  background-image: linear-gradient(45deg, $color, $color),
                     linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   background-clip: padding-box, border-box;
   background-origin: border-box;

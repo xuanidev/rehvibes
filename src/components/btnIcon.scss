@@ -1,0 +1,66 @@
+@import '../styles/base';
+
+
+.btnIcon{
+    padding: 12px 16px;
+    border-radius: 14px;
+    width: max-content;
+    font-family: 'Satoshi-Medium';
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    transition: color 0.15s;
+    &:hover {
+        // Estilos al hacer hover
+        
+        // Aquí puedes definir los estilos que deseas aplicar cuando el cursor está sobre el botón. Para cambiar el color de relleno de los iconos a blanco, podrías hacer algo como esto:
+        
+        .icon {
+          fill: white; // Cambia el color de relleno a blanco cuando se hace hover
+        }
+      }
+      
+      .icon {
+        fill: var(--color-secondary);
+        transition: color 0.15s;
+      }
+}
+.btnIcon:hover{
+    background-color: var(--color-primary);
+    cursor: pointer;
+}
+.primary{
+    background-color: var(--color-secondary);
+    color: white;
+    font-size: 18px;
+    border: 2px solid var(--color-secondary-dark);
+}
+.primary:hover{
+    background-color: var(--color-white);
+    color: var(--color-secondary-dark);
+    font-family: 'Satoshi-Bold'
+}
+.borderGradient{
+    @include gradient-border(2px, 14px, var(--color-white));
+    &:hover {
+        &_fill {
+          fill: white;
+          color: white;
+        }
+      }   
+}
+.borderGradient:hover{
+    @include gradient-border(2px, 14px, transparent);
+    color: white;
+    font-family: 'Satoshi-Bold';
+}
+.disabled{
+    background-color: var(--color-secondary-light);
+    border: 2px solid var(--color-secondary-dark-disabled);
+    color: var(--color-white);
+}
+.disabled:hover{
+    background-color: var(--color-secondary-light);
+    cursor: default;
+}

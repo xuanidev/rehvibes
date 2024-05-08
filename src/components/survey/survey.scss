@@ -17,10 +17,13 @@
 
 }
 .step__option{
-  font-family: 'Satoshi-Bold';
+  font-family: 'Satoshi-Medium';
+  background-color: hsla(0, 0%, 0%, 0.2) !important;
   @include generateBreakpoints(('sm','md','xl'), 'font-size', 16px, 18px, 20px);
   font-size: 14px;
-  padding: 6px 0px;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
+  padding: 10px 16px;
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
