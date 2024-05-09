@@ -76,8 +76,14 @@ export const Survey = () => {
     const hasCurrentStep =
       Cookies.get("currentStep") !== undefined &&
       Cookies.get("currentStep") !== null;
+
     if (hasData && hasCurrentStep) {
       const dataObject = Cookies.get("data");
+
+      if(!dataObject){
+        return;
+      }
+
       setData(JSON.parse(dataObject));
       let step = Cookies.get("currentStep");
       setPercentage(((Number(step) + 1) / numSteps) * 100);
@@ -139,7 +145,7 @@ export const Survey = () => {
       toast.dismiss(toastId);
       calculatePercentage();
       Cookies.set("data", JSON.stringify(data), { path: "" });
-      Cookies.set("currentStep", currentStep, { path: "" });
+      Cookies.set("currentStep", currentStep.toString(), { path: "" });
     } else {
       const toastIdAux = toast.error(isStepValid.error, toastError);
       setToastId(toastIdAux);
