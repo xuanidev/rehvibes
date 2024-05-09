@@ -32,7 +32,7 @@ export const Signup = () => {
     const { isLogged, uid, errorMsg, imgUrl } = await loginGoogle();
     if (isLogged) {
       Cookies.set("uid", uid, { path: "" });
-      Cookies.set("currentSurvey", true, { path: "" });
+      Cookies.set("currentSurvey", 'true', { path: "" });
       navigate("/app");
     } else {
       toast.error(errorMsg, toastError);
