@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
-import "./survey.scss";
-import { StepMultipleChoices } from "../../models";
-import { surveyErrors } from "./errors";
+import { useState, useEffect, useLayoutEffect } from 'react';
+import './survey.scss';
+import { StepMultipleChoices } from '../../models';
+import { surveyErrors } from './errors';
 
 export const MultipleChoices = (props: StepMultipleChoices) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    currentValue !== null ? [currentValue] : []
-  );
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(currentValue !== null ? [currentValue] : []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (currentValue) {
-      setSelectedOptions(currentValue.split(","));
-      setStepValid({ state: true, error: "" });
+      setSelectedOptions(currentValue.split(','));
+      setStepValid({ state: true, error: '' });
     } else {
       setStepValid({ state: false, error: surveyErrors.optionsMsg });
     }
@@ -23,15 +21,12 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
     setSelectedOptions(isSelected ? [] : [value]);
     setStepValid({
       state: !isSelected,
-      error: isSelected ? surveyErrors.optionsMsg : "",
+      error: isSelected ? surveyErrors.optionsMsg : '',
     });
-    handleStep(stepInfo.fieldName, isSelected ? "" : stepInfo.exclusiveOption);
+    handleStep(stepInfo.fieldName, isSelected ? '' : stepInfo.exclusiveOption);
   };
 
-  const handleNotAlreadySelected = (
-    newSelectedOptions: string[],
-    value: string
-  ): string[] => {
+  const handleNotAlreadySelected = (newSelectedOptions: string[], value: string): string[] => {
     if (!selectedOptions.includes(stepInfo.exclusiveOption)) {
       if (value !== stepInfo.exclusiveOption) {
         newSelectedOptions.push(value);
@@ -57,7 +52,7 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
 
     setSelectedOptions(newSelectedOptions);
     if (newSelectedOptions.length > 0) {
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
     } else {
       setStepValid({ state: false, error: surveyErrors.optionsMsg });
     }
@@ -75,9 +70,11 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
 
   return (
     <>
+      <label className="step__question" form="formSurvey">
+        {stepInfo.question}
+      </label>
       <div className="step">
-        <h4 className="step__question">{stepInfo.question}</h4>
-        {stepInfo.options.length < 4 ? (
+        {stepInfo.options.length < 7 ? (
           stepInfo.options.map((option, index) => (
             <label key={index} className="step__option gradient-border">
               <input
@@ -91,27 +88,20 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
         ) : (
           <div className="columns">
             {stepInfo.options.map((_option, index) =>
-              index % 3 === 0 ? (
+              index % 6 === 0 ? (
                 <div className="column" key={index}>
-                  {stepInfo.options
-                    .slice(index, index + 3)
-                    .map((option, innerIndex) => (
-                      <label
-                        key={innerIndex}
-                        className="step__option gradient-border"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedOptions.includes(option)}
-                          onChange={() =>
-                            handleClick(stepInfo.fieldName, option)
-                          }
-                        />
-                        {option}
-                      </label>
-                    ))}
+                  {stepInfo.options.slice(index, index + 6).map((option, innerIndex) => (
+                    <label key={innerIndex} className="step__option gradient-border">
+                      <input
+                        type="checkbox"
+                        checked={selectedOptions.includes(option)}
+                        onChange={() => handleClick(stepInfo.fieldName, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
-              ) : null
+              ) : null,
             )}
           </div>
         )}

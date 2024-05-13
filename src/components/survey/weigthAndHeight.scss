@@ -32,6 +32,9 @@
         font-family: 'Satoshi-Bold';
         font-size: 16px;
     }
+    input::placeholder{
+        color: white;
+    }
     input:focus-visible{
         outline: none;
         appearance: none;
@@ -50,7 +53,6 @@
 .weight_and_height__input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-
 .weight_and_height__input:focus-visible{
     outline: none;
     appearance: none;

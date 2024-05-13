@@ -1,26 +1,18 @@
-import { useState, useEffect } from "react";
-import { Step } from "../../models";
-import "./birthdate.scss";
-import DatePicker from "react-datepicker";
-import { getMonth, getYear } from "date-fns";
-import range from "lodash.range";
-import "react-datepicker/dist/react-datepicker.css";
-import { months } from "../../constants";
-import { surveyErrors } from "./errors";
-import { registerLocale,  } from  "react-datepicker";
-import { es } from 'date-fns/locale/es';
-
-registerLocale('es', es)
+import React, { useState, useEffect } from 'react';
+import { Step } from '../../models';
+import './birthdate.scss';
+import { getYear } from 'date-fns';
+import range from 'lodash.range';
+import { surveyErrors } from './errors';
 
 export const BirthDate = (props: Step) => {
   const { setStepValid, handleStep, stepInfo, currentValue } = props;
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const years = range(1950, getYear(new Date()) + 1, 1);
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     if (currentValue !== null) {
-      setCurrentDate(new Date(currentValue));
-      setStepValid({ state: true, error: "" });
+      setCurrentDate(new Date(currentValue).toISOString().slice(0, 10));
+      setStepValid({ state: true, error: '' });
     } else {
       setStepValid({ state: false, error: surveyErrors.generalMsg });
     }
@@ -32,30 +24,21 @@ export const BirthDate = (props: Step) => {
     console.log(age);
     return (
       age >= 18 ||
-      (age === 18 &&
-        currentDate >=
-          new Date(
-            currentDate.getFullYear(),
-            dateOfBirth.getMonth(),
-            dateOfBirth.getDate()
-          ))
+      (age === 18 && currentDate >= new Date(currentDate.getFullYear(), dateOfBirth.getMonth(), dateOfBirth.getDate()))
     );
   };
 
-  const handleChange = (date: Date | null) => {
-    if (!date) return;
-    setCurrentDate(date);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const dateValue = event.target.value;
+    setCurrentDate(dateValue);
 
-    if (!validateDateOfBirth(date)) {
+    if (!validateDateOfBirth(new Date(dateValue))) {
       setStepValid({ state: false, error: surveyErrors.olderMsg });
       return;
     }
 
-    setStepValid({ state: true, error: "" });
-    handleStep(
-      stepInfo.fieldName || "birthDate",
-      date.toISOString().slice(0, 10)
-    );
+    setStepValid({ state: true, error: '' });
+    handleStep(stepInfo.fieldName || 'birthDate', dateValue);
   };
 
   return (
@@ -63,78 +46,14 @@ export const BirthDate = (props: Step) => {
       <div className="birth_date">
         <label className="birth_date__title">Fecha de nacimiento:</label>
         <div className="birth_date__date">
-          <label htmlFor="dateOfBirth" className="birth_date__input">
-            <DatePicker
-                  dateFormat="dd/MM/yyyy"
-
-              renderCustomHeader={({
-                date,
-                changeYear,
-                changeMonth,
-                decreaseMonth,
-                increaseMonth,
-                prevMonthButtonDisabled,
-                nextMonthButtonDisabled,
-              }: any) => (
-                <div
-                  style={{
-                    margin: 10,
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault();
-                      decreaseMonth();
-                    }}
-                    disabled={prevMonthButtonDisabled}
-                    className="datepicker__btn"
-                  >
-                    {"<"}
-                  </button>
-                  <select
-                    value={months[getMonth(date)]}
-                    onChange={({ target: { value } }) =>
-                      changeMonth(months.indexOf(value))
-                    }
-                    className="datepicker__btn"
-                  >
-                    {months.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    value={getYear(date)}
-                    onChange={({ target: { value } }) => changeYear(value)}
-                    className="datepicker__btn"
-                  >
-                    {years.map((option: any) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    onClick={(event) => {
-                      event.preventDefault();
-                      increaseMonth();
-                    }}
-                    disabled={nextMonthButtonDisabled}
-                    className="datepicker__btn"
-                  >
-                    {">"}
-                  </button>
-                </div>
-              )}
-              selected={currentDate}
-              onChange={handleChange}
-              locale="es"
-              popperPlacement="bottom"
-            />
-          </label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={currentDate}
+            onChange={handleChange}
+            max={new Date().toISOString().slice(0, 10)}
+          />
         </div>
       </div>
     </>

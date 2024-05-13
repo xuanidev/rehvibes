@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { SurveyStep, SurveyActions } from "../components/survey/index";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { SurveyStep, SurveyActions } from '../components/survey/index';
+import { useNavigate } from 'react-router-dom';
 import {
   genero,
   birthDate,
@@ -37,15 +37,14 @@ import {
   practicaRegular,
   rehabilitacionPreviamente,
   trabajoSentado,
-} from "../optionsData";
-import { toastError } from "../constants";
-import { surveyErrors } from "../components/survey/errors";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Cookies from "js-cookie";
-import ImgDefault from "../assets/ImgDefault.png";
-import { Information } from "../components/icons";
-import { Logo } from "../components/branding";
+} from '../optionsData';
+import { toastError } from '../constants';
+import { surveyErrors } from '../components/survey/errors';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ImgDefault from '../assets/ImgDefault.png';
+import { Information } from '../components/icons';
+import { Logo } from '../components/branding';
 
 const preloadImage = (url: string) => {
   return new Promise((resolve, reject) => {
@@ -65,35 +64,31 @@ export const Survey = () => {
     state: false,
     error: surveyErrors.generalMsg,
   });
-  const [toastId, setToastId] = useState<any>("");
-  const [numSteps, setNumSteps] = useState<number>(22);
-  const [percentage, setPercentage] = useState<number>(0);
+  const [toastId, setToastId] = useState<any>('');
+  const [numSteps, setNumSteps] = useState<number[]>([5, 0, 12]);
+  const [percentage, setPercentage] = useState<number[]>([0, 0, 0]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const hasData =
-      Cookies.get("data") !== undefined && Cookies.get("data") !== null;
-    const hasCurrentStep =
-      Cookies.get("currentStep") !== undefined &&
-      Cookies.get("currentStep") !== null;
+    const hasData = localStorage.getItem('data') !== null;
+    const hasCurrentStep = localStorage.getItem('currentStep') !== null;
 
     if (hasData && hasCurrentStep) {
-      const dataObject = Cookies.get("data");
+      const dataObject = localStorage.getItem('data');
 
-      if(!dataObject){
+      if (!dataObject) {
         return;
       }
 
       setData(JSON.parse(dataObject));
-      let step = Cookies.get("currentStep");
-      setPercentage(((Number(step) + 1) / numSteps) * 100);
+      let step = localStorage.getItem('currentStep');
       setCurrentStep(Number(step) + 1);
     }
   }, []);
 
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
-      if (name === "desire") {
+      if (name === 'desire') {
         const { dateOfBirth, genero, goals, weigth, heigth } = data;
         setData({
           dateOfBirth,
@@ -104,13 +99,13 @@ export const Survey = () => {
           [name]: value,
         });
       } else {
-        setData((prevData) => ({
+        setData(prevData => ({
           ...prevData,
           [name]: value,
         }));
       }
     } else {
-      setData((prevData) => ({
+      setData(prevData => ({
         ...prevData,
         [name]: num,
       }));
@@ -118,34 +113,69 @@ export const Survey = () => {
   };
 
   const prevStep = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
-    setIsStepValid({ state: true, error: "" });
-    setPercentage(((currentStep - 1) / numSteps) * 100);
+    localStorage.setItem('currentStep', (currentStep - 1).toString());
+    setCurrentStep(prevStep => prevStep - 1);
+    setIsStepValid({ state: true, error: '' });
+    //setPercentage(((currentStep - 1) / numSteps) * 100);
   };
 
   const calculatePercentage = () => {
-    if (data.desire === desire.conditionOption) {
-      setNumSteps(numSteps + 3);
-      console.log(currentStep + 1);
-      console.log(numSteps + 3);
-      console.log(((currentStep + 1) / (numSteps + 3)) * 100);
-      setPercentage(((currentStep + 1) / (numSteps + 3)) * 100);
+    if (data.desire && !(data.nivel || data.rehabilitation)) {
+      const auxSteps = data.desire === desire.conditionOption ? 3 : 6;
+      console.log(auxSteps);
+      if (numSteps[1] === 0) {
+        setNumSteps(prevState => {
+          const updatedNumSteps = [...prevState];
+          updatedNumSteps[1] = auxSteps;
+          return updatedNumSteps;
+        });
+        setPercentage(prevState => {
+          const updatedPercentage = [...prevState];
+          updatedPercentage[0] = 100;
+          return updatedPercentage;
+        });
+      }
+      setPercentage(prevState => {
+        const updatedPercentage = [...prevState];
+        updatedPercentage[1] = ((currentStep - numSteps[0] + 1) / auxSteps) * 100;
+        return updatedPercentage;
+      });
     } else {
-      setPercentage(((currentStep + 1) / numSteps) * 100);
-      console.log(currentStep + 1);
       console.log(numSteps);
-      console.log(((currentStep + 1) / numSteps) * 100);
+      if (currentStep < 6) {
+        setPercentage(prevState => {
+          const updatedPercentage = [...prevState];
+          updatedPercentage[0] = ((currentStep + 1) / numSteps[0]) * 100;
+          return updatedPercentage;
+        });
+      } else {
+        if (percentage[1] !== 100) {
+          setPercentage(prevState => {
+            const updatedPercentage = [...prevState];
+            updatedPercentage[1] = 100;
+            return updatedPercentage;
+          });
+        }
+        setPercentage(prevState => {
+          const updatedPercentage = [...prevState];
+          updatedPercentage[2] = ((currentStep - numSteps[0] - numSteps[1] + 1) / numSteps[2]) * 100;
+          console.log(numSteps[0] + numSteps[1] + numSteps[2]);
+          console.log(updatedPercentage[2]);
+
+          return updatedPercentage;
+        });
+      }
     }
   };
 
   const nextStep = () => {
     if (isStepValid.state) {
-      setCurrentStep((prevStep) => prevStep + 1);
+      setCurrentStep(prevStep => prevStep + 1);
       setIsStepValid({ state: false, error: surveyErrors.generalMsg });
       toast.dismiss(toastId);
       calculatePercentage();
-      Cookies.set("data", JSON.stringify(data), { path: "" });
-      Cookies.set("currentStep", currentStep.toString(), { path: "" });
+      localStorage.setItem('data', JSON.stringify(data));
+      localStorage.setItem('currentStep', currentStep.toString());
     } else {
       const toastIdAux = toast.error(isStepValid.error, toastError);
       setToastId(toastIdAux);
@@ -153,37 +183,31 @@ export const Survey = () => {
   };
 
   const handleSubmit = () => {
-    Cookies.remove("currentStep");
-    Cookies.remove("data");
-    navigate("/app");
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('data');
+    navigate('/app');
   };
 
   const steps = [goals, genero, birthDate, weigthAndHeigth, desire];
   const lesionComponents = {
-    Cuello: operationCuello,
-    Hombro: operationHombro,
-    Espalda: operationEspalda,
-    Cadera: operationCadera,
-    Codo: operationCodo,
-    Muñeca: operationMuneca,
-    Rodilla: operationRodilla,
-    Pie: operationPie,
-    Tobillo: operationTobillo,
-    "Columna vertebral": operationColumna,
+    'Cuello': operationCuello,
+    'Hombro': operationHombro,
+    'Espalda': operationEspalda,
+    'Cadera': operationCadera,
+    'Codo': operationCodo,
+    'Muñeca': operationMuneca,
+    'Rodilla': operationRodilla,
+    'Pie': operationPie,
+    'Tobillo': operationTobillo,
+    'Columna vertebral': operationColumna,
   };
 
   if (data.desire === desire.conditionOption) {
     steps.push(lesionZones);
-    const isValidLesionKey = (
-      key: string
-    ): key is keyof typeof lesionComponents => {
+    const isValidLesionKey = (key: string): key is keyof typeof lesionComponents => {
       return key in lesionComponents;
     };
-    if (
-      data.desire === desire.conditionOption &&
-      data.lesionZones &&
-      isValidLesionKey(data.lesionZones)
-    ) {
+    if (data.desire === desire.conditionOption && data.lesionZones && isValidLesionKey(data.lesionZones)) {
       const component = lesionComponents[data.lesionZones];
       if (component) {
         steps.push(component);
@@ -192,14 +216,7 @@ export const Survey = () => {
 
     steps.push(rehabilitation);
   } else {
-    steps.push(
-      zones,
-      lastOperation,
-      lesionBeforeZones,
-      objetivos,
-      tipoEjercicios,
-      nivel
-    );
+    steps.push(zones, lastOperation, lesionBeforeZones, objetivos, tipoEjercicios, nivel);
   }
   steps.push(
     lugar,
@@ -213,7 +230,7 @@ export const Survey = () => {
     trabajoSentado,
     estres,
     rehabilitacionPreviamente,
-    dolor
+    dolor,
   );
   interface SurveyData {
     [key: string]: any;
@@ -235,10 +252,13 @@ export const Survey = () => {
     >
       <div className="survey__top">
         <div className="progress_bar_container">
-          <div
-            className="progress_bar__bar"
-            style={{ width: `${percentage}%` }}
-          ></div>
+          <div className="progress_bar__bar" style={{ width: `${percentage[0]}%` }}></div>
+        </div>
+        <div className="progress_bar_container">
+          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>{' '}
+        </div>
+        <div className="progress_bar_container">
+          <div className="progress_bar__bar" style={{ width: `${percentage[2]}%` }}></div>
         </div>
         <div className="information_icon">
           <Information fill="white" height={25} width={25} />
@@ -246,7 +266,8 @@ export const Survey = () => {
       </div>
       <div className="survey__content">
         <form
-          onSubmit={async (event) => {
+          id="formSurvey"
+          onSubmit={async event => {
             event.preventDefault();
             event.stopPropagation();
             handleSubmit();
@@ -259,37 +280,27 @@ export const Survey = () => {
             setStepValid={setIsStepValid}
             stepInfo={currentStepInfo}
             currentValue={
-              currentStepInfo.fieldName && data[currentStepInfo.fieldName]
-                ? data[currentStepInfo.fieldName]
-                : null
+              currentStepInfo.fieldName && data[currentStepInfo.fieldName] ? data[currentStepInfo.fieldName] : null
             }
             currentValueWeigth={
-              currentStepInfo.fieldName === "weigthAndHeigth" && data["weigth"]
-                ? data["weigth"]
-                : null
+              currentStepInfo.fieldName === 'weigthAndHeigth' && data['weigth'] ? data['weigth'] : null
             }
             currentValueHeigth={
-              currentStepInfo.fieldName === "weigthAndHeigth" && data["heigth"]
-                ? data["heigth"]
-                : null
+              currentStepInfo.fieldName === 'weigthAndHeigth' && data['heigth'] ? data['heigth'] : null
             }
           />
-          <SurveyActions
-            currentStep={currentStep}
-            nextStep={nextStep}
-            prevStep={prevStep}
-            length={steps.length}
-            isStepValid={isStepValid}
-          />
         </form>
+        <SurveyActions
+          currentStep={currentStep}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          length={steps.length}
+          isStepValid={isStepValid}
+          form="surveyForm"
+        />
       </div>
       <div className="logo_icon">
-        <Logo
-          fill="white"
-          height={40}
-          width={40}
-          style={{ filter: "brightness(3)" }}
-        />
+        <Logo fill="white" height={40} width={40} style={{ filter: 'brightness(3)' }} />
       </div>
       <ToastContainer />
     </div>

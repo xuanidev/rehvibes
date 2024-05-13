@@ -28,7 +28,7 @@ const toastError: ToastOptions<ToastPosition> = {
       fontFamily: "Satoshi-Medium",
       color: "black",
       border: "1px solid white",
-      backgroundColor: "hsla(0, 0%, 100%, 0.8)",
+      backgroundColor: "hsla(0, 0%, 100%, 0.95)",
       borderRadius: "12px",
     },
   };

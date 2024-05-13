@@ -9,12 +9,17 @@ justify-content: center;
   }
 .survey__content{
   width: 100%;
-  height: 70%;
+  height: 100%;
   display: flex;
+  padding: 96px 0px 0px 0px;
   flex-direction: column;
-  justify-content: space-between;
-  @include breakpoint('sm'){
+  justify-content: start;
+
+  @include breakpoint('md'){
+    height: 80%;
     width: 55%;
+    justify-content: space-between;
+    padding: 0px;
   }
 
 }
@@ -23,11 +28,23 @@ justify-content: center;
     z-index: 10;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 48px;
+    justify-content: start;
+    gap: 8px;
+    padding: 0px 24px;
     height: 100%;
+    max-height: calc(100% - 80px - 88px);
+    overflow: auto;
+    overflow-x: hidden;
     width: 100%;
-    padding: 16px;
+    &.overflowing {
+      box-shadow: 
+          inset 0px 11px 8px -10px #3d3d3da8,
+          inset 0px -11px 8px -10px #3d3d3da8;
+    }
+    @include breakpoint('sm'){
+      padding: 0px;
+      max-height: calc(100% - 40px - 32px);
+    }
   }
   .survey__top{
     position: absolute;
@@ -35,15 +52,20 @@ justify-content: center;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 32px;
-    padding: 32px;
+    gap: 4px;
+    padding:40px 24px ;
+    @include breakpoint('sm'){
+      gap: 32px;
+    }
   }
   .progress_bar_container{
     width: 100%;
     height: 9px;
     border-radius: 16px;
+    display: flex;
+    gap: 8px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 0 10px rgb(255, 255, 255); 
     border: 1px solid var(--color-white);
     outline-offset: -1px;
   }
@@ -55,6 +77,7 @@ justify-content: center;
   }
 
   .information_icon{
+    margin-left: 4px;
     display: grid;
     place-content: center;
   }
@@ -65,37 +88,50 @@ justify-content: center;
     bottom: 0;
     right: 0;
     padding: 32px;
+    display: none;
+    @include breakpoint('md'){
+      display: block;
+    }
   }
 
   .survey__label {
     padding: 0px 0px 8px 16px;
   }
   .survey__actions {
+    height: auto;
     position: absolute;
     bottom: 0;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-flow: column;
     gap: 16px;
     margin-left: auto;
     margin-right: auto;
+    padding: 36px 24px;
     @include breakpoint('sm'){
       position: relative;
+      flex-direction: row;
+      height: 50px;
+      padding: 0px;
     }
   }
   .survey__btn {
     font-family: "Satoshi-Bold";
-    font: 18px;
     padding: 14px 50px;
     border-radius: 10px;
     box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.1);
   }
   
   .survey__btn--back {
+    order: 2;
+    width: 100%;
     background-color: transparent;
     border: 1px solid var(--color-white);
     color: var(--color-white);
+    @include breakpoint('sm'){
+      width: auto;
+      order: 1;
+     }
   }
   
   .survey__btn--back:hover {
@@ -105,14 +141,27 @@ justify-content: center;
   }
   
   .survey__btn--right {
-    width: auto;
+    width: 100%;
+    order: 1;
     background-color: var(--color-secondary);
     border: 1px solid var(--color-secondary-dark);
     color: white;
     margin-left: auto;
+    @include breakpoint('sm'){
+     width: auto;
+     order: 2;
+    }
   }
   .survey__btn--right:hover {
     cursor: pointer;
-    background-color: var(--color-primary-fluorescent);
+    background-color: var(--color-secondary-dark);
   }
-  
+  .Toastify__toast {
+    margin: 12px 24px 0px 24px;
+    @include breakpoint('sm'){
+      margin: 0;
+    }
+      margin-top: 10px;
+      margin-bottom: 0;
+      border-radius: 0;
+  }

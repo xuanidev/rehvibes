@@ -1,38 +1,34 @@
-import { useState, useEffect } from "react";
-import "./survey.scss";
-import { StepMultipleChoicesInput } from "../../models";
-import { surveyErrors } from "./errors";
+import { useState, useEffect } from 'react';
+import './survey.scss';
+import { StepMultipleChoicesInput } from '../../models';
+import { surveyErrors } from './errors';
 
 export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    currentValue !== null ? [currentValue] : []
-  );
-  const [other, setOther] = useState<string>("");
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(currentValue !== null ? [currentValue] : []);
+  const [other, setOther] = useState<string>('');
 
   useEffect(() => {
-    if (!currentValue || currentValue === "") {
+    if (!currentValue || currentValue === '') {
       setSelectedOptions([]);
       setStepValid({ state: false, error: surveyErrors.generalMsg });
 
       return;
     }
 
-    const values = currentValue
-      .split(",")
-      .filter((value) => stepInfo.options.includes(value.trim()));
+    const values = currentValue.split(',').filter(value => stepInfo.options.includes(value.trim()));
     if (values.length > 0) {
       setSelectedOptions(values);
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
     } else {
       setOther(currentValue);
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
     }
   }, [currentValue]);
 
   const handleInput = (value: string) => {
     setSelectedOptions([]);
-    if (value === "") {
+    if (value === '') {
       setStepValid({ state: false, error: surveyErrors.generalMsg });
     } else if (value.length < 4) {
       setStepValid({
@@ -40,14 +36,11 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
         error: surveyErrors.inputMsg,
       });
     } else {
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
       handleStep(stepInfo.fieldName, value, undefined);
     }
   };
-  const handleNotAlreadySelected = (
-    newSelectedOptions: string[],
-    value: string
-  ): string[] => {
+  const handleNotAlreadySelected = (newSelectedOptions: string[], value: string): string[] => {
     if (!selectedOptions.includes(stepInfo.exclusiveOption)) {
       if (value !== stepInfo.exclusiveOption) {
         newSelectedOptions.push(value);
@@ -58,10 +51,7 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
       return [value];
     }
   };
-  const hanleAlreadySelected = (
-    index: number,
-    newSelectedOptions: string[]
-  ): string[] => {
+  const hanleAlreadySelected = (index: number, newSelectedOptions: string[]): string[] => {
     if (newSelectedOptions.length > 1) {
       newSelectedOptions.splice(index, 1);
       return newSelectedOptions;
@@ -84,7 +74,7 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
 
     setSelectedOptions(newSelectedOptions);
     if (newSelectedOptions.length > 0) {
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
     } else {
       setStepValid({ state: false, error: surveyErrors.generalMsg });
     }
@@ -94,7 +84,7 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
   const handleExclusiveOption = (name: string) => {
     if (!selectedOptions.includes(stepInfo.exclusiveOption)) {
       setSelectedOptions([stepInfo.exclusiveOption]);
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
       handleStep(name, stepInfo.exclusiveOption);
     } else {
       setSelectedOptions([]);
@@ -106,7 +96,7 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
     if (input) {
       handleInput(value);
     } else {
-      setOther("");
+      setOther('');
       if (value === stepInfo.exclusiveOption) {
         // If "Ninguna de las anteriores" is selected, disable all other options
         handleExclusiveOption(name);
@@ -129,8 +119,10 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
 
   return (
     <>
+      <label className="step__question" form="formSurvey">
+        {stepInfo.question}
+      </label>
       <div className="step">
-        <h4 className="step__question">{stepInfo.question}</h4>
         {stepInfo.options.length < 4 ? (
           <div className="column">
             {stepInfo.options.map((option, index) => (
@@ -138,52 +130,54 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
                 <input
                   type="checkbox"
                   checked={selectedOptions.includes(option)}
-                  onChange={() =>
-                    handleClick(stepInfo.fieldName, option, false)
-                  }
+                  onChange={() => handleClick(stepInfo.fieldName, option, false)}
                 />
                 {option}
               </label>
             ))}
+            <input
+              type="text"
+              className="step__input"
+              value={other}
+              onChange={e => {
+                setOther(e.target.value);
+                handleClick(stepInfo.fieldName, e.target.value, true);
+              }}
+              onClick={onClickInput}
+              placeholder={stepInfo.otherText}
+            />
           </div>
         ) : (
           <div className="columns">
             {stepInfo.options.map((_option, index) =>
               index % 3 === 0 ? (
                 <div className="column" key={index}>
-                  {stepInfo.options
-                    .slice(index, index + 3)
-                    .map((option, innerIndex) => (
-                      <label
-                        key={innerIndex}
-                        className="step__option gradient-border"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedOptions.includes(option)}
-                          onChange={() =>
-                            handleClick(stepInfo.fieldName, option, false)
-                          }
-                        />
-                        {option}
-                      </label>
-                    ))}
+                  {stepInfo.options.slice(index, index + 3).map((option, innerIndex) => (
+                    <label key={innerIndex} className="step__option gradient-border">
+                      <input
+                        type="checkbox"
+                        checked={selectedOptions.includes(option)}
+                        onChange={() => handleClick(stepInfo.fieldName, option, false)}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
-              ) : null
+              ) : null,
             )}
+            <input
+              type="text"
+              className="step__input"
+              value={other}
+              onChange={e => {
+                setOther(e.target.value);
+                handleClick(stepInfo.fieldName, e.target.value, true);
+              }}
+              onClick={onClickInput}
+              placeholder={stepInfo.otherText}
+            />
           </div>
         )}
-        <input
-          type="text"
-          className="step__input"
-          value={other}
-          onChange={(e) => {
-            setOther(e.target.value);
-            handleClick(stepInfo.fieldName, e.target.value, true);
-          }}
-          onClick={onClickInput}
-          placeholder={stepInfo.otherText}
-        />
       </div>
     </>
   );

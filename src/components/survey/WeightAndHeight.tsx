@@ -1,19 +1,36 @@
-import { useState, useEffect, useRef } from "react";
-import { StepWeightAndHeight } from "../../models";
-import "./weigthAndHeight.scss";
-import { surveyErrors } from "./errors";
+import { useState, useEffect, useRef } from 'react';
+import { StepWeightAndHeight } from '../../models';
+import './weigthAndHeight.scss';
+import { surveyErrors } from './errors';
+import { imcMessage } from '../../optionsData';
 
 export const WeightAndHeight = (props: StepWeightAndHeight) => {
-  const { setStepValid, handleStep, currentValueWeigth, currentValueHeigth } =
-    props;
-  const [formData, setFormData] = useState({ weight: 0, height: 0 });
-  const [imc, setImc] = useState(0);
+  const { setStepValid, handleStep, currentValueWeigth, currentValueHeigth, stepInfo } = props;
+  const [formData, setFormData] = useState<{ weight: number; height: number }>({ weight: 0, height: 0 });
+  const [imc, setImc] = useState<number>(0);
+  const [imcMessageState, setImcMessageState] = useState<string>('');
 
+  const calculateImcMessage = (value: number) => {
+    if (value < 18.5) {
+      setImcMessageState(imcMessage.infrapeso);
+    } else if (value < 25) {
+      setImcMessageState(imcMessage.normal);
+    } else if (value < 30) {
+      setImcMessageState(imcMessage.sobrepeso);
+    } else if (value < 35) {
+      setImcMessageState(imcMessage.obeso1);
+    } else if (value < 40) {
+      setImcMessageState(imcMessage.obeso2);
+    } else if (value >= 40) {
+      setImcMessageState(imcMessage.obeso3);
+    }
+  };
   const calculateImc = (weight: number, height: number) => {
     console.log(weight);
     const heightInMeters = height / 100;
     console.log(heightInMeters);
     const imcValue = weight / (heightInMeters * heightInMeters);
+    calculateImcMessage(imcValue);
     console.log(imcValue);
     setImc(imcValue);
   };
@@ -25,7 +42,7 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
         height: parseInt(currentValueHeigth),
       });
       calculateImc(Number(currentValueWeigth), Number(currentValueHeigth));
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
     } else {
       setStepValid({ state: false, error: surveyErrors.generalMsg });
       setImc(0);
@@ -33,12 +50,12 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
   }, [currentValueWeigth, currentValueHeigth]);
 
   const handleChange = (name: string, value: number) => {
-    setFormData((prevData) => ({ ...prevData, [name]: value || 0 }));
+    setFormData(prevData => ({ ...prevData, [name]: value || 0 }));
     const updatedFormData = { ...formData, [name]: value || 0 };
     let validated = validate(updatedFormData);
     if (validated) {
-      handleStep("weigth", undefined, updatedFormData.weight);
-      handleStep("heigth", undefined, updatedFormData.height);
+      handleStep('weigth', undefined, updatedFormData.weight);
+      handleStep('heigth', undefined, updatedFormData.height);
       calculateImc(updatedFormData.weight, updatedFormData.height);
     } else {
       setImc(0);
@@ -54,7 +71,7 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
       setStepValid({ state: false, error: surveyErrors.alturaMsg });
       return false;
     } else {
-      setStepValid({ state: true, error: "" });
+      setStepValid({ state: true, error: '' });
       return true;
     }
   };
@@ -63,39 +80,37 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
     <>
       <div className="weight_and_height">
         <div className="weight_and_height__field">
-          <label className="weight_and_height__question">Peso</label>
-          <div className="weight_and_height__input">
-            <input
-              type="text"
-              name="weight"
-              max={350}
-              value={formData.weight.toString()}
-              onChange={(event) =>
-                handleChange(event.target.name, parseInt(event.target.value))
-              }
-            />
-            <p>kg</p>
-          </div>
-        </div>
-        <div className="weight_and_height__field">
-          <label className="weight_and_height__question">
-            ¿Cuál es tu estatura?
-          </label>
+          <label className="weight_and_height__question">{stepInfo.question1}</label>
           <div className="weight_and_height__input">
             <input
               type="text"
               name="height"
               max={250}
-              value={formData.height.toString()}
-              onChange={(event) =>
-                handleChange(event.target.name, parseInt(event.target.value))
-              }
+              value={formData.height !== 0 ? formData.height.toString() : ''}
+              placeholder="0"
+              onChange={event => handleChange(event.target.name, parseInt(event.target.value))}
             />
             <p>cm</p>
           </div>
         </div>
+        <div className="weight_and_height__field">
+          <label className="weight_and_height__question">{stepInfo.question2}</label>
+          <div className="weight_and_height__input">
+            <input
+              type="text"
+              name="weight"
+              max={350}
+              value={formData.weight ? formData.weight.toString() : ''}
+              placeholder="0"
+              onChange={event => handleChange(event.target.name, parseInt(event.target.value))}
+            />
+            <p>kg</p>
+          </div>
+        </div>
         <div className="weight_and_height__imc">
-          <p>IMC ( Índice de Masa Corporal ): {imc.toFixed(2)}</p>
+          <p>
+            ¡Tu IMC es del {imc.toFixed(2)}! {imcMessageState}
+          </p>
         </div>
       </div>
     </>

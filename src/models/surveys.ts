@@ -25,6 +25,8 @@ export interface StepWeightAndHeight {
         | 'BirthDate' 
         | 'WeigthAndHeigth';
         fieldName?: string;
+        question1?: string;
+        question2?: string;
     }
     currentValueWeigth: string | null,
     currentValueHeigth:string | null
