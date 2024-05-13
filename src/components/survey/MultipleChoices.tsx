@@ -6,6 +6,9 @@ import { surveyErrors } from './errors';
 export const MultipleChoices = (props: StepMultipleChoices) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [selectedOptions, setSelectedOptions] = useState<string[]>(currentValue !== null ? [currentValue] : []);
+  const midpoint = Math.ceil(stepInfo.options.length / 2);
+  const firstHalf = stepInfo.options.slice(0, midpoint);
+  const secondHalf = stepInfo.options.slice(midpoint);
 
   useLayoutEffect(() => {
     if (currentValue) {
@@ -74,35 +77,45 @@ export const MultipleChoices = (props: StepMultipleChoices) => {
         {stepInfo.question}
       </label>
       <div className="step">
-        {stepInfo.options.length < 7 ? (
-          stepInfo.options.map((option, index) => (
-            <label key={index} className="step__option gradient-border">
-              <input
-                type="checkbox"
-                checked={selectedOptions.includes(option)}
-                onChange={() => handleClick(stepInfo.fieldName, option)}
-              />
-              {option}
-            </label>
-          ))
+        {stepInfo.options.length < 6 ? (
+          <div className="column">
+            {stepInfo.options.map((option, index) => (
+              <label key={index} className="step__option gradient-border">
+                <input
+                  type="checkbox"
+                  checked={selectedOptions.includes(option)}
+                  onChange={() => handleClick(stepInfo.fieldName, option)}
+                />
+                {option}
+              </label>
+            ))}
+          </div>
         ) : (
           <div className="columns">
-            {stepInfo.options.map((_option, index) =>
-              index % 6 === 0 ? (
-                <div className="column" key={index}>
-                  {stepInfo.options.slice(index, index + 6).map((option, innerIndex) => (
-                    <label key={innerIndex} className="step__option gradient-border">
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions.includes(option)}
-                        onChange={() => handleClick(stepInfo.fieldName, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              ) : null,
-            )}
+            <div className="column">
+              {firstHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={selectedOptions.includes(option)}
+                    onChange={() => handleClick(stepInfo.fieldName, option)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+            <div className="column">
+              {secondHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={selectedOptions.includes(option)}
+                    onChange={() => handleClick(stepInfo.fieldName, option)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
           </div>
         )}
       </div>

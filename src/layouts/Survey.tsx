@@ -255,7 +255,7 @@ export const Survey = () => {
           <div className="progress_bar__bar" style={{ width: `${percentage[0]}%` }}></div>
         </div>
         <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>{' '}
+          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>
         </div>
         <div className="progress_bar_container">
           <div className="progress_bar__bar" style={{ width: `${percentage[2]}%` }}></div>

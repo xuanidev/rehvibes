@@ -36,12 +36,13 @@ const operationCuello = {
     'Artritis cervical',
     'Latigazo cervical',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationColumna = {
   fieldName: 'operationColumna',
-  question: '¿Qué lesión tienes en la columna?',
+  question: '¿Qué lesión tienes en la columna vertebral?',
   options: [
     'Hernia de disco lumbar',
     'Esteriosis espiral',
@@ -50,7 +51,8 @@ const operationColumna = {
     'Escoliosis',
     'Sindrome facetario',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationHombro = {
@@ -64,7 +66,8 @@ const operationHombro = {
     'Síndrome de impacto',
     'Capsulitis adhesiva',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationEspalda = {
@@ -78,7 +81,8 @@ const operationEspalda = {
     'Postura incorrecta',
     'Dolor de cuello asociado con la espalda',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationCadera = {
@@ -92,7 +96,8 @@ const operationCadera = {
     'Tenidinitis',
     'Síndrome del piramidal',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationCodo = {
@@ -106,7 +111,8 @@ const operationCodo = {
     'Lesión del ligamento',
     'Síndrome de sobrecarga del codo',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationMuneca = {
@@ -120,7 +126,8 @@ const operationMuneca = {
     'Artritis de muñeca',
     'Tenosinovitis',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationRodilla = {
@@ -134,7 +141,8 @@ const operationRodilla = {
     'Síndrome de fricción de la banda iliotibial',
     'Rotura',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationPie = {
@@ -148,7 +156,8 @@ const operationPie = {
     'Síndrome del túnel del tarso',
     'Espolón calcáneo',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const operationTobillo = {
@@ -162,7 +171,8 @@ const operationTobillo = {
     'Lesión de tejidos blandos',
     'Inestabilidad crónica del tobillo',
   ],
-  fieldType: 'Options',
+  otherText: 'Otro',
+  fieldType: 'OptionsAndInput',
 };
 
 const goals = {
@@ -181,7 +191,7 @@ const goals = {
 
 const desire = {
   fieldName: 'desire',
-  question: '¿Qué deseas alcanzar?',
+  question: '¿Qué deseas alcanzar con Revibes?',
   options: ['Tengo molestias y quiero mejorar mis hábitos', 'Recuperarme de una lesión o cirugía'],
   conditionOption: 'Recuperarme de una lesión o cirugía',
   fieldType: 'Options',
@@ -218,7 +228,7 @@ const lastOperation = {
 
 const lesionZones = {
   fieldName: 'lesionZones',
-  question: '¿En que zona de tu cuerpo tienes la lesión?',
+  question: '¿Qué zonas son tus puntos débiles o en las que tienes molestias?',
   options: [
     'Cuello',
     'Muñeca',
@@ -244,8 +254,7 @@ const lesionBeforeZones = {
 
 const rehabilitation = {
   fieldName: 'rehabilitation',
-  question:
-    '¿Has realizado algún tipo de programa de rehabilitación o entrenamiento en los últimos 6 meses referente a la lesión u operación que deseas tratar?',
+  question: '¿Has realizado rehabilitación o entrenamiento referente a la lesión u operación que deseas tratar?',
   options: ['Si', 'Hace más de 6 meses', 'No'],
   fieldType: 'Options',
 };
@@ -303,8 +312,7 @@ const equipamiento = {
   question: '¿Tienes acceso a equipamiento en casa?',
   exclusiveOption: 'Ninguna de las anteriores',
   options: ['Mancuernas', 'Pesa rusa', 'Esterilla de yoga', 'Comba', 'Ninguna de las anteriores'],
-  fieldType: 'MultipleChoicesAndInput',
-  otherText: 'Otro',
+  fieldType: 'MultipleChoices',
 };
 
 const condiciones = {
@@ -324,45 +332,50 @@ const condiciones = {
     'Ninguna',
   ],
   fieldType: 'MultipleChoicesAndInput',
-  otherText: 'Otro',
+  otherText: 'Otra',
 };
 const movilidad = {
   fieldName: 'movilidad',
   question: '¿Tienes alguna limitación de movilidad?',
   exclusiveOption: 'Ninguna',
-  options: ['Movilidad reducida en las extremidades inferiores', 'Rigidez articular', 'Falta de equilibrio', 'Ninguna'],
-  fieldType: 'MultipleChoicesAndInput',
-  otherText: 'Otro',
+  options: [
+    'Movilidad reducida en las extremidades inferiores',
+    'Movilidad reducida en las extremidades inferiores',
+    'Rigidez articular',
+    'Falta de equilibrio',
+    'Ninguna',
+  ],
+  fieldType: 'MultipleChoices',
 };
 const enfermedadCardiovascular = {
   fieldName: 'enfermedadCardiovascular',
   question: '¿Tienes alguna de estas enfermedades cardiovasculares?',
-  exclusiveOption: 'No',
+  exclusiveOption: 'Ninguna',
   options: [
-    'No',
     'Hipertensión arterial',
     'Enfermedad cardíaca coronaria',
     'Insuficiencia cardíaca',
     'Arritmia',
     'Accidente cerebrovascular previo',
+    'Ninguna',
   ],
   fieldType: 'MultipleChoicesAndInput',
-  otherText: 'Otro',
+  otherText: 'Otra',
 };
 const condicionRespiratoria = {
   fieldName: 'condicionRespiratoria',
   question: '¿Tienes alguna de estas condiciones respiratorias?',
-  exclusiveOption: 'No',
+  exclusiveOption: 'Ninguna',
   options: [
-    'No',
     'Asma',
     'Enfermedad pulmonar obstructiva crónica',
     'Bronquitis crónica',
     'Fibrosis pulmonar',
     'Apnea del sueño',
+    'Ninguna',
   ],
   fieldType: 'MultipleChoicesAndInput',
-  otherText: 'Otro',
+  otherText: 'Otra',
 };
 const nivelActividadActual = {
   fieldName: 'nivelActividadActual',

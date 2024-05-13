@@ -7,6 +7,9 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [selectedOptions, setSelectedOptions] = useState<string[]>(currentValue !== null ? [currentValue] : []);
   const [other, setOther] = useState<string>('');
+  const midpoint = Math.ceil(stepInfo.options.length / 2);
+  const firstHalf = stepInfo.options.slice(0, midpoint);
+  const secondHalf = stepInfo.options.slice(midpoint);
 
   useEffect(() => {
     if (!currentValue || currentValue === '') {
@@ -123,7 +126,7 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
         {stepInfo.question}
       </label>
       <div className="step">
-        {stepInfo.options.length < 4 ? (
+        {stepInfo.options.length < 6 ? (
           <div className="column">
             {stepInfo.options.map((option, index) => (
               <label key={index} className="step__option gradient-border">
@@ -135,49 +138,46 @@ export const MultipleChoicesAndInput = (props: StepMultipleChoicesInput) => {
                 {option}
               </label>
             ))}
-            <input
-              type="text"
-              className="step__input"
-              value={other}
-              onChange={e => {
-                setOther(e.target.value);
-                handleClick(stepInfo.fieldName, e.target.value, true);
-              }}
-              onClick={onClickInput}
-              placeholder={stepInfo.otherText}
-            />
           </div>
         ) : (
           <div className="columns">
-            {stepInfo.options.map((_option, index) =>
-              index % 3 === 0 ? (
-                <div className="column" key={index}>
-                  {stepInfo.options.slice(index, index + 3).map((option, innerIndex) => (
-                    <label key={innerIndex} className="step__option gradient-border">
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions.includes(option)}
-                        onChange={() => handleClick(stepInfo.fieldName, option, false)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              ) : null,
-            )}
-            <input
-              type="text"
-              className="step__input"
-              value={other}
-              onChange={e => {
-                setOther(e.target.value);
-                handleClick(stepInfo.fieldName, e.target.value, true);
-              }}
-              onClick={onClickInput}
-              placeholder={stepInfo.otherText}
-            />
+            <div className="column">
+              {firstHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={selectedOptions.includes(option)}
+                    onChange={() => handleClick(stepInfo.fieldName, option, false)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+            <div className="column">
+              {secondHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={selectedOptions.includes(option)}
+                    onChange={() => handleClick(stepInfo.fieldName, option, false)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
           </div>
         )}
+        <input
+          type="text"
+          className="step__input"
+          value={other}
+          onChange={e => {
+            setOther(e.target.value);
+            handleClick(stepInfo.fieldName, e.target.value, true);
+          }}
+          onClick={onClickInput}
+          placeholder={stepInfo.otherText}
+        />
       </div>
     </>
   );

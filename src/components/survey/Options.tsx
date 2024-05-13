@@ -1,13 +1,15 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import '../../styles/style.scss';
 import './survey.scss';
 import { StepOptions } from '../../models';
 import { surveyErrors } from './errors';
-import classNames from 'classnames';
 
 export const Options = (props: StepOptions) => {
   const { handleStep, setStepValid, stepInfo, currentValue } = props;
   const [clickedButton, setClickedButton] = useState<string | null>(currentValue);
+  const midpoint = Math.ceil(stepInfo.options.length / 2);
+  const firstHalf = stepInfo.options.slice(0, midpoint);
+  const secondHalf = stepInfo.options.slice(midpoint);
 
   useLayoutEffect(() => {
     setClickedButton(currentValue);
@@ -81,22 +83,30 @@ export const Options = (props: StepOptions) => {
           </div>
         ) : (
           <div className="columns">
-            {stepInfo.options.map((_option, index) =>
-              index % 6 === 0 ? (
-                <div className="column" key={index}>
-                  {stepInfo.options.slice(index, index + 6).map((option, innerIndex) => (
-                    <label key={innerIndex} className="step__option gradient-border">
-                      <input
-                        type="checkbox"
-                        checked={clickedButton === option}
-                        onChange={() => handleClick(stepInfo.fieldName, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              ) : null,
-            )}
+            <div className="column">
+              {firstHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={clickedButton === option}
+                    onChange={() => handleClick(stepInfo.fieldName, option)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+            <div className="column">
+              {secondHalf.map((option, index) => (
+                <label key={index} className="step__option gradient-border">
+                  <input
+                    type="checkbox"
+                    checked={clickedButton === option}
+                    onChange={() => handleClick(stepInfo.fieldName, option)}
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
           </div>
         )}
       </div>

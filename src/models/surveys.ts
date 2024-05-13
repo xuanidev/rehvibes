@@ -48,6 +48,24 @@ export interface StepOptions {
     }
     currentValue: string | null;
 }
+export interface StepOptionsAndInput {
+    setStepValid: (value: { state: boolean; error: string }) => void;
+    handleStep: (name: string, value?: string, num?: number) => void;
+    stepInfo:{
+        fieldType:
+        | 'Options'
+        | 'OptionsAndInput'
+        | 'MultipleChoices'
+        | 'MultipleChoicesAndInput'
+        | 'BirthDate' 
+        | 'WeigthAndHeigth';
+        options: string[];
+        question: string;
+        otherText:string;
+        fieldName: string;
+    }
+    currentValue: string | null;
+}
 export interface StepMultipleChoices {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
@@ -87,25 +105,6 @@ export interface StepMultipleChoicesInput {
     }
     currentValue: string | null;
 }
-export interface StepOptionsAndInput {
-    setStepValid: (value: { state: boolean; error: string }) => void;
-    handleStep: (name: string, value?: string, num?: number) => void;
-    stepInfo:{
-        fieldType:
-        | 'Options'
-        | 'OptionsAndInput'
-        | 'MultipleChoices'
-        | 'MultipleChoicesAndInput'
-        | 'BirthDate' 
-        | 'WeigthAndHeigth';
-        inputs: string[];
-        question: string;
-        otherText:string;
-        fieldName: string;
-    }
-    currentValue: string | null;
-}
-
 
 export interface SurveyData {
     genero?:string;

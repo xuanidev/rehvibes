@@ -10,7 +10,7 @@ export const OptionsAndInput = (props: StepOptionsAndInput) => {
 
   useEffect(() => {
     if (currentValue !== null && currentValue !== '') {
-      if (stepInfo.inputs.includes(currentValue)) {
+      if (stepInfo.options.includes(currentValue)) {
         setClickedButton(currentValue);
         setStepValid({ state: true, error: '' });
       } else {
@@ -50,18 +50,43 @@ export const OptionsAndInput = (props: StepOptionsAndInput) => {
 
   return (
     <>
-      <label className="step__question" form="formSurvey">
-        {stepInfo.question}
-      </label>
       <div className="step">
-        {stepInfo.inputs.map((input, index) => (
-          <button type="button" key={index} className="step__btn" onClick={() => handleButtonClick(input)}>
-            {input}
-          </button>
-        ))}
+        {stepInfo.options.length < 6 ? (
+          <div className="column">
+            {stepInfo.options.map((option, index) => (
+              <label key={index} className="step__option gradient-border">
+                <input
+                  type="checkbox"
+                  checked={clickedButton === option}
+                  onChange={() => handleButtonClick(stepInfo.fieldName)}
+                />
+                {option}
+              </label>
+            ))}
+          </div>
+        ) : (
+          <div className="columns">
+            {stepInfo.options.map((_option, index) =>
+              index % 5 === 0 ? (
+                <div className="column" key={index}>
+                  {stepInfo.options.slice(index, index + 5).map((option, innerIndex) => (
+                    <label key={innerIndex} className="step__option gradient-border">
+                      <input
+                        type="checkbox"
+                        checked={clickedButton === option}
+                        onChange={() => handleButtonClick(stepInfo.fieldName)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              ) : null,
+            )}
+          </div>
+        )}
         <input
           type="text"
-          className="step__btn step__input"
+          className="step__input"
           value={other}
           onChange={e => {
             setOther(e.target.value);
