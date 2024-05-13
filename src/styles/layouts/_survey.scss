@@ -156,6 +156,13 @@ justify-content: center;
     cursor: pointer;
     background-color: var(--color-secondary-dark);
   }
+  .Toastify__toast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+
+}
   .Toastify__toast {
     margin: 12px 24px 0px 24px;
     @include breakpoint('sm'){
