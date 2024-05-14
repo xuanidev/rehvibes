@@ -3,6 +3,7 @@ import { StepWeightAndHeight } from '../../models';
 import './weigthAndHeight.scss';
 import { surveyErrors } from './errors';
 import { imcMessage } from '../../optionsData';
+import classNames from 'classnames';
 
 export const WeightAndHeight = (props: StepWeightAndHeight) => {
   const { setStepValid, handleStep, currentValueWeigth, currentValueHeigth, stepInfo } = props;
@@ -87,7 +88,7 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
               name="height"
               max={250}
               value={formData.height !== 0 ? formData.height.toString() : ''}
-              placeholder="0"
+              placeholder="__"
               onChange={event => handleChange(event.target.name, parseInt(event.target.value))}
             />
             <p>cm</p>
@@ -101,17 +102,17 @@ export const WeightAndHeight = (props: StepWeightAndHeight) => {
               name="weight"
               max={350}
               value={formData.weight ? formData.weight.toString() : ''}
-              placeholder="0"
+              placeholder="__"
               onChange={event => handleChange(event.target.name, parseInt(event.target.value))}
             />
             <p>kg</p>
           </div>
         </div>
-        <div className="weight_and_height__imc">
-          <p>
-            ¡Tu IMC es del {imc.toFixed(2)}! {imcMessageState}
-          </p>
-        </div>
+      </div>
+      <div className={classNames('weight_and_height__imc', { visible_imc: imc === 0 })}>
+        <p>
+          ¡Tu IMC es del {imc.toFixed(2)}! {imcMessageState}
+        </p>
       </div>
     </>
   );

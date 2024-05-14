@@ -69,21 +69,34 @@ export const Survey = () => {
   const [percentage, setPercentage] = useState<number[]>([0, 0, 0]);
   const navigate = useNavigate();
 
+  const checkPercentage = () => {
+    const numStepsLocal = localStorage.getItem('numSteps');
+    const percentageLocal = localStorage.getItem('percentage');
+    if (!percentageLocal) {
+      localStorage.setItem('percentage', JSON.stringify(percentage));
+    } else {
+      setPercentage(JSON.parse(percentageLocal));
+    }
+    if (!numStepsLocal) {
+      localStorage.setItem('numSteps', JSON.stringify(numSteps));
+    } else {
+      setNumSteps(JSON.parse(numStepsLocal));
+    }
+  };
+
   useEffect(() => {
     const hasData = localStorage.getItem('data') !== null;
     const hasCurrentStep = localStorage.getItem('currentStep') !== null;
-
     if (hasData && hasCurrentStep) {
       const dataObject = localStorage.getItem('data');
-
       if (!dataObject) {
         return;
       }
-
       setData(JSON.parse(dataObject));
       let step = localStorage.getItem('currentStep');
       setCurrentStep(Number(step) + 1);
     }
+    checkPercentage();
   }, []);
 
   const handleStep = (name: string, value?: string, num?: number) => {
@@ -116,36 +129,33 @@ export const Survey = () => {
     localStorage.setItem('currentStep', (currentStep - 1).toString());
     setCurrentStep(prevStep => prevStep - 1);
     setIsStepValid({ state: true, error: '' });
-    //setPercentage(((currentStep - 1) / numSteps) * 100);
+    calculateDecrementPercentage();
   };
 
   const calculatePercentage = () => {
-    if (data.desire && !(data.nivel || data.rehabilitation)) {
+    if (data.desire && numSteps[1] === 0) {
       const auxSteps = data.desire === desire.conditionOption ? 3 : 6;
-      console.log(auxSteps);
-      if (numSteps[1] === 0) {
-        setNumSteps(prevState => {
-          const updatedNumSteps = [...prevState];
-          updatedNumSteps[1] = auxSteps;
-          return updatedNumSteps;
-        });
-        setPercentage(prevState => {
-          const updatedPercentage = [...prevState];
-          updatedPercentage[0] = 100;
-          return updatedPercentage;
-        });
-      }
+      setNumSteps(prevState => {
+        const updatedNumSteps = [...prevState];
+        updatedNumSteps[1] = auxSteps;
+        localStorage.setItem('numSteps', JSON.stringify(updatedNumSteps));
+        return updatedNumSteps;
+      });
+    }
+
+    if (currentStep > numSteps[0] && currentStep < numSteps[0] + numSteps[1]) {
       setPercentage(prevState => {
         const updatedPercentage = [...prevState];
-        updatedPercentage[1] = ((currentStep - numSteps[0] + 1) / auxSteps) * 100;
+        updatedPercentage[1] = ((currentStep - numSteps[0] + 1) / numSteps[1]) * 100;
+        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
         return updatedPercentage;
       });
     } else {
-      console.log(numSteps);
       if (currentStep < 6) {
         setPercentage(prevState => {
           const updatedPercentage = [...prevState];
           updatedPercentage[0] = ((currentStep + 1) / numSteps[0]) * 100;
+          localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
           return updatedPercentage;
         });
       } else {
@@ -153,18 +163,48 @@ export const Survey = () => {
           setPercentage(prevState => {
             const updatedPercentage = [...prevState];
             updatedPercentage[1] = 100;
+            localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
             return updatedPercentage;
           });
+        }
+        if (currentStep === numSteps[0] + numSteps[1] + numSteps[2] - 2) {
+          setPercentage([100, 100, 100]);
+          return;
         }
         setPercentage(prevState => {
           const updatedPercentage = [...prevState];
           updatedPercentage[2] = ((currentStep - numSteps[0] - numSteps[1] + 1) / numSteps[2]) * 100;
           console.log(numSteps[0] + numSteps[1] + numSteps[2]);
-          console.log(updatedPercentage[2]);
-
+          localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
           return updatedPercentage;
         });
       }
+    }
+  };
+  const calculateDecrementPercentage = () => {
+    if (currentStep < numSteps[0]) {
+      setPercentage(prevState => {
+        const updatedPercentage = [...prevState];
+        const nextValue = currentStep !== 0 ? currentStep - 1 : 0;
+        updatedPercentage[0] = (nextValue / numSteps[0]) * 100;
+        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
+        return updatedPercentage;
+      });
+    } else if (data.desire && currentStep < numSteps[0] + numSteps[1]) {
+      setPercentage(prevState => {
+        const updatedPercentage = [...prevState];
+        updatedPercentage[1] = ((currentStep - numSteps[0] - 1) / numSteps[1]) * 100;
+        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
+        return updatedPercentage;
+      });
+    } else {
+      setPercentage(prevState => {
+        const updatedPercentage = [...prevState];
+        updatedPercentage[2] = ((currentStep - numSteps[0] - numSteps[1] - 1) / numSteps[2]) * 100;
+        console.log(numSteps[0] + numSteps[1] + numSteps[2]);
+        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
+        return updatedPercentage;
+      });
     }
   };
 
@@ -185,6 +225,8 @@ export const Survey = () => {
   const handleSubmit = () => {
     localStorage.removeItem('currentStep');
     localStorage.removeItem('data');
+    localStorage.removeItem('numSteps');
+    localStorage.removeItem('percentage');
     navigate('/app');
   };
 
@@ -255,7 +297,7 @@ export const Survey = () => {
           <div className="progress_bar__bar" style={{ width: `${percentage[0]}%` }}></div>
         </div>
         <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>{' '}
+          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>
         </div>
         <div className="progress_bar_container">
           <div className="progress_bar__bar" style={{ width: `${percentage[2]}%` }}></div>
