@@ -1,46 +1,42 @@
-import { useState, useEffect } from "react";
-import { login, loginGoogle } from "../api/login";
-import { Link, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { InputIcon, BtnCta } from "../components";
-import loginMain from "../assets/loginMain.png";
-import { LogoWordmark } from "../components/branding/LogoWordmark";
-import {
-  UserIcon,
-  PassIcon,
-  AppleLoginIcon,
-  GoogleLoginIcon,
-} from "../components/icons";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { toastError } from "../constants";
+import { useState, useEffect } from 'react';
+import { login, loginGoogle } from '../api/login';
+import { Link, useNavigate } from 'react-router-dom';
+import { InputIcon, BtnCta, Btn } from '../components';
+import loginMain from '../assets/loginMain.png';
+import { LogoWordmark } from '../components/branding/LogoWordmark';
+import { UserIcon, PassIcon, AppleLoginIcon, GoogleLoginIcon } from '../components/icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastError } from '../constants';
+import { saveOnCookies } from '../utils/helpers';
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {});
 
   const handleLogin = async () => {
     //login("revibes@gmail.com", "mandatorico");
-    const { isLogged, uid, errorMsg } = await login(email, password);
-    console.log();
-    if (isLogged) {
-      Cookies.set("uid", uid, { path: "" });
-      console.log(isLogged);
-      navigate("/app");
-    } else {
-      toast.error(errorMsg, toastError);
+    try {
+      const { uid } = await login(email, password);
+      saveOnCookies('uid', uid ?? '');
+      navigate('/app');
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage, toastError);
     }
   };
   const handleLoginGoogle = async () => {
-    const { isLogged, uid, errorMsg, imgUrl } = await loginGoogle();
-    if (isLogged) {
-      Cookies.set("uid", uid, { path: "" });
-      navigate("/app");
-    } else {
-      toast.error(errorMsg, toastError);
+    try {
+      const { uid, imgUrl } = await loginGoogle();
+      console.log(uid);
+      saveOnCookies('uid', uid ?? '');
+      navigate('/app');
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage, toastError);
     }
   };
 
@@ -54,13 +50,12 @@ export const Login = () => {
         <div className="login__info">
           <div className="login__title">Login</div>
           <p className="login__text">
-            ¡Que bueno verte de nuevo! Inicia sesión para entrar a tu
-            entrenamiento de rehabilitación y darlo todo.
+            ¡Que bueno verte de nuevo! Inicia sesión para entrar a tu entrenamiento de rehabilitación y darlo todo.
           </p>
         </div>
         <form
           className="login__form"
-          onSubmit={async (event) => {
+          onSubmit={async event => {
             event.preventDefault();
             event.stopPropagation();
             handleLogin();
@@ -69,7 +64,7 @@ export const Login = () => {
           <div className="login__form_email">
             <InputIcon
               icon={UserIcon}
-              className={"color-brand"}
+              className={'color-brand'}
               iconWidth={19}
               iconHeight={19}
               label="Correo electrónico"
@@ -81,7 +76,7 @@ export const Login = () => {
             />
             <InputIcon
               icon={PassIcon}
-              className={"color-brand"}
+              className={'color-brand'}
               iconWidth={19}
               iconHeight={19}
               label="Contraseña"
@@ -93,10 +88,10 @@ export const Login = () => {
             />
             <div>
               <div className="login__cta">
-                <BtnCta text="Iniciar sesión" type="submit" />
+                <Btn text="Iniciar sesión" btnClass="primary full" type="submit"></Btn>
                 <p>
                   ¿Todavia no tienes cuenta?
-                  <Link to={"/signup"} className="login__cta-register">
+                  <Link to={'/signup'} className="login__cta-register">
                     Registrate ahora
                   </Link>
                 </p>
@@ -107,18 +102,10 @@ export const Login = () => {
         <div className="login__form_alternatives">
           <p className="divider">O si lo prefieres, inicia sesión con</p>
           <div className="login__form_alternatives__btns">
-            <button
-              type="button"
-              className="login_alternatives__btn"
-              onClick={handleLoginGoogle}
-            >
+            <button type="button" className="login_alternatives__btn" onClick={handleLoginGoogle}>
               <GoogleLoginIcon height={40} width={40} />
             </button>
-            <button
-              type="button"
-              className="login_alternatives__btn"
-              onClick={handleLoginGoogle}
-            >
+            <button type="button" className="login_alternatives__btn" onClick={handleLoginGoogle}>
               <AppleLoginIcon height={40} width={40} />
             </button>
           </div>

@@ -1,35 +1,66 @@
 import { SurveyData } from "../models";
 import OpenAI from "openai";
-const openai = new OpenAI();
+const openai = new OpenAI({
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true
+  });
 
-const fetchOpenAI = async (valuePrompt:string, fileId:string) => {
-
-    const prompt = `${valuePrompt}\n\nUse the following file ID in the prompt: ${fileId}`;
-
-    const response = await fetch('https://api.openai.com/v1/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.VITE_OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-            model: 'text-davinci-003', // Use the model you prefer
-            prompt: prompt,
-            max_tokens: 150
-        })
-    });
-    const data = await response.json();
-    return data;
-};
-
-const generatePromp = async (data: SurveyData):Promise<string> =>{
-    const prompt = '';
-    const result = await fetchOpenAI(prompt, 'exercises.json');
-    console.log(result);
-    return ''
+export const extractJsonString = (input:string):string => {
+    const startIndex = input.indexOf('{');
+    const endIndex = input.lastIndexOf('}');
+    if (startIndex === -1 || endIndex === -1 || startIndex > endIndex) {
+        return '';
+    }
+    return input.slice(startIndex, endIndex + 1);
 }
 
-export const callGPT = async (data: SurveyData):Promise<string> => {
-    generatePromp(data);
-    return '';
+export const callToAssistant = async (object:string):Promise<string> =>{
+    const thread = await openai.beta.threads.create();
+    await openai.beta.threads.messages.create(
+        thread.id,
+        {
+            role: "user",
+            content: `Using the provided JSON: ${object}, please generate a detailed rehabilitation program with exercises for each day, ensuring the number of days matches the 'days_for_recovery' specified. Don't return anything that is not the json content as an output`
+        }
+    );
+    const run = await openai.beta.threads.runs.create(thread.id, {
+    assistant_id: "asst_angL6UB1FsRQEVM4OjRMnl0p",
+    });
+    await openai.beta.threads.runs.retrieve(
+    thread.id,
+    run.id,
+    );
+    let actualRun = await openai.beta.threads.runs.retrieve(
+    // use the thread created earlier
+    thread.id,
+    run.id,
+    );
+    while (
+    actualRun.status === "queued" ||
+    actualRun.status === "in_progress" ||
+    actualRun.status === "requires_action"
+    ) {
+    // keep polling until the run is completed
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    actualRun = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+    }
+    const messages = await openai.beta.threads.messages.list(thread.id);
+    console.log(messages);
+    const lastMessageForRun = messages.data
+    .filter(
+        (message) =>
+        message.run_id === run.id && message.role === "assistant",
+    )
+    .pop();
+    if (lastMessageForRun) {
+        // aparently the `content` array is not correctly typed
+        // content returns an of objects do contain a text object
+        const messageValue = lastMessageForRun.content[0] as {
+            text: { value: string };
+        };
+
+        return extractJsonString(`${messageValue?.text?.value}`);
+    }else{
+        return ''
+    }
 }

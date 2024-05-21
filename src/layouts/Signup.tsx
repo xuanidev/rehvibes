@@ -1,58 +1,45 @@
-import { useState, useEffect } from "react";
-import { loginGoogle, signup } from "../api/login";
-import { createUser } from "../api/users";
-import Cookies from "js-cookie";
-import { User } from "../models";
-import { useNavigate, Link } from "react-router-dom";
-import { InputIcon, BtnCta } from "../components";
-import {
-  UserIcon,
-  UserRounded,
-  PassIcon,
-  GoogleLoginIcon,
-  AppleLoginIcon,
-} from "../components/icons";
-import SignupMain from "../assets/signupMain.png";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { toastError } from "../constants";
-import { LogoWordmark } from "../components/branding/LogoWordmark";
+import { useState, useEffect } from 'react';
+import { loginGoogle, signup } from '../api/login';
+import { useNavigate, Link } from 'react-router-dom';
+import { InputIcon, Btn } from '../components';
+import { UserIcon, UserRounded, PassIcon, GoogleLoginIcon, AppleLoginIcon } from '../components/icons';
+import SignupMain from '../assets/signupMain.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastError } from '../constants';
+import { LogoWordmark } from '../components/branding/LogoWordmark';
+import { saveOnCookies } from '../utils/helpers';
 
 export const Signup = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordRepeated, setPasswordRepeated] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepeated, setPasswordRepeated] = useState('');
   const navigate = useNavigate();
-  const classIcons = "color-brand";
+  const classIcons = 'color-brand';
 
   useEffect(() => {});
-
   const handleLoginGoogle = async () => {
-    const { isLogged, uid, errorMsg, imgUrl } = await loginGoogle();
-    if (isLogged) {
-      Cookies.set("uid", uid, { path: "" });
-      Cookies.set("currentSurvey", 'true', { path: "" });
-      navigate("/app");
-    } else {
-      toast.error(errorMsg, toastError);
+    try {
+      const { uid, imgUrl } = await loginGoogle();
+      console.log(uid);
+      saveOnCookies('uid', uid ?? '');
+      navigate('/app');
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage, toastError);
     }
   };
+
   const handleSignup = async () => {
-    const signupValue = await signup(email, password);
-    if (signupValue.succesfull) {
-      const user: User = {
-        name: name,
-        email: email,
-      };
-      const created = await createUser(user);
-      if (created ?? false) {
-        console.log("created !");
-        Cookies.set("uid", signupValue.uid, { path: "" });
-        navigate("/app");
-      }
-    } else {
-      toast.error(signupValue.errorMsg, toastError);
+    try {
+      const id = await signup(email, password, name);
+      console.log('created !');
+      saveOnCookies('uid', id);
+      navigate('/app');
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage, toastError);
     }
   };
 
@@ -61,7 +48,7 @@ export const Signup = () => {
     if (password === passwordRepeated) {
       await handleSignup();
     } else {
-      toast.error("Las contraseñas no coinciden", toastError);
+      toast.error('Las contraseñas no coinciden', toastError);
     }
   };
 
@@ -74,11 +61,16 @@ export const Signup = () => {
         </div>
         <div className="signup__info">
           <div className="signup__title">Crea tu cuenta</div>
-          <p className="signup__text">
-            ¡Bienvenido a Revibes! Únete ahora y empieza tu transformación.
-          </p>
+          <p className="signup__text">¡Bienvenido a Revibes! Únete ahora y empieza tu transformación.</p>
         </div>
-        <form className="signup__form">
+        <form
+          className="signup__form"
+          onSubmit={async event => {
+            event.preventDefault();
+            event.stopPropagation();
+            handleSubmit();
+          }}
+        >
           <div className="signup__form_email">
             <InputIcon
               icon={UserRounded}
@@ -90,7 +82,6 @@ export const Signup = () => {
               value={name}
               setValue={setName}
               type="text"
-              regex="/^[a-z ,.'-]+$/i"
             />
             <InputIcon
               icon={UserIcon}
@@ -102,7 +93,6 @@ export const Signup = () => {
               value={email}
               setValue={setEmail}
               type="email"
-              regex="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             />
             <InputIcon
               icon={PassIcon}
@@ -130,17 +120,10 @@ export const Signup = () => {
           </div>
           <div>
             <div className="signup__cta">
-              <BtnCta
-                text="Registrarse"
-                onClick={async (event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  handleSubmit();
-                }}
-              />
+              <Btn text="Primary" btnClass="primary full" type="submit" />
               <p>
                 ¿Ya tienes cuenta?
-                <Link to={"/login"} className="signup__cta-register">
+                <Link to={'/login'} className="signup__cta-register">
                   Inicia sesión ahora
                 </Link>
               </p>
@@ -150,18 +133,10 @@ export const Signup = () => {
         <div className="signup__form_alternatives">
           <p className="divider">O si lo prefieres, inicia sesión con</p>
           <div className="signup__form_alternatives__btns">
-            <button
-              type="button"
-              className="signup_alternatives__btn"
-              onClick={handleLoginGoogle}
-            >
+            <button type="button" className="signup_alternatives__btn" onClick={handleLoginGoogle}>
               <GoogleLoginIcon height={40} width={40} />
             </button>
-            <button
-              type="button"
-              className="signup_alternatives__btn"
-              onClick={handleLoginGoogle}
-            >
+            <button type="button" className="signup_alternatives__btn" onClick={handleLoginGoogle}>
               <AppleLoginIcon height={40} width={40} />
             </button>
           </div>

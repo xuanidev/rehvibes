@@ -19,23 +19,21 @@ const usersRef = collection(db, "users");
 export const createUser = async (userData:User ): Promise<boolean> =>{
     const {name, email, uid} = userData;
     try {
-        const docRef = await setDoc(doc(usersRef, uid ?? uuid4()), {
+        const created = await setDoc(doc(usersRef, uid ?? uuid4()), {
             uid: uid ?? uuid4(),
             name: name ?? '',
             email: email,
             createdAt: new Date().getTime().toString(),
             verified: false
+        }).then(docSnap => {
+            return docSnap !== null
         });
-        console.log(docRef);
-        if(docRef !== null){
-            return true;
-        }
-        return false;
+        return created;
     } catch (error) {
-        console.error('Error adding user: ', error);
-        return false;
+        throw new Error("Error adding user in database");     
     }
 }
+
 export const getUser = async (userId:string): Promise<UserFromApi> => {
     try {
         const usersCollection = collection(db, 'users');

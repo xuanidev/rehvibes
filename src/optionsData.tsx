@@ -6,7 +6,7 @@ const genero = {
   src: '/src/assets/genero.png',
 };
 const birthDate = {
-  fieldName: 'dateOfBirth',
+  fieldName: 'fecha_nacimiento',
   fieldType: 'BirthDate',
 };
 const weigthAndHeigth = {
@@ -26,7 +26,7 @@ const imcMessage = {
 };
 
 const operationCuello = {
-  fieldName: 'operationCuello',
+  fieldName: 'operacion_cuello',
   question: '¿Qué lesión tienes en el cuello?',
   options: [
     'Esguince cervical',
@@ -41,7 +41,7 @@ const operationCuello = {
 };
 
 const operationColumna = {
-  fieldName: 'operationColumna',
+  fieldName: 'operacion_columna',
   question: '¿Qué lesión tienes en la columna vertebral?',
   options: [
     'Hernia de disco lumbar',
@@ -56,7 +56,7 @@ const operationColumna = {
 };
 
 const operationHombro = {
-  fieldName: 'operationHombro',
+  fieldName: 'operacion_hombro',
   question: '¿Qué lesión tienes en el hombro?',
   options: [
     'Luxación de hombro',
@@ -71,7 +71,7 @@ const operationHombro = {
 };
 
 const operationEspalda = {
-  fieldName: 'operationEspalda',
+  fieldName: 'operacion_espalda',
   question: '¿Qué lesión tienes en la espalda?',
   options: [
     'Dolor lumbar',
@@ -86,7 +86,7 @@ const operationEspalda = {
 };
 
 const operationCadera = {
-  fieldName: 'operationCadera',
+  fieldName: 'operacion_cadera',
   question: '¿Qué lesión tienes en la cadera?',
   options: [
     'Artrosis de cadera',
@@ -101,7 +101,7 @@ const operationCadera = {
 };
 
 const operationCodo = {
-  fieldName: 'operationCodo',
+  fieldName: 'operacion_codo',
   question: '¿Qué lesión tienes en el codo?',
   options: [
     'Codo de tenista',
@@ -116,7 +116,7 @@ const operationCodo = {
 };
 
 const operationMuneca = {
-  fieldName: 'operationMuneca',
+  fieldName: 'operacion_muneca',
   question: '¿Qué lesión tienes en la muñeca?',
   options: [
     'Esguince de muñeca',
@@ -131,7 +131,7 @@ const operationMuneca = {
 };
 
 const operationRodilla = {
-  fieldName: 'operationRodilla',
+  fieldName: 'operacion_rodilla',
   question: '¿Qué lesión tienes en la rodilla?',
   options: [
     'Ligamento cruzado',
@@ -146,7 +146,7 @@ const operationRodilla = {
 };
 
 const operationPie = {
-  fieldName: 'operationPie',
+  fieldName: 'operacion_pie',
   question: '¿Qué lesión tienes en el pie?',
   options: [
     'Fascitis plantar',
@@ -161,7 +161,7 @@ const operationPie = {
 };
 
 const operationTobillo = {
-  fieldName: 'operationTobillo',
+  fieldName: 'operacion_tobillo',
   question: '¿Qué lesión tienes en el tobillo?',
   options: [
     'Esguince de tobillo',
@@ -176,7 +176,7 @@ const operationTobillo = {
 };
 
 const goals = {
-  fieldName: 'goals',
+  fieldName: 'motivaciones',
   question: '¿Qué es lo que más te motiva para unirte a Revibes?',
   options: [
     'Superar una lesión o limitación física',
@@ -198,7 +198,7 @@ const desire = {
 };
 
 const zones = {
-  fieldName: 'zones',
+  fieldName: 'zonas_con_molestias',
   question: '¿Qué zonas son tus puntos débiles o en las que tienes molestias?',
   options: [
     'Cuello',
@@ -220,14 +220,14 @@ const zones = {
 };
 
 const lastOperation = {
-  fieldName: 'lastOperation',
+  fieldName: 'operacion_recientemente',
   question: '¿Has tenido alguna operación recientemente?',
   options: ['Si', 'No', 'No, pero hace más de 3 sí'],
   fieldType: 'Options',
 };
 
 const lesionZones = {
-  fieldName: 'lesionZones',
+  fieldName: 'zonas_de_molestia',
   question: '¿Qué zonas son tus puntos débiles o en las que tienes molestias?',
   options: [
     'Cuello',
@@ -245,7 +245,7 @@ const lesionZones = {
 };
 
 const lesionBeforeZones = {
-  fieldName: 'lesionBeforeZones',
+  fieldName: 'sufrido_lesion_antes',
   question: '¿Has sufrido alguna lesión en estas zonas?',
   exclusiveOption: 'No',
   options: ['Cuello', 'Hombro', 'Espalda', 'Cadera', 'Muñeca', 'Pies', 'No'],
@@ -253,13 +253,13 @@ const lesionBeforeZones = {
 };
 
 const rehabilitation = {
-  fieldName: 'rehabilitation',
+  fieldName: 'rehabilitacion_previa_en_zona',
   question: '¿Has realizado rehabilitación o entrenamiento referente a la lesión u operación que deseas tratar?',
   options: ['Si', 'Hace más de 6 meses', 'No'],
   fieldType: 'Options',
 };
 const objetivos = {
-  fieldName: 'objetivos',
+  fieldName: 'objetivo_principal',
   question: '¿Cuál es tu objetivo principal?',
   options: [
     'Mejorar la movilidad y flexibilidad',
@@ -274,7 +274,7 @@ const objetivos = {
 };
 
 const tipoEjercicios = {
-  fieldName: 'tipoEjercicios',
+  fieldName: 'tipo_de_ejercicios',
   question: 'Elige el tipo de ejercicios que prefieras',
   options: [
     'Fuerza',
@@ -289,14 +289,14 @@ const tipoEjercicios = {
 };
 
 const nivel = {
-  fieldName: 'nivel',
+  fieldName: 'nivel_entrenamiento',
   question: 'Elige el nivel de entrenamiento que prefieras:',
   options: ['Principiante', 'Intermedio', 'Avanzado'],
   fieldType: 'Options',
 };
 
 const lugar = {
-  fieldName: 'lugar',
+  fieldName: 'lugar_entrenamiento',
   question: 'Elige el nivel el lugar para tu entrenamiento:',
   options: [
     'En casa: quiero ejercitarme en la comodidad y privacidad de mi hogar',
@@ -316,7 +316,7 @@ const equipamiento = {
 };
 
 const condiciones = {
-  fieldName: 'condiciones',
+  fieldName: 'condiciones_cronicas',
   question: '¿Tienes alguna de estas condiciones médicas crónicas?',
   exclusiveOption: 'Ninguna',
   options: [
@@ -335,20 +335,14 @@ const condiciones = {
   otherText: 'Otra',
 };
 const movilidad = {
-  fieldName: 'movilidad',
+  fieldName: 'limitacion_movilidad',
   question: '¿Tienes alguna limitación de movilidad?',
   exclusiveOption: 'Ninguna',
-  options: [
-    'Movilidad reducida en las extremidades inferiores',
-    'Movilidad reducida en las extremidades inferiores',
-    'Rigidez articular',
-    'Falta de equilibrio',
-    'Ninguna',
-  ],
+  options: ['Movilidad reducida en las extremidades inferiores', 'Rigidez articular', 'Falta de equilibrio', 'Ninguna'],
   fieldType: 'MultipleChoices',
 };
 const enfermedadCardiovascular = {
-  fieldName: 'enfermedadCardiovascular',
+  fieldName: 'enfermedades_cardiovasculares',
   question: '¿Tienes alguna de estas enfermedades cardiovasculares?',
   exclusiveOption: 'Ninguna',
   options: [
@@ -363,7 +357,7 @@ const enfermedadCardiovascular = {
   otherText: 'Otra',
 };
 const condicionRespiratoria = {
-  fieldName: 'condicionRespiratoria',
+  fieldName: 'condiciones_respiratorias',
   question: '¿Tienes alguna de estas condiciones respiratorias?',
   exclusiveOption: 'Ninguna',
   options: [
@@ -378,7 +372,7 @@ const condicionRespiratoria = {
   otherText: 'Otra',
 };
 const nivelActividadActual = {
-  fieldName: 'nivelActividadActual',
+  fieldName: 'nivel_actividad_fisica_actual',
   question: '¿Cuál es tu nivel de actividad física actual?',
   options: [
     'Sedentario: no hago ningún tipo de ejercicio',
@@ -389,13 +383,13 @@ const nivelActividadActual = {
   fieldType: 'Options',
 };
 const practicaRegular = {
-  fieldName: 'practicaRegular',
+  fieldName: 'practica_deporte_regular',
   question: '¿Practicas algún deporte o actividad física de manera regular?',
   options: ['Si', 'No'],
   fieldType: 'Options',
 };
 const trabajoSentado = {
-  fieldName: 'trabajoSentado',
+  fieldName: 'trabajo_sentado',
   question: '¿Tienes un trabajo en el que estés la mayor parte del tiempo sentado?',
   options: ['Si', 'No'],
   fieldType: 'Options',
@@ -411,13 +405,13 @@ const estres = {
   fieldType: 'Options',
 };
 const rehabilitacionPreviamente = {
-  fieldName: 'rehabilitacionPreviamente',
+  fieldName: 'realizado_rehabilitacion_previamente',
   question: '¿Has realizado algún tipo de programa de rehabilitación o entrenamiento anteriormente?',
   options: ['Si', 'No'],
   fieldType: 'Options',
 };
 const dolor = {
-  fieldName: 'dolor',
+  fieldName: 'nivel_dolor_actual',
   question: '¿Cuál es tu nivel de dolor actualmente?',
   options: ['Leve: me duele un poco', 'Moderado: me duele pero es soportable', 'Intenso: me duele muchísimo'],
   fieldType: 'Options',
