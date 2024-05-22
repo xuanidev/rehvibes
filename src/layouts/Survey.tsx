@@ -45,6 +45,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ImgDefault from '../assets/ImgDefault.png';
 import { Information } from '../components/icons';
 import { Logo } from '../components/branding';
+import { callToAssistant } from '../api/openai';
+import { removeFromLocalStorage } from '../utils/helpers';
 
 const preloadImage = (url: string) => {
   return new Promise((resolve, reject) => {
@@ -222,11 +224,14 @@ export const Survey = () => {
     }
   };
 
-  const handleSubmit = () => {
-    localStorage.removeItem('currentStep');
-    localStorage.removeItem('data');
-    localStorage.removeItem('numSteps');
-    localStorage.removeItem('percentage');
+  const handleSubmit = async () => {
+    console.log(data);
+    removeFromLocalStorage('currentStep');
+    removeFromLocalStorage('data');
+    removeFromLocalStorage('numSteps');
+    removeFromLocalStorage('percentage');
+    const resultGPT = await callToAssistant(JSON.stringify(data));
+    console.log(JSON.parse(resultGPT));
     navigate('/app');
   };
 
@@ -338,7 +343,7 @@ export const Survey = () => {
           prevStep={prevStep}
           length={steps.length}
           isStepValid={isStepValid}
-          form="surveyForm"
+          form="formSurvey"
         />
       </div>
       <div className="logo_icon">

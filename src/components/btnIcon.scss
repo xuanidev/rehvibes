@@ -9,15 +9,12 @@
     font-size: 15px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2px;
     transition: color 0.15s;
     &:hover {
-        // Estilos al hacer hover
-        
-        // Aquí puedes definir los estilos que deseas aplicar cuando el cursor está sobre el botón. Para cambiar el color de relleno de los iconos a blanco, podrías hacer algo como esto:
-        
         .icon {
-          fill: white; // Cambia el color de relleno a blanco cuando se hace hover
+          fill: white;
         }
       }
       
@@ -34,7 +31,11 @@
     background-color: var(--color-secondary);
     color: white;
     font-size: 18px;
-    border: 2px solid var(--color-secondary-dark);
+    border: 1px solid var(--color-secondary-dark);
+}
+.full{
+width: 100%;
+text-align: center;
 }
 .primary:hover{
     background-color: var(--color-white);

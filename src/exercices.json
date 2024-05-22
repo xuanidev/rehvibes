@@ -1,0 +1,117 @@
+[
+  {
+    "id": 1,
+    "name": "Sentadillas",
+    "description": "Ejercicio de fuerza para las piernas y glúteos.",
+    "difficulty": "Intermedio",
+    "equipment": ["Pesas", "Mancuernas"],
+    "frequency": 3,
+    "instructions": [
+      "De pie, con los pies separados al ancho de los hombros.",
+      "Flexiona las rodillas y baja las caderas como si te fueras a sentar, manteniendo la espalda recta.",
+      "Baja hasta que los muslos estén paralelos al suelo.",
+      "Empuja con los talones para volver a la posición inicial."
+    ],
+    "kcalBurned": 8,
+    "mainAreas": ["Cuádriceps", "Glúteos"],
+    "secondAreas": ["Isquiotibiales", "Core", "Espalda baja"],
+    "objective": "Adquirir fuerza y potencia en las piernas.",
+    "precautions": "Mantén la espalda recta en todo momento para evitar lesiones en la espalda baja. No dejes que las rodillas se desplacen hacia delante más allá de los dedos de los pies para prevenir lesiones en las articulaciones.",
+    "minRep": 10,
+    "maxRep": 12,
+    "series": 3,
+    "image": "",
+    "video": ""
+  },
+  {
+    "id": 2,
+    "name": "Flexiones inclinadas",
+    "description": "Las flexiones inclinadas son una variación de las flexiones tradicionales.",
+    "difficulty": "Principiante",
+    "equipment": ["Sofá", "Banco"],
+    "frequency": 2,
+    "instructions": [
+      "Arrodíllate en el suelo y coloca las manos sobre una superficie elevada, como una silla, un banco o un sofá.",
+      "Mantén las manos separadas aproximadamente al ancho de los hombros.",
+      "Extiende las piernas hacia atrás, manteniendo el cuerpo en una línea recta desde la cabeza hasta las rodillas.",
+      "Baja el cuerpo hacia la superficie elevada flexionando los codos, manteniendo el abdomen contraído y la espalda recta.",
+      "Empuja con las manos para volver a la posición inicial, extendiendo los codos."
+    ],
+    "kcalBurned": 5,
+    "mainAreas": ["Pecho", "Hombros", "Brazos"],
+    "secondAreas": ["Core"],
+    "objective": "Adquirir fuerza en el pecho, los hombros y los brazos.",
+    "precautions": "Mantén el cuerpo alineado y evita arquear la espalda baja. Controla el movimiento para evitar que las rodillas se deslicen sobre el suelo y para asegurarte de que los codos estén en una posición segura.",
+    "minRep": 8,
+    "maxRep": 12,
+    "series": 3,
+    "image": "",
+    "video": ""
+  },
+  {
+    "id": 3,
+    "name": "Plancha abdominal",
+    "description": "Fortalece el core, incluyendo abdominales, oblicuos y músculos estabilizadores de la espalda.",
+    "difficulty": "Intermedio",
+    "equipment": ["Esterilla"],
+    "frequency": 3,
+    "instructions": [
+      "Colócate en posición de plancha con los antebrazos apoyados en el suelo, los codos debajo de los hombros y el cuerpo en línea recta desde la cabeza hasta los talones. Mantén la posición durante el tiempo indicado, manteniendo el abdomen contraído y evitando que las caderas se hundan o se eleven."
+    ],
+    "kcalBurned": 12,
+    "mainAreas": ["Hombros", "Brazos", "Abdominales"],
+    "secondAreas": ["Espalda"],
+    "objective": "Fortalecimiento del core y mejora de la estabilidad del tronco.",
+    "precautions": "Mantén la posición de manera correcta para evitar lesiones en la espalda. Si sientes dolor, detén el ejercicio.",
+    "minRep": 1,
+    "maxRep": 3,
+    "series": 3,
+    "image": "",
+    "video": ""
+  },
+  {
+    "id": 4,
+    "name": "Flexiones con pelota",
+    "description": "Fortalece los músculos del pecho, hombros, tríceps y core, con el agregado de mejorar el equilibrio y la estabilidad.",
+    "difficulty": "Avanzado",
+    "equipment": ["Pelota de pilates"],
+    "frequency": 3,
+    "instructions": [
+      "Coloca las manos en el suelo y los pies sobre una bola de pilates.",
+      "Realiza flexiones manteniendo el equilibrio sobre la bola, manteniendo el cuerpo en línea recta desde la cabeza hasta los pies.",
+      "Flexiona los brazos para bajar el cuerpo hacia el suelo y luego extiéndelos para volver a la posición inicial."
+    ],
+    "kcalBurned": 14,
+    "mainAreas": ["Pecho", "Hombros", "Tríceps"],
+    "secondAreas": ["Core"],
+    "objective": "Fortalecimiento muscular y mejora del equilibrio y la estabilidad.",
+    "precautions": "Mantén el core contraído y el cuerpo alineado para evitar lesiones en la espalda o caídas.",
+    "minRep": 8,
+    "maxRep": 12,
+    "series": 3,
+    "image": "",
+    "video": ""
+  },
+  {
+    "id": 5,
+    "name": "Zancadas con elevación de brazos",
+    "description": "Trabaja los músculos de las piernas, glúteos, hombros y brazos, mejorando la fuerza y la coordinación.",
+    "difficulty": "Intermedio",
+    "equipment": ["Esterilla"],
+    "frequency": 3,
+    "instructions": [
+      "Realiza una zancada hacia adelante con una pierna mientras elevas los brazos por encima de la cabeza.",
+      "Mantén la rodilla de la pierna adelantada en un ángulo de 90 grados y la rodilla de la pierna atrás casi tocando el suelo. Luego, vuelve a la posición inicial y repite con la otra pierna."
+    ],
+    "kcalBurned": 8,
+    "mainAreas": ["Piernas", "Glúteos", "Hombros", "Brazos"],
+    "secondAreas": [""],
+    "objective": "Fortalecimiento muscular y mejora de la coordinación.",
+    "precautions": "Mantén la espalda recta y las rodillas alineadas con los tobillos para evitar lesiones.",
+    "minRep": 10,
+    "maxRep": 15,
+    "series": 3,
+    "image": "",
+    "video": ""
+  }
+]
