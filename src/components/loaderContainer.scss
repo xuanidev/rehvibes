@@ -1,0 +1,38 @@
+@import '../styles/base';
+
+.loader_container{
+    position: absolute;
+    height: 100svh;
+    width: 100%;
+    display: grid;
+    place-content: center;
+}
+.gradient{
+    font-family: 'Satoshi-Regular';
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.11);
+    @include gradient-border(2px, 14px, var(--color-white));
+    padding: 12px 24px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-radius: 14px;
+    .loader{
+        animation: rotate-animation 3s infinite linear;
+    }
+}
+
+@keyframes rotate-animation {
+	0% {
+		transform: rotate(0deg);
+    }
+    50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
