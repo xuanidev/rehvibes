@@ -3,26 +3,35 @@ import {auth, signInWithGooglePopup} from '../firebaseConfig.js'
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import {createUser } from './users.js';
 import { handleErrorMessageSignup,errorsSignup, handleErrorMessageLogin, errorsLogin, errorsLoginGoogle } from './errors.js';
+import { User } from '../models/index.js';
 const db = getFirestore();
 
 const chekcIfExists = async (id:string): Promise<boolean> =>{
     const docRef = doc(db, "users", id);
-    const docSnap = await getDoc(docRef);
-    console.log(docSnap);
-    if (docSnap.exists()) {
-        return true
-    } else {
-        return false;
+    const exists = await getDoc(docRef).then(docSnap => {
+        return docSnap.exists()
+    });
+    return exists;
+}
+
+export const signup = async (email: string, password: string, name:string):Promise<string>=> {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user.uid;
+      console.log(user);
+      const newUser: User = {
+        name: name,
+        email: email,
+      };
+      await createUser(newUser);
+      return user;
+    } catch (error) {
+      const errorCode = (error as any).code;
+      throw new Error(handleErrorMessageSignup(errorCode));     
     }
-}
+};
 
-interface signupProps {
-    succesfull: boolean,
-    errorMsg:string,
-    uid?: string,
-}
-
-export const signup = async (email: string, password: string ): Promise<signupProps> =>{
+/*export const signup = async (email: string, password: string ): Promise<signupProps> =>{
     try {
         let created = {succesfull: false, errorMsg: errorsSignup.generalMsg};
         created = await createUserWithEmailAndPassword(auth, email, password)
@@ -40,68 +49,56 @@ export const signup = async (email: string, password: string ): Promise<signupPr
     } catch (error) {
         return {succesfull: false, errorMsg: errorsSignup.generalMsg};
     }
-}
+}*/
 
-interface loginProps {
-    isLogged: boolean,
+interface LoginProps {
     uid?: string,
     imgUrl?: string,
-    errorMsg: string
 }
 
-export const login = async (email: string, password: string ): Promise<loginProps> =>{
+export const login = async (email: string, password: string ): Promise<LoginProps> =>{
     let uidAux = "";
     try {
-        const isLogged = await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const userLogged = userCredential.user;
-            uidAux = userLogged.uid;
-            return {logged: true, errorMsg: ''}
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            console.log(errorCode);
-            const errorMessage = handleErrorMessageLogin(errorCode);
-            return {logged: false, errorMsg: errorMessage}
+        const userCredential = await signInWithEmailAndPassword(auth, email, password)
+        const userLogged = userCredential.user;
+        uidAux = userLogged.uid;
+        return {imgUrl: '', uid: uidAux}
+    } catch (error) {
+        const errorCode = (error as any).code;
+        throw new Error(handleErrorMessageLogin(errorCode))
+    }
+}
+
+export const loginGoogle = async (): Promise<{ uid?: string; imgUrl?: string }> => {
+    try{
+        const response = await signInWithGooglePopup();
+        const { displayName, email, uid, photoURL } = response.user;
+
+        if (email === undefined || displayName === undefined) {
+            throw new Error(errorsLoginGoogle.generalMsg);
+        }
+        
+        const exists = await chekcIfExists(uid);
+
+        if (exists) {
+            return { uid, imgUrl: photoURL ?? ''};
+        }
+        console.log("entra");
+        const isCreated = await createUser({
+            uid,
+            name: displayName,
+            email
         });
-        return {isLogged: isLogged.logged, uid:uidAux, errorMsg: isLogged.errorMsg};
+
+        if (isCreated) {
+            return { uid, imgUrl: photoURL ?? '' };
+        }
+
+        throw new Error(errorsLoginGoogle.errorCrearUsuarioMsg);
     } catch (error) {
-       return {isLogged:false, errorMsg: (error as Error).message};
+        const errorCode = (error as any).code;
+        console.log(errorCode);
+        throw new Error(handleErrorMessageLogin(errorCode))
     }
 }
-
-export const loginGoogle = async (): Promise<loginProps> =>{
-    try {
-            const response = await signInWithGooglePopup();
-            if(response){
-                console.log(response);
-                const {displayName, email, uid} = response.user;
-                if(email === undefined || displayName === undefined){
-                    return {isLogged:false, uid:"", errorMsg: errorsLoginGoogle.generalMsg};
-                }
-
-                const exists = await chekcIfExists(uid);
-                console.log(exists);
-                if(exists){
-                    return {isLogged:true, uid: response.user.uid, errorMsg:'', imgUrl: response.user.photoURL};
-                }else{
-                    const isCreated = createUser({
-                        uid: response.user.uid,
-                        name: response.user.displayName,
-                        email: response.user.email
-                    })
-                    if(isCreated !== undefined){
-                        return {isLogged:true, uid: response.user.uid, errorMsg:'', imgUrl: response.user.photoURL};
-                    }else{
-                        return {isLogged:false, uid:"", errorMsg: errorsLoginGoogle.errorCrearUsuarioMsg};
-                    }
-                }
-            }else{
-                return {isLogged:false, uid:"", errorMsg: errorsLoginGoogle.generalMsg};
-            }
-    } catch (error) {
-        return {isLogged:false, uid:'', errorMsg: (error as Error).message};
-    }
-}
-
 

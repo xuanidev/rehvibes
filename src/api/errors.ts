@@ -1,5 +1,5 @@
 export const errorsSignup = {
-    generalMsg: "Ha ocurrido un error con tu inicio de sesión, vuelva a intentarlo más tarde por favor",
+    generalMsg: "Ha ocurrido un error con tu registro, vuelva a intentarlo más tarde por favor",
     emailMsg: "El correo indicado ya tiene una cuenta asignada.",
     invalidMsg: 'El correo introducido no es válido.',
     weakPassMsg: 'La contraseña introducida es demasiado débil.',
