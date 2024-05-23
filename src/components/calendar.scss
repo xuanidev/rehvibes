@@ -1,0 +1,83 @@
+.calendar-container {
+    width: 331px;
+    height: 300px;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .calendar-header select {
+    border: 1px solid #ffa238;
+    border-radius: 4px;
+    padding: 4px;
+    background: none;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .calendar-header span {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .calendar-body {
+    width: 100%;
+  }
+  
+  .weekdays {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .weekday {
+    width: calc(100% / 7 - 1px);
+    text-align: center;
+    font-weight: 'Satoshi-Bold';
+    color: #000;
+    margin-bottom: 4px; 
+  }
+  
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .day {
+    width: calc(100% / 7 - 1px);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-bottom: 2px;
+  }
+  
+  .today {
+    background-color: #ffebcc;
+    color: #000;
+  }
+  
+  .rehab-day {
+    background-color: #ffa238;
+    color: #fff;
+  }
+  
+  .day.today.rehab-day {
+    background-color: #ff662d;
+    color: #fff;
+  }
+  
