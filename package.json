@@ -23,6 +23,7 @@
     "uuid4": "^2.0.3"
   },
   "devDependencies": {
+    "@types/firebase": "^3.2.1",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash.range": "^3.2.9",
     "@types/react": "^18.2.56",

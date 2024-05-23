@@ -2,8 +2,8 @@
 
 
 .btnIcon{
-    padding: 12px 16px;
-    border-radius: 14px;
+    padding: 12px 12px;
+    border-radius: 12px;
     width: max-content;
     font-family: 'Satoshi-Medium';
     font-size: 15px;
@@ -33,16 +33,16 @@
 .primary{
     background-color: var(--color-secondary);
     color: white;
-    font-size: 18px;
-    border: 2px solid var(--color-secondary-dark);
+    font-size: 16px;
+    border: 1.5px solid var(--color-secondary-dark);
+    border-radius: 8px;
 }
 .primary:hover{
     background-color: var(--color-white);
-    color: var(--color-secondary-dark);
-    font-family: 'Satoshi-Bold'
+    color: var(--color-secondary);
 }
 .borderGradient{
-    @include gradient-border(2px, 14px, var(--color-white));
+    @include gradient-border(1.5px, 12px, var(--color-white));
     &:hover {
         &_fill {
           fill: white;
@@ -51,7 +51,7 @@
       }   
 }
 .borderGradient:hover{
-    @include gradient-border(2px, 14px, transparent);
+    @include gradient-border(2px, 12px, transparent);
     color: white;
     font-family: 'Satoshi-Bold';
 }

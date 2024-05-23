@@ -1,0 +1,28 @@
+.progress-container {
+  width: 297px;
+  height: 300px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 10px;
+
+  h2{
+    font-size: 26px;
+    font-family: 'Satoshi-Bold';
+  }
+}
+
+.progress-circle {
+  width: 156px;
+  height: 156px;
+  position: relative;
+  margin-right: 40px;
+}
+
+.progress-percentage {
+  font-size: 24px;
+  font-family: 'Satoshi-Bold';
+}
