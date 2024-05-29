@@ -1,4 +1,4 @@
-import { Loader } from './icons';
+import { LoaderWhite } from './icons';
 import './loaderContainer.scss';
 
 interface LoaderContainerProps {
@@ -13,7 +13,7 @@ export const LoaderContainer = (props: LoaderContainerProps) => {
       <div className="loader_container">
         <div className="gradient">
           <p>{text}</p>
-          <Loader height={100} width={100} className="loader " />
+          <LoaderWhite height={100} width={100} className="loader" fill="#ffff" />
         </div>
       </div>
     )

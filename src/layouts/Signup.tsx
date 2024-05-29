@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastError } from '../constants';
 import { LogoWordmark } from '../components/branding/LogoWordmark';
-import { saveOnCookies } from '../utils/helpers';
 
 export const Signup = () => {
   const [name, setName] = useState('');
@@ -21,9 +20,7 @@ export const Signup = () => {
   useEffect(() => {});
   const handleLoginGoogle = async () => {
     try {
-      const { uid, imgUrl } = await loginGoogle();
-      console.log(uid);
-      saveOnCookies('uid', uid ?? '');
+      await loginGoogle();
       navigate('/app');
     } catch (error) {
       const errorMessage = (error as Error).message;
@@ -33,10 +30,8 @@ export const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const id = await signup(email, password, name);
-      console.log('created !');
-      saveOnCookies('uid', id);
-      navigate('/app');
+      await signup(email, password, name);
+      navigate('/survey');
     } catch (error) {
       const errorMessage = (error as Error).message;
       toast.error(errorMessage, toastError);
@@ -104,7 +99,6 @@ export const Signup = () => {
               value={password}
               setValue={setPassword}
               type="password"
-              regex="/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/"
             />
             <InputIcon
               icon={PassIcon}
@@ -120,7 +114,7 @@ export const Signup = () => {
           </div>
           <div>
             <div className="signup__cta">
-              <Btn text="Primary" btnClass="primary full" type="submit" />
+              <Btn text="Registrarse" btnClass="primary full" type="submit" />
               <p>
                 ¿Ya tienes cuenta?
                 <Link to={'/login'} className="signup__cta-register">

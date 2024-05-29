@@ -17,3 +17,4 @@ export { Exit } from './Exit';
 export { Information } from './Information';
 export { Plus } from './Plus';
 export { Loader } from './Loader';
+export { LoaderWhite } from './LoaderWhite';

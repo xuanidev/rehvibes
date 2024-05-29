@@ -1,7 +1,12 @@
+import { SurveyData } from "./surveys";
+
 export interface User {
-    uid?: string,
+    uid: string,
     name: string;
     email: string;
+    google_id: boolean;
+    patient_profile?: SurveyData
+    programs: string[];
 }
 
 export interface UserFromApi {
@@ -10,6 +15,7 @@ export interface UserFromApi {
     surname: string;
     username: string;
     mail: string;
+    programs: string[];
 }
 
 export interface SignUpData {

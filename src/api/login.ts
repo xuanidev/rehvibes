@@ -1,55 +1,66 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'firebase/auth';
 import {auth, signInWithGooglePopup} from '../firebaseConfig.js'
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
 import {createUser } from './users.js';
-import { handleErrorMessageSignup,errorsSignup, handleErrorMessageLogin, errorsLogin, errorsLoginGoogle } from './errors.js';
+import { handleErrorMessageSignup,handleErrorMessageLogin, errorsLoginGoogle } from './errors.js';
 import { User } from '../models/index.js';
+import { saveOnCookies } from '../utils/helpers.js';
 const db = getFirestore();
 
 const chekcIfExists = async (id:string): Promise<boolean> =>{
-    const docRef = doc(db, "users", id);
-    const exists = await getDoc(docRef).then(docSnap => {
-        return docSnap.exists()
-    });
-    return exists;
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where("google_id", "==", id));
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
+    if(querySnapshot.size > 0){
+        return true
+    }
+    return false;
+}
+const checkIfEmailExists = async (email:string): Promise<boolean> =>{
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
+    if(querySnapshot.size > 0){
+        return true
+    }
+    return false;
+}
+const checkIfGoogle = async (email:string): Promise<boolean> =>{
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where("google_id", "==", true), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot.size);
+    if(querySnapshot.size > 0){
+        return true
+    }
+    return false;
 }
 
-export const signup = async (email: string, password: string, name:string):Promise<string>=> {
+export const signup = async (email: string, password: string, name:string)=> {
     try {
+      const exists = await checkIfEmailExists(email);
+      if(exists){
+        throw new Error('auth/correo-usado');  
+      }
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user.uid;
-      console.log(user);
+
       const newUser: User = {
         name: name,
         email: email,
+        uid: user
       };
       await createUser(newUser);
-      return user;
+      saveOnCookies('uid', user);
+      saveOnCookies('email', email);
+      saveOnCookies('username', name);
     } catch (error) {
-      const errorCode = (error as any).code;
+        const errorCode = (error as any).code ?? (error as any).message;
       throw new Error(handleErrorMessageSignup(errorCode));     
     }
 };
-
-/*export const signup = async (email: string, password: string ): Promise<signupProps> =>{
-    try {
-        let created = {succesfull: false, errorMsg: errorsSignup.generalMsg};
-        created = await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user.uid;
-            console.log(user);
-            return {succesfull: true, errorMsg: '', uid: user};
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMsg = handleErrorMessageSignup(errorCode);
-            return {succesfull: false, errorMsg: errorMsg};
-        });
-        return created;
-    } catch (error) {
-        return {succesfull: false, errorMsg: errorsSignup.generalMsg};
-    }
-}*/
 
 interface LoginProps {
     uid?: string,
@@ -59,17 +70,24 @@ interface LoginProps {
 export const login = async (email: string, password: string ): Promise<LoginProps> =>{
     let uidAux = "";
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password)
+        const exists = await checkIfGoogle(email);
+        if(exists){
+          throw new Error('auth/correo-usado');  
+        }
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log(userCredential);
         const userLogged = userCredential.user;
         uidAux = userLogged.uid;
+        saveOnCookies('uid', uidAux);
         return {imgUrl: '', uid: uidAux}
     } catch (error) {
-        const errorCode = (error as any).code;
+        console.log(error);
+        const errorCode = (error as any).code ?? (error as any).message;
         throw new Error(handleErrorMessageLogin(errorCode))
     }
 }
 
-export const loginGoogle = async (): Promise<{ uid?: string; imgUrl?: string }> => {
+export const loginGoogle = async () => {
     try{
         const response = await signInWithGooglePopup();
         const { displayName, email, uid, photoURL } = response.user;
@@ -81,19 +99,28 @@ export const loginGoogle = async (): Promise<{ uid?: string; imgUrl?: string }> 
         const exists = await chekcIfExists(uid);
 
         if (exists) {
-            return { uid, imgUrl: photoURL ?? ''};
+            saveOnCookies('uid', uid);
+            saveOnCookies('email', email);
+            saveOnCookies('username', displayName);
+            return;
         }
-        console.log("entra");
-        const isCreated = await createUser({
+
+        const newUser = await createUser({
             uid,
             name: displayName,
-            email
+            email,
+            google_id: true
         });
 
-        if (isCreated) {
-            return { uid, imgUrl: photoURL ?? '' };
+        if (newUser) {
+            if(photoURL){
+                saveOnCookies('imgUser', photoURL);
+            }
+            saveOnCookies('uid', uid);
+            saveOnCookies('email', email);
+            saveOnCookies('username', displayName);
+            return;
         }
-
         throw new Error(errorsLoginGoogle.errorCrearUsuarioMsg);
     } catch (error) {
         const errorCode = (error as any).code;

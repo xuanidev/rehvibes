@@ -11,8 +11,7 @@ const undefinedUser = {
     surname: '',
     username: '',
     mail: '',
-    createdAt: '',
-    photoURL: ''
+    programs: [] as string[]
 }
 
 const usersRef = collection(db, "users");

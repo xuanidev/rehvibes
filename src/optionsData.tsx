@@ -6,7 +6,7 @@ const genero = {
   src: '/src/assets/genero.png',
 };
 const birthDate = {
-  fieldName: 'fecha_nacimiento',
+  fieldName: 'birth_date',
   fieldType: 'BirthDate',
 };
 const weigthAndHeigth = {
