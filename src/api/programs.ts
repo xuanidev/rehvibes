@@ -5,15 +5,18 @@ import { GenerateProgramProps,RehabilitationProgramProps, SurveyData } from '../
 import { getUser, updateUser } from './users.js';
 import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
+import uuid4 from 'uuid4';
 const db = getFirestore();
 
 
 export const postPogram = async (program: RehabilitationProgramProps) =>{
     try {
-        console.log(program);
-        const docRef = await addDoc(collection(db, 'programs'), program);
+        const uid = program.uid ?? uuid4()
+        const usersRef = collection(db, "programs");
+        await setDoc(doc(usersRef, uid), program);
+        //const docRef = await addDoc(collection(db, 'programs'), program);
         console.log('posted');
-        return docRef.id;
+        return uid;
     } catch (error) {
         console.error('Error adding user: ', error);
         return undefined;
@@ -22,8 +25,12 @@ export const postPogram = async (program: RehabilitationProgramProps) =>{
 
 export const getProgramByUserID = async (userID: string): Promise<RehabilitationProgramProps[]> => {
     try {
+        console.log(userID);
+        const user = await getUser(userID);
+        
         const programsCollection = collection(db, 'programs');
-        const q = query(programsCollection, where('user_id', '==', userID));
+        console.log(user);
+        const q = query(programsCollection, where('uid', 'in', user.programs));
         const querySnapshot = await getDocs(q);
 
         const programs: RehabilitationProgramProps[] = [];
