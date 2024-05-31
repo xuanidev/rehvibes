@@ -1,3 +1,5 @@
+import { SurveyData } from "./surveys";
+
 export interface Exercise {
     name: string;
     description: string;
@@ -20,6 +22,7 @@ export interface Program {
     endDate: string;
     days: number;
     rutine: DailyRoutine[];
+    surveyAnswers: SurveyData;
 }
 
 export interface ExerciseFromApi {
@@ -30,10 +33,17 @@ export interface ExerciseFromApi {
     pause_sec?: string;
 }
 
+export interface ExerciseFromAPI {
+    name: string;
+    series: number;
+    minRep: number;
+    maxRep: number;
+}
+
 export interface DailyRoutineFromApi {
     day: string;
     exercices_num: string;
-    exercises: Exercise[];
+    exercises: ExerciseFromAPI[];
 }
 
 export interface ProgramFromApi {
@@ -44,4 +54,5 @@ export interface ProgramFromApi {
     endDate: string;
     days: number;
     rutine: DailyRoutine[];
+    surveyAnswers: SurveyData;
 }

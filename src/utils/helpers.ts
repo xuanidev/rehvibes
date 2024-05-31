@@ -15,3 +15,8 @@ export const saveOnCookies = (name: string, value: string, path?: string ) =>{
 export const getFromCookies = (name: string):string =>{
     return Cookies.get(name) ?? '';
 }
+export const removeFromCookies = (names: string[]) =>{
+    names.forEach((name: string) => {
+        Cookies.remove(name);
+    })
+}

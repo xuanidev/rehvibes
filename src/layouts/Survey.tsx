@@ -1,63 +1,20 @@
 import { useState, useEffect } from 'react';
 import { SurveyStep, SurveyActions } from '../components/survey/index';
 import { useNavigate } from 'react-router-dom';
-import {
-  genero,
-  birthDate,
-  weigthAndHeigth,
-  operationCuello,
-  operationHombro,
-  operationEspalda,
-  operationCadera,
-  operationCodo,
-  operationColumna,
-  operationMuneca,
-  operationPie,
-  operationRodilla,
-  operationTobillo,
-  goals,
-  desire,
-  zones,
-  lastOperation,
-  lesionZones,
-  lesionBeforeZones,
-  rehabilitation,
-  nivel,
-  lugar,
-  objetivos,
-  tipoEjercicios,
-  equipamiento,
-  condiciones,
-  condicionRespiratoria,
-  dolor,
-  enfermedadCardiovascular,
-  estres,
-  movilidad,
-  nivelActividadActual,
-  practicaRegular,
-  rehabilitacionPreviamente,
-  trabajoSentado,
-} from '../optionsData';
 import { toastError } from '../constants';
 import { surveyErrors } from '../components/survey/errors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ImgDefault from '../assets/ImgDefault.png';
-import { Information } from '../components/icons';
 import { Logo } from '../components/branding';
 import { callToAssistant } from '../api/openai';
+import { calculateDecrementPercentage, calculatePercentage, checkPercentage, preloadImage } from '../utils/survey';
 import { removeFromLocalStorage } from '../utils/helpers';
-
-const preloadImage = (url: string) => {
-  return new Promise((resolve, reject) => {
-    if (url) {
-      const img = new Image();
-      img.src = url;
-      img.onload = resolve;
-      img.onerror = reject;
-    }
-  });
-};
+import LoaderContainer from '../components/LoaderContainer';
+import { getSurveySteps } from '../components/survey/surveySteps';
+import SurveyTop from '../components/survey/SurveyTop';
+import { generateProgram } from '../api/programs';
+import { openAiToFirebase } from '../api/programs.mapper';
 
 export const Survey = () => {
   const [data, setData] = useState<SurveyData>({});
@@ -69,22 +26,8 @@ export const Survey = () => {
   const [toastId, setToastId] = useState<any>('');
   const [numSteps, setNumSteps] = useState<number[]>([5, 0, 12]);
   const [percentage, setPercentage] = useState<number[]>([0, 0, 0]);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  const checkPercentage = () => {
-    const numStepsLocal = localStorage.getItem('numSteps');
-    const percentageLocal = localStorage.getItem('percentage');
-    if (!percentageLocal) {
-      localStorage.setItem('percentage', JSON.stringify(percentage));
-    } else {
-      setPercentage(JSON.parse(percentageLocal));
-    }
-    if (!numStepsLocal) {
-      localStorage.setItem('numSteps', JSON.stringify(numSteps));
-    } else {
-      setNumSteps(JSON.parse(numStepsLocal));
-    }
-  };
 
   useEffect(() => {
     const hasData = localStorage.getItem('data') !== null;
@@ -98,17 +41,17 @@ export const Survey = () => {
       let step = localStorage.getItem('currentStep');
       setCurrentStep(Number(step) + 1);
     }
-    checkPercentage();
+    checkPercentage({ numSteps, percentage, setNumSteps, setPercentage });
   }, []);
 
   const handleStep = (name: string, value?: string, num?: number) => {
     if (!num) {
       if (name === 'desire') {
-        const { dateOfBirth, genero, goals, weigth, heigth } = data;
+        const { birth_date, genero, motivaciones, weigth, heigth } = data;
         setData({
-          dateOfBirth,
+          birth_date,
           genero,
-          goals,
+          motivaciones,
           weigth,
           heigth,
           [name]: value,
@@ -131,83 +74,7 @@ export const Survey = () => {
     localStorage.setItem('currentStep', (currentStep - 1).toString());
     setCurrentStep(prevStep => prevStep - 1);
     setIsStepValid({ state: true, error: '' });
-    calculateDecrementPercentage();
-  };
-
-  const calculatePercentage = () => {
-    if (data.desire && numSteps[1] === 0) {
-      const auxSteps = data.desire === desire.conditionOption ? 3 : 6;
-      setNumSteps(prevState => {
-        const updatedNumSteps = [...prevState];
-        updatedNumSteps[1] = auxSteps;
-        localStorage.setItem('numSteps', JSON.stringify(updatedNumSteps));
-        return updatedNumSteps;
-      });
-    }
-
-    if (currentStep > numSteps[0] && currentStep < numSteps[0] + numSteps[1]) {
-      setPercentage(prevState => {
-        const updatedPercentage = [...prevState];
-        updatedPercentage[1] = ((currentStep - numSteps[0] + 1) / numSteps[1]) * 100;
-        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-        return updatedPercentage;
-      });
-    } else {
-      if (currentStep < 6) {
-        setPercentage(prevState => {
-          const updatedPercentage = [...prevState];
-          updatedPercentage[0] = ((currentStep + 1) / numSteps[0]) * 100;
-          localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-          return updatedPercentage;
-        });
-      } else {
-        if (percentage[1] !== 100) {
-          setPercentage(prevState => {
-            const updatedPercentage = [...prevState];
-            updatedPercentage[1] = 100;
-            localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-            return updatedPercentage;
-          });
-        }
-        if (currentStep === numSteps[0] + numSteps[1] + numSteps[2] - 2) {
-          setPercentage([100, 100, 100]);
-          return;
-        }
-        setPercentage(prevState => {
-          const updatedPercentage = [...prevState];
-          updatedPercentage[2] = ((currentStep - numSteps[0] - numSteps[1] + 1) / numSteps[2]) * 100;
-          console.log(numSteps[0] + numSteps[1] + numSteps[2]);
-          localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-          return updatedPercentage;
-        });
-      }
-    }
-  };
-  const calculateDecrementPercentage = () => {
-    if (currentStep < numSteps[0]) {
-      setPercentage(prevState => {
-        const updatedPercentage = [...prevState];
-        const nextValue = currentStep !== 0 ? currentStep - 1 : 0;
-        updatedPercentage[0] = (nextValue / numSteps[0]) * 100;
-        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-        return updatedPercentage;
-      });
-    } else if (data.desire && currentStep < numSteps[0] + numSteps[1]) {
-      setPercentage(prevState => {
-        const updatedPercentage = [...prevState];
-        updatedPercentage[1] = ((currentStep - numSteps[0] - 1) / numSteps[1]) * 100;
-        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-        return updatedPercentage;
-      });
-    } else {
-      setPercentage(prevState => {
-        const updatedPercentage = [...prevState];
-        updatedPercentage[2] = ((currentStep - numSteps[0] - numSteps[1] - 1) / numSteps[2]) * 100;
-        console.log(numSteps[0] + numSteps[1] + numSteps[2]);
-        localStorage.setItem('percentage', JSON.stringify(updatedPercentage));
-        return updatedPercentage;
-      });
-    }
+    calculateDecrementPercentage({ currentStep, numSteps, setPercentage, data });
   };
 
   const nextStep = () => {
@@ -215,7 +82,7 @@ export const Survey = () => {
       setCurrentStep(prevStep => prevStep + 1);
       setIsStepValid({ state: false, error: surveyErrors.generalMsg });
       toast.dismiss(toastId);
-      calculatePercentage();
+      calculatePercentage({ data, numSteps, setNumSteps, currentStep, setPercentage, percentage });
       localStorage.setItem('data', JSON.stringify(data));
       localStorage.setItem('currentStep', currentStep.toString());
     } else {
@@ -230,55 +97,27 @@ export const Survey = () => {
     removeFromLocalStorage('data');
     removeFromLocalStorage('numSteps');
     removeFromLocalStorage('percentage');
-    const resultGPT = await callToAssistant(JSON.stringify(data));
-    console.log(JSON.parse(resultGPT));
-    navigate('/app');
-  };
-
-  const steps = [goals, genero, birthDate, weigthAndHeigth, desire];
-  const lesionComponents = {
-    'Cuello': operationCuello,
-    'Hombro': operationHombro,
-    'Espalda': operationEspalda,
-    'Cadera': operationCadera,
-    'Codo': operationCodo,
-    'Muñeca': operationMuneca,
-    'Rodilla': operationRodilla,
-    'Pie': operationPie,
-    'Tobillo': operationTobillo,
-    'Columna vertebral': operationColumna,
-  };
-
-  if (data.desire === desire.conditionOption) {
-    steps.push(lesionZones);
-    const isValidLesionKey = (key: string): key is keyof typeof lesionComponents => {
-      return key in lesionComponents;
-    };
-    if (data.desire === desire.conditionOption && data.lesionZones && isValidLesionKey(data.lesionZones)) {
-      const component = lesionComponents[data.lesionZones];
-      if (component) {
-        steps.push(component);
-      }
+    setLoading(true);
+    try {
+      const resultGPT = await callToAssistant(JSON.stringify(data));
+      let program = [];
+      console.log(resultGPT);
+      program = JSON.parse(resultGPT);
+      const rehabilitationProgram = {
+        rehabilitation_program: program,
+        patient_profile: data,
+      };
+      await generateProgram(rehabilitationProgram);
+      navigate('/app');
+    } catch (error) {
+      const toastIdAux = toast.error((error as Error).message, toastError);
+      setToastId(toastIdAux);
     }
+    setLoading(false);
+  };
 
-    steps.push(rehabilitation);
-  } else {
-    steps.push(zones, lastOperation, lesionBeforeZones, objetivos, tipoEjercicios, nivel);
-  }
-  steps.push(
-    lugar,
-    equipamiento,
-    condiciones,
-    movilidad,
-    enfermedadCardiovascular,
-    condicionRespiratoria,
-    nivelActividadActual,
-    practicaRegular,
-    trabajoSentado,
-    estres,
-    rehabilitacionPreviamente,
-    dolor,
-  );
+  const steps = getSurveySteps(data);
+
   interface SurveyData {
     [key: string]: any;
   }
@@ -297,20 +136,7 @@ export const Survey = () => {
         backgroundImage: `url(${currentStepInfo.src ?? ImgDefault})`,
       }}
     >
-      <div className="survey__top">
-        <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${percentage[0]}%` }}></div>
-        </div>
-        <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${percentage[1]}%` }}></div>
-        </div>
-        <div className="progress_bar_container">
-          <div className="progress_bar__bar" style={{ width: `${percentage[2]}%` }}></div>
-        </div>
-        <div className="information_icon">
-          <Information fill="white" height={25} width={25} />
-        </div>
-      </div>
+      <SurveyTop percentage={percentage} />
       <div className="survey__content">
         <form
           id="formSurvey"
@@ -349,6 +175,7 @@ export const Survey = () => {
       <div className="logo_icon">
         <Logo fill="white" height={40} width={40} style={{ filter: 'brightness(3)' }} />
       </div>
+      <LoaderContainer text="Generando rehabilitación" isLoaded={loading} />
       <ToastContainer />
     </div>
   );

@@ -38,7 +38,7 @@ export const BirthDate = (props: Step) => {
     }
 
     setStepValid({ state: true, error: '' });
-    handleStep(stepInfo.fieldName || 'birthDate', dateValue);
+    handleStep(stepInfo.fieldName || 'birth_date', dateValue);
   };
 
   return (
@@ -48,8 +48,8 @@ export const BirthDate = (props: Step) => {
         <div className="birth_date__date">
           <input
             type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
+            id="birth_date"
+            name="birth_date"
             value={currentDate}
             onChange={handleChange}
             max={new Date().toISOString().slice(0, 10)}

@@ -20,19 +20,17 @@ export const Login = () => {
   const handleLogin = async () => {
     //login("revibes@gmail.com", "mandatorico");
     try {
-      const { uid } = await login(email, password);
-      saveOnCookies('uid', uid ?? '');
+      await login(email, password);
       navigate('/app');
     } catch (error) {
+      console.log(error);
       const errorMessage = (error as Error).message;
       toast.error(errorMessage, toastError);
     }
   };
   const handleLoginGoogle = async () => {
     try {
-      const { uid, imgUrl } = await loginGoogle();
-      console.log(uid);
-      saveOnCookies('uid', uid ?? '');
+      await loginGoogle();
       navigate('/app');
     } catch (error) {
       const errorMessage = (error as Error).message;

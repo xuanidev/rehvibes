@@ -11,8 +11,7 @@ const undefinedUser = {
     surname: '',
     username: '',
     mail: '',
-    createdAt: '',
-    photoURL: ''
+    programs: [] as string[]
 }
 
 const usersRef = collection(db, "users");
@@ -37,7 +36,7 @@ export const createUser = async (userData:User ): Promise<boolean> =>{
 export const getUser = async (userId:string): Promise<UserFromApi> => {
     try {
         const usersCollection = collection(db, 'users');
-        const querySnapshot = await getDocs(query(usersCollection, where('id', '==', userId)));
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '==', userId)));
 
         let userData: UserFromApi | null = undefinedUser;
 

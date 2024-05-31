@@ -4,6 +4,7 @@ export const errorsSignup = {
     invalidMsg: 'El correo introducido no es válido.',
     weakPassMsg: 'La contraseña introducida es demasiado débil.',
     credentialMsg: 'Las credenciales introducidas ya están siendo utilizadas en otro usuario.',
+    correoUsado: 'El correo indicado ya ha sido utilizado en otro modo de registro.'
   };
 
 export const handleErrorMessageSignup = (message: string):string =>{
@@ -15,6 +16,8 @@ export const handleErrorMessageSignup = (message: string):string =>{
             return errorsSignup.invalidMsg;
         case 'auth/operation-not-allowed':
             return errorsSignup.generalMsg;
+        case 'auth/correo-usado':
+            return errorsSignup.correoUsado;
         case 'auth/weak-password':
             return errorsSignup.weakPassMsg;
         case 'auth/credential-already-in-use':
@@ -29,7 +32,8 @@ export const errorsLogin = {
     notFoundMsg: "No existe ningún registro para el usuario indicado",
     tooManyMsg: 'La cantidad de intentos fallidos ha sido superada',
     wrongPassMsg: 'La contraseña no es correcta',
-    invalidCredentialMsg: 'Indique un usuario y contraseña que existan'
+    invalidCredentialMsg: 'Indique un usuario y contraseña que existan',
+    correoUsado: 'El correo indicado ya ha sido utilizado en otro modo de registro.'
 };
 
 export const handleErrorMessageLogin = (message: string):string =>{
@@ -44,6 +48,8 @@ export const handleErrorMessageLogin = (message: string):string =>{
             return errorsLogin.wrongPassMsg;
         case 'auth/invalid-credential':
             return errorsLogin.invalidCredentialMsg;
+        case 'auth/correo-usado':
+            return errorsLogin.correoUsado;
         default:
             return errorsLogin.generalMsg;
     }
