@@ -8,6 +8,7 @@ import { Landing } from './layouts/Landing';
 import DesignSystem from './layouts/DesignSystem';
 import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
+import { LandingProducto } from './layouts/LandingProducto';
 import { getFromCookies } from './utils/helpers';
 
 const loaderToLogin = () => {
@@ -71,5 +72,9 @@ export const router = createBrowserRouter([
   {
     path: '/designsystem',
     element: <DesignSystem />,
+  },
+  {
+    path: '/landing',
+    element: <LandingProducto />,
   },
 ]);
