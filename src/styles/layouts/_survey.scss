@@ -2,11 +2,19 @@
 .survey {
     height: 100svh;
     width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
+    background-image: url("@/assets/genero.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.5s;
-  }
+    @include breakpoint('md'){
+      background-image: url("@/assets/generoDesktop.png");
+    }
+}
+
 .survey__content{
   width: 100%;
   height: 100%;

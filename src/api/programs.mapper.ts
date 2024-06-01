@@ -2,12 +2,7 @@ import uuid4 from "uuid4";
 import { ExerciseFromAPI, RehabilitationDay, RehabilitationProgramProps } from "../models";
 import { getFromCookies } from "../utils/helpers";
 
-export interface openAiToFirebaseProps {
-    // Example properties
-    groups: string[];
-}
-
-export const openAiToFirebase = (data: any, groups: string[]): RehabilitationProgramProps => {
+export const openAiToFirebase = (data: any, groups: string[], level?:string): RehabilitationProgramProps => {
     const program: RehabilitationProgramProps = {
         rehabilitation_program: []
     };
@@ -24,15 +19,16 @@ export const openAiToFirebase = (data: any, groups: string[]): RehabilitationPro
             if (Array.isArray(dayData.exercises)) {
                 for (const exerciseData of dayData.exercises) {
                     const exercise: ExerciseFromAPI = {
+                        id:exerciseData.id ?? exerciseData.uid ?? "",
                         name: exerciseData.name ?? "",
                         series: exerciseData.series ?? 0,
-                        minRep: exerciseData.minReps ?? exerciseData.min_reps ?? exerciseData.min_rep ?? exerciseData.min_repetitions ?? exerciseData.minreps ?? 0,
-                        maxRep: exerciseData.maxReps ?? exerciseData.max_reps ?? exerciseData.max_rep ?? exerciseData.max_repetitions ?? exerciseData.maxreps ?? 0,
+                        minRep: exerciseData.minRep ?? exerciseData.minReps ?? exerciseData.min_reps ?? exerciseData.min_rep ?? exerciseData.min_repetitions ?? exerciseData.minreps ?? 0,
+                        maxRep: exerciseData.maxRep ?? exerciseData.maxReps ?? exerciseData.max_reps ?? exerciseData.max_rep ?? exerciseData.max_repetitions ?? exerciseData.maxreps ?? 0,
                     };
                     day.exercises.push(exercise);
+                    program.exercices?.push(exerciseData.id ?? exerciseData.uid ?? "");
                 }
             }
-
             program.rehabilitation_program.push(day);
         }
         program.user_id = getFromCookies('uid');
@@ -41,7 +37,10 @@ export const openAiToFirebase = (data: any, groups: string[]): RehabilitationPro
         program.name = data.rehabilitation_program.name ?? data.rehabilitation_program.programName ?? '';
         program.groups = groups ?? data.rehabilitation_program.groups ?? data.rehabilitation_program.group ?? [];
         program.description = data.rehabilitation_program.description ?? '';
+        program.level = level ?? '';
+        program.weeks = (exercisesArray.length ? Math.ceil(exercisesArray.length / 7) : 0).toString();
+        program.hours = '20';
     }
-
+    console.log(program);
     return program;
 };

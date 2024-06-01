@@ -3,45 +3,76 @@ import PechoSuperior from '../assets/routinesLibrary/pecho superior.png';
 import { useEffect, useState } from 'react';
 import { getProgramByUserID } from '../api/programs';
 import { RehabilitationProgramProps } from '../models';
-import { getFromCookies } from '../utils/helpers';
+import { getFromCookies, getFromLocalStorage, saveOnLocalStorage } from '../utils/helpers';
 import { ToastContainer, toast } from 'react-toastify';
 import { toastError } from '../constants';
+import RoutineContainer from '../components/RoutineInfo';
+
+interface RoutineInfo {
+  description: string;
+  difficulty: string;
+  totalTimeWeeks: string;
+  totalTimeHours: string;
+  mainAreas: string[];
+}
+
+interface RoutineContainerProps {
+  routineInfo: RoutineInfo;
+}
+
 export const Main = () => {
   const [programs, setPrograms] = useState<RehabilitationProgramProps[]>();
   const [toastId, setToastId] = useState<any>('');
+  const [routineInfo, setRoutineInfo] = useState<RoutineInfo>({
+    description: '',
+    difficulty: '',
+    totalTimeWeeks: '',
+    totalTimeHours: '',
+    mainAreas: [],
+  });
+
+  const getPrograms = async () => {
+    const uidCookie = getFromCookies('uid');
+    if (uidCookie !== '') {
+      try {
+        const programsResponse = await getProgramByUserID(uidCookie);
+        setPrograms(programsResponse);
+        if (programs && programs.length > 0) {
+          const firstProgram = programs[0];
+          const info: RoutineInfo = {
+            description: firstProgram.description || 'No description available',
+            difficulty: firstProgram.level || routineInfo.difficulty,
+            totalTimeWeeks: firstProgram.weeks || routineInfo.totalTimeWeeks,
+            totalTimeHours: '6 hours',
+            mainAreas: firstProgram.groups || routineInfo.mainAreas,
+          };
+          setRoutineInfo(info);
+          saveOnLocalStorage('mainProgram', JSON.stringify(info));
+        }
+      } catch {
+        const toastIdAux = toast.error(
+          'No se han podido cargar los programas, recarga la página por favor',
+          toastError,
+        );
+        setToastId(toastIdAux);
+      }
+    }
+  };
 
   useEffect(() => {
-    const getPrograms = async () => {
-      const uidCookie = getFromCookies('uid');
-      if (uidCookie !== '') {
-        try {
-          const programs = await getProgramByUserID(uidCookie);
-          setPrograms(programs);
-          console.log(programs);
-        } catch {
-          const toastIdAux = toast.error(
-            'No se han podido cargar los programas, recarga la página por favor',
-            toastError,
-          );
-          setToastId(toastIdAux);
-        }
-      }
-    };
-    getPrograms();
+    const programFromStorage = getFromLocalStorage('mainProgram');
+    console.log(programFromStorage);
+    if (programFromStorage != '') {
+      const routineInfo = JSON.parse(programFromStorage);
+      setRoutineInfo(routineInfo);
+    } else {
+      getPrograms();
+    }
   }, []);
 
   return (
     <div className="main">
-      <Card
-        img={PechoSuperior}
-        difficulty="Intermedia"
-        duration={'40min' + '.'}
-        onClick={() => {
-          console.log('click');
-        }}
-        size="sm"
-        text="Pecho Superior"
-      ></Card>
+      <RoutineContainer routineInfo={routineInfo} />
       <ToastContainer />
     </div>
   );

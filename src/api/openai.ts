@@ -20,7 +20,7 @@ export const callToAssistant = async (object:string):Promise<string> =>{
             thread.id,
             {
                 role: "user",
-                content: `Using the provided JSON: ${object}, please generate a detailed rehabilitation program of 15 days with exercises for each day, ensuring that includes fields name, groups, description and days. And inside every exercise should be name, series, maxRep, minRep. Give me a JSON with the result. Don't return anything that is not the json content as an output`
+                content: `Using the provided JSON: ${object}, please generate a detailed rehabilitation program of 15 days with exercises for each day, ensuring that includes fields name, groups, description and days. And inside every exercise should be name, the correspondant id, series, maxRep, minRep. Give me a JSON with the result. Don't return anything that is not the json content as an output`
             }
         );
         const run = await openai.beta.threads.runs.create(thread.id, {

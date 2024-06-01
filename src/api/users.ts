@@ -68,6 +68,8 @@ export const getUsers = async () => {
 
 export const updateUser = async (userId: string, updatedUserData: User): Promise<boolean> => {
     try {
+        console.log(userId);
+        console.log(updatedUserData);
         const userDocRef = doc(db, 'users', userId);
         await setDoc(userDocRef, updatedUserData);
         console.log('User updated successfully');

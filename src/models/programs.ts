@@ -38,6 +38,7 @@ export interface ExerciseFromAPI {
     series: number;
     minRep: number;
     maxRep: number;
+    id: number;
 }
 
 export interface DailyRoutineFromApi {

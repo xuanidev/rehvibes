@@ -186,11 +186,15 @@ export interface RehabilitationDay {
 export interface RehabilitationProgramProps {
     rehabilitation_program: RehabilitationDay[];
     days?: number;
+    exercices?: string[];
     uid?: string;
     user_id?: string;
     name?: string;
     groups?: string[];
     description?: string;
+    level?: string;
+    weeks?: string;
+    hours?: string;
 }
 export interface GenerateProgramProps {
     rehabilitation_program: RehabilitationDay[];

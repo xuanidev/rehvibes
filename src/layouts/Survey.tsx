@@ -5,16 +5,14 @@ import { toastError } from '../constants';
 import { surveyErrors } from '../components/survey/errors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ImgDefault from '../assets/ImgDefault.png';
 import { Logo } from '../components/branding';
 import { callToAssistant } from '../api/openai';
-import { calculateDecrementPercentage, calculatePercentage, checkPercentage, preloadImage } from '../utils/survey';
+import { calculateDecrementPercentage, calculatePercentage, checkPercentage } from '../utils/survey';
 import { removeFromLocalStorage } from '../utils/helpers';
 import LoaderContainer from '../components/LoaderContainer';
 import { getSurveySteps } from '../components/survey/surveySteps';
 import SurveyTop from '../components/survey/SurveyTop';
 import { generateProgram } from '../api/programs';
-import { openAiToFirebase } from '../api/programs.mapper';
 
 export const Survey = () => {
   const [data, setData] = useState<SurveyData>({});
@@ -101,7 +99,6 @@ export const Survey = () => {
     try {
       const resultGPT = await callToAssistant(JSON.stringify(data));
       let program = [];
-      console.log(resultGPT);
       program = JSON.parse(resultGPT);
       const rehabilitationProgram = {
         rehabilitation_program: program,
@@ -122,20 +119,9 @@ export const Survey = () => {
     [key: string]: any;
   }
 
-  if (steps.length > currentStep + 1) {
-    const nextStepInfo = steps[currentStep + 1] as SurveyData;
-    const imgSrc = nextStepInfo.src;
-    preloadImage(imgSrc ?? undefined);
-  }
-
   const currentStepInfo = steps[currentStep] as SurveyData;
   return (
-    <div
-      className="survey"
-      style={{
-        backgroundImage: `url(${currentStepInfo.src ?? ImgDefault})`,
-      }}
-    >
+    <div className="survey">
       <SurveyTop percentage={percentage} />
       <div className="survey__content">
         <form

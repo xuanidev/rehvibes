@@ -40,9 +40,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    @include generateBreakpoints(('md','2xl'), 'gap',24px, 32px);
-    gap:16px;
-    @include generateBreakpoints(('xs','sm','xl'), 'padding',24px 64px, 24px 96px, 24px 128px);
+    @include generateBreakpoints(('sm','md','2xl'), 'gap',16px, 32px, 48px);
+    gap:12px;
+    @include generateBreakpoints(('sm','md','2xl'), 'padding',24px 64px, 24px 96px, 24px 128px);
     padding: 24px 48px;
     transition: width 1s;
 }
@@ -101,7 +101,7 @@
     gap:16px;
     width: 100%;
     gap:16px;
-    @include breakpoint('xl') {
+    @include breakpoint('2xl') {
         gap: 24px;
     }
 }

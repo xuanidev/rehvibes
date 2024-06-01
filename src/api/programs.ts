@@ -6,30 +6,28 @@ import { getUser, updateUser } from './users.js';
 import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
 import uuid4 from 'uuid4';
+import { update } from 'firebase/database';
 const db = getFirestore();
 
 
 export const postPogram = async (program: RehabilitationProgramProps) =>{
     try {
-        const uid = program.uid ?? uuid4()
+        const uid = program.uid ?? uuid4();
         const usersRef = collection(db, "programs");
         await setDoc(doc(usersRef, uid), program);
-        //const docRef = await addDoc(collection(db, 'programs'), program);
+        //const docRef = await addDoc(collection(db, 'programs'), program).the;
         console.log('posted');
         return uid;
     } catch (error) {
         console.error('Error adding user: ', error);
-        return undefined;
+        throw (error as Error).message;
     }
 }
 
 export const getProgramByUserID = async (userID: string): Promise<RehabilitationProgramProps[]> => {
     try {
-        console.log(userID);
         const user = await getUser(userID);
-        
         const programsCollection = collection(db, 'programs');
-        console.log(user);
         const q = query(programsCollection, where('uid', 'in', user.programs));
         const querySnapshot = await getDocs(q);
 
@@ -38,11 +36,10 @@ export const getProgramByUserID = async (userID: string): Promise<Rehabilitation
             const programData = doc.data() as RehabilitationProgramProps;
             programs.push(programData);
         });
-        console.log(programs);
         return programs;
     } catch (error) {
         console.error('Error fetching program by userID:', error);
-        throw error; // Re-throw the error to propagate it further if necessary
+        throw (error as Error).message;
     }
 }
 
@@ -56,7 +53,7 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
         if(patient_profile){
             groups = patient_profile?.zonas_con_molestias?.split(',') ?? groups;
         }
-        const rehabilatationProgram = openAiToFirebase({rehabilitation_program: rehabilitation_program},groups );
+        const rehabilatationProgram = openAiToFirebase({rehabilitation_program: rehabilitation_program},groups, patient_profile?.nivel_entrenamiento );
         let updatedUser = {
             uid: uid,
             name: username,
@@ -67,7 +64,7 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
         }
         if(username !== ''){
             const user = await getUser(uid);
-            updatedUser.programs = user.programs;
+            updatedUser.programs = user.programs ?? [];
             if(rehabilatationProgram.uid){
                 updatedUser.programs.push(rehabilatationProgram.uid)
             }
@@ -75,8 +72,8 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
         await updateUser(uid, updatedUser);
         await postPogram(rehabilatationProgram);
         removeFromCookies(['username','email']);
-    }catch{
-        throw new Error('Function not implemented.');
+    }catch(error){
+        throw (error as Error).message;
     }
 }
   
