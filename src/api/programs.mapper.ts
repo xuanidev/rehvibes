@@ -10,9 +10,16 @@ export const openAiToFirebase = (data: any, groups: string[], level?:string): Re
     const exercisesArray = data.rehabilitation_program.days || data.rehabilitation_program.exercises || data.rehabilitation_program.exercises_per_day || data.rehabilitation_program.program || data.rehabilitation_program.rehabilitation_program;
     console.log(exercisesArray);
     if (Array.isArray(exercisesArray)) {
+        let currentDay = 0;
+        const startDate = new Date();
         for (const dayData of exercisesArray) {
+            const yourDate = new Date(startDate);
+            yourDate.setDate(startDate.getDate() + currentDay);
+            currentDay = currentDay + 1;
+
             const day: RehabilitationDay = {
                 day: dayData.day ?? 0,
+                date: yourDate.toISOString(),
                 exercises: []
             };
 

@@ -7,7 +7,7 @@ interface CalendarProps {
   rehabDays: Date[];
 }
 
-const Calendar: React.FC<CalendarProps> = ({ rehabDays }) => {
+export const Calendar = ({ rehabDays }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   const start = startOfMonth(currentMonth);
@@ -15,10 +15,11 @@ const Calendar: React.FC<CalendarProps> = ({ rehabDays }) => {
   const days = eachDayOfInterval({ start, end });
 
   const isRehabDay = (date: Date) => {
-    return rehabDays.some(rehabDay => 
-      date.getDate() === rehabDay.getDate() && 
-      date.getMonth() === rehabDay.getMonth() && 
-      date.getFullYear() === rehabDay.getFullYear()
+    return rehabDays.some(
+      rehabDay =>
+        date.getDate() === rehabDay.getDate() &&
+        date.getMonth() === rehabDay.getMonth() &&
+        date.getFullYear() === rehabDay.getFullYear(),
     );
   };
 
@@ -48,7 +49,9 @@ const Calendar: React.FC<CalendarProps> = ({ rehabDays }) => {
       <div className="calendar-body">
         <div className="weekdays">
           {weekDays.map(day => (
-            <div key={day} className="weekday">{day}</div>
+            <div key={day} className="weekday">
+              {day}
+            </div>
           ))}
         </div>
         <div className="days">

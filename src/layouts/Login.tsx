@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { login, loginGoogle } from '../api/login';
 import { Link, useNavigate } from 'react-router-dom';
-import { InputIcon, BtnCta, Btn } from '../components';
+import { InputIcon, Btn } from '../components';
 import loginMain from '../assets/loginMain.png';
 import { LogoWordmark } from '../components/branding/LogoWordmark';
 import { UserIcon, PassIcon, AppleLoginIcon, GoogleLoginIcon } from '../components/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastError } from '../constants';
-import { saveOnCookies } from '../utils/helpers';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,10 +17,9 @@ export const Login = () => {
   useEffect(() => {});
 
   const handleLogin = async () => {
-    //login("revibes@gmail.com", "mandatorico");
     try {
       await login(email, password);
-      navigate('/app');
+      navigate('/');
     } catch (error) {
       console.log(error);
       const errorMessage = (error as Error).message;
@@ -31,7 +29,7 @@ export const Login = () => {
   const handleLoginGoogle = async () => {
     try {
       await loginGoogle();
-      navigate('/app');
+      navigate('/');
     } catch (error) {
       const errorMessage = (error as Error).message;
       toast.error(errorMessage, toastError);

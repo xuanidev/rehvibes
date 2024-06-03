@@ -1,0 +1,49 @@
+@import "../styles/base";
+
+.achievements{
+    width: 100%;
+    background-color: var(--color-yellow);
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.achievements__icons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    th{
+        width: 16%;
+        margin-left: auto;
+        margin-right: auto;
+        span{
+            width: 100%;
+            display: grid;
+        }
+    }
+}
+.achievements__value{
+    font-family: 'Satoshi-Bold';
+    font-size: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    td{
+        width: 16%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.achievements__description{
+    font-family: 'Satoshi-Medium';
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    td{
+        width: 16%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,18 @@
+@import '../styles/base';
+
+.progress-bar {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 4px;
+}
+
+.progress-bar span {
+    width: 30px;
+    height: 4px;
+    background-color: #d4d4d4; /* Gray color for empty spans */
+    display: inline-block;
+}
+
+.progress-bar span.filled {
+    background-color: var(--color-secondary); /* Green color for filled spans */
+}

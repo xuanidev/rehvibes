@@ -71,7 +71,7 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
         }
         await updateUser(uid, updatedUser);
         await postPogram(rehabilatationProgram);
-        removeFromCookies(['username','email']);
+        removeFromCookies(['email']);
     }catch(error){
         throw (error as Error).message;
     }

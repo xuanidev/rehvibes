@@ -105,7 +105,7 @@ export const Survey = () => {
         patient_profile: data,
       };
       await generateProgram(rehabilitationProgram);
-      navigate('/app');
+      navigate('/');
     } catch (error) {
       const toastIdAux = toast.error((error as Error).message, toastError);
       setToastId(toastIdAux);

@@ -180,6 +180,7 @@ export interface ExerciseFromAPI {
   
 export interface RehabilitationDay {
     day: number;
+    date: string;
     exercises: ExerciseFromAPI[];
 }
 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Btn } from './index.js';
 import Plus from './icons/Plus.tsx';
-import './addWorkout.scss';
+import './addWorkoutBtn.scss';
 
-const AddWorkoutBtn: React.FC = () => {
+export const AddWorkoutBtn = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -17,23 +17,26 @@ const AddWorkoutBtn: React.FC = () => {
   return (
     <>
       <Btn
-          btnClass="borderGradient"
-          leftIcon={Plus}
-          iconHeight={24}
-          iconWidth={24}
-          iconClass="color-brand icon"
-          text="Añadir nuevo entrenamiento"
-          onClick={openModal}
-        />
+        btnClass="borderGradient"
+        leftIcon={Plus}
+        iconHeight={24}
+        iconWidth={24}
+        iconClass="color-brand icon"
+        text="Añadir nuevo entrenamiento"
+        onClick={openModal}
+      />
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <button className="close-modal" onClick={closeModal}>x</button>
+            <button className="close-modal" onClick={closeModal}>
+              x
+            </button>
             <h2>Añadir nuevo entrenamiento</h2>
-            {<div className=''> 
+            {
+              <div className="">
                 <input type="text" placeholder="Buscar ejercicios" />
                 <button>Añadir ejercicio</button>
-                </div>
+              </div>
             }
           </div>
         </div>
