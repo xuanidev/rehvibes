@@ -24,7 +24,14 @@ const BodyMap: React.FC<BodyMapProps> = ({ zones }) => {
   const validZones = getValidBodyParts(zones);
   const muscles = getMuscles(validZones);
   const data: IExerciseData[] = [{ name: 'Zonas', muscles: muscles }];
-  return <Model data={data} style={{ width: '100%', padding: '2rem' }} />;
+  return (
+    <Model
+      data={data}
+      style={{ width: '50%', padding: '0.5rem', marginTop: '-50px' }}
+      highlightedColors={['#FF662D']}
+      bodyColor={'#e0b9aa'}
+    />
+  );
 };
 
 export default BodyMap;

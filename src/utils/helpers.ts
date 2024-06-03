@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { RehabilitationDay, RehabilitationProgramProps } from "../models";
 
 export const saveOnLocalStorage = (name: string, value: string) =>{
     localStorage.setItem(name, value);
@@ -20,3 +21,19 @@ export const removeFromCookies = (names: string[]) =>{
         Cookies.remove(name);
     })
 }
+
+export const retrieveDates = (programs: RehabilitationProgramProps[], setRehabDays: React.Dispatch<React.SetStateAction<Date[]>>) => {
+    console.log(programs);
+    const dates = [] as Date[];
+    if (programs.length > 0) {
+        programs.forEach((program: RehabilitationProgramProps) => {
+        if (program.rehabilitation_program) {
+            program.rehabilitation_program.forEach((days: RehabilitationDay) => {
+            dates.push(new Date(days.date));
+            });
+        }
+        });
+    }
+    saveOnLocalStorage('rehabdays', JSON.stringify(dates));
+    setRehabDays(dates);
+};

@@ -18,3 +18,8 @@ export { Information } from './Information';
 export { Plus } from './Plus';
 export { Loader } from './Loader';
 export { LoaderWhite } from './LoaderWhite';
+export { Sesion } from './Sesion';
+export { Lightning } from './Lightning';
+export { Medal } from './Medal';
+export { Trophy } from './Trophy';
+export { Clock } from './Clock';
