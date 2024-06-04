@@ -2,13 +2,6 @@
 
 .greeting {
     font-family: 'Satoshi-Bold';
-    &--sm {
-        font-size: 20px;
-    }
-    &--md {
-        font-size: 26px;
-    }
-    &--lg {
-        font-size: 32px;
-    }
+    font-size: 20px;
+    @include generateBreakpoints(('md','xl'), 'font-size', 26px, 32px);
 }

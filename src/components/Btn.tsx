@@ -16,15 +16,16 @@ export interface BtnProps {
   iconClass?: string;
   isDisabled?: boolean;
   type?: 'button' | 'submit' | undefined;
+  id?: string;
 }
 
 export const Btn = (props: BtnProps) => {
-  const { text, btnClass, onClick, link, href, iconWidth, iconHeight, iconClass, isDisabled, type } = props;
+  const { text, btnClass, onClick, link, href, iconWidth, iconHeight, iconClass, isDisabled, type, id } = props;
 
   return (
     <>
       {link ? (
-        <a className={`btnIcon ${btnClass}`} href={href}>
+        <a className={`btnIcon ${btnClass}`} href={href} id={id}>
           {props.leftIcon && <props.leftIcon width={iconWidth} height={iconHeight} className={iconClass} />}
           {text}
           {props.rightIcon && <props.rightIcon width={iconWidth} height={iconHeight} className={`icon ${iconClass}`} />}
@@ -35,6 +36,7 @@ export const Btn = (props: BtnProps) => {
           onClick={onClick}
           type={type ?? 'button'}
           disabled={isDisabled ?? false}
+          id={id}
         >
           {props.leftIcon && <props.leftIcon width={iconWidth} height={iconHeight} className={iconClass} />}
           {text}

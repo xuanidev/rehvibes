@@ -6,25 +6,15 @@
     align-items: flex-end;
     width: 100%;
     height: fit-content;
-    padding-left: 282px;
-    padding-right: 32px;
+    padding: 22px 24px;
     padding-bottom: 16px;
+    @include breakpoint('md'){
+        padding-left: 282px;
+        padding-right: 32px;
+    }
     @include breakpoint('2xl'){
         padding-left: 332px;
     }
-}
-.top_up{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 32px;
-    width: 100%;
-}
-.welcome{
-    width: 70%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 .components{
     width: 100%;

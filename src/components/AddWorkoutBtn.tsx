@@ -3,7 +3,11 @@ import { Btn } from './index.js';
 import Plus from './icons/Plus.tsx';
 import './addWorkoutBtn.scss';
 
-export const AddWorkoutBtn = () => {
+interface AddWorkoutBtnProps {
+  id?: string;
+}
+
+export const AddWorkoutBtn = ({ id }: AddWorkoutBtnProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -15,7 +19,7 @@ export const AddWorkoutBtn = () => {
   };
 
   return (
-    <>
+    <div id={id}>
       <Btn
         btnClass="borderGradient"
         leftIcon={Plus}
@@ -41,7 +45,7 @@ export const AddWorkoutBtn = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

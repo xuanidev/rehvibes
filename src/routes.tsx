@@ -48,6 +48,7 @@ export const router = createBrowserRouter([
         loader: loaderToLogin,
       },
     ],
+    loader: loaderToLogin,
   },
   {
     path: '/app',
