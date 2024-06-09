@@ -35,4 +35,23 @@ const bodyPartsMap = {
   'Gluteos': ['gluteal']
 };
 
-export {toastError, bodyPartsMap} 
+const cualidadesDefault = [
+  {
+    text: 'Coordinación',
+    percentage: 0,
+  },
+  {
+    text: 'Flexibilidad',
+    percentage: 0,
+  },
+  {
+    text: 'Fuerza',
+    percentage: 0,
+  },
+  {
+    text: 'Resistencia',
+    percentage: 0,
+  },
+];
+
+export {toastError, bodyPartsMap, cualidadesDefault} 

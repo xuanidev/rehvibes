@@ -3,6 +3,7 @@ import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, quer
 import uuid4 from "uuid4";
 
 import { User, UserFromApi } from '../models/index.js'
+import { cualidadesDefault } from '../constants.js';
 const db = getFirestore();
 
 const undefinedUser = {
@@ -11,7 +12,11 @@ const undefinedUser = {
     surname: '',
     username: '',
     mail: '',
-    programs: [] as string[]
+    programs: [] as string[],
+    cualidades: cualidadesDefault,
+    horas: 0,
+    logros:0,
+    sesiones: 0,
 }
 
 const usersRef = collection(db, "users");

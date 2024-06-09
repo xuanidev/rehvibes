@@ -7,6 +7,7 @@ interface cualidades {
   text: string;
   percentage: number;
 }
+
 interface infoTrabajadoProps {
   energy: string;
   time: string;
@@ -26,7 +27,7 @@ export const InfoTrabajado = (props: infoTrabajadoProps) => {
       <div className="info_top">
         <div className="info__title">
           <h2 className="info__text">{TEXT}</h2>
-          <Share fill="#ff662e" color="#ff662e" width={20} height={20} />
+          <Share fill="#ff662e" color="#ff662e" width={20} height={20} className="share_icon" />
         </div>
 
         <ul className="info_table">
@@ -50,8 +51,8 @@ export const InfoTrabajado = (props: infoTrabajadoProps) => {
       </div>
       <div className="info_bottom">
         <div className="info_cualidades">
-          {cualidades.map((percentage: cualidades) => (
-            <div className="cualidad">
+          {cualidades.map((percentage: cualidades, index: number) => (
+            <div className="cualidad" key={index}>
               <StripedBar percentage={percentage.percentage} />
               <span>{percentage.text}</span>
             </div>

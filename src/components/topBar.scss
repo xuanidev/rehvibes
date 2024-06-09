@@ -1,0 +1,121 @@
+@import '../styles/abstracts';
+
+.top_up{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.top__bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    @include breakpoint('md'){
+        display: none;
+    }
+}
+.welcome{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.welcome__bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_bar__user{
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    @include breakpoint('md'){
+        display: none;
+    }
+}
+.top_bar__img{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.top_bar__info{
+    display: none;
+    margin-top: -18px;
+    gap: 8px;
+    @include breakpoint('md'){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.top_bar__icons{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+.wordmark{
+    width: 100px;
+    @include breakpoint('md'){
+        width: 180px;
+    }
+}
+.top_bar__greeting{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+}
+.top_bar__greeting__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+}
+.ntf_btn{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+    button{
+        width: 40px;
+        height: 40px;
+    }
+
+}
+.ntf_btn__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+
+}
+.workout_btn{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+    button{
+        width: 40px;
+        height: 40px;
+    }
+}
+.workout_btn__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+}
+
+.top_bar__name{
+    display: none;
+    font-family: 'Satoshi-Bold';
+    background-color: var(--color-white);
+    border: 1px solid var(--color-secondary);
+    padding: 6px 12px;
+    border-radius: 8px;
+}

@@ -7,6 +7,7 @@ import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
 import uuid4 from 'uuid4';
 import { update } from 'firebase/database';
+import { cualidadesDefault } from '../constants.js';
 const db = getFirestore();
 
 
@@ -61,6 +62,10 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
             google_id:false,
             patient_profile: patient_profile,
             programs: [] as string[],
+            cualidades: cualidadesDefault,
+            horas: 0,
+            logros:0,
+            sesiones: 0,
         }
         if(username !== ''){
             const user = await getUser(uid);

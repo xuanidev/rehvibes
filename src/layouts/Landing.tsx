@@ -1,21 +1,25 @@
-import { Greet } from '../components/WelcomeMsg';
 import {
   RoutineContainer,
   ProgressBar,
   InfoTrabajado,
-  AddWorkoutBtn,
-  BtnNtf,
   Calendar,
   Achievements,
   NewRoutines,
+  TopBar,
 } from '../components';
-import { LogoWordmark } from '../components/branding';
 import { getProgramByUserID } from '../api/programs';
-import { getFromCookies, getFromLocalStorage, retrieveDates, saveOnLocalStorage } from '../utils/helpers';
+import {
+  getFromCookies,
+  getFromLocalStorage,
+  retrieveDates,
+  saveOnCookies,
+  saveOnLocalStorage,
+} from '../utils/helpers';
 import { useEffect, useState } from 'react';
-import { RehabilitationProgramProps } from '../models';
-import { toastError } from '../constants';
+import { RehabilitationProgramProps, cualidadesUser } from '../models';
+import { cualidadesDefault, toastError } from '../constants';
 import { Id, ToastContainer, toast } from 'react-toastify';
+import { getUser } from '../api/users';
 
 interface RoutineInfo {
   description: string;
@@ -36,12 +40,15 @@ export const Landing = () => {
     totalTimeHours: '',
     mainAreas: [],
   });
+  const [cualidades, setCualidades] = useState<cualidadesUser[]>(cualidadesDefault);
+  const [horas, setHoras] = useState<number>(0);
+  const [sessions, setSessions] = useState<number>(0);
+  const [achievements, setAchievements] = useState<number>(0);
+  const [user, setUser] = useState<string>('');
 
-  const user = getFromCookies('username');
-  const greetingUser = Greet(user);
   const uid = getFromCookies('uid');
 
-  const getPrograms = async () => {
+  const getProgramsData = async () => {
     if (uid !== '') {
       try {
         const programsResponse = await getProgramByUserID(uid);
@@ -71,6 +78,27 @@ export const Landing = () => {
     }
   };
 
+  const getUserData = async () => {
+    if (uid !== '') {
+      try {
+        const userResponse = await getUser(uid);
+        setUser(userResponse.name);
+        saveOnCookies('username', userResponse.name);
+        setCualidades(userResponse.cualidades ?? []);
+        setHoras(userResponse.horas ?? 0);
+        setSessions(userResponse.sesiones ?? 0);
+        setAchievements(userResponse.logros ?? 0);
+        saveOnLocalStorage('userInfo', JSON.stringify(userResponse));
+      } catch {
+        const toastIdAux = toast.error('No se han podido cargar el usuario', toastError);
+        setToastId(toastIdAux);
+      }
+    }
+    if (user === '') {
+      setUser(getFromCookies('username'));
+    }
+  };
+
   const setCalendarDays = (value: string) => {
     const days = JSON.parse(value);
     const dates = days.map((date: string) => {
@@ -79,46 +107,27 @@ export const Landing = () => {
     setRehabDays(dates);
   };
   useEffect(() => {
+    setUser(getFromCookies('username'));
     const programFromStorage = getFromLocalStorage('mainProgram');
     const rehabDaysFromStorage = getFromLocalStorage('rehabdays');
+    const userFromStorage = getFromLocalStorage('userInfo');
     console.log(rehabDaysFromStorage);
     if (programFromStorage != '' && rehabDaysFromStorage != '') {
       const routineInfo = JSON.parse(programFromStorage);
       setRoutineInfo(routineInfo);
       setCalendarDays(rehabDaysFromStorage);
     } else {
-      getPrograms();
+      getProgramsData();
+    }
+    if (uid !== '' && userFromStorage != '') {
+      console.log('ea');
+      getUserData();
     }
   }, []);
-  const cualidades = [
-    {
-      text: 'Coordinación',
-      percentage: 60,
-    },
-    {
-      text: 'Flexibilidad',
-      percentage: 80,
-    },
-    {
-      text: 'Fuerza',
-      percentage: 100,
-    },
-    {
-      text: 'Resistencia',
-      percentage: 80,
-    },
-  ];
 
   return (
     <div className="main_home">
-      <div className="top_up">
-        <div className="welcome">
-          {greetingUser} <BtnNtf userId={uid} /> <AddWorkoutBtn />
-        </div>
-        <div className="logo">
-          <LogoWordmark width={180} />
-        </div>
-      </div>
+      <TopBar uid={uid} user={user} />
       <div className="components">
         <div className="components_left">
           <RoutineContainer routineInfo={routineInfo} />
@@ -136,7 +145,7 @@ export const Landing = () => {
             <ProgressBar />
             <Calendar rehabDays={rehabDays} />
           </div>
-          <Achievements hours="8" sesions="8" achievements="8" />
+          <Achievements hours={horas} sessions={sessions} achievements={achievements} />
           <NewRoutines />
         </div>
       </div>

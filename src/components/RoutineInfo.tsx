@@ -1,6 +1,6 @@
-import React from 'react';
 import './routineInfo.scss';
 import { Btn } from './index.js';
+import { Level, Calendar as CalendarIcon, Time, Human } from '../components/icons';
 
 interface RoutineInfo {
   description: string;
@@ -14,35 +14,38 @@ interface RoutineContainerProps {
   routineInfo: RoutineInfo;
 }
 
-export const RoutineContainer: React.FC<RoutineContainerProps> = ({ routineInfo }) => {
+export const RoutineContainer = (props: RoutineContainerProps) => {
+  const { routineInfo } = props;
   return (
-    <div className="routine-container">
-      <div className="routine-info">
+    <div className="routine__container">
+      <div className="routine__info">
         <div>
           <h2>Continúa con tu entrenamiento</h2>
-          <p>Descripción: {routineInfo.description}</p>
+          <p>
+            <span>Descripción:</span> {routineInfo.description}
+          </p>
         </div>
-        <ul className="routine-stats">
-          <li>
-            <span className="icon-difficulty">{routineInfo.difficulty}</span>
+        <ul className="routine__stats">
+          <li className="stat">
+            <Level width={20} fill="white" />
+            <span className="stat__text">{routineInfo.difficulty}</span>
           </li>
-          <li>
-            <span className="icon-total-time-weeks">{routineInfo.totalTimeWeeks} semanas</span>
+          <li className="stat">
+            <CalendarIcon width={20} fill="white" />
+            <span className="stat__text">{routineInfo.totalTimeWeeks} semanas</span>
           </li>
-          <li>
-            <span className="icon-total-time-hours">{routineInfo.totalTimeHours} horas</span>
+          <li className="stat">
+            <Time width={20} fill="white" />
+            <span className="stat__text">{routineInfo.totalTimeHours} horas</span>
           </li>
-          <li>
-            <span className="icon-main-areas">{routineInfo.mainAreas.join(', ')}</span>
+          <li className="stat">
+            <Human width={20} />
+            <span className="stat__text">{routineInfo.mainAreas.join(', ')}</span>
           </li>
         </ul>
       </div>
-      <div className="separation-line"></div>
-      <Btn
-        btnClass="primary"
-        text="Continuar entrenando"
-        //   onClick=
-      />
+      <div className="separation_line"></div>
+      <Btn btnClass="primary" text="Continuar entrenando" />
     </div>
   );
 };

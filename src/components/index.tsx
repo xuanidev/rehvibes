@@ -13,3 +13,4 @@ export { AddWorkoutBtn } from './AddWorkoutBtn';
 export { BtnNtf } from './BtnNtf';
 export { Calendar } from './Calendar';
 export { NewRoutines } from './NewRoutines';
+export { TopBar } from './TopBar';
