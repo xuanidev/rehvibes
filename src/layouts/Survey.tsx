@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Isotype } from '../components/branding';
 import { callToAssistant } from '../api/openai';
 import { calculateDecrementPercentage, calculatePercentage, checkPercentage } from '../utils/survey';
-import { removeFromLocalStorage } from '../utils/helpers';
+import { removeFromLocalStorage, saveOnCookies } from '../utils/helpers';
 import LoaderContainer from '../components/LoaderContainer';
 import { getSurveySteps } from '../components/survey/surveySteps';
 import SurveyTop from '../components/survey/SurveyTop';
@@ -90,7 +90,7 @@ export const Survey = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(data);
+    removeFromLocalStorage('currentSurvey');
     removeFromLocalStorage('currentStep');
     removeFromLocalStorage('data');
     removeFromLocalStorage('numSteps');

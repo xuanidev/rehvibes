@@ -1,8 +1,8 @@
-export interface exerciseFromApi {
+export interface ExerciseFromApiFirebase {
     description: string,
     difficulty: string,
     equipment:string[],
-    frecuency: number,
+    frequency: number,
     id: number,
     image: string,
     instructions: string[],
@@ -19,6 +19,23 @@ export interface exerciseFromApi {
     creationDate?: string
 }
 
-export interface exercisesFromApi {
-    exercises: exerciseFromApi[]
+export interface Exercise {
+    description: string,
+    difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
+    equipment:string[],
+    frequency: number,
+    id: number,
+    image: string,
+    instructions: string[],
+    kcalBurned: string,
+    mainAreas: string[],
+    maxRep: number,
+    minRep: number,
+    name: string,
+    objective: string,
+    precautions:string,
+    secondAreas: string[],
+    series: number,
+    video:string,
+    creationDate?: string
 }

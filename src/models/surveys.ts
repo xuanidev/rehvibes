@@ -1,3 +1,5 @@
+import { ExerciseFromAPI } from "./programs";
+
 export interface Step {
     setStepValid: (value: { state: boolean; error: string }) => void;
     handleStep: (name: string, value?: string, num?: number) => void;
@@ -171,12 +173,7 @@ export interface CalculateDecrementPercentageProps {
     setPercentage: (value: React.SetStateAction<number[]>) => void;
     data: SurveyData;
 }
-export interface ExerciseFromAPI {
-    name: string;
-    series: number;
-    minRep: number;
-    maxRep: number;
-  }
+
   
 export interface RehabilitationDay {
     day: number;

@@ -26,11 +26,10 @@ const loaderToMain = () => {
   return null;
 };
 const loaderSurvey = () => {
-  if (!Cookies.get('currentSurvey'))
-    // {
-    //   return redirect("/app");
-    // }
-    return null;
+  if (getFromCookies('currentSurvey') !== 'true') {
+    return redirect('/');
+  }
+  return null;
 };
 
 export const router = createBrowserRouter([
@@ -68,7 +67,7 @@ export const router = createBrowserRouter([
   {
     path: '/survey',
     element: <Survey />,
-    //loader: loaderSurvey,
+    loader: loaderSurvey,
   },
   {
     path: '/designsystem',
