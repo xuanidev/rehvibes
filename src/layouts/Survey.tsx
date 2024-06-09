@@ -5,7 +5,7 @@ import { toastError } from '../constants';
 import { surveyErrors } from '../components/survey/errors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Logo } from '../components/branding';
+import { Isotype } from '../components/branding';
 import { callToAssistant } from '../api/openai';
 import { calculateDecrementPercentage, calculatePercentage, checkPercentage } from '../utils/survey';
 import { removeFromLocalStorage } from '../utils/helpers';
@@ -159,7 +159,7 @@ export const Survey = () => {
         />
       </div>
       <div className="logo_icon">
-        <Logo fill="white" height={40} width={40} style={{ filter: 'brightness(3)' }} />
+        <Isotype fill="white" height={40} width={40} style={{ filter: 'brightness(3)' }} />
       </div>
       <LoaderContainer text="Generando rehabilitación" isLoaded={loading} />
       <ToastContainer />

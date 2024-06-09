@@ -8,9 +8,11 @@ import Bell from './icons/Bell.tsx';
 
 interface NotificationBtnProps {
   userId: string;
+  style?: string;
 }
 
-export const BtnNtf = ({ userId }: NotificationBtnProps) => {
+export const BtnNtf = (props: NotificationBtnProps) => {
+  const { userId, style = '' } = props;
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState<string[]>([]);
 
@@ -35,7 +37,7 @@ export const BtnNtf = ({ userId }: NotificationBtnProps) => {
   };
 
   return (
-    <div className="notification-container">
+    <div className={`notification-container ${style}`}>
       <Btn
         btnClass="borderGradient"
         leftIcon={Bell}

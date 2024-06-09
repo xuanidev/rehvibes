@@ -4,26 +4,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
     width: 100%;
+}
+.top__bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    @include breakpoint('md'){
+        display: none;
+    }
 }
 .welcome{
     width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .notification-container{
-        display: none;
-        @include breakpoint('md'){
-            display: inline;
-        }
-    }
-    #workout{
-        display: none;
-        @include breakpoint('md'){
-            display: inline;
-        }
-    }
+}
+.welcome__bottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .top_bar__user{
@@ -47,6 +51,63 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+}
+.top_bar__icons{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+.wordmark{
+    width: 100px;
+    @include breakpoint('md'){
+        width: 180px;
+    }
+}
+.top_bar__greeting{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+}
+.top_bar__greeting__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+}
+.ntf_btn{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+    button{
+        width: 40px;
+        height: 40px;
+    }
+
+}
+.ntf_btn__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
+
+}
+.workout_btn{
+    display: block;
+    @include breakpoint('md'){
+        display: none;
+    }
+    button{
+        width: 40px;
+        height: 40px;
+    }
+}
+.workout_btn__desktop{
+    display: none;
+    @include breakpoint('md'){
+        display: block;
     }
 }
 

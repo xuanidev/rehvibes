@@ -27,7 +27,7 @@ export const InfoTrabajado = (props: infoTrabajadoProps) => {
       <div className="info_top">
         <div className="info__title">
           <h2 className="info__text">{TEXT}</h2>
-          <Share fill="#ff662e" color="#ff662e" width={20} height={20} />
+          <Share fill="#ff662e" color="#ff662e" width={20} height={20} className="share_icon" />
         </div>
 
         <ul className="info_table">

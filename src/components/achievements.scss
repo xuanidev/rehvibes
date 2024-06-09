@@ -1,4 +1,4 @@
-@import "../styles/base";
+@import "../styles/abstracts/";
 
 .achievements{
     width: 100%;
@@ -7,13 +7,19 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
+    @include breakpoint('md'){
+        gap: 10px;
+    }
 }
-.achievements__icons{
+.achievements__tittles{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    font-size: 13px;
     th{
+        font-family: 'Satoshi-Regular';
+        text-align: start;
         width: 16%;
         margin-left: auto;
         margin-right: auto;
@@ -21,6 +27,9 @@
             width: 100%;
             display: grid;
         }
+    }
+    @include breakpoint('md'){
+        font-size: 16px;
     }
 }
 .achievements__value{
@@ -33,6 +42,10 @@
         width: 16%;
         margin-left: auto;
         margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap:10px;
     }
 }
 .achievements__description{

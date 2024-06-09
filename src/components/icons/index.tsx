@@ -23,3 +23,4 @@ export { Lightning } from './Lightning';
 export { Medal } from './Medal';
 export { Trophy } from './Trophy';
 export { Clock } from './Clock';
+export { Human } from './Human';

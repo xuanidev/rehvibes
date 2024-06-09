@@ -11,37 +11,26 @@ export const Achievements = (props: AchievementsProps) => {
   const { hours, sessions, achievements } = props;
   return (
     <table className="achievements">
-      <thead>
-        <tr className="achievements__icons">
-          <th>
-            <span>
-              <Clock width={36} height={36} />
-            </span>
-          </th>
-          <th>
-            <span>
-              <Medal width={36} height={36} />
-            </span>
-          </th>
-          <th>
-            <span>
-              <Trophy width={36} height={36} />
-            </span>
-          </th>
-        </tr>
-      </thead>
       <tbody>
         <tr className="achievements__value">
-          <td>{hours}</td>
-          <td>{sessions}</td>
-          <td>{achievements}</td>
-        </tr>
-        <tr className="achievements__description">
-          <td>Horas rehabilitándote</td>
-          <td>Sesiones completadas</td>
-          <td>Logros Alcanzados</td>
+          <td>
+            <Clock width={36} height={36} /> {hours}
+          </td>
+          <td>
+            <Medal width={36} height={36} /> {sessions}
+          </td>
+          <td>
+            <Trophy width={36} height={36} /> {achievements}
+          </td>
         </tr>
       </tbody>
+      <thead>
+        <tr className="achievements__tittles">
+          <th>Horas rehabilitándote</th>
+          <th>Sesiones completadas</th>
+          <th>Logros Alcanzados</th>
+        </tr>
+      </thead>
     </table>
   );
 };
