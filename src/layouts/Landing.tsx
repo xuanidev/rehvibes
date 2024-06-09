@@ -16,10 +16,11 @@ import {
   saveOnLocalStorage,
 } from '../utils/helpers';
 import { useEffect, useState } from 'react';
-import { RehabilitationProgramProps, cualidadesUser } from '../models';
+import { Exercise, RehabilitationProgramProps, cualidadesUser } from '../models';
 import { cualidadesDefault, toastError } from '../constants';
 import { Id, ToastContainer, toast } from 'react-toastify';
 import { getUser } from '../api/users';
+import { getExercises } from '../api/exercises';
 
 interface RoutineInfo {
   description: string;
@@ -45,6 +46,7 @@ export const Landing = () => {
   const [sessions, setSessions] = useState<number>(0);
   const [achievements, setAchievements] = useState<number>(0);
   const [user, setUser] = useState<string>('');
+  const [exercises, setExercises] = useState<Exercise[]>();
 
   const uid = getFromCookies('uid');
 
@@ -99,6 +101,10 @@ export const Landing = () => {
     }
   };
 
+  const getNewExercises = async () => {
+    const exercisesFromApi = await getExercises();
+    setExercises(exercisesFromApi);
+  };
   const setCalendarDays = (value: string) => {
     const days = JSON.parse(value);
     const dates = days.map((date: string) => {
@@ -106,7 +112,9 @@ export const Landing = () => {
     });
     setRehabDays(dates);
   };
+
   useEffect(() => {
+    getNewExercises();
     setUser(getFromCookies('username'));
     const programFromStorage = getFromLocalStorage('mainProgram');
     const rehabDaysFromStorage = getFromLocalStorage('rehabdays');
@@ -120,7 +128,6 @@ export const Landing = () => {
       getProgramsData();
     }
     if (uid !== '' && userFromStorage != '') {
-      console.log('ea');
       getUserData();
     }
   }, []);
@@ -146,7 +153,7 @@ export const Landing = () => {
             <Calendar rehabDays={rehabDays} />
           </div>
           <Achievements hours={horas} sessions={sessions} achievements={achievements} />
-          <NewRoutines />
+          <NewRoutines exercises={exercises ?? []} />
         </div>
       </div>
       <ToastContainer />

@@ -1,10 +1,15 @@
 import './newRoutines.scss';
 import Btn from './Btn';
 import Card from './Card';
-import PechoSuperior from '../assets/routinesLibrary/pecho superior.png';
+import ImgDefault from '../assets/routinesLibrary/pecho superior.png';
 import { useEffect, useRef } from 'react';
+import { Exercise } from '../models';
+import exercise7 from '../assets/routinesLibrary/exercise7.png';
+interface NewRoutinesProps {
+  exercises: Exercise[];
+}
 
-export const NewRoutines = () => {
+export const NewRoutines = ({ exercises }: NewRoutinesProps) => {
   const sliderContainer = useRef<HTMLDivElement>(null);
   const isDown = useRef(false);
   const startX = useRef<number | null>(null);
@@ -54,36 +59,21 @@ export const NewRoutines = () => {
       <h3>Nuevas rutinas que te pueden interesar</h3>
       <div className="slider-container" ref={sliderContainer}>
         <div className="inner-slider">
-          <Card
-            img={PechoSuperior}
-            difficulty="Intermedia"
-            duration={'40min' + '.'}
-            onClick={() => {
-              console.log('click');
-            }}
-            size="sm"
-            text="Pecho Superior"
-          ></Card>
-          <Card
-            img={PechoSuperior}
-            difficulty="Intermedia"
-            duration={'40min' + '.'}
-            onClick={() => {
-              console.log('click');
-            }}
-            size="sm"
-            text="Pecho Superior"
-          ></Card>
-          <Card
-            img={PechoSuperior}
-            difficulty="Intermedia"
-            duration={'40min' + '.'}
-            onClick={() => {
-              console.log('click');
-            }}
-            size="sm"
-            text="Pecho Superior"
-          ></Card>
+          {exercises.map((exercise: Exercise) => {
+            return (
+              <Card
+                key={exercise.id}
+                img={exercise.image ?? ImgDefault}
+                difficulty={exercise.difficulty}
+                duration={'40min' + '.'}
+                onClick={() => {
+                  console.log('click');
+                }}
+                size="sm"
+                text={exercise.name}
+              ></Card>
+            );
+          })}
         </div>
       </div>
       <Btn btnClass="borderGradient" text="Ver más" />

@@ -8,7 +8,7 @@ interface CardProps {
   text: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   duration: string;
-  difficulty: 'Básico' | 'Intermedia' | 'Alta';
+  difficulty: 'Principiante' | 'Intermedio' | 'Avanzado';
 }
 
 export const Card = (props: CardProps) => {

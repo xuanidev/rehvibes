@@ -1,20 +1,22 @@
 import { getFirestore, collection, getDocs} from "firebase/firestore";
-import { exerciseFromApi, exercisesFromApi } from "../models/exercises";
+import { Exercise, ExerciseFromApiFirebase } from "../models/exercises";
+import { mapExerciseApiToExerciseView } from "./exercises.mapper";
 const db = getFirestore();
 
-export const getExercises = async ():Promise<exerciseFromApi[]> => {
-    const usersCollection = collection(db, "exercises");
-    const usersSnapshot = await getDocs(usersCollection);
+export const getExercises = async ():Promise<Exercise[]> => {
+    try{
+        const usersCollection = collection(db, "exercises");
+        const usersSnapshot = await getDocs(usersCollection);
 
-    const exercisesData: exerciseFromApi[] = [];
-
-    usersSnapshot.forEach((doc) => {
-        const usersData = doc.data() as exercisesFromApi;
-        usersData.exercises.forEach( exercise => {
-            exercisesData.push(exercise);
+        const exercisesData: ExerciseFromApiFirebase[] = [];
+        usersSnapshot.forEach((doc) => {
+            const usersData = doc.data() as ExerciseFromApiFirebase;
+            exercisesData.push(usersData);
         });
-    });
 
-    console.log(exercisesData);
-    return exercisesData;
+        return mapExerciseApiToExerciseView(exercisesData);
+
+    }catch(error){
+        throw (error as Error).message;
+    }
 };

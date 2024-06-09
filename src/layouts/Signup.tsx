@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastError } from '../constants';
 import { LogoWordmark } from '../components/branding/LogoWordmark';
+import { saveOnCookies } from '../utils/helpers';
 
 export const Signup = () => {
   const [name, setName] = useState('');
@@ -31,6 +32,7 @@ export const Signup = () => {
   const handleSignup = async () => {
     try {
       await signup(email, password, name);
+      saveOnCookies('currentSurvey', 'true');
       navigate('/survey');
     } catch (error) {
       const errorMessage = (error as Error).message;

@@ -1,6 +1,6 @@
 import { SurveyData } from "./surveys";
 
-export interface Exercise {
+interface Exercise {
     name: string;
     description: string;
     repetitions?: string;
