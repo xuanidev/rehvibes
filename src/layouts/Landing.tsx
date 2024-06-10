@@ -18,7 +18,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Exercise, RehabilitationProgramProps, cualidadesUser } from '../models';
 import { cualidadesDefault, toastError } from '../constants';
-import { Id, ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { getUser } from '../api/users';
 import { getExercises } from '../api/exercises';
 
@@ -32,7 +32,6 @@ interface RoutineInfo {
 
 export const Landing = () => {
   const [programs, setPrograms] = useState<RehabilitationProgramProps[]>();
-  const [toastId, setToastId] = useState<Id>('');
   const [rehabDays, setRehabDays] = useState<Date[]>([]);
   const [routineInfo, setRoutineInfo] = useState<RoutineInfo>({
     description: '',
@@ -54,7 +53,6 @@ export const Landing = () => {
     if (uid !== '') {
       try {
         const programsResponse = await getProgramByUserID(uid);
-        console.log(programsResponse);
         setPrograms(programsResponse);
         if (programsResponse && programsResponse.length > 0) {
           const firstProgram = programsResponse[0];
@@ -75,7 +73,8 @@ export const Landing = () => {
           'No se han podido cargar los programas, recarga la página por favor',
           toastError,
         );
-        setToastId(toastIdAux);
+        toast(toastIdAux);
+        console.log(programs);
       }
     }
   };
@@ -93,7 +92,7 @@ export const Landing = () => {
         saveOnLocalStorage('userInfo', JSON.stringify(userResponse));
       } catch {
         const toastIdAux = toast.error('No se han podido cargar el usuario', toastError);
-        setToastId(toastIdAux);
+        toast(toastIdAux);
       }
     }
     if (user === '') {

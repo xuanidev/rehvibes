@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Step } from '../../models';
 import './birthdate.scss';
-import { getYear } from 'date-fns';
-import range from 'lodash.range';
 import { surveyErrors } from './errors';
 
 export const BirthDate = (props: Step) => {

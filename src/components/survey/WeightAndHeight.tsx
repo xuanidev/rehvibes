@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { StepWeightAndHeight } from '../../models';
 import './weigthAndHeight.scss';
 import { surveyErrors } from './errors';

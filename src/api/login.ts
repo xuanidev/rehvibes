@@ -1,5 +1,6 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'firebase/auth';
-import {auth, signInWithGooglePopup} from '../firebaseConfig.js'
+import { signInWithGooglePopup } from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
 import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
 import {createUser } from './users.js';
 import { handleErrorMessageSignup,handleErrorMessageLogin, errorsLoginGoogle } from './errors.js';
@@ -48,9 +49,15 @@ export const signup = async (email: string, password: string, name:string)=> {
       const user = userCredential.user.uid;
 
       const newUser: User = {
-        name: name,
-        email: email,
-        uid: user
+          name: name,
+          email: email,
+          uid: user,
+          google_id: false,
+          programs: [],
+          cualidades: [],
+          horas: 0,
+          logros: 0,
+          sesiones: 0
       };
       await createUser(newUser);
       saveOnCookies('uid', user);
@@ -100,16 +107,21 @@ export const loginGoogle = async () => {
 
         if (exists) {
             saveOnCookies('uid', uid);
-            saveOnCookies('email', email);
-            saveOnCookies('username', displayName);
+            saveOnCookies('email', email ?? '');
+            saveOnCookies('username', displayName ?? '');
             return;
         }
 
         const newUser = await createUser({
             uid,
-            name: displayName,
-            email,
-            google_id: true
+            name: displayName ?? '',
+            email: email ?? '',
+            google_id: true,
+            programs: [],
+            cualidades: [],
+            horas: 0,
+            logros: 0,
+            sesiones: 0
         });
 
         if (newUser) {
@@ -117,8 +129,8 @@ export const loginGoogle = async () => {
                 saveOnCookies('imgUser', photoURL);
             }
             saveOnCookies('uid', uid);
-            saveOnCookies('email', email);
-            saveOnCookies('username', displayName);
+            saveOnCookies('email', email ?? '');
+            saveOnCookies('username', displayName ?? '');
             return;
         }
         throw new Error(errorsLoginGoogle.errorCrearUsuarioMsg);

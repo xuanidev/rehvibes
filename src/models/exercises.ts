@@ -1,6 +1,6 @@
 export interface ExerciseFromApiFirebase {
     description: string,
-    difficulty: string,
+    difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
     equipment:string[],
     frequency: number,
     id: number,

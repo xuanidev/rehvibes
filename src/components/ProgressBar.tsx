@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './progressBar.scss';
 
 export const ProgressBar = () => {
-  const initialProgress = Math.floor(Math.random() * 101);
-  const [progress, setProgress] = useState<number>(initialProgress);
+  const [progress, setProgress] = useState<number>(0);
+
+  useEffect(() => {
+    const initialProgress = Math.floor(Math.random() * 101);
+    setProgress(initialProgress);
+  }, []);
 
   const radius = 65;
   const circumference = 2 * Math.PI * radius;
