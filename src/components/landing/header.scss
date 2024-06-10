@@ -1,1 +1,96 @@
-@use '../../styles/base' as *;
+@use '../../styles/abstracts/' as *;
+
+.header {
+    font-family: 'Satoshi-Regular';
+    height: 100vh;
+    width: 100%;
+    background-image: url("@/assets/landing/Header_xs.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+    padding-right: 7.5rem;
+    padding-left: 7.5rem;
+    @include breakpoint('md'){
+        background-image: url("@/assets/landing/Header_md.jpg");
+    }
+    @include breakpoint('3xl'){
+        background-image: url("@/assets/landing/Header_3xl.jpg");
+    }
+}
+
+.topmenu {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 4rem;
+}
+.top_nav_web{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.landing_logo{
+    width: 160px;
+    height: auto;
+    @include breakpoint('md'){
+        width: 200px;
+    }
+    @include breakpoint('3xl'){
+        width: 240px;
+    }
+}
+.nav_links {
+  list-style-type: none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4rem;
+}
+
+.buttons_app {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.container_header {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+.nav_item {
+  font-size: 1.375rem;
+  font-weight: medium;
+  color: var(--color-white);
+  padding: 0.25rem;
+}
+
+.nav_items_links {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+button .login_web {
+  font-size: 1.375rem;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 32px;
+  padding-left: 32px;
+}
+
+button .signup_web {
+  font-size: 1.375rem;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 32px;
+  padding-left: 32px;
+}

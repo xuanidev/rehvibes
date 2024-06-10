@@ -48,6 +48,7 @@ text-align: center;
     background-color: var(--color-white);
     color: var(--color-secondary-dark);
 }
+
 .borderGradient{
     @include gradient-border(1.5px, 12px, var(--color-white));
     &:hover {
@@ -70,3 +71,5 @@ text-align: center;
     background-color: var(--color-secondary-light);
     cursor: default;
 }
+
+
