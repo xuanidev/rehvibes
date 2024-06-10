@@ -1,6 +1,5 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword  } from 'firebase/auth';
-import { signInWithGooglePopup } from '../firebaseConfig';
-import { auth } from '../firebaseConfig';
+import { signInWithGooglePopup, auth } from '../firebaseConfig';
 import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
 import {createUser } from './users.js';
 import { handleErrorMessageSignup,handleErrorMessageLogin, errorsLoginGoogle } from './errors.js';
