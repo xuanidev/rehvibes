@@ -1,5 +1,3 @@
-import { Card } from '../components';
-import PechoSuperior from '../assets/routinesLibrary/pecho superior.png';
 import { useEffect, useState } from 'react';
 import { getProgramByUserID } from '../api/programs';
 import { RehabilitationProgramProps } from '../models';
@@ -16,13 +14,8 @@ interface RoutineInfo {
   mainAreas: string[];
 }
 
-interface RoutineContainerProps {
-  routineInfo: RoutineInfo;
-}
-
 export const Main = () => {
   const [programs, setPrograms] = useState<RehabilitationProgramProps[]>();
-  const [toastId, setToastId] = useState<any>('');
   const [routineInfo, setRoutineInfo] = useState<RoutineInfo>({
     description: '',
     difficulty: '',
@@ -54,7 +47,7 @@ export const Main = () => {
           'No se han podido cargar los programas, recarga la página por favor',
           toastError,
         );
-        setToastId(toastIdAux);
+        toast(toastIdAux);
       }
     }
   };

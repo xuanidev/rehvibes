@@ -8,7 +8,7 @@ export const mapExerciseApiToExerciseView = (exercises: ExerciseFromApiFirebase[
         description: exerciseItem.description,
         difficulty: exerciseItem.difficulty,
         equipment: exerciseItem.equipment,
-        frecuency: exerciseItem.frequency,
+        frequency: exerciseItem.frequency,
         id: exerciseItem.id,
         image: exerciseItem.image,
         instructions: exerciseItem.instructions,

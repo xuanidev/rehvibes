@@ -1,5 +1,4 @@
 // BodyMap.tsx
-import React from 'react';
 import Model, { IExerciseData, Muscle } from 'react-body-highlighter';
 import { bodyPartsMap } from '../constants';
 import './bodyMap.scss';

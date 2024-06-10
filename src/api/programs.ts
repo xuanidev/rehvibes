@@ -1,12 +1,10 @@
 import '../firebaseConfig.js'
-import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
-import { Program, ProgramFromApi } from '../models/programs.js';
-import { GenerateProgramProps,RehabilitationProgramProps, SurveyData } from '../models/surveys.js';
+import { getFirestore, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore"
+import { GenerateProgramProps,RehabilitationProgramProps} from '../models/surveys.js';
 import { getUser, updateUser } from './users.js';
 import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
 import uuid4 from 'uuid4';
-import { update } from 'firebase/database';
 import { cualidadesDefault } from '../constants.js';
 const db = getFirestore();
 

@@ -4,7 +4,6 @@ import Card from './Card';
 import ImgDefault from '../assets/routinesLibrary/pecho superior.png';
 import { useEffect, useRef } from 'react';
 import { Exercise } from '../models';
-import exercise7 from '../assets/routinesLibrary/exercise7.png';
 interface NewRoutinesProps {
   exercises: Exercise[];
 }

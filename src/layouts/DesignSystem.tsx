@@ -1,9 +1,9 @@
-import { Btn, Card, InputIcon } from "../components";
-import { Plus, UserIcon } from "../components/icons";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { toastError } from "../constants";
-import PechoSuperior from "../assets/routinesLibrary/pecho superior.png";
+import { Btn, Card, InputIcon } from '../components';
+import { Plus, UserIcon } from '../components/icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastError } from '../constants';
+import PechoSuperior from '../assets/routinesLibrary/pecho superior.png';
 
 export const DesignSystem = () => {
   return (
@@ -107,13 +107,7 @@ export const DesignSystem = () => {
         <h2>4. Botones</h2>
         <Btn text="Primary" btnClass="primary" />
         <Btn text="Disabled" btnClass="disabled" />
-        <Btn
-          btnClass="borderGradient"
-          leftIcon={Plus}
-          iconHeight={24}
-          iconWidth={24}
-          iconClass="color-brand icon"
-        />
+        <Btn btnClass="borderGradient" leftIcon={Plus} iconHeight={24} iconWidth={24} iconClass="color-brand icon" />
         <Btn text="Gradient" btnClass="borderGradient" />
         <Btn
           text="Left Icon"
@@ -147,22 +141,22 @@ export const DesignSystem = () => {
         <div className="components_section">
           <InputIcon
             icon={UserIcon}
-            className={"color-brand"}
+            className={'color-brand'}
             iconWidth={19}
             iconHeight={19}
             label="Input"
             name="email"
-            value={""}
+            value={''}
             setValue={() => {}}
             type="email"
             required={true}
           />
           <Card
             img={PechoSuperior}
-            difficulty="Intermedia"
-            duration={"40min" + "."}
+            difficulty="Intermedio"
+            duration={'40min' + '.'}
             onClick={() => {
-              console.log("click");
+              console.log('click');
             }}
             size="sm"
             text="Pecho Superior"
@@ -174,9 +168,9 @@ export const DesignSystem = () => {
         <h2>6. Grids</h2>
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "20px",
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '20px',
           }}
         >
           <div>Elemento 1</div>
@@ -187,8 +181,8 @@ export const DesignSystem = () => {
       <section>
         <h2>7. Reactividad y Animaciones</h2>
         <button
-          onClick={() => toast.error("Error", toastError)}
-          style={{ cursor: "pointer", transition: "background-color 0.3s" }}
+          onClick={() => toast.error('Error', toastError)}
+          style={{ cursor: 'pointer', transition: 'background-color 0.3s' }}
         >
           Error
         </button>

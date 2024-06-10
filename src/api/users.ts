@@ -1,5 +1,5 @@
 import '../firebaseConfig.js'
-import { getFirestore, collection, doc, addDoc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
 import uuid4 from "uuid4";
 
 import { User, UserFromApi } from '../models/index.js'

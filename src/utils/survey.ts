@@ -1,4 +1,4 @@
-import { CalculateDecrementPercentageProps, CalculatePercentageProps, CheckPercentageProps, Program, SurveyData, prevStepProps} from "../models";
+import { CalculateDecrementPercentageProps, CalculatePercentageProps, CheckPercentageProps} from "../models";
 import { desire } from "../optionsData";
 
 export const preloadImage = (url: string) => {
