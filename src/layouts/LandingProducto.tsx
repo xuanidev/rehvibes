@@ -1,9 +1,10 @@
-import { Header } from "../components/landing"
+import { Beneficios, Header } from "../components/landing"
 
 export const LandingProducto = () => {
     return(
         <>
         <Header/>
+        <Beneficios/>
         </>
     )
 }
