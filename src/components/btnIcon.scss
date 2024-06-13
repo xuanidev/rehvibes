@@ -59,7 +59,7 @@ text-align: center;
       }   
 }
 .borderGradient:hover{
-    @include gradient-border(2px, 12px, transparent);
+    @include gradient-border(1.5px, 12px, transparent);
     color: white;
 }
 .disabled{
@@ -71,5 +71,17 @@ text-align: center;
     background-color: var(--color-secondary-light);
     cursor: default;
 }
-
+.routine_cta{
+  height: min-content;
+  color: white;
+  @include gradient-border(1.5px, 8px, transparent);
+  padding: 10px 16px;
+  font-size: 13px;
+}
+.routine_cta:hover{
+  background-image: none;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
 

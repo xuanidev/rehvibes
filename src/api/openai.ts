@@ -45,7 +45,6 @@ export const callToAssistant = async (object:string):Promise<string> =>{
         actualRun = await openai.beta.threads.runs.retrieve(thread.id, run.id);
         }
         const messages = await openai.beta.threads.messages.list(thread.id);
-        console.log(messages);
         const lastMessageForRun = messages.data
         .filter(
             (message) =>

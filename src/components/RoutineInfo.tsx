@@ -1,6 +1,7 @@
 import './routineInfo.scss';
 import { Btn } from './index.js';
 import { Level, Calendar as CalendarIcon, Time, Human } from '../components/icons';
+import { useNavigate } from 'react-router-dom';
 
 interface RoutineInfo {
   description: string;
@@ -15,6 +16,7 @@ interface RoutineContainerProps {
 }
 
 export const RoutineContainer = (props: RoutineContainerProps) => {
+  const navigate = useNavigate();
   const { routineInfo } = props;
   return (
     <div className="routine__container">
@@ -45,7 +47,7 @@ export const RoutineContainer = (props: RoutineContainerProps) => {
         </ul>
       </div>
       <div className="separation_line"></div>
-      <Btn btnClass="primary" text="Continuar entrenando" />
+      <Btn btnClass="routine_cta" text="Continuar entrenando" onClick={() => navigate('/routine')} />
     </div>
   );
 };

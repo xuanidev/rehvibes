@@ -8,7 +8,6 @@ export const openAiToFirebase = (data: any, groups: string[], level?:string): Re
     };
 
     const exercisesArray = data.rehabilitation_program.days || data.rehabilitation_program.exercises || data.rehabilitation_program.exercises_per_day || data.rehabilitation_program.program || data.rehabilitation_program.rehabilitation_program;
-    console.log(exercisesArray);
     if (Array.isArray(exercisesArray)) {
         let currentDay = 0;
         const startDate = new Date();
@@ -48,6 +47,5 @@ export const openAiToFirebase = (data: any, groups: string[], level?:string): Re
         program.weeks = (exercisesArray.length ? Math.ceil(exercisesArray.length / 7) : 0).toString();
         program.hours = '20';
     }
-    console.log(program);
     return program;
 };

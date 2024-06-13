@@ -1,9 +1,18 @@
 import './sidebar.scss';
 import { Home, DumbBell, Compass, StarCircle, Conf, Exit } from './icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import profileImg from '../assets/profileImg.png';
+import { removeFromCookies, removeFromLocalStorageArray } from '../utils/helpers';
 
 export const SideBar = () => {
+  const navigate = useNavigate();
+
+  const handleExit = () => {
+    removeFromLocalStorageArray(['mainProgram', 'rehabdays', 'userInfo']);
+    removeFromCookies(['uid', 'username']);
+    navigate('/');
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__user">
@@ -47,12 +56,10 @@ export const SideBar = () => {
           </NavLink>
         </li>
       </ul>
-      <div className="sidebar__exit ">
-        <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
-          <Exit fill="#FF662D" className="sidebar__icon" />
-          Exit
-        </NavLink>
-      </div>
+      <button onClick={handleExit} className="sidebar__exit">
+        <Exit fill="#FF662D" className="sidebar__icon" />
+        Exit
+      </button>
     </div>
   );
 };

@@ -16,3 +16,21 @@ polygon{
         width: auto;
     }
 }
+.working_zones{
+    .rbh-wrapper{
+        height: 200px;
+        width: min-content;
+        padding: 0px;
+        padding-left: 50px;
+        padding-top: 10px;
+        margin-left: 0rem;
+        margin-top: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        svg{
+            height: 100%;
+            width: auto;
+        }
+    }
+}

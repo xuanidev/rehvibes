@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import './btnNtf.scss';
 import '../api/users';
 import '../firebaseConfig.js';
-import firebase from 'firebase/compat/app';
 import { Btn } from './index.js';
 import Bell from './icons/Bell.tsx';
+import { getNotificationsFromUser } from '../api/notifications.ts';
+import { Notification } from '../models/notifications.ts';
 
 interface NotificationBtnProps {
   userId: string;
@@ -14,21 +15,20 @@ interface NotificationBtnProps {
 export const BtnNtf = (props: NotificationBtnProps) => {
   const { userId, style = '' } = props;
   const [showNotifications, setShowNotifications] = useState(false);
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  const getNotifications = async () => {
+    try {
+      const text = await getNotificationsFromUser(userId);
+      if (text.notifications) {
+        setNotifications(text.notifications);
+      }
+    } catch (error) {
+      console.error('Ha habido un error para mostrarte las notificaciones', error);
+    }
+  };
 
   useEffect(() => {
-    const getNotifications = async () => {
-      try {
-        const notificationsRef = firebase.firestore().collection('notifications').doc(userId);
-        const info = await notificationsRef.get();
-
-        if (info.exists) {
-          setNotifications(info.data()?.message || []);
-        }
-      } catch (error) {
-        console.error('Ha habido un error para mostrarte las notificaciones', error);
-      }
-    };
     getNotifications();
   }, [userId]);
 
@@ -49,9 +49,9 @@ export const BtnNtf = (props: NotificationBtnProps) => {
       {showNotifications && (
         <ul className="showNtf">
           {notifications.length > 0 ? (
-            notifications.map((message, index) => <li key={index}>{message}</li>)
+            notifications.map((message, index) => <li key={index + message.text}>{message.text}</li>)
           ) : (
-            <li> Todavía no hay notificaciones</li>
+            <li className="notification"> Todavía no hay notificaciones</li>
           )}
         </ul>
       )}

@@ -11,7 +11,6 @@ const chekcIfExists = async (id:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("google_id", "==", id));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     if(querySnapshot.size > 0){
         return true
     }
@@ -21,7 +20,6 @@ const checkIfEmailExists = async (email:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     if(querySnapshot.size > 0){
         return true
     }
@@ -31,7 +29,6 @@ const checkIfGoogle = async (email:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("google_id", "==", true), where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.size);
     if(querySnapshot.size > 0){
         return true
     }
@@ -81,13 +78,11 @@ export const login = async (email: string, password: string ): Promise<LoginProp
           throw new Error('auth/correo-usado');  
         }
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log(userCredential);
         const userLogged = userCredential.user;
         uidAux = userLogged.uid;
         saveOnCookies('uid', uidAux);
         return {imgUrl: '', uid: uidAux}
     } catch (error) {
-        console.log(error);
         const errorCode = (error as any).code ?? (error as any).message;
         throw new Error(handleErrorMessageLogin(errorCode))
     }
@@ -135,7 +130,6 @@ export const loginGoogle = async () => {
         throw new Error(errorsLoginGoogle.errorCrearUsuarioMsg);
     } catch (error) {
         const errorCode = (error as any).code;
-        console.log(errorCode);
         throw new Error(handleErrorMessageLogin(errorCode))
     }
 }

@@ -15,10 +15,8 @@ export const postPogram = async (program: RehabilitationProgramProps) =>{
         const usersRef = collection(db, "programs");
         await setDoc(doc(usersRef, uid), program);
         //const docRef = await addDoc(collection(db, 'programs'), program).the;
-        console.log('posted');
         return uid;
     } catch (error) {
-        console.error('Error adding user: ', error);
         throw (error as Error).message;
     }
 }
@@ -37,7 +35,6 @@ export const getProgramByUserID = async (userID: string): Promise<Rehabilitation
         });
         return programs;
     } catch (error) {
-        console.error('Error fetching program by userID:', error);
         throw (error as Error).message;
     }
 }

@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
 import { LandingProducto } from './layouts/LandingProducto';
 import { getFromCookies } from './utils/helpers';
+import Routine from './layouts/Routine';
 
 const loaderToLogin = () => {
   const uidCookie = getFromCookies('uid');
@@ -44,6 +45,11 @@ export const router = createBrowserRouter([
       {
         path: '/app',
         element: <Main />,
+        loader: loaderToLogin,
+      },
+      {
+        path: '/routine',
+        element: <Routine />,
         loader: loaderToLogin,
       },
     ],

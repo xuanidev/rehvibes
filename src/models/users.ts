@@ -37,3 +37,11 @@ export interface SignUpData {
     email: string;
     pass: string;
 }
+
+export interface RoutineInfo {
+    description: string;
+    difficulty: string;
+    totalTimeWeeks: string;
+    totalTimeHours: string;
+    mainAreas: string[];
+}
