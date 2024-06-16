@@ -10,10 +10,11 @@ interface ExerciseDescriptionProps {
   minReps: string;
   series: string;
   progress: number;
+  objective?: string;
 }
 
 export const ExerciseDescription = (props: ExerciseDescriptionProps) => {
-  const { type, maxReps, minReps, series, progress } = props;
+  const { type, maxReps, minReps, series, progress, objective } = props;
   return (
     <div className="exercise_description">
       <Progress80 progress={progress} style="exercise_description__progress" />
@@ -23,7 +24,7 @@ export const ExerciseDescription = (props: ExerciseDescriptionProps) => {
           <Type className="exercise_description__top_icon" />
           <h3 className="exercise_description__top_type">Ejercicio de {type}</h3>
         </div>
-
+        <p className="exercise_description__observations">{objective}</p>
         <div className="exercise_description__data">
           <div className="exercise_description__data_item">
             {minReps} / {maxReps} repeticiones

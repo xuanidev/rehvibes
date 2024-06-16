@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
-import { RehabilitationProgramProps, RoutineInfo } from '../models';
+import { Exercise, RehabilitationProgramProps, RoutineInfo } from '../models';
 
 interface UserContextModel {
   username?: string;
@@ -10,6 +10,8 @@ interface UserContextModel {
   setRehabDays: (rehabDays: Date[]) => void;
   routineInfo?: RoutineInfo;
   setRoutineInfo: (routineInfo: RoutineInfo) => void;
+  currentExercises?: Exercise[];
+  setCurrentExercises: (exercise: Exercise[]) => void;
 }
 
 const context: UserContextModel = {
@@ -26,6 +28,10 @@ const context: UserContextModel = {
   },
   routineInfo: {} as RoutineInfo,
   setRoutineInfo: () => {
+    return;
+  },
+  currentExercises: [] as Exercise[],
+  setCurrentExercises: () => {
     return;
   },
 };
@@ -47,6 +53,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
     totalTimeHours: '',
     mainAreas: [],
   });
+  const [currentExercises, setCurrentExercises] = useState<Exercise[]>([]);
 
   const contextValue = {
     username,
@@ -57,6 +64,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
     setRehabDays: setRehabDays,
     routineInfo,
     setRoutineInfo: setRoutineInfo,
+    currentExercises,
+    setCurrentExercises: setCurrentExercises,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;

@@ -5,10 +5,11 @@ interface ExerciseActionsProps {
   prevStep: () => void;
   nextStep: () => void;
   length: number;
+  handleSubmit: () => void;
 }
 
 export const ExerciseActions = (props: ExerciseActionsProps) => {
-  const { currentExercise, prevStep, nextStep, length } = props;
+  const { currentExercise, prevStep, nextStep, length, handleSubmit } = props;
 
   return (
     <div className="exercise__actions">
@@ -23,7 +24,7 @@ export const ExerciseActions = (props: ExerciseActionsProps) => {
         </button>
       )}
       {currentExercise === length - 1 && (
-        <button type="submit" className="exercise__btn exercise__btn--right">
+        <button type="submit" className="exercise__btn exercise__btn--right" onClick={handleSubmit}>
           Finalizar rutina
         </button>
       )}

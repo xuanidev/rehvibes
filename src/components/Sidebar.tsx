@@ -4,7 +4,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import profileImg from '../assets/profileImg.png';
 import { removeFromCookies, removeFromLocalStorageArray } from '../utils/helpers';
 
-export const SideBar = () => {
+interface SideBarProps {
+  username?: string;
+}
+
+export const SideBar = ({ username }: SideBarProps) => {
   const navigate = useNavigate();
 
   const handleExit = () => {
@@ -18,7 +22,7 @@ export const SideBar = () => {
       <div className="sidebar__user">
         <img src={profileImg} className="profile_img" />
         <div className="profile__info">
-          <span className="profile__name">Vicente Torner</span>
+          <span className="profile__name">{username ?? ''}</span>
           vtr_91
         </div>
       </div>
@@ -31,7 +35,7 @@ export const SideBar = () => {
         </li>
 
         <li className="sidebar_bar_option">
-          <NavLink to="/training" className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/routine" className={({ isActive }) => (isActive ? 'active' : '')}>
             <DumbBell fill="#FF662D" className="sidebar__icon" />
             Mi entrenamiento
           </NavLink>

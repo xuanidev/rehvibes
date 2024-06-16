@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getExercises } from '../api/exercises';
 import { RoutineContent } from '../components/routine';
 import HeaderRoutine from '../components/routine/HeaderRoutine';
 import { Exercise } from '../models';
+import { UserContext } from '../contexts/UserContextProvider';
 
 export const Routine = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const { setCurrentExercises } = useContext(UserContext);
 
   const getNewExercises = async () => {
     const exercisesFromApi = await getExercises();
     setExercises(exercisesFromApi);
+    setCurrentExercises(exercisesFromApi);
   };
 
   useEffect(() => {

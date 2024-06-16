@@ -11,15 +11,14 @@ export const HeaderTraining = (props: HeaderTrainingProps) => {
 
   return (
     <div className="header_training">
-      <div className="top_bar__user">
-        <img src={profileImg} className="top_bar__img" />
-        <div className="top_bar__info">
-          <span className="top_bar__name">Vicente Torner</span>
-          vtr_91
-        </div>
-      </div>
       <div className="header_training_right">
-        <LogoWordmarkWhite className="wordmark" />
+        <div className="top_bar__user">
+          <img src={profileImg} className="top_bar__img" />
+          <div className="top_bar__info">
+            <span className="top_bar__name">Vicente Torner</span>
+            vtr_91
+          </div>
+        </div>
         <div className="header_training__buttons">
           <span className="header_training__buttons_span">Especial para {user}</span>
           <div className="header_training__buttons_icons">
@@ -32,6 +31,7 @@ export const HeaderTraining = (props: HeaderTrainingProps) => {
           </div>
         </div>
       </div>
+      <LogoWordmarkWhite className="wordmark" />
     </div>
   );
 };

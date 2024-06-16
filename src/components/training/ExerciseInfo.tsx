@@ -12,10 +12,11 @@ interface ExerciseInfoProps {
   currentStep: number;
   length: number;
   progress: number;
+  handleSubmit: () => void;
 }
 
 export const ExerciseInfo = (props: ExerciseInfoProps) => {
-  const { exercise, prevStep, nextStep, length, currentStep, progress } = props;
+  const { exercise, prevStep, nextStep, length, currentStep, progress, handleSubmit } = props;
   return (
     <div className="exercise_info">
       <div className="exercise_info__top">
@@ -25,8 +26,15 @@ export const ExerciseInfo = (props: ExerciseInfoProps) => {
           series={exercise.series ? exercise.series.toString() : ''}
           type={exercise.type}
           progress={progress}
+          objective={exercise.objective ? exercise.objective.toString() : ''}
         />
-        <ExerciseActions currentExercise={currentStep} length={length} prevStep={prevStep} nextStep={nextStep} />
+        <ExerciseActions
+          currentExercise={currentStep}
+          length={length}
+          prevStep={prevStep}
+          nextStep={nextStep}
+          handleSubmit={handleSubmit}
+        />
       </div>
       <div className="exercise_info__bottom">
         <ExerciseSteps steps={exercise.instructions} />

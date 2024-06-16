@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { Play } from '../icons';
 import './exerciseFrame.scss';
 import classNames from 'classnames';
-import ExerciseVideo from '../../assets/videos/exercise.mp4';
+import ExerciseVideo from '../../assets/videos/sentadillas.mp4';
 
 interface ExerciseFrameProps {
   name: string;
-  img?: string;
   video?: string;
 }
 
 export const ExerciseFrame = (props: ExerciseFrameProps) => {
+  console.log(ExerciseVideo);
   const [play, setPlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -30,6 +30,7 @@ export const ExerciseFrame = (props: ExerciseFrameProps) => {
   }, [play]);
 
   const { name, video } = props;
+  console.log(video);
   return (
     <div className="exercise_frame">
       <h2 className="exercise_frame__name">{name}</h2>

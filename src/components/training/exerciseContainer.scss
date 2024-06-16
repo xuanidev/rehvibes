@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin-bottom:22px;
     @include breakpoint('md'){
         height: calc(100% - 102px);
         margin-bottom: 0px;

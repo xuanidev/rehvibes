@@ -10,6 +10,7 @@ interface InfoRoutineProps {
 export const InfoRoutine = (props: InfoRoutineProps) => {
   const navigate = useNavigate();
   const { mins = 30, level, types } = props;
+
   return (
     <div className="info_routine">
       <div className="info_routine__left">
@@ -24,7 +25,7 @@ export const InfoRoutine = (props: InfoRoutineProps) => {
           <h4 className="info_routine__h4">{types.join(' ')}</h4>
         </div>
       </div>
-      <Btn text="Empezar ahora" btnClass="routine_cta" onClick={() => alert('click')} />
+      <Btn text="Empezar ahora" btnClass="routine_cta" onClick={() => navigate('/training')} />
     </div>
   );
 };

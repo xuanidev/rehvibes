@@ -20,7 +20,7 @@ export const ExerciseRoutine = (props: ExerciseRoutineProps) => {
       <ul className="exercises_routine__list">
         {exercises.map((exercise: Exercise) => {
           return (
-            <li className="exercises_routine__item">
+            <li className="exercises_routine__item" key={exercise.name}>
               <img src={Sentadillas} className="item_img" />
               <div className="item_info">
                 <div className="item_name">

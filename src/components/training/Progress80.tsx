@@ -14,7 +14,6 @@ export const Progress80 = (props: ProgresProps) => {
 
   return (
     <div className={`progress_circle ${style}`}>
-      <h2>Progreso</h2>
       <svg className="progress-ring" viewBox="0 0 80 80" width="80" height="80">
         <circle
           className="progress-ring-circle"
@@ -61,6 +60,9 @@ export const Progress80 = (props: ProgresProps) => {
           </linearGradient>
         </defs>
       </svg>
+      <h2>
+        Progreso<span className="span_training"> del entrenamiento</span>
+      </h2>
     </div>
   );
 };

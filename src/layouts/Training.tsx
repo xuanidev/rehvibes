@@ -1,21 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ExerciseContainer, HeaderTraining } from '../components/training';
 import { Exercise } from '../models';
-import { getExercisesById } from '../api/exercises';
+import { UserContext } from '../contexts/UserContextProvider';
+import { useNavigate } from 'react-router-dom';
+import { getFromCookies, getFromLocalStorage, removeFromLocalStorageArray, saveOnLocalStorage } from '../utils/helpers';
 
 export const Training = () => {
+  const navigate = useNavigate();
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
+  const { currentExercises, username } = useContext(UserContext);
 
   const updateProgress = (step: number) => {
     const newProgress = (step / exercises.length) * 100;
     setProgress(newProgress);
+    saveOnLocalStorage('progress', newProgress.toString());
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
       const newStep = currentStep - 1;
+      saveOnLocalStorage('currentStepTraining', newStep.toString());
       setCurrentStep(newStep);
       updateProgress(newStep);
     }
@@ -25,24 +31,46 @@ export const Training = () => {
     if (currentStep < exercises.length - 1) {
       const newStep = currentStep + 1;
       setCurrentStep(newStep);
+      saveOnLocalStorage('currentStepTraining', newStep.toString());
       updateProgress(newStep);
     }
   };
-
-  const getExercises = async (ids: string[]) => {
-    const exerciseFromApi = await getExercisesById(ids);
-    console.log(exerciseFromApi);
-    setExercises(exerciseFromApi);
+  const handleSubmit = () => {
+    removeFromLocalStorageArray(['currentExercises', 'currentStepTraining', 'progress']);
+    navigate('/');
   };
 
   useEffect(() => {
-    getExercises(['7', '10']);
+    if (currentExercises && currentExercises.length === 0) {
+      console.log(currentExercises);
+      const exercisesFromStorage = getFromLocalStorage('currentExercises');
+      if (exercisesFromStorage !== '[]' && exercisesFromStorage !== '') {
+        console.log('entra');
+        setExercises(JSON.parse(exercisesFromStorage));
+      }
+      const currentStepTraining = getFromLocalStorage('currentStepTraining');
+      if (currentStepTraining !== '') {
+        setCurrentStep(Number(currentStepTraining));
+      }
+      const progress = getFromLocalStorage('progress');
+      if (progress !== '') {
+        setProgress(Number(progress));
+      }
+      if (exercisesFromStorage !== '[]' && exercisesFromStorage !== '') {
+        return;
+      }
+      navigate('/routine');
+      return;
+    }
+    setExercises(currentExercises ?? []);
+    saveOnLocalStorage('currentExercises', JSON.stringify(currentExercises));
   }, []);
 
+  const usernameHeader = username ? username : getFromCookies('username');
   return (
     <div className="routine_training">
       <div className="overlay">
-        <HeaderTraining user="Vicente" />
+        <HeaderTraining user={usernameHeader} />
         <ExerciseContainer
           exercise={exercises[currentStep] || ({} as Exercise)}
           prevStep={prevStep}
@@ -50,6 +78,7 @@ export const Training = () => {
           currentStep={currentStep}
           length={exercises.length}
           progress={progress}
+          handleSubmit={handleSubmit}
         />
       </div>
     </div>
