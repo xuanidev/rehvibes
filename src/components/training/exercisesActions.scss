@@ -1,0 +1,62 @@
+@import '../../styles/base';
+.exercise__actions {
+    height: auto;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 12px;
+    @include breakpoint('md'){
+      margin-bottom: 0px;
+        padding: 36px 24px;
+      position: relative;
+      flex-direction: row;
+      height: auto;
+      padding: 0px;
+    }
+  }
+  .exercise__btn {
+    font-family: "Satoshi-Medium";
+    font-size: 500;
+    font-size: 16px;
+    padding: 16px 22px;
+    border-radius: 10px;
+  }
+  
+  .exercise__btn--back {
+    width: 100%;
+    order: 2;
+    background-color: var(--color-black-25);
+    border: 1px solid var(--color-white);
+    color: var(--color-white);
+    @include breakpoint('md'){
+      width: auto;
+      order: 2;
+     }
+  }
+  
+  .exercise__btn--back:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+  }
+  
+  .exercise__btn--right {
+    width: 100%;
+    order: 1;
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-secondary-dark);
+    color: white;
+    margin-left: auto;
+    @include breakpoint('md'){
+     width: auto;
+     order: 2;
+    }
+  }
+  .exercise__btn--right:hover {
+    cursor: pointer;
+    background-color: var(--color-secondary-dark);
+  }

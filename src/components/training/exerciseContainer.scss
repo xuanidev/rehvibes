@@ -1,0 +1,24 @@
+@import '../../styles/abstracts';
+
+.exercise_container{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom:22px;
+    @include breakpoint('md'){
+        height: calc(100% - 102px);
+        margin-bottom: 0px;
+        gap: 32px;
+    }
+    @include breakpoint('lg'){
+        margin-top:0px;
+        flex-direction: row;
+        gap: 30px;
+    }
+    @include breakpoint('3xl'){
+        flex-direction: row;
+        gap: 48px;
+    }
+}

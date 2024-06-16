@@ -25,3 +25,6 @@ export { Trophy } from './Trophy';
 export { Clock } from './Clock';
 export { Human } from './Human';
 export { FindReplace } from './FindReplace';
+export { Alert } from './Alert';
+export { Type } from './Type';
+export { Play } from './Play';

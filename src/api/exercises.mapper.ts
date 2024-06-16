@@ -5,6 +5,7 @@ export const mapExerciseApiToExerciseView = (exercises: ExerciseFromApiFirebase[
     return exercises.map((exerciseItem: Exercise) => {
       return {
         description: exerciseItem.description,
+        type: exerciseItem.type,
         difficulty: exerciseItem.difficulty,
         equipment: exerciseItem.equipment,
         frequency: exerciseItem.frequency,

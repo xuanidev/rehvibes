@@ -1,0 +1,48 @@
+@import '../abstracts';
+
+.routine_training{
+    position: relative;
+    height: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-image: url("@/assets/routine_run.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 72px;
+    @include breakpoint('lg'){
+        height: 100vh;
+        padding-left: 250px;
+        margin-bottom: 0px;
+    }
+    @include breakpoint('2xl'){
+        padding-left: 300px;
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.15);
+        padding: 26px 24px;
+        display: flex;
+        flex-direction: column;
+        gap:16px;
+        @include breakpoint('sm'){
+            min-height: 100vh;
+            height: auto;
+            padding: 48px 48px 44px 48px;
+            gap: 42px;
+        }
+        @include breakpoint('lg'){
+            width: calc(100% - 250px);
+            left: 250px;
+            padding: 58px 64px 48px 64px;
+        }
+        @include breakpoint('2xl'){
+            width: calc(100% - 300px);
+            left: 300px;
+        }
+    }
+}

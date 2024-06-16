@@ -1,0 +1,40 @@
+@import '../../styles/base';
+
+.progress_circle {
+  background-color: var(--color-black-25);
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  padding: 16px 22px;
+  border: 1px solid var(--color-white);
+  border-radius: 12px;
+  gap: 12px;
+  h2{
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    gap: 4px;
+    @include breakpoint('lg'){
+      font-size: 20px;
+      gap: 12px;
+    }
+    @include breakpoint('3xl'){
+        font-size: 24px;
+    }
+  }
+}
+
+.progress_percentage__text{
+  font-family: 'Satoshi-Bold';
+  font-size: 14px;
+  fill: var(--color-white);
+  @include breakpoint('lg'){
+    font-size: 18px;
+  }
+  @include breakpoint('3xl'){
+      font-size: 20px;
+  }
+}
