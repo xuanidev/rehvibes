@@ -1,11 +1,11 @@
 import { Beneficios, Header, Slides, Funcionalidades , Video} from "../components/landing"
+import { BeneficiosData } from "../components/landing/beneficiosData";
 
-export const 
-LandingProducto = () => {
+export const LandingProducto = () => {
     return(
         <>
         <Header/>
-        <Beneficios/>
+        <Beneficios cards={BeneficiosData}/>
         <Slides/>
         <Funcionalidades/>
         <Video/>
@@ -13,3 +13,5 @@ LandingProducto = () => {
         </>
     )
 }
+
+export default LandingProducto;

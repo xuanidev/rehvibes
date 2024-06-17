@@ -1,2 +1,102 @@
 @use '../../styles/abstracts/' as *;
 
+:root {
+    --d: 0.4s;
+    --e: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+h3 {
+    font-family:poppins;
+    font-size: 30px;
+  }
+  
+  .beneficios__text {
+    font-family:poppins;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity ease 0.7s;
+
+  }
+  
+  
+  .beneficios {
+    position: relative;
+    height: 425px;
+    width: 458px;
+    border-radius: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 24px;
+    overflow: hidden; 
+  }
+  
+  .beneficios:hover .beneficios__container {
+    transform: translateY(0);
+  }
+  .beneficios:hover .beneficios__container .beneficios__text {
+    opacity: 1;
+    
+  }
+  
+  .beneficios:before {
+    content: "";
+    position: absolute;
+    inset:0;
+    z-index:0;
+    background-image: url(https://www.impulsyn.com/wp-content/uploads/2024/05/210616193554-01-michael-jordan-athlete-activism.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    transition: all 0.3s ease-in;
+    transition-delay: 0.1s;
+    
+  }
+  
+  .beneficios:hover:before {
+    inset:-10px;
+  }
+  
+  
+  
+  .beneficios:after {
+    content:"";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+  background-image: linear-gradient(
+        to bottom,
+        hsla(0, 0%, 0%, 0) 0%,
+        hsla(0, 0%, 0%, 0.009) 11.7%,
+        hsla(0, 0%, 0%, 0.034) 22.1%,
+        hsla(0, 0%, 0%, 0.072) 31.2%,
+        hsla(0, 0%, 0%, 0.123) 39.4%,
+        hsla(0, 0%, 0%, 0.182) 46.6%,
+        hsla(0, 0%, 0%, 0.249) 53.1%,
+        hsla(0, 0%, 0%, 0.320) 58.9%,
+        hsla(0, 0%, 0%, 0.394) 64.3%,
+        hsla(0, 0%, 0%, 0.468) 69.3%,
+        hsla(0, 0%, 0%, 0.540) 74.1%,
+        hsla(0, 0%, 0%, 0.607) 78.8%,
+        hsla(0, 0%, 0%, 0.668) 83.6%,
+        hsla(0, 0%, 0%, 0.721) 88.7%,
+        hsla(0, 0%, 0%, 0.762) 94.1%,
+        hsla(0, 0%, 0%, 0.790) 100%
+      );
+    z-index: 1;
+  
+    
+  }
+  
+  .beneficios__container {
+    transform: translateY(90%);
+    z-index: 2;
+    transition: transform calc(var(--d) * 2) var(--e);
+  }
+  
+
+  
+  .beneficios:hover {
+    background-size: 120%;
+    background-repeat: none;
+  }
