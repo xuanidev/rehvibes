@@ -1,11 +1,15 @@
-import { Beneficios, Header, Slides } from "../components/landing"
+import { Beneficios, Header, Slides, Funcionalidades , Video} from "../components/landing"
 
-export const LandingProducto = () => {
+export const 
+LandingProducto = () => {
     return(
         <>
         <Header/>
         <Beneficios/>
         <Slides/>
+        <Funcionalidades/>
+        <Video/>
+
         </>
     )
 }
