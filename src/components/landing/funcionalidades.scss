@@ -1,0 +1,39 @@
+@use '../../styles/abstracts/' as *;
+
+.icon-text_funcionalidades-section{
+    display: flex;
+    justify-content: space-between;
+    padding: 160px 240px;
+}
+
+.column_funcionalidades {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px); 
+    gap: 56px;
+}
+
+.element_funcionalidades {
+    display: flex;
+    align-items: center;
+}
+
+.element_funcionalidades img {
+    width: 90px;
+    height: 90px;
+    margin-right: 32px;
+}
+
+.text_funcionalidades h3 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.text_funcionalidades p {
+    margin: 16px 0 0;
+    font-family: Sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;;
+}
