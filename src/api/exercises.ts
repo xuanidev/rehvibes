@@ -55,3 +55,4 @@ export const getExercisesById = async (ids:string[]): Promise<Exercise[]> => {
         throw (error as Error).message;
     }
 };
+

@@ -1,7 +1,7 @@
 import './exercisesRoutine.scss';
 import { Exercise } from '../../models';
 import { FindReplace } from '../icons';
-import Sentadillas from '../../assets/routinesLibrary/sentadillas.png';
+import Sentadillas from '../../../public/assets/routinesLibrary/sentadillas.png';
 
 interface ExerciseRoutineProps {
   day: number;

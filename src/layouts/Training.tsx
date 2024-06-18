@@ -4,6 +4,8 @@ import { Exercise } from '../models';
 import { UserContext } from '../contexts/UserContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { getFromCookies, getFromLocalStorage, removeFromLocalStorageArray, saveOnLocalStorage } from '../utils/helpers';
+import { Modal } from '../components/Modal';
+import { useModal } from '../contexts/ModalContext';
 
 export const Training = () => {
   const navigate = useNavigate();
@@ -11,6 +13,16 @@ export const Training = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
   const { currentExercises, username } = useContext(UserContext);
+  const { showModalTraining, setShowModalTraining, pendingPath } = useModal();
+
+  const confirmNavigation = () => {
+    setShowModalTraining(false);
+    navigate(pendingPath);
+  };
+
+  const cancelNavigation = () => {
+    setShowModalTraining(false);
+  };
 
   const updateProgress = (step: number) => {
     const newProgress = (step / exercises.length) * 100;
@@ -37,6 +49,7 @@ export const Training = () => {
   };
   const handleSubmit = () => {
     removeFromLocalStorageArray(['currentExercises', 'currentStepTraining', 'progress']);
+    //updateProgram();
     navigate('/');
   };
 
@@ -80,6 +93,15 @@ export const Training = () => {
           progress={progress}
           handleSubmit={handleSubmit}
         />
+        {showModalTraining && (
+          <Modal
+            onConfirm={confirmNavigation}
+            onCancel={cancelNavigation}
+            text="¿Estás seguro de que deseas abandonar el entrenamiento? Se perderán sus datos guardados"
+            confirmText="Si, deseo salir"
+            cancelText="Cancelar"
+          />
+        )}
       </div>
     </div>
   );

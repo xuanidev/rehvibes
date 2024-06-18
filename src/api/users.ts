@@ -1,5 +1,5 @@
 import '../firebaseConfig.js'
-import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where, updateDoc } from "firebase/firestore"
 import uuid4 from "uuid4";
 
 import { User, UserFromApi } from '../models/index.js'
@@ -17,6 +17,7 @@ const undefinedUser = {
     horas: 0,
     logros:0,
     sesiones: 0,
+    ejerciciosFavoritos: [] as number[],
 }
 
 const usersRef = collection(db, "users");
@@ -94,5 +95,29 @@ export const removeUser = async (userId: string): Promise<boolean> => {
     } catch (error) {
         console.error('Error deleting user: ', error);
         return false;
+    }
+};
+
+export const updateUserFavorites = async (userId: string, exerciseId: number): Promise<void> => {
+    try {
+        const usersCollection = collection(db, 'users');
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '==', userId)));
+        let userData: UserFromApi | null = undefinedUser;
+
+        querySnapshot.forEach((doc) => {
+            userData = doc.data() as UserFromApi;
+        });
+        console.log(userData);
+        const ejercicios = userData.ejerciciosFavoritos ?? [] as number[];
+        ejercicios.push(exerciseId);
+        const data = {
+            ejerciciosFavoritos: ejercicios
+          };
+        
+        const docRef = doc(db, 'users', userId);
+        await updateDoc(docRef, data);
+        console.log('User updated successfully');
+    } catch (error) {
+        throw (error as Error).message;
     }
 };

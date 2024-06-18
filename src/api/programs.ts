@@ -61,6 +61,7 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
             horas: 0,
             logros:0,
             sesiones: 0,
+            ejerciciosFavoritos: [] as string[]
         }
         if(username !== ''){
             const user = await getUser(uid);

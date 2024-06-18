@@ -61,7 +61,8 @@ export const Progress80 = (props: ProgresProps) => {
         </defs>
       </svg>
       <h2>
-        Progreso<span className="span_training"> del entrenamiento</span>
+        Progreso <span className="span_training">del</span>
+        <span className="span_training"> entrenamiento</span>
       </h2>
     </div>
   );

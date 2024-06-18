@@ -3,7 +3,7 @@ import { signInWithGooglePopup, auth } from '../firebaseConfig';
 import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
 import {createUser } from './users.js';
 import { handleErrorMessageSignup,handleErrorMessageLogin, errorsLoginGoogle } from './errors.js';
-import { User } from '../models/index.js';
+import { User, cualidadesUser } from '../models/index.js';
 import { saveOnCookies } from '../utils/helpers.js';
 const db = getFirestore();
 
@@ -80,7 +80,9 @@ export const login = async (email: string, password: string ): Promise<LoginProp
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const userLogged = userCredential.user;
         uidAux = userLogged.uid;
+        const username = userLogged.displayName ?? '';
         saveOnCookies('uid', uidAux);
+        saveOnCookies('username', username);
         return {imgUrl: '', uid: uidAux}
     } catch (error) {
         const errorCode = (error as any).code ?? (error as any).message;
@@ -111,11 +113,12 @@ export const loginGoogle = async () => {
             name: displayName ?? '',
             email: email ?? '',
             google_id: true,
-            programs: [],
-            cualidades: [],
+            programs: [] as string[],
+            cualidades: [] as cualidadesUser[],
             horas: 0,
             logros: 0,
-            sesiones: 0
+            sesiones: 0,
+            ejerciciosFavoritos: [] as string[]
         });
 
         if (newUser) {

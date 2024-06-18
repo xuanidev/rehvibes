@@ -17,15 +17,12 @@
   }
 
   &__name {
-    font-size: 20px;
+    font-size: 26px;
     margin-block-start: 0em;
     margin-block-end: 0em;
-    @include breakpoint('md') {
-      font-size: 22px;
-    }
     
     @include breakpoint('3xl') {
-      font-size: 22px;
+      font-size: 32px;
     }
   }
 
@@ -43,9 +40,15 @@
 
   &__video {
     width: 100%;
-    height: 100%;
+    height: 250px;
     border-radius: 12px;
     object-fit: cover;
+    @include breakpoint('xs') {
+      height: 350px;
+    }
+    @include breakpoint('sm') {
+      height: 100%;
+    }
   }
 
   &__play_icon {
@@ -55,15 +58,15 @@
     height: 40px;
     width: 40px;
     @include breakpoint('md') {
-        top: calc(50% - 30px);
-        left: calc(50% - 30px);
-        height: 60px;
-        width: 60px;
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+      height: 40px;
+      width: 40px;
     }
-    fill: var(--color-secondary);
+    fill: var(--color-white);
     transition: all ease-in-out 0.1s;
     transition: opacity ease-in-out 0.25s;
-    filter: drop-shadow(0px 0px 2px #3b3b3b);
+    filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
     &__active {
       opacity: 0;
     }
@@ -72,14 +75,56 @@
 
     top: calc(50% - 21px);
     left: calc(50% - 21px);
-    height: 42px;
-    width: 42px;
+    height: 32px;
+    width: 32px;
     @include breakpoint('md') {
-        top: calc(50% - 31px);
-        left: calc(50% - 31px);
-        height: 62px;
-        width: 62px;
+        top: calc(50% - 21px);
+        left: calc(50% - 21px);
+        height: 42px;
+        width: 42px;
     }
+    cursor: pointer;
+  }
+  &__share_icon {
+    position: absolute;
+    top: 16px;
+    left: 22px;
+    height: 30px;
+    width: 30px;
+    fill: var(--color-white);
+    transition: all ease-in-out 0.1s;
+    transition: opacity ease-in-out 0.25s;
+    filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
+    &__active {
+      opacity: 0;
+    }
+  }
+  &__share_icon:hover {
+    top: 15px;
+    left: 21px;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+  }
+  &__favorites_icon {
+    position: absolute;
+    top: 16px;
+    right: 22px;
+    height: 30px;
+    width: 30px;
+    fill: var(--color-white);
+    transition: all ease-in-out 0.1s;
+    transition: opacity ease-in-out 0.25s;
+    filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
+    &__active {
+      opacity: 0;
+    }
+  }
+  &__favorites_icon:hover {
+    top: 15px;
+    right: 21px;
+    height: 32px;
+    width: 32px;
     cursor: pointer;
   }
 }

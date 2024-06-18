@@ -83,9 +83,13 @@
 }
 
 .header_training__buttons_icons{
+    display: none;
     display: flex;
     flex-direction: row;
     gap: 12px;
+    @include breakpoint('md'){
+        display: block;
+    }
 }
 
 .header_training__buttons_icon{

@@ -46,6 +46,7 @@ export const openAiToFirebase = (data: any, groups: string[], level?:string): Re
         program.level = level ?? '';
         program.weeks = (exercisesArray.length ? Math.ceil(exercisesArray.length / 7) : 0).toString();
         program.hours = '20';
+        program.completedDays = 0;
     }
     return program;
 };

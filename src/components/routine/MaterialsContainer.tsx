@@ -1,5 +1,5 @@
 import './materialsContainer.scss';
-import ImgDefault from '../../assets/routinesLibrary/exercise7.png';
+import ImgDefault from '../../../public/assets/routinesLibrary/exercise7.png';
 
 interface MaterialsContainerProps {
   materials: string[];

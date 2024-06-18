@@ -1,7 +1,6 @@
 import { Type } from '../icons';
 import Progress110 from './Progress110';
 import Progress80 from './Progress80';
-
 import './exerciseDescription.scss';
 
 interface ExerciseDescriptionProps {

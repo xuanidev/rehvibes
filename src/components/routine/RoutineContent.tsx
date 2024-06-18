@@ -1,6 +1,6 @@
 import { Exercise } from '../../models';
 import './routineContent.scss';
-import Esterilla from '../../assets/materials/esterilla.png';
+import Esterilla from '../../../public/assets/routinesLibrary/sentadillas.png';
 import ExerciseRoutine from './ExercisesRoutine';
 import MaterialsContainer from './MaterialsContainer';
 import BodyMap from '../BodyMap';

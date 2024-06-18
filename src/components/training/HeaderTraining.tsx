@@ -21,14 +21,6 @@ export const HeaderTraining = (props: HeaderTrainingProps) => {
         </div>
         <div className="header_training__buttons">
           <span className="header_training__buttons_span">Especial para {user}</span>
-          <div className="header_training__buttons_icons">
-            <div className="header_training__buttons_icon">
-              <Share className="header_training__buttons_svg" />
-            </div>
-            <div className="header_training__buttons_icon">
-              <AddToFavorites className="header_training__buttons_svg" />
-            </div>
-          </div>
         </div>
       </div>
       <LogoWordmarkWhite className="wordmark" />

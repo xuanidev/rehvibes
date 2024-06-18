@@ -14,10 +14,10 @@ interface ExerciseContainerProps {
 }
 export const ExerciseContainer = (props: ExerciseContainerProps) => {
   const { exercise, prevStep, nextStep, currentStep, length, progress, handleSubmit } = props;
-  console.log(exercise);
+  console.log(exercise.id);
   return (
     <div className="exercise_container">
-      <ExerciseFrame name={exercise.name} video={exercise.video} />
+      <ExerciseFrame name={exercise.name} video={exercise.video} currentExerciseId={exercise.id} />
       <ExerciseInfo
         exercise={exercise}
         prevStep={prevStep}

@@ -1,7 +1,7 @@
 import './newRoutines.scss';
 import Btn from './Btn';
 import Card from './Card';
-import ImgDefault from '../assets/routinesLibrary/pecho superior.png';
+import ImgDefault from '../../public/assets/routinesLibrary/pecho superior.png';
 import { useEffect, useRef } from 'react';
 import { Exercise } from '../models';
 interface NewRoutinesProps {

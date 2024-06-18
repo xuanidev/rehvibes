@@ -3,7 +3,7 @@ import { Plus, UserIcon } from '../components/icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastError } from '../constants';
-import PechoSuperior from '../assets/routinesLibrary/pecho superior.png';
+import PechoSuperior from '../../public/assets/routinesLibrary/pecho superior.png';
 
 export const DesignSystem = () => {
   return (

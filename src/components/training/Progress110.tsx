@@ -60,6 +60,10 @@ export const Progress110 = (props: ProgresProps) => {
           </linearGradient>
         </defs>
       </svg>
+      <h2>
+        Progreso <span className="span_training">del</span>
+        <span className="span_training"> entrenamiento</span>
+      </h2>
     </div>
   );
 };
