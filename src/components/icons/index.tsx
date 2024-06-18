@@ -24,3 +24,11 @@ export { Medal } from './Medal';
 export { Trophy } from './Trophy';
 export { Clock } from './Clock';
 export { Human } from './Human';
+export { Funcionalidades_1 } from './Funcionalidades_1';
+export { Funcionalidades_2 } from './Funcionalidades_2';
+export { Funcionalidades_3 } from './Funcionalidades_3';
+export { Funcionalidades_4 } from './Funcionalidades_4';
+export { Funcionalidades_5 } from './Funcionalidades_5';
+export { Funcionalidades_6 } from './Funcionalidades_6';
+
+

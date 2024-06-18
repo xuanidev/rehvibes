@@ -4,3 +4,4 @@ export { CardBeneficios } from "./CardBeneficios";
 export { Slides } from "./Slides";
 export { Funcionalidades } from "./Funcionalidades";
 export { Video } from "./Video";
+export { Claim } from "./Claim";
