@@ -1,0 +1,72 @@
+@use '../../styles/abstracts/' as *;
+
+.funcionalidades_section {
+    padding: 160px 240px;
+}
+
+.tittle_h2 {
+    font-family: 'Satoshi-Bold';
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.text_landing {
+    font-family: 'Satoshi-Regular';
+    font-weight: 500;
+    font-size: 22px;
+
+}
+.icon-text_funcionalidades-section{   
+    display: flex;
+    justify-content: space-between;
+    padding: 160px 240px;
+
+}
+
+.column_funcionalidades {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px); 
+    gap: 56px;
+}
+
+.element_funcionalidades {
+    display: flex;
+    align-items: center;
+}
+
+.element_funcionalidades img {
+    width: 90px;
+    height: 90px;
+    margin-right: 32px;
+}
+
+.text_funcionalidades h3 {
+    font-family: 'Satoshi-Medium';
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+    text-transform: none;
+    line-height: 34px;
+    span{
+        display: none;
+        @include breakpoint('md'){
+            display: block;
+        }
+    }
+}
+
+.text_funcionalidades p {
+    font-family: 'Satoshi-Regular';
+    font-size: 18px;
+    font-weight: 400;
+    margin: 16px 0 0;
+    line-height: 22px;
+}
+
+.icon_funcionalidades{
+    height: 90px;
+    width: auto;
+    margin-right: 32px;
+    margin-bottom: auto;
+}
