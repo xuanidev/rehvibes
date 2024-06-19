@@ -11,13 +11,22 @@ interface ExerciseContainerProps {
   length: number;
   progress: number;
   handleSubmit: () => void;
+  favorites: number[];
+  updateFavorites: (value: number) => void;
 }
 export const ExerciseContainer = (props: ExerciseContainerProps) => {
-  const { exercise, prevStep, nextStep, currentStep, length, progress, handleSubmit } = props;
-  console.log(exercise.id);
+  const { exercise, prevStep, nextStep, currentStep, length, progress, handleSubmit, favorites, updateFavorites } =
+    props;
+
   return (
     <div className="exercise_container">
-      <ExerciseFrame name={exercise.name} video={exercise.video} currentExerciseId={exercise.id} />
+      <ExerciseFrame
+        name={exercise.name}
+        video={exercise.video}
+        currentExerciseId={exercise.id}
+        favorites={favorites}
+        updateFavorites={updateFavorites}
+      />
       <ExerciseInfo
         exercise={exercise}
         prevStep={prevStep}

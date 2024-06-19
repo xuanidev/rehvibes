@@ -36,8 +36,17 @@ export const Landing = () => {
   const [horas, setHoras] = useState<number>(0);
   const [sessions, setSessions] = useState<number>(0);
   const [achievements, setAchievements] = useState<number>(0);
-  const { username, setUsername, programs, setPrograms, rehabDays, setRehabDays, routineInfo, setRoutineInfo } =
-    useContext(UserContext);
+  const [progress, setProgress] = useState<number>(0);
+  const {
+    username,
+    setUsername,
+    setPrograms,
+    setCurrentProgramId,
+    rehabDays,
+    setRehabDays,
+    routineInfo,
+    setRoutineInfo,
+  } = useContext(UserContext);
 
   const [exercises, setExercises] = useState<Exercise[]>();
   const uid = getFromCookies('uid');
@@ -46,6 +55,7 @@ export const Landing = () => {
   const getProgramsData = async () => {
     try {
       const programsResponse = await getProgramByUserID(uid);
+      setPrograms(programsResponse);
       if (programsResponse && programsResponse.length > 0) {
         const firstProgram = programsResponse[0];
         const info: RoutineInfo = {
@@ -57,13 +67,18 @@ export const Landing = () => {
         };
         setRoutineInfo(info);
         saveOnLocalStorage('mainProgram', JSON.stringify(info));
+        setProgress(
+          firstProgram.completedDays && firstProgram.days
+            ? Number(((firstProgram.completedDays / firstProgram.days) * 100).toFixed(2))
+            : 0,
+        );
+        setCurrentProgramId(firstProgram.uid ?? '');
       }
 
       retrieveDates(programsResponse || [], setRehabDays);
     } catch {
       const toastIdAux = toast.error('No se han podido cargar los programas, recarga la página por favor', toastError);
       toast(toastIdAux);
-      console.log(programs);
     }
   };
 
@@ -78,7 +93,6 @@ export const Landing = () => {
       setAchievements(userResponse.logros ?? 0);
       saveOnLocalStorage('userInfo', JSON.stringify(userResponse));
     } catch {
-      console.log('error');
       const toastIdAux = toast.error('No se han podido cargar el usuario', toastError);
       toast(toastIdAux);
     }
@@ -92,6 +106,7 @@ export const Landing = () => {
     const exercisesFromApi = await getExercises();
     setExercises(exercisesFromApi);
   };
+
   const setCalendarDays = (value: string) => {
     const days = JSON.parse(value);
     const dates = days.map((date: string) => {
@@ -110,14 +125,11 @@ export const Landing = () => {
     const userFromStorage = getFromLocalStorage('userInfo');
     if (programFromStorage !== '' && rehabDaysFromStorage !== '') {
       const routineInfo = JSON.parse(programFromStorage);
-      console.log(routineInfo);
       setRoutineInfo(routineInfo);
       setCalendarDays(rehabDaysFromStorage);
     } else {
       getProgramsData();
     }
-    console.log(userFromStorage);
-    console.log(uid);
     if (uid !== '' && userFromStorage === '') {
       getUserData();
     }
@@ -140,7 +152,7 @@ export const Landing = () => {
         </div>
         <div className="components_right">
           <div className="components_right_top">
-            <ProgressBar />
+            <ProgressBar progress={progress} />
             <Calendar rehabDays={rehabDays || []} />
           </div>
           <Achievements hours={horas} sessions={sessions} achievements={achievements} />

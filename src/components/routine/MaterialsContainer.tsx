@@ -15,7 +15,7 @@ export const MaterialsContainer = (props: MaterialsContainerProps) => {
       <ul className="routine_content__material_list">
         {materials.map((material: string) => {
           return (
-            <li className="routine_content__material">
+            <li className="routine_content__material" key={material}>
               {material} <img src={srcImg} className="routine_content__material_img" />
             </li>
           );

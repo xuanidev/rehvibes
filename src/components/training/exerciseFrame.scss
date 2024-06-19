@@ -92,12 +92,8 @@
     height: 30px;
     width: 30px;
     fill: var(--color-white);
-    transition: all ease-in-out 0.1s;
-    transition: opacity ease-in-out 0.25s;
+    transition: fill ease-in-out 0.5s;
     filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
-    &__active {
-      opacity: 0;
-    }
   }
   &__share_icon:hover {
     top: 15px;
@@ -105,6 +101,7 @@
     height: 32px;
     width: 32px;
     cursor: pointer;
+    transition: all ease-in-out 0.2s;
   }
   &__favorites_icon {
     position: absolute;
@@ -113,12 +110,8 @@
     height: 30px;
     width: 30px;
     fill: var(--color-white);
-    transition: all ease-in-out 0.1s;
-    transition: opacity ease-in-out 0.25s;
+    transition: fill ease-in-out 0.5s;
     filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
-    &__active {
-      opacity: 0;
-    }
   }
   &__favorites_icon:hover {
     top: 15px;
@@ -126,5 +119,11 @@
     height: 32px;
     width: 32px;
     cursor: pointer;
+    transition: all ease-in-out 0.2s;
   }
+}
+
+.disabled_icon{
+  fill: var(--color-secondary);
+  filter: drop-shadow(0px 0px 1px hsla(0, 0%, 47%, 0.4));
 }

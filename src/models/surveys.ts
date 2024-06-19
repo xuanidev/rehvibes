@@ -183,6 +183,7 @@ export interface RehabilitationDay {
 
 export interface RehabilitationProgramProps {
     rehabilitation_program: RehabilitationDay[];
+    finished: boolean;
     days?: number;
     exercices?: string[];
     uid?: string;

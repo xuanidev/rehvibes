@@ -4,23 +4,42 @@ import './exerciseFrame.scss';
 import classNames from 'classnames';
 import ExerciseVideo from '../../assets/videos/sentadillas.mp4';
 import { getFromCookies } from '../../utils/helpers';
-import { updateUserFavorites } from '../../api/users';
+import { addExerciseToFavorites, removeExerciseFromFavorites } from '../../api/users';
 
 interface ExerciseFrameProps {
   name: string;
   video?: string;
   currentExerciseId: number;
+  favorites: number[];
+  updateFavorites: (value: number) => void;
 }
 
 export const ExerciseFrame = (props: ExerciseFrameProps) => {
-  const { name, video, currentExerciseId } = props;
+  const { name, video, currentExerciseId, favorites, updateFavorites } = props;
 
   const [play, setPlay] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleClick = () => {
     setPlay(!play);
   };
+
+  const handleFavorites = async () => {
+    try {
+      if (isFavorite) {
+        await removeExerciseFromFavorites(getFromCookies('uid'), currentExerciseId);
+      } else {
+        await addExerciseToFavorites(getFromCookies('uid'), currentExerciseId);
+      }
+      setIsFavorite(!isFavorite);
+      updateFavorites(favorites.push(currentExerciseId)); // Update favorites after changing the database
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    setIsFavorite(favorites.includes(currentExerciseId));
+  }, [favorites, currentExerciseId]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -33,7 +52,6 @@ export const ExerciseFrame = (props: ExerciseFrameProps) => {
     }
   }, [play]);
 
-  console.log(video);
   return (
     <div className="exercise_frame">
       <h2 className="exercise_frame__name">{name}</h2>
@@ -67,14 +85,17 @@ export const ExerciseFrame = (props: ExerciseFrameProps) => {
           })}
         />
         <AddToFavorites
+          key={currentExerciseId}
           className={classNames({
             exercise_frame__favorites_icon: true,
             ['exercise_frame__favorites_icon__active']: play,
+            ['disabled_icon']: isFavorite,
           })}
-          onClick={async () => await updateUserFavorites(getFromCookies('uid'), currentExerciseId)}
+          onClick={handleFavorites}
         />
       </div>
     </div>
   );
 };
+
 export default ExerciseFrame;

@@ -1,11 +1,12 @@
 import '../firebaseConfig.js'
-import { getFirestore, collection, doc, setDoc, getDocs, query, where } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, getDocs, query, where, updateDoc } from "firebase/firestore"
 import { GenerateProgramProps,RehabilitationProgramProps} from '../models/surveys.js';
 import { getUser, updateUser } from './users.js';
 import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
 import uuid4 from 'uuid4';
 import { cualidadesDefault } from '../constants.js';
+import { Program} from '../models/index.js';
 const db = getFirestore();
 
 
@@ -39,6 +40,26 @@ export const getProgramByUserID = async (userID: string): Promise<Rehabilitation
     }
 }
 
+
+export const getProgramByID = async (programId: string): Promise<RehabilitationProgramProps> => {
+    try {
+        const programsCollection = collection(db, 'programs');
+        const q = query(programsCollection, where('uid', '==', programId));
+        const querySnapshot = await getDocs(q);
+
+        let program = {} as RehabilitationProgramProps;
+        
+        querySnapshot.forEach((doc) => {
+            program = doc.data() as RehabilitationProgramProps;
+        });
+        console.log(program);
+        return program;
+    } catch (error) {
+        console.error('Error fetching program by userID:', error);
+        throw error;
+    }
+};
+
 export const generateProgram = async (props: GenerateProgramProps)  => {
     const { rehabilitation_program, patient_profile} = props;
     const uid = getFromCookies('uid');
@@ -61,7 +82,7 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
             horas: 0,
             logros:0,
             sesiones: 0,
-            ejerciciosFavoritos: [] as string[]
+            ejerciciosFavoritos: [] as number[]
         }
         if(username !== ''){
             const user = await getUser(uid);
@@ -77,40 +98,30 @@ export const generateProgram = async (props: GenerateProgramProps)  => {
         throw (error as Error).message;
     }
 }
-  
-/*
-export const getProgramByID = async (userID: string): Promise<ProgramFromApi | null> => {
-    try {
-        const programsCollection = collection(db, 'programs');
-        const q = query(programsCollection, where('id', '==', userID));
-        const querySnapshot = await getDocs(q);
 
-        let program: ProgramFromApi | null = null;
-        
-        querySnapshot.forEach((doc) => {
-            program = doc.data() as ProgramFromApi;
-        });
 
-        return program;
-    } catch (error) {
-        console.error('Error fetching program by userID:', error);
-        throw error; // Re-throw the error to propagate it further if necessary
-    }
-};
-
-export const updateProgram = async (programId: string, updatedProgramData: Program): Promise<boolean> => {
+export const updateAfterExercise = async (programId: string): Promise<boolean> => {
     try {
         const programDocRef = doc(db, 'programs', programId);
-        await setDoc(programDocRef, updatedProgramData);
-        console.log('Program updated successfully');
+        let program = {} as RehabilitationProgramProps;
+        program = await getProgramByID(programId);
+        const completedDays = program.completedDays ?? 0;
+        const days = program.days ?? 0;
+        const newCompletedDays = completedDays +1 < days ? completedDays +1 : completedDays;
+        const data = {
+            completedDays: newCompletedDays,
+            finished: newCompletedDays === days
+        }
+        console.log(data);
+        await updateDoc(programDocRef, data);
         return true;
     } catch (error) {
-        console.error('Error updating program: ', error);
         return false;
     }
 };
 
 
+/*
 export const removeProgram = async (programId: string): Promise<boolean> => {
     try {
         const programDocRef = doc(db, 'programs', programId);

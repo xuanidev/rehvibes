@@ -4,7 +4,8 @@ import { getFromCookies } from "../utils/helpers";
 
 export const openAiToFirebase = (data: any, groups: string[], level?:string): RehabilitationProgramProps => {
     const program: RehabilitationProgramProps = {
-        rehabilitation_program: []
+        rehabilitation_program: [],
+        finished: false
     };
 
     const exercisesArray = data.rehabilitation_program.days || data.rehabilitation_program.exercises || data.rehabilitation_program.exercises_per_day || data.rehabilitation_program.program || data.rehabilitation_program.rehabilitation_program;

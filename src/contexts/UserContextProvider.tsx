@@ -6,6 +6,8 @@ interface UserContextModel {
   setUsername: (username: string) => void;
   programs?: RehabilitationProgramProps[];
   setPrograms: (programs: RehabilitationProgramProps[]) => void;
+  currentProgramId: string;
+  setCurrentProgramId: (currentProgramId: string) => void;
   rehabDays?: Date[];
   setRehabDays: (rehabDays: Date[]) => void;
   routineInfo?: RoutineInfo;
@@ -20,6 +22,10 @@ const context: UserContextModel = {
   },
   programs: [] as RehabilitationProgramProps[],
   setPrograms: () => {
+    return;
+  },
+  currentProgramId: '',
+  setCurrentProgramId: () => {
     return;
   },
   rehabDays: [] as Date[],
@@ -45,6 +51,7 @@ interface UserContextProviderProps {
 export const UserContextProvider = ({ children }: UserContextProviderProps): JSX.Element | null => {
   const [username, setUsername] = useState<string>('');
   const [programs, setPrograms] = useState<RehabilitationProgramProps[]>([]);
+  const [currentProgramId, setCurrentProgramId] = useState<string>('');
   const [rehabDays, setRehabDays] = useState<Date[]>([]);
   const [routineInfo, setRoutineInfo] = useState<RoutineInfo>({
     description: '',
@@ -57,15 +64,17 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
 
   const contextValue = {
     username,
-    setUsername: setUsername,
+    setUsername,
     programs,
-    setPrograms: setPrograms,
+    setPrograms,
+    currentProgramId,
+    setCurrentProgramId,
     rehabDays,
-    setRehabDays: setRehabDays,
+    setRehabDays,
     routineInfo,
-    setRoutineInfo: setRoutineInfo,
+    setRoutineInfo,
     currentExercises,
-    setCurrentExercises: setCurrentExercises,
+    setCurrentExercises,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;

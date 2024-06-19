@@ -6,14 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import { getFromCookies, getFromLocalStorage, removeFromLocalStorageArray, saveOnLocalStorage } from '../utils/helpers';
 import { Modal } from '../components/Modal';
 import { useModal } from '../contexts/ModalContext';
+import { getFavorites } from '../api/users';
+import { updateAfterExercise } from '../api/programs';
 
 export const Training = () => {
   const navigate = useNavigate();
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
-  const { currentExercises, username } = useContext(UserContext);
+  const { currentExercises, username, currentProgramId } = useContext(UserContext);
   const { showModalTraining, setShowModalTraining, pendingPath } = useModal();
+  const [favorites, setFavorites] = useState<number[]>([]);
 
   const confirmNavigation = () => {
     setShowModalTraining(false);
@@ -46,19 +49,26 @@ export const Training = () => {
       saveOnLocalStorage('currentStepTraining', newStep.toString());
       updateProgress(newStep);
     }
+    console.log(currentProgramId);
   };
+
   const handleSubmit = () => {
     removeFromLocalStorageArray(['currentExercises', 'currentStepTraining', 'progress']);
-    //updateProgram();
+    updateAfterExercise(currentProgramId);
     navigate('/');
   };
 
+  const handleFavorites = async () => {
+    const auxFavorites = await getFavorites(getFromCookies('uid'));
+    setFavorites(auxFavorites);
+  };
+
   useEffect(() => {
+    handleFavorites();
+
     if (currentExercises && currentExercises.length === 0) {
-      console.log(currentExercises);
       const exercisesFromStorage = getFromLocalStorage('currentExercises');
       if (exercisesFromStorage !== '[]' && exercisesFromStorage !== '') {
-        console.log('entra');
         setExercises(JSON.parse(exercisesFromStorage));
       }
       const currentStepTraining = getFromLocalStorage('currentStepTraining');
@@ -92,6 +102,8 @@ export const Training = () => {
           length={exercises.length}
           progress={progress}
           handleSubmit={handleSubmit}
+          favorites={favorites}
+          updateFavorites={handleFavorites} // Pass updateFavorites function
         />
         {showModalTraining && (
           <Modal
