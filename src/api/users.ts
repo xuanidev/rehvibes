@@ -1,5 +1,5 @@
 import '../firebaseConfig.js'
-import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, deleteDoc, getDocs, query, where, updateDoc } from "firebase/firestore"
 import uuid4 from "uuid4";
 
 import { User, UserFromApi } from '../models/index.js'
@@ -17,6 +17,7 @@ const undefinedUser = {
     horas: 0,
     logros:0,
     sesiones: 0,
+    ejerciciosFavoritos: [] as number[],
 }
 
 const usersRef = collection(db, "users");
@@ -73,14 +74,10 @@ export const getUsers = async () => {
 
 export const updateUser = async (userId: string, updatedUserData: User): Promise<boolean> => {
     try {
-        console.log(userId);
-        console.log(updatedUserData);
         const userDocRef = doc(db, 'users', userId);
         await setDoc(userDocRef, updatedUserData);
-        console.log('User updated successfully');
         return true
     } catch (error) {
-        console.error('Error updating user: ', error);
         return false;
     }
 };
@@ -89,10 +86,74 @@ export const removeUser = async (userId: string): Promise<boolean> => {
     try {
         const userDocRef = doc(db, 'users', userId);
         await deleteDoc(userDocRef);
-        console.log('User deleted successfully');
         return true
     } catch (error) {
-        console.error('Error deleting user: ', error);
         return false;
+    }
+};
+
+export const getFavorites = async (userId: string): Promise<number[]> => {
+    try {
+        const usersCollection = collection(db, 'users');
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '==', userId)));
+        let userData: UserFromApi | null = undefinedUser;
+
+        querySnapshot.forEach((doc) => {
+            userData = doc.data() as UserFromApi;
+        });
+        return userData.ejerciciosFavoritos ?? [];
+    } catch (error) {
+        throw (error as Error).message;
+    }
+};
+
+export const addExerciseToFavorites = async (userId: string, exerciseId: number): Promise<void> => {
+    try {
+        const usersCollection = collection(db, 'users');
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '==', userId)));
+        let userData: UserFromApi | null = undefinedUser;
+
+        querySnapshot.forEach((doc) => {
+            userData = doc.data() as UserFromApi;
+        });
+
+        const ejercicios = userData.ejerciciosFavoritos ?? [] as number[];
+        if(ejercicios.indexOf(exerciseId) === -1){
+            ejercicios.push(exerciseId);
+            const data = {
+                ejerciciosFavoritos: ejercicios
+            };
+            
+            const docRef = doc(db, 'users', userId);
+            await updateDoc(docRef, data);
+        }
+    } catch (error) {
+        throw (error as Error).message;
+    }
+};
+
+export const removeExerciseFromFavorites = async (userId: string, exerciseId: number): Promise<void> => {
+    try {
+        const usersCollection = collection(db, 'users');
+        const querySnapshot = await getDocs(query(usersCollection, where('uid', '==', userId)));
+        let userData: UserFromApi | null = undefinedUser;
+
+        querySnapshot.forEach((doc) => {
+            userData = doc.data() as UserFromApi;
+        });
+        const ejercicios = userData.ejerciciosFavoritos ?? [] as number[];
+        ejercicios.filter((exercise: number) => {
+            return exercise !== exerciseId
+        })
+        const updatedEjercicios = ejercicios.filter((exercise: number) => {
+            return exercise !== exerciseId;
+        });
+        const data = {
+            ejerciciosFavoritos: updatedEjercicios
+        };
+        const docRef = doc(db, 'users', userId);
+        await updateDoc(docRef, data);
+    } catch (error) {
+        throw (error as Error).message;
     }
 };

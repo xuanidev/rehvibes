@@ -15,6 +15,7 @@ export interface User {
     horas: number,
     logros: number,
     sesiones: number,
+    ejerciciosFavoritos: number[]
 }
 
 export interface UserFromApi {
@@ -28,6 +29,7 @@ export interface UserFromApi {
     horas: number,
     logros: number,
     sesiones: number,
+    ejerciciosFavoritos: number[]
 }
 
 export interface SignUpData {
@@ -36,4 +38,12 @@ export interface SignUpData {
     username: string;
     email: string;
     pass: string;
+}
+
+export interface RoutineInfo {
+    description: string;
+    difficulty: string;
+    totalTimeWeeks: string;
+    totalTimeHours: string;
+    mainAreas: string[];
 }

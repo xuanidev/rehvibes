@@ -1,0 +1,30 @@
+@use '../../styles/abstracts/' as *;
+
+.routine_content{
+    margin-top: -22px;
+    background-color: var(--color-white);
+    height: auto;
+    width: 100%;
+    padding: 22px 24px 48px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    @include breakpoint('md'){
+        padding: 22px 25px 22px 50px;
+        gap: 20px;
+    }
+    @include breakpoint('lg'){
+        padding: 22px 25px 0px 50px;
+        gap: 20px;
+    }
+    border-radius: 22px 22px 0px 0px;
+}
+.display_none{
+    display: none;
+}
+.working_zones{
+    height: auto;
+    @include breakpoint('md'){
+        gap: 20px;
+    }
+}

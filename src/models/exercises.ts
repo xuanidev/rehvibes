@@ -1,5 +1,6 @@
 export interface ExerciseFromApiFirebase {
     description: string,
+    type: string,
     difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
     equipment:string[],
     frequency: number,
@@ -21,6 +22,7 @@ export interface ExerciseFromApiFirebase {
 
 export interface Exercise {
     description: string,
+    type: string,
     difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
     equipment:string[],
     frequency: number,
@@ -37,5 +39,6 @@ export interface Exercise {
     secondAreas: string[],
     series: number,
     video:string,
-    creationDate?: string
+    creationDate?: string,
+
 }

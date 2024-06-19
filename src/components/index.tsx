@@ -7,7 +7,7 @@ export { StripedBar } from './StripedBar';
 export { InfoTrabajado } from './InfoTrabajado';
 export { LoaderContainer } from './LoaderContainer';
 export { Achievements } from './Achievements';
-export { RoutineContainer } from './RoutineInfo';
+export { RoutineContainer } from './routine/RoutineInfo';
 export { ProgressBar } from './ProgressBar';
 export { AddWorkoutBtn } from './AddWorkoutBtn';
 export { BtnNtf } from './BtnNtf';

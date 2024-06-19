@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react';
 import './progressBar.scss';
 
-export const ProgressBar = () => {
-  const [progress, setProgress] = useState<number>(0);
-
-  useEffect(() => {
-    const initialProgress = Math.floor(Math.random() * 101);
-    setProgress(initialProgress);
-  }, []);
-
+interface ProgressBarProps {
+  progress: number;
+}
+export const ProgressBar = ({ progress }: ProgressBarProps) => {
   const radius = 65;
   const circumference = 2 * Math.PI * radius;
   const dashOffset = circumference - (progress / 100) * circumference;

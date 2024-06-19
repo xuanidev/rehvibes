@@ -3,7 +3,7 @@ import { signInWithGooglePopup, auth } from '../firebaseConfig';
 import { getFirestore, collection, where, query, getDocs } from "firebase/firestore";
 import {createUser } from './users.js';
 import { handleErrorMessageSignup,handleErrorMessageLogin, errorsLoginGoogle } from './errors.js';
-import { User } from '../models/index.js';
+import { User, cualidadesUser } from '../models/index.js';
 import { saveOnCookies } from '../utils/helpers.js';
 const db = getFirestore();
 
@@ -11,7 +11,6 @@ const chekcIfExists = async (id:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("google_id", "==", id));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     if(querySnapshot.size > 0){
         return true
     }
@@ -21,7 +20,6 @@ const checkIfEmailExists = async (email:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     if(querySnapshot.size > 0){
         return true
     }
@@ -31,7 +29,6 @@ const checkIfGoogle = async (email:string): Promise<boolean> =>{
     const usersRef = collection(db, 'users');
     const q = query(usersRef, where("google_id", "==", true), where("email", "==", email));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.size);
     if(querySnapshot.size > 0){
         return true
     }
@@ -56,7 +53,8 @@ export const signup = async (email: string, password: string, name:string)=> {
           cualidades: [],
           horas: 0,
           logros: 0,
-          sesiones: 0
+          sesiones: 0,
+          ejerciciosFavoritos: []
       };
       await createUser(newUser);
       saveOnCookies('uid', user);
@@ -81,13 +79,13 @@ export const login = async (email: string, password: string ): Promise<LoginProp
           throw new Error('auth/correo-usado');  
         }
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log(userCredential);
         const userLogged = userCredential.user;
         uidAux = userLogged.uid;
+        const username = userLogged.displayName ?? '';
         saveOnCookies('uid', uidAux);
+        saveOnCookies('username', username);
         return {imgUrl: '', uid: uidAux}
     } catch (error) {
-        console.log(error);
         const errorCode = (error as any).code ?? (error as any).message;
         throw new Error(handleErrorMessageLogin(errorCode))
     }
@@ -116,11 +114,12 @@ export const loginGoogle = async () => {
             name: displayName ?? '',
             email: email ?? '',
             google_id: true,
-            programs: [],
-            cualidades: [],
+            programs: [] as string[],
+            cualidades: [] as cualidadesUser[],
             horas: 0,
             logros: 0,
-            sesiones: 0
+            sesiones: 0,
+            ejerciciosFavoritos: [] as number[]
         });
 
         if (newUser) {
@@ -135,7 +134,6 @@ export const loginGoogle = async () => {
         throw new Error(errorsLoginGoogle.errorCrearUsuarioMsg);
     } catch (error) {
         const errorCode = (error as any).code;
-        console.log(errorCode);
         throw new Error(handleErrorMessageLogin(errorCode))
     }
 }

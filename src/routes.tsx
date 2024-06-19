@@ -3,13 +3,14 @@ import { App } from './App';
 import { Login } from './layouts/Login';
 import { Signup } from './layouts/Signup';
 import { Survey } from './layouts/Survey';
-import { Main } from './layouts/Main';
 import { Landing } from './layouts/Landing';
 import DesignSystem from './layouts/DesignSystem';
 import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
 import { LandingProducto } from './layouts/LandingProducto';
 import { getFromCookies } from './utils/helpers';
+import Routine from './layouts/Routine';
+import { Training } from './layouts/Training';
 
 const loaderToLogin = () => {
   const uidCookie = getFromCookies('uid');
@@ -42,16 +43,16 @@ export const router = createBrowserRouter([
         element: <Landing />,
       },
       {
-        path: '/app',
-        element: <Main />,
+        path: '/routine/:programId',
+        element: <Routine />,
+        loader: loaderToLogin,
+      },
+      {
+        path: '/training',
+        element: <Training />,
         loader: loaderToLogin,
       },
     ],
-    loader: loaderToLogin,
-  },
-  {
-    path: '/app',
-    element: <Main />,
     loader: loaderToLogin,
   },
   {

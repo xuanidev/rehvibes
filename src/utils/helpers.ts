@@ -7,6 +7,11 @@ export const saveOnLocalStorage = (name: string, value: string) =>{
 export const removeFromLocalStorage = (name: string) =>{
     localStorage.removeItem(name);
 }
+export const removeFromLocalStorageArray = (names: string[]) =>{
+    names.forEach((name: string) => {
+        localStorage.removeItem(name);
+    })
+}
 export const getFromLocalStorage = (name: string):string =>{
     return localStorage.getItem(name) ?? '';
 }
@@ -22,7 +27,7 @@ export const removeFromCookies = (names: string[]) =>{
     })
 }
 
-export const retrieveDates = (programs: RehabilitationProgramProps[], setRehabDays: React.Dispatch<React.SetStateAction<Date[]>>) => {
+export const retrieveDates = (programs: RehabilitationProgramProps[], setRehabDays: (rehabDays: Date[]) => void) => {
     console.log(programs);
     const dates = [] as Date[];
     if (programs.length > 0) {

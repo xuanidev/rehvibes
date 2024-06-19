@@ -17,11 +17,14 @@
   width: 300px; 
   height: 400px;
   z-index: 1;
+    padding: 10px;
 }
   
 .showNtf li {
   padding: 10px;
+  background-color: var(--color-primary-light);
   border-bottom: 1px solid #eee;
+  border-radius: 4px;
 }
   
 .showNtf li:last-child {
