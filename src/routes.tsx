@@ -3,7 +3,6 @@ import { App } from './App';
 import { Login } from './layouts/Login';
 import { Signup } from './layouts/Signup';
 import { Survey } from './layouts/Survey';
-import { Main } from './layouts/Main';
 import { Landing } from './layouts/Landing';
 import DesignSystem from './layouts/DesignSystem';
 import Cookies from 'js-cookie';
@@ -44,12 +43,7 @@ export const router = createBrowserRouter([
         element: <Landing />,
       },
       {
-        path: '/app',
-        element: <Main />,
-        loader: loaderToLogin,
-      },
-      {
-        path: '/routine',
+        path: '/routine/:programId',
         element: <Routine />,
         loader: loaderToLogin,
       },
@@ -59,11 +53,6 @@ export const router = createBrowserRouter([
         loader: loaderToLogin,
       },
     ],
-    loader: loaderToLogin,
-  },
-  {
-    path: '/app',
-    element: <Main />,
     loader: loaderToLogin,
   },
   {

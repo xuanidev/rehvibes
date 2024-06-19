@@ -135,3 +135,25 @@
     width: 18px;
     fill: white;
 }
+
+
+.header_routine__top_select {
+    width: auto;
+    height: 100%;
+    border: 1px solid var(--color-white);
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    appearance: none;
+    padding: 0 10px;
+    font-size: 14px;
+}
+.header_routine__top_select:focus-visible{
+    outline: none;
+}
+.header_routine__top_select option {
+    padding: 8px;
+    background-color: transparent;
+    color: var(--color-black);
+}

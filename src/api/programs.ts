@@ -22,7 +22,7 @@ export const postPogram = async (program: RehabilitationProgramProps) =>{
     }
 }
 
-export const getProgramByUserID = async (userID: string): Promise<RehabilitationProgramProps[]> => {
+export const getProgramsByUserID = async (userID: string): Promise<RehabilitationProgramProps[]> => {
     try {
         const user = await getUser(userID);
         const programsCollection = collection(db, 'programs');
@@ -57,6 +57,24 @@ export const getProgramByID = async (programId: string): Promise<RehabilitationP
     } catch (error) {
         console.error('Error fetching program by userID:', error);
         throw error;
+    }
+};
+
+export const getProgramsById = async (ids:string[]): Promise<RehabilitationProgramProps[]> => {
+    try{
+        const programsCollection = collection(db, "programs");
+        const programsSnapshot = await getDocs(query(programsCollection, where("id", "in", ids)));
+
+
+        const programsData: RehabilitationProgramProps[] = [];
+        programsSnapshot.forEach((doc) => {
+            console.log(doc.data());
+            const usersData = doc.data() as RehabilitationProgramProps;
+            programsData.push(usersData);
+        });
+        return programsData;
+    }catch(error){
+        throw (error as Error).message;
     }
 };
 

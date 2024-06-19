@@ -148,9 +148,9 @@
         border-radius: 8px;
         font-family: 'Satoshi-Medium';
     }
-    a.active:hover{
+    a .active:hover{
         margin-bottom: 0px;
-        cursor: pointer;
+        cursor: default;
     }
 }
 .hidden_option{

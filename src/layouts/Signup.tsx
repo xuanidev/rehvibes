@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { loginGoogle, signup } from '../api/login';
 import { useNavigate, Link } from 'react-router-dom';
 import { InputIcon, Btn } from '../components';
@@ -32,7 +32,7 @@ export const Signup = () => {
   const handleSignup = async () => {
     try {
       await signup(email, password, name);
-      saveOnCookies('currentSurvey', 'true');
+      saveOnCookies('currentSurvey', 'false');
       navigate('/survey');
     } catch (error) {
       const errorMessage = (error as Error).message;

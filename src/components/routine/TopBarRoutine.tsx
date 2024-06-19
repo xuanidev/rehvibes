@@ -2,12 +2,18 @@ import './topBarRoutine.scss';
 import profileImg from '../../assets/profileImg.png';
 import { LogoWordmarkWhite } from '../branding';
 import { AddToFavorites, Share } from '../icons';
+import { useState } from 'react';
 
 interface TopBarRoutineProps {
   user: string;
 }
 export const TopBarRoutine = (props: TopBarRoutineProps) => {
   const { user } = props;
+  const [selectedOption, setSelectedOption] = useState('option1');
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <>
@@ -21,6 +27,11 @@ export const TopBarRoutine = (props: TopBarRoutineProps) => {
             <div className="header_routine__top_icon">
               <AddToFavorites className="header_routine__top_svg" />
             </div>
+            <select className="header_routine__top_select" value={selectedOption} onChange={handleSelectChange}>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
           </div>
         </div>
         <div className="welcome_routine">
@@ -45,6 +56,11 @@ export const TopBarRoutine = (props: TopBarRoutineProps) => {
             <div className="header_routine__top_icon">
               <AddToFavorites className="header_routine__top_svg" />
             </div>
+            <select className="header_routine__top_select" value={selectedOption} onChange={handleSelectChange}>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
           </div>
         </div>
       </div>

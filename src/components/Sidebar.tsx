@@ -5,13 +5,13 @@ import profileImg from '../assets/profileImg.png';
 import { removeFromCookies, removeFromLocalStorageArray } from '../utils/helpers';
 import { useModal } from '../contexts/ModalContext';
 import { Modal } from './Modal';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContextProvider';
+import { UserFromApi } from '../models';
 
-interface SideBarProps {
-  username?: string;
-}
-
-export const SideBar = ({ username }: SideBarProps) => {
+export const SideBar = () => {
   const { showModal, setShowModal, setShowModalTraining, setPendingPath } = useModal();
+  const { userInfo, username, currentProgramId } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -51,7 +51,7 @@ export const SideBar = ({ username }: SideBarProps) => {
           <img src={profileImg} className="profile_img" />
           <div className="profile__info">
             <span className="profile__name">{username ?? ''}</span>
-            vtr_91
+            {userInfo !== ({} as UserFromApi) ? <span>{userInfo.username}</span> : <span>{username}</span>}
           </div>
         </div>
         <ul className="sidebar__bar">
@@ -71,11 +71,11 @@ export const SideBar = ({ username }: SideBarProps) => {
 
           <li className="sidebar_bar_option">
             <NavLink
-              to="/routine"
+              to={`/routine/${currentProgramId}`}
               className={({ isActive }) => (isActive || location.pathname === '/training' ? 'active' : '')}
               onClick={e => {
                 e.preventDefault();
-                handleNavigationAttempt('/routine');
+                handleNavigationAttempt(`/routine/${currentProgramId}`);
               }}
             >
               <DumbBell fill="#FF662D" className="sidebar__icon" />

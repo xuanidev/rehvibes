@@ -53,7 +53,8 @@ export const signup = async (email: string, password: string, name:string)=> {
           cualidades: [],
           horas: 0,
           logros: 0,
-          sesiones: 0
+          sesiones: 0,
+          ejerciciosFavoritos: []
       };
       await createUser(newUser);
       saveOnCookies('uid', user);
@@ -118,7 +119,7 @@ export const loginGoogle = async () => {
             horas: 0,
             logros: 0,
             sesiones: 0,
-            ejerciciosFavoritos: [] as string[]
+            ejerciciosFavoritos: [] as number[]
         });
 
         if (newUser) {
