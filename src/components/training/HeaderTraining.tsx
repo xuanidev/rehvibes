@@ -1,6 +1,5 @@
 import './headerTraining.scss';
 import { LogoWordmarkWhite } from '../branding';
-import { AddToFavorites, Share } from '../icons';
 import profileImg from '../../assets/profileImg.png';
 
 interface HeaderTrainingProps {

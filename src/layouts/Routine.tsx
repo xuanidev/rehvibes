@@ -9,7 +9,7 @@ import { getProgramsByUserID } from '../api/programs';
 
 export const Routine = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [programNames, setProgramNames] = useState<string[]>([]);
+  //const [programNames, setProgramNames] = useState<string[]>([]);
   const { mainProgram, setMainProgram, setCurrentExercises } = useContext(UserContext);
   const { programId } = useParams();
 
@@ -18,13 +18,13 @@ export const Routine = () => {
       const responsePrograms = await getProgramsByUserID(programId ?? '');
       if (responsePrograms.length > 0) {
         setMainProgram(responsePrograms[0]);
-        let auxProgramNames = responsePrograms
+        /*let auxProgramNames = responsePrograms
           .slice(1)
           .map((program: RehabilitationProgramProps) => {
             return program.name ?? '';
           })
           .filter(name => name !== '');
-        setProgramNames(auxProgramNames ?? ([] as string[]));
+        setProgramNames(auxProgramNames ?? ([] as string[]));*/
       }
     } catch (error) {
       console.log();

@@ -6,7 +6,6 @@ import { getFromCookies, removeFromCookies } from '../utils/helpers.js';
 import { openAiToFirebase } from './programs.mapper.js';
 import uuid4 from 'uuid4';
 import { cualidadesDefault } from '../constants.js';
-import { Program} from '../models/index.js';
 const db = getFirestore();
 
 

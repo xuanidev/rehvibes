@@ -4,13 +4,11 @@ import SideBar from './components/Sidebar';
 import { getFromCookies } from './utils/helpers';
 import { ModalProvider } from './contexts/ModalContext';
 
-const usernameHeader = getFromCookies('username');
-
 export const App = () => {
   return (
     <ModalProvider>
       <div className="app">
-        <SideBar username={usernameHeader} />
+        <SideBar />
         <Outlet />
       </div>
     </ModalProvider>

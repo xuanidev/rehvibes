@@ -54,8 +54,8 @@ export const NewRoutines = ({ exercises }: NewRoutinesProps) => {
   }, []);
 
   return (
-    <div className="new_routines">
-      <h3>Nuevas rutinas que te pueden interesar</h3>
+    <div className="new_routines_container">
+      <h3 className="new_routines_container__tittle">Nuevas rutinas que te pueden interesar</h3>
       <div className="slider-container" ref={sliderContainer}>
         <div className="inner-slider">
           {exercises.map((exercise: Exercise) => {
