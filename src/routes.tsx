@@ -14,6 +14,7 @@ import { Training } from './layouts/Training';
 import Profile from './layouts/Profile';
 import Configuration from './layouts/Configuration';
 import EditProfile from './layouts/EditProfile';
+import { Library } from './layouts/Library';
 
 const loaderToLogin = () => {
   const uidCookie = getFromCookies('uid');
@@ -53,6 +54,11 @@ export const router = createBrowserRouter([
       {
         path: '/training',
         element: <Training />,
+        loader: loaderToLogin,
+      },
+      {
+        path: '/library',
+        element: <Library />,
         loader: loaderToLogin,
       },
       {

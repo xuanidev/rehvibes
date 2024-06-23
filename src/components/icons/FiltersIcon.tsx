@@ -1,0 +1,12 @@
+import { SVGProps } from 'react';
+
+export const FiltersIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" {...props} xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M3 17.2192V19.2192H9V17.2192H3ZM3 5.21924V7.21924H13V5.21924H3ZM13 21.2192V19.2192H21V17.2192H13V15.2192H11V21.2192H13ZM7 9.21924V11.2192H3V13.2192H7V15.2192H9V9.21924H7ZM21 13.2192V11.2192H11V13.2192H21ZM15 9.21924H17V7.21924H21V5.21924H17V3.21924H15V9.21924Z"
+      fill="#FF662D"
+    />
+  </svg>
+);
+
+export default FiltersIcon;

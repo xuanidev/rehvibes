@@ -61,7 +61,6 @@ export const getExercisesById = async (ids:string[]): Promise<Exercise[]> => {
 
         const exercisesData: ExerciseFromApiFirebase[] = [];
         exercisesSnapshot.forEach((doc) => {
-            console.log(doc.data());
             const usersData = doc.data() as ExerciseFromApiFirebase;
             exercisesData.push(usersData);
         });
@@ -73,3 +72,22 @@ export const getExercisesById = async (ids:string[]): Promise<Exercise[]> => {
     }
 };
 
+
+export const getExercisesLibraryFilter = async (searchTerm:string): Promise<Exercise[]> => {
+    try{
+        const exercisesCollection = collection(db, "exercises");
+        const exercisesSnapshot = await getDocs(query(exercisesCollection, where('name', '>=', searchTerm), where('name', '<=', searchTerm)));
+
+
+        const exercisesData: ExerciseFromApiFirebase[] = [];
+        exercisesSnapshot.forEach((doc) => {
+            const usersData = doc.data() as ExerciseFromApiFirebase;
+            exercisesData.push(usersData);
+        });
+
+        return mapExerciseApiToExerciseView(exercisesData);
+
+    }catch(error){
+        throw (error as Error).message;
+    }
+};

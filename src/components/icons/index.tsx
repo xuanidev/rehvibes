@@ -39,3 +39,5 @@ export { RightArrow } from './RightArrow';
 export { Close } from './Close';
 export { Switch } from './Switch';
 export { SwitchOff } from './SwitchOff';
+export { FiltersIcon } from './FiltersIcon';
+export { SearchIcon } from './SearchIcon';
