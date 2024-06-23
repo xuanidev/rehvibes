@@ -5,23 +5,41 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 24px;
+    @include breakpoint('sm'){
+        margin-bottom: 32px;
+    }
 }
 .top__bottom{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
     margin-bottom: 24px;
     width: 100%;
+
+    @include breakpoint('sm'){
+        margin-bottom: 32px;
+    }
     @include breakpoint('md'){
         display: none;
     }
 }
 .welcome{
-    width: 70%;
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include breakpoint('sm'){
+        width: 70%;
+        gap: 16px;
+    }
+    &__left{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+    }
 }
 .welcome__bottom{
     width: 100%;
@@ -34,7 +52,7 @@
     display: grid;
     place-content: center;
     border-radius: 50%;
-    @include breakpoint('md'){
+    @include breakpoint('xl'){
         display: none;
     }
 }
@@ -59,7 +77,20 @@
     gap: 8px;
 }
 .wordmark{
+        width: 140px;
+        min-height: 24.5px;
+        @include breakpoint('md'){
+            width: 180px;
+            height: auto;
+        }   
+}
+.wordmark__desktop{
     width: 100px;
+    height: auto;
+    display: none;
+    @include breakpoint('md'){
+        display: block;
+    }
     @include breakpoint('md'){
         width: 180px;
     }
@@ -77,15 +108,10 @@
     }
 }
 .ntf_btn{
-    display: block;
-    @include breakpoint('md'){
-        display: none;
-    }
     button{
         width: 40px;
         height: 40px;
     }
-
 }
 .ntf_btn__desktop{
     display: none;
@@ -94,23 +120,27 @@
     }
 
 }
+
 .workout_btn{
-    display: block;
-    @include breakpoint('md'){
-        display: none;
-    }
     button{
         width: 40px;
         height: 40px;
     }
+    @include breakpoint('sm'){
+        button{
+            width: auto;
+            height: 40px;
+        }
+    }
 }
+
 .workout_btn__desktop{
     display: none;
     @include breakpoint('md'){
         display: block;
     }
-}
 
+}
 .top_bar__name{
     display: none;
     font-family: 'Satoshi-Bold';

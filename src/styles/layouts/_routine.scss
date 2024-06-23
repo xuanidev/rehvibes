@@ -7,10 +7,8 @@
     width: 100%;
     height: fit-content;
     padding-bottom: 96px;
-    @include breakpoint('lg'){
+    @include breakpoint('xl'){
         padding-bottom: 44px;
-    }
-    @include breakpoint('lg'){
         padding-left: 250px;
     }
     @include breakpoint('2xl'){

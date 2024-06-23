@@ -1,4 +1,4 @@
-import { getFirestore, collection, getDocs, query, where} from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where, limit} from "firebase/firestore";
 import { Exercise, ExerciseFromApiFirebase } from "../models/exercises";
 import { mapExerciseApiToExerciseView } from "./exercises.mapper";
 const db = getFirestore();
@@ -12,6 +12,23 @@ export const getExercise = async (exerciseId:string): Promise<Exercise> => {
             userData = doc.data() as Exercise;
         });
         return userData;
+    } catch (error) {
+        console.log(error);
+        throw (error as Error).message;
+    }
+};
+
+export const getExercisesLimit = async (limitNumber:number): Promise<Exercise[]> => {
+    try {
+        const exercisesCollection = collection(db, 'exercises');
+        const querySnapshot = await getDocs(query(exercisesCollection, limit(limitNumber)));
+        const exercisesData: ExerciseFromApiFirebase[] = [];
+        querySnapshot.forEach((doc) => {
+            const usersData = doc.data() as ExerciseFromApiFirebase;
+            exercisesData.push(usersData);
+        });
+
+        return mapExerciseApiToExerciseView(exercisesData);
     } catch (error) {
         console.log(error);
         throw (error as Error).message;
@@ -44,7 +61,6 @@ export const getExercisesById = async (ids:string[]): Promise<Exercise[]> => {
 
         const exercisesData: ExerciseFromApiFirebase[] = [];
         exercisesSnapshot.forEach((doc) => {
-            console.log(doc.data());
             const usersData = doc.data() as ExerciseFromApiFirebase;
             exercisesData.push(usersData);
         });
@@ -56,3 +72,22 @@ export const getExercisesById = async (ids:string[]): Promise<Exercise[]> => {
     }
 };
 
+
+export const getExercisesLibraryFilter = async (searchTerm:string): Promise<Exercise[]> => {
+    try{
+        const exercisesCollection = collection(db, "exercises");
+        const exercisesSnapshot = await getDocs(query(exercisesCollection, where('name', '>=', searchTerm), where('name', '<=', searchTerm)));
+
+
+        const exercisesData: ExerciseFromApiFirebase[] = [];
+        exercisesSnapshot.forEach((doc) => {
+            const usersData = doc.data() as ExerciseFromApiFirebase;
+            exercisesData.push(usersData);
+        });
+
+        return mapExerciseApiToExerciseView(exercisesData);
+
+    }catch(error){
+        throw (error as Error).message;
+    }
+};

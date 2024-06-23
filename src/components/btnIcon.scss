@@ -40,9 +40,11 @@
 }
 
 .full{
-width: 100%;
-text-align: center;
-
+  width: 100%;
+  text-align: center;
+}
+.heighFit{
+  height: fit-content;
 }
 .primary:hover{
     background-color: var(--color-white);

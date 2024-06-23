@@ -1,0 +1,74 @@
+@import "../../styles/base";
+
+.search-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid red;
+  transition: width 0.3s ease;
+  background-color: #fff;
+
+  &.expanded {
+    width: 280px;
+  }
+
+  .search-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--color-brand);
+    }
+  }
+
+  .search-input-field {
+    width: 0;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    padding: 0;
+    opacity: 0;
+    transition:
+      width 0.3s ease,
+      opacity 0.3s ease;
+    outline: none;
+
+    &::placeholder {
+      color: var(--color-primary-dark);
+    }
+
+    &.expanded {
+      width: 100%;
+      padding: 0 10px;
+      opacity: 1;
+    }
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--color-primary-dark);
+    border-radius: 0 0 10px 10px;
+    display: none;
+  }
+
+  &.expanded .search-results {
+    display: block;
+  }
+}

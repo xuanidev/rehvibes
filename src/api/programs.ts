@@ -62,7 +62,7 @@ export const getProgramByID = async (programId: string): Promise<RehabilitationP
 export const getProgramsById = async (ids:string[]): Promise<RehabilitationProgramProps[]> => {
     try{
         const programsCollection = collection(db, "programs");
-        const programsSnapshot = await getDocs(query(programsCollection, where("id", "in", ids)));
+        const programsSnapshot = await getDocs(query(programsCollection, where("uid", "in", ids)));
 
 
         const programsData: RehabilitationProgramProps[] = [];

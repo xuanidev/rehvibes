@@ -1,0 +1,230 @@
+@import '../styles/base';
+
+.modal_exercise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; // Ensure the modal takes the full height of the viewport
+    overflow-y: auto; // Enable vertical scrolling when content overflows
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Satoshi-Regular';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    &__overlay {
+      height: auto;
+      overflow-y: auto;
+        position: relative;
+        width: 100%;
+        margin-inline: 16px;
+        padding: 12px 0px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        @include breakpoint('md'){
+          margin-top: 0px;
+          padding: 22px 24px;
+          background-color: var(--color-white);
+          border: 1px solid white;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          margin-inline: 0px;
+            flex-direction: row;
+            gap: 32px;
+            width: 1000px;
+        }
+    }
+    &__video_container {
+      position: relative;
+      width: 100%; 
+      height: auto; 
+      overflow: hidden;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    &__video {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+      &__play_icon {
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        height: 40px;
+        width: 40px;
+        @include breakpoint('md') {
+          top: calc(50% - 30px);
+          left: calc(50% - 30px);
+          width: 60px;
+          height:  60px;
+        }
+        fill: var(--color-white);
+        transition: all ease-in-out 0.1s;
+        transition: opacity ease-in-out 0.25s;
+        filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
+        &__active {
+          opacity: 0;
+          cursor: default;
+        }
+      }
+      &__play_icon:hover {
+    
+        top: calc(50% - 21px);
+        left: calc(50% - 21px);
+        height: 42px;
+        width: 42px;
+        @include breakpoint('md') {
+            top: calc(50% - 31px);
+            left: calc(50% - 31px);
+            height: 62px;
+            width: 62px;
+        }
+        cursor: pointer;
+      }
+      &__share_icon {
+        position: absolute;
+        top: 16px;
+        left: 22px;
+        height: 30px;
+        width: 30px;
+        fill: var(--color-white);
+        transition: all ease-in-out 0.2s;
+        transition: fill ease-in-out 0.2s;
+        filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
+        &__active {
+          opacity: 0;
+          cursor: default;
+        }
+      }
+      &__share_icon:hover {
+        top: 15px;
+        left: 21px;
+        height: 32px;
+        width: 32px;
+        cursor: pointer;
+      }
+      &__favorites_icon {
+        position: absolute;
+        top: 16px;
+        right: 22px;
+        height: 30px;
+        width: 30px;
+        fill: var(--color-white);
+        transition: all ease-in-out 0.2s;
+        transition: fill ease-in-out 0.2s;
+        filter: drop-shadow(0px 0px 3px hsla(0, 0%, 0%, 0.4));
+        &__active {
+          opacity: 0;
+          cursor: default;
+        }
+      }
+      &__favorites_icon:hover {
+        top: 15px;
+        right: 21px;
+        height: 32px;
+        width: 32px;
+        cursor: pointer;
+
+      }
+      &__right{
+        background-color: var(--color-white);
+        border: 1px solid white;
+        padding: 22px 24px;
+        border-radius: 12px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        @include breakpoint('md') {
+            gap: 12px;
+            padding: 0px 0px;
+        }
+        &__top{
+          height: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+        &__content{
+            margin-block-start: 0em;
+            margin-block-end: 0em;
+            padding-inline-start: 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: auto;
+            @include breakpoint('md') {
+                gap: 18px;
+            }
+            &_item{
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                span{
+                    font-family: 'Satoshi-Light';
+                    font-size: 13px;
+                    text-transform: uppercase;
+                }
+                h4{
+                    font-family: 'Satoshi-Regular';
+                    font-size: 16px;
+                    font-weight: 400;
+                    margin-block-start: 0em;
+                    margin-block-end: 0em;
+                }
+            }
+        }
+      }
+      .routine_content__materials{
+        gap:2px;
+      }
+      &__materials{
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        @include breakpoint('md') {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+      }
+      &__warning{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        span{
+          font-family: 'Satoshi-Light';
+          font-size: 14px;
+          text-transform: uppercase;
+        }
+        
+      }
+}
+.close_icon{
+  position: initial;
+  margin-left: auto;
+  margin-bottom: -12px;
+  width: 40px;
+  height: 40px;
+  fill: white;
+  @include breakpoint('md') {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 22px;
+    right: 19px;
+    fill: var(--color-black);
+  }
+}
+
+.close_icon:hover{
+  cursor: pointer;
+}

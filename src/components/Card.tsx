@@ -9,16 +9,18 @@ interface CardProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   duration: string;
   difficulty: 'Principiante' | 'Intermedio' | 'Avanzado';
+  style?: string;
 }
 
 export const Card = (props: CardProps) => {
-  const { size, img, text, onClick, difficulty, duration } = props;
+  const { size, img, text, onClick, difficulty, duration, style } = props;
 
   return (
     <button
       className={classNames({
         card: true,
         [`card--${size}`]: size,
+        [`${style}`]: style != undefined,
       })}
       onClick={onClick}
       disabled={true}

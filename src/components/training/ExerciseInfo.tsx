@@ -2,7 +2,7 @@ import './exerciseInfo.scss';
 import { Exercise } from '../../models';
 import ExerciseDescription from './ExerciseDescription';
 import ExerciseSteps from './ExerciseSteps';
-import { ExerciseWarning } from './ExerciseWarning';
+import { ExerciseWarning } from '../ExerciseWarning';
 import ExerciseActions from './ExercisesActions';
 
 interface ExerciseInfoProps {

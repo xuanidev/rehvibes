@@ -18,6 +18,8 @@ interface UserContextModel {
   setRoutineInfo: (routineInfo: RoutineInfo) => void;
   currentExercises?: Exercise[];
   setCurrentExercises: (exercise: Exercise[]) => void;
+  currentExerciseId?: number;
+  setCurrentExerciseId: (id: number) => void;
 }
 
 const context: UserContextModel = {
@@ -53,6 +55,10 @@ const context: UserContextModel = {
   setCurrentExercises: () => {
     return;
   },
+  currentExerciseId: 0,
+  setCurrentExerciseId: () => {
+    return;
+  },
 };
 
 export const UserContext = createContext<UserContextModel>(context);
@@ -79,6 +85,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
     mainAreas: [],
   });
   const [currentExercises, setCurrentExercises] = useState<Exercise[]>([]);
+  const [currentExerciseId, setCurrentExerciseId] = useState<number>(0);
 
   const contextValue = {
     username,
@@ -97,6 +104,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
     setRoutineInfo,
     currentExercises,
     setCurrentExercises,
+    currentExerciseId,
+    setCurrentExerciseId,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;

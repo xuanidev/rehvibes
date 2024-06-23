@@ -8,8 +8,9 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
+    order: 2;
     @include breakpoint('md'){
-        gap: 10px;
+        order: initial;
     }
 }
 .achievements__tittles{
@@ -29,6 +30,9 @@
         }
     }
     @include breakpoint('md'){
+        font-size: 14px;
+    }
+    @include breakpoint('2xl'){
         font-size: 16px;
     }
 }

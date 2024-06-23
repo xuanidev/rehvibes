@@ -1,0 +1,57 @@
+@import '../abstracts';
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    height: fit-content;
+    padding: 22px 24px;
+    padding-bottom: 114px;
+    @include breakpoint('xl'){
+        padding-left: 282px;
+        padding-right: 32px;
+        padding-bottom: 32px;
+    }
+    @include breakpoint('2xl'){
+        padding-left: 332px;
+    }
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 58px 0px 48px 0px;
+  
+    .header-btns{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  
+      .search-input {
+        margin-right: 20px;
+      }
+    }
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  
+    .section {
+      margin-bottom: 40px;
+  
+      h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+  
+      .card-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+      }
+    }
+  }

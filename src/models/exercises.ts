@@ -40,5 +40,4 @@ export interface Exercise {
     series: number,
     video:string,
     creationDate?: string,
-
 }

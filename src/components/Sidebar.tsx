@@ -2,16 +2,18 @@ import './sidebar.scss';
 import { Home, DumbBell, Compass, StarCircle, Conf, Exit } from './icons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import profileImg from '../assets/profileImg.png';
-import { removeFromCookies, removeFromLocalStorageArray } from '../utils/helpers';
+import { getFromCookies, removeFromCookies, removeFromLocalStorageArray } from '../utils/helpers';
 import { useModal } from '../contexts/ModalContext';
 import { Modal } from './Modal';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContextProvider';
 import { UserFromApi } from '../models';
+import classNames from 'classnames';
 
 export const SideBar = () => {
   const { showModal, setShowModal, setShowModalTraining, setPendingPath } = useModal();
   const { userInfo, username, currentProgramId } = useContext(UserContext);
+  const usernameSidebar = username ? username : getFromCookies('username');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -46,16 +48,37 @@ export const SideBar = () => {
           cancelText="Cancelar"
         />
       )}
-      <div className="sidebar">
-        <div className="sidebar__user">
+      <div
+        className={classNames({
+          sidebar: true,
+          [`sidebar__training`]: location.pathname === '/training',
+        })}
+      >
+        <div
+          className={classNames({
+            sidebar__user: true,
+            [`sidebar__user__training`]: location.pathname === '/training',
+          })}
+          onClick={() => navigate('/profile')}
+        >
           <img src={profileImg} className="profile_img" />
           <div className="profile__info">
-            <span className="profile__name">{username ?? ''}</span>
+            <span className="profile__name">{usernameSidebar ?? ''}</span>
             {userInfo !== ({} as UserFromApi) ? <span>{userInfo.username}</span> : <span>{username}</span>}
           </div>
         </div>
-        <ul className="sidebar__bar">
-          <li className="sidebar_bar_option">
+        <ul
+          className={classNames({
+            sidebar__bar: true,
+            [`sidebar__bar__training`]: location.pathname === '/training',
+          })}
+        >
+          <li
+            className={classNames({
+              sidebar_bar_option: true,
+              [`sidebar_bar_option__training`]: location.pathname === '/training',
+            })}
+          >
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? 'active' : '')}
@@ -69,7 +92,12 @@ export const SideBar = () => {
             </NavLink>
           </li>
 
-          <li className="sidebar_bar_option">
+          <li
+            className={classNames({
+              sidebar_bar_option: true,
+              [`sidebar_bar_option__training`]: location.pathname === '/training',
+            })}
+          >
             <NavLink
               to={`/routine/${currentProgramId}`}
               className={({ isActive }) => (isActive || location.pathname === '/training' ? 'active' : '')}
@@ -83,7 +111,12 @@ export const SideBar = () => {
             </NavLink>
           </li>
 
-          <li className="sidebar_bar_option">
+          <li
+            className={classNames({
+              sidebar_bar_option: true,
+              [`sidebar_bar_option__training`]: location.pathname === '/training',
+            })}
+          >
             <NavLink
               to="/library"
               className={({ isActive }) => (isActive ? 'active' : '')}
@@ -96,7 +129,13 @@ export const SideBar = () => {
               Biblioteca
             </NavLink>
           </li>
-          <li className="sidebar_bar_option hidden_option">
+          <li
+            className={classNames({
+              sidebar_bar_option: true,
+              hidden_option: true,
+              [`sidebar_bar_option__training`]: location.pathname === '/training',
+            })}
+          >
             <NavLink
               to="/subscription"
               className={({ isActive }) => (isActive ? 'active' : 'hidden')}
@@ -109,7 +148,12 @@ export const SideBar = () => {
               Suscripción
             </NavLink>
           </li>
-          <li className="sidebar_bar_option">
+          <li
+            className={classNames({
+              sidebar_bar_option: true,
+              [`sidebar_bar_option__training`]: location.pathname === '/training',
+            })}
+          >
             <NavLink
               to="/configuration"
               className="siber_bar_option_link"
@@ -124,7 +168,10 @@ export const SideBar = () => {
           </li>
         </ul>
         <button
-          className="sidebar__exit"
+          className={classNames({
+            sidebar__exit: true,
+            [`sidebar__exit__training`]: location.pathname === '/training',
+          })}
           onClick={e => {
             e.preventDefault();
             handleNavigationAttempt('/exit');

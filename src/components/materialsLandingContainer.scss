@@ -1,0 +1,54 @@
+@use '../styles/abstracts/' as *;
+
+.landing_content{
+    border-radius: 22px 22px 0px 0px;
+    &__materials{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    &__section_tittle{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        font-weight: 300;
+        font-family: 'Satoshi-Light';
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-transform: uppercase;
+        line-height: 26px;
+    }
+    &__material_list{
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-inline-start: 0px;
+        @include breakpoint('md'){
+            gap: 10px;
+        }
+    }
+    &__material{
+        font-size: 16px;
+        background-color: var(--color-white-dark);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 24px;
+        border-radius: 8px;
+        @include breakpoint('md'){
+            gap: 10px;
+        }
+        &_img{
+            width: 33px;
+            height: 33px;
+            background-repeat: none;
+            background-size: cover;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+}
