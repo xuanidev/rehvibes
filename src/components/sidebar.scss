@@ -17,17 +17,7 @@
         display: flex;
         flex-direction: row;
     }
-    /*@include breakpoint('md'){
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        padding: 24px 16px;
-        width: 250px;
-        border-top: none;
-        border-right: 1px solid var(--color-gray-border);
-    }*/
-    @include breakpoint('lg'){
+    @include breakpoint('xl'){
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -44,12 +34,50 @@
         padding: 40px 32px;
         width: 300px;
     }
+    &__training{
+        @include breakpoint('md'){
+            height: auto;
+            width: 100vw;
+            overflow: auto;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            flex-direction: row;
+            padding: 12px 12px;
+        }
+        @include breakpoint('lg'){
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            padding: 40px 32px;
+            width: 250px;
+            border-right: 1px solid var(--color-gray-border);
+        }
+        @include breakpoint('2xl'){
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            padding: 40px 32px;
+            width: 300px;
+        }
+    }
 }
 .sidebar__user{
     display: none;
-    @include breakpoint('lg'){
+    @include breakpoint('xl'){
         display: grid;
         place-content: center;
+    }
+    &__training{
+        @include breakpoint('md'){
+            display: none;
+        }
+        @include breakpoint('lg'){
+            display: grid;
+        place-content: center;
+        }
     }
 }
 .profile__info{
@@ -85,7 +113,7 @@
     @include breakpoint('sm'){
         font-size: 12px;
     }
-    @include breakpoint('lg'){
+    @include breakpoint('xl'){
         flex-direction: column;
         gap: 12px;
         font-size: 15px;
@@ -96,6 +124,23 @@
         gap: 16px;
         font-size: 18px;
         justify-content: space-between;
+    }
+    &__training{
+        @include breakpoint('md'){
+            flex-direction: row;
+            justify-content: center;
+            font-size: 9px;
+            gap: 18px;
+        }
+        @include breakpoint('lg'){
+            flex-direction: column;
+            gap: 12px;
+            font-size: 15px;
+            justify-content: space-between;
+        }
+        @include breakpoint('2xl'){
+           
+        }
     }
 }
 .sidebar_bar_option{
@@ -114,13 +159,11 @@
             margin-right: auto;
         }
         @include breakpoint('sm'){
-            gap: 4px;
+            gap: 4px;            
+            font-size: 12px;
         }
-        @include breakpoint('md'){
-            flex-direction: column;
+        @include breakpoint('xl'){
             font-size: 16px;
-        }
-        @include breakpoint('lg'){
             flex-direction: row;
             gap: 8px;
             padding: 6px 12px;
@@ -151,6 +194,23 @@
     a .active:hover{
         margin-bottom: 0px;
         cursor: default;
+    }
+    &__training{
+        a{
+            @include breakpoint('md'){
+                flex-direction: column;
+                font-size: 16px;
+            }
+            @include breakpoint('lg'){
+                flex-direction: row;
+                gap: 8px;
+                padding: 6px 12px;
+                svg{
+                    margin-left: 0px;
+                    margin-right: 0px;
+                }
+            }
+        }
     }
 }
 .hidden_option{
@@ -185,13 +245,13 @@
     }
 
     &:hover{
-        @include breakpoint('lg'){
+        @include breakpoint('xl'){
 
             background-color: var(--color-primary-light);
             cursor: pointer;
         }
     }
-    @include breakpoint('lg'){
+    @include breakpoint('xl'){
         display: flex;
         align-items: center;
         width: calc(250px - 64px);
@@ -214,5 +274,25 @@
         margin-bottom: 64px;
         width: calc(300px - 64px);
     }
-
+    &__training{
+        display:none;
+        &:hover{
+            @include breakpoint('lg'){
+    
+                background-color: var(--color-primary-light);
+                cursor: pointer;
+            }
+        }
+        @include breakpoint('lg'){
+            display: flex;
+            align-items: center;
+            width: calc(250px - 64px);
+            margin-bottom: 16px;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            border-radius: 8px;
+    
+        }
+    }
 }

@@ -36,7 +36,7 @@
 
 .hidde_text{
     font-size: 0px;
-    @include breakpoint('md'){
+    @include breakpoint('sm'){
       font-size: 16px;
     }
 }

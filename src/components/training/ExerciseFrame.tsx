@@ -33,8 +33,10 @@ export const ExerciseFrame = (props: ExerciseFrameProps) => {
         await addExerciseToFavorites(getFromCookies('uid'), currentExerciseId);
       }
       setIsFavorite(!isFavorite);
-      updateFavorites(favorites.push(currentExerciseId)); // Update favorites after changing the database
-    } catch (error) {}
+      updateFavorites(favorites.push(currentExerciseId));
+    } catch (error) {
+      console.log('No se ha podido añadir a favoritos');
+    }
   };
 
   useEffect(() => {

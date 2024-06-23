@@ -17,14 +17,16 @@ export const TopBar = (props: TopBarProps) => {
     <>
       <div className="top_up">
         <div className="welcome">
-          <div className="top_bar__user">
-            <img src={profileImg} className="top_bar__img" />
-            <div className="top_bar__info">
-              <span className="top_bar__name">Vicente Torner</span>
-              vtr_91
+          <div className="welcome__left">
+            <div className="top_bar__user">
+              <img src={profileImg} className="top_bar__img" />
+              <div className="top_bar__info">
+                <span className="top_bar__name">Vicente Torner</span>
+                vtr_91
+              </div>
             </div>
+            <div className="top_bar__greeting__desktop">{greetingUser}</div>
           </div>
-          <div className="top_bar__greeting__desktop">{greetingUser}</div>
           <BtnNtf userId={uid} style="ntf_btn__desktop" />
           <AddWorkoutBtn style="workout_btn__desktop" />
         </div>

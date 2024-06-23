@@ -11,10 +11,10 @@ export const HeaderTraining = (props: HeaderTrainingProps) => {
   return (
     <div className="header_training">
       <div className="header_training_right">
-        <div className="top_bar__user">
-          <img src={profileImg} className="top_bar__img" />
+        <div className="training__top_bar__user">
+          <img src={profileImg} className="training__top_bar__img" />
           <div className="top_bar__info">
-            <span className="top_bar__name">Vicente Torner</span>
+            <span className="training__top_bar__name">Vicente Torner</span>
             vtr_91
           </div>
         </div>

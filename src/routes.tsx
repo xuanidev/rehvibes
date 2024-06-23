@@ -11,6 +11,7 @@ import { LandingProducto } from './layouts/LandingProducto';
 import { getFromCookies } from './utils/helpers';
 import Routine from './layouts/Routine';
 import { Training } from './layouts/Training';
+import Configuration from './layouts/Configuration';
 
 const loaderToLogin = () => {
   const uidCookie = getFromCookies('uid');
@@ -50,6 +51,11 @@ export const router = createBrowserRouter([
       {
         path: '/training',
         element: <Training />,
+        loader: loaderToLogin,
+      },
+      {
+        path: '/configuration',
+        element: <Configuration />,
         loader: loaderToLogin,
       },
     ],

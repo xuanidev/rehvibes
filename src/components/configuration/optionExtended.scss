@@ -1,0 +1,36 @@
+@import '../../styles/abstracts/';
+
+.option_extended{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2em 0px;
+    font-size: 16px;
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    font-size: 18px;
+    &__button{
+        font-family: 'Satoshi-Medium';
+        font-size: 12px;
+        padding: 4px 16px;
+        background-color: #E6E6E6;
+        border: 1px solid #A6A6A6;
+        border-radius: 4px;
+    }
+    &__button_down{
+        font-family: 'Satoshi-Medium';
+        font-size: 16px;
+        padding: 4px 16px;
+        background-color: #E6E6E6;
+        border: 1px solid #A6A6A6;
+        border-radius: 4px;
+        span{
+            transform: rotate(-90deg);
+        }
+    }
+}
+.switch{
+    height: 24px;
+    width: auto;
+}

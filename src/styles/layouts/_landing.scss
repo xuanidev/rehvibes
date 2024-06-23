@@ -8,7 +8,7 @@
     height: fit-content;
     padding: 22px 24px;
     padding-bottom: 96px;
-    @include breakpoint('md'){
+    @include breakpoint('xl'){
         padding-left: 282px;
         padding-right: 32px;
         padding-bottom: 16px;
@@ -24,7 +24,7 @@
     gap: 24px;
     @include breakpoint('md'){
         flex-direction: row;
-        gap: 48px;
+        gap: 32px;
     }
 }
 .components_top{
@@ -43,6 +43,12 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
+    .calendar-container{
+        display: none;
+        @include breakpoint('md'){
+            display: flex;
+        }
+    }
 }
 .components_left{
     width: 100%;
@@ -51,7 +57,7 @@
     gap: 24px;
     @include breakpoint('md'){
         width: 60%;
-        gap: 32px;
+        gap:16px;
     }
 }
 .components_right{

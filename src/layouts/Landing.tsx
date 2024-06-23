@@ -13,9 +13,10 @@ import { Exercise, RehabilitationProgramProps, RoutineInfo, cualidadesUser } fro
 import { cualidadesDefault, toastError } from '../constants';
 import { ToastContainer, toast } from 'react-toastify';
 import { getUser } from '../api/users';
-import { getExercises } from '../api/exercises';
+import { getExercisesLimit } from '../api/exercises';
 import { UserContext } from '../contexts/UserContextProvider';
 import { getProgramsByUserID } from '../api/programs';
+import NewRoutinesImage from '../components/NewRoutinesImage';
 
 const initialRoutineInfo = {
   description: '',
@@ -98,7 +99,7 @@ export const Landing = () => {
   };
 
   const getNewExercises = async () => {
-    const exercisesFromApi = await getExercises();
+    const exercisesFromApi = await getExercisesLimit(4);
     setExercises(exercisesFromApi);
   };
 
@@ -132,6 +133,7 @@ export const Landing = () => {
           <div className="components_right_top">
             <ProgressBar progress={progress} />
             <Calendar rehabDays={rehabDays || []} />
+            <NewRoutinesImage />
           </div>
           <Achievements hours={horas} sessions={sessions} achievements={achievements} />
           <NewRoutines exercises={exercises || []} />

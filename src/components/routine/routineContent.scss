@@ -5,7 +5,7 @@
     background-color: var(--color-white);
     height: auto;
     width: 100%;
-    padding: 22px 24px 48px 24px;
+    padding: 22px 24px 0px 24px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -26,5 +26,30 @@
     height: auto;
     @include breakpoint('md'){
         gap: 20px;
+    }
+}
+.routine__info_images{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1px;
+    padding: 16px 16px 0px 16px;
+    @include breakpoint('lg'){
+        gap: 150px;
+    }
+}
+.routine__body_img{
+    height: auto;
+    width: calc(40% - 20px);
+    background-repeat: no-repeat;
+    @include breakpoint('md'){
+        height: 350px;
+        width: auto;
+    }
+    @include breakpoint('lg'){
+        height: 400px;
+        width: auto;
     }
 }

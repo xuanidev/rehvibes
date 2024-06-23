@@ -5,6 +5,8 @@ interface ModalContextProps {
   setShowModal: (show: boolean) => void;
   showModalTraining: boolean;
   setShowModalTraining: (show: boolean) => void;
+  showModalExercise: boolean;
+  setShowModalExercise: (show: boolean) => void;
   pendingPath: string;
   setPendingPath: (path: string) => void;
 }
@@ -14,10 +16,21 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModalTraining, setShowModalTraining] = useState(false);
+  const [showModalExercise, setShowModalExercise] = useState(false);
   const [pendingPath, setPendingPath] = useState('');
+
   return (
     <ModalContext.Provider
-      value={{ showModal, setShowModal, showModalTraining, setShowModalTraining, pendingPath, setPendingPath }}
+      value={{
+        showModal,
+        setShowModal,
+        showModalTraining,
+        setShowModalTraining,
+        showModalExercise,
+        setShowModalExercise,
+        pendingPath,
+        setPendingPath,
+      }}
     >
       {children}
     </ModalContext.Provider>

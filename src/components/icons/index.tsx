@@ -35,3 +35,7 @@ export { FindReplace } from './FindReplace';
 export { Alert } from './Alert';
 export { Type } from './Type';
 export { Play } from './Play';
+export { RightArrow } from './RightArrow';
+export { Close } from './Close';
+export { Switch } from './Switch';
+export { SwitchOff } from './SwitchOff';

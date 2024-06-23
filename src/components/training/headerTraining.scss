@@ -10,7 +10,7 @@
         margin-bottom: 0px;
     }
 }
-.top_bar__user{
+.training__top_bar__user{
     display: grid;
     place-content: center;
     border-radius: 50%;
@@ -18,7 +18,14 @@
         display: none;
     }
 }
-.top_bar__img{
+.training__top_bar__name{
+    display: none;
+    color: white;
+    @include breakpoint('lg'){
+        display: block;
+    }
+}
+.training__top_bar__img{
     border-radius: 50%;
     width: 40px;
     height: 40px;
