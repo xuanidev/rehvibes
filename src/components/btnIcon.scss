@@ -56,7 +56,6 @@ text-align: center;
 .borderGradient:hover{
     @include gradient-border(2px, 12px, transparent);
     color: white;
-    font-family: 'Satoshi-Bold';
 }
 .disabled{
     background-color: var(--color-secondary-light);

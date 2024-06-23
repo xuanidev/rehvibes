@@ -1,0 +1,43 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 64px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 58px 0px 48px 0px;
+
+  .header-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .search-input {
+      margin-right: 20px;
+    }
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+
+  .section {
+    margin-bottom: 40px;
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+  }
+}

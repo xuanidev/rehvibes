@@ -5,6 +5,7 @@ import { Signup } from "./layouts/Signup";
 import { Survey } from "./layouts/Survey";
 import { Main } from "./layouts/Main";
 import { Landing } from "./layouts/Landing";
+import { Library } from "./layouts/Library";
 import DesignSystem from "./layouts/DesignSystem";
 import Cookies from "js-cookie";
 import { redirect } from "react-router-dom";
@@ -70,5 +71,10 @@ export const router = createBrowserRouter([
   {
     path: "/designsystem",
     element: <DesignSystem />,
+  },
+
+  {
+    path: "/library",
+    element: <Library />,
   },
 ]);

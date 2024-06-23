@@ -14,7 +14,7 @@ interface RoutineContainerProps {
   routineInfo: RoutineInfo;
 }
 
-const RoutineContainer: React.FC<RoutineContainerProps> = ({ routineInfo }) => {
+const RoutineContainer = ({ routineInfo }:RoutineContainerProps) => {
   return (
     <div className="routine-container" style={{ width: '758px', height: '300px'}}>
       <div className="routine-info">

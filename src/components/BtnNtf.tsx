@@ -15,6 +15,9 @@ const NotificationsBtn = ({userId}: NotificationBtnProps) => {
     const [notifications, setNotifications] = useState<string[]>([]); 
 
     useEffect(() => {
+        if (!showNotifications){
+            return;
+        }
         const getNotifications = async () => {
             try {
                 const notificationsRef = firebase.firestore().collection('notifications').doc(userId);
@@ -28,7 +31,7 @@ const NotificationsBtn = ({userId}: NotificationBtnProps) => {
             }
         };
         getNotifications();
-    }, [userId]);
+    }, [userId, showNotifications]);
 
     const toggleNotifications = () => {
         setShowNotifications(!showNotifications);
