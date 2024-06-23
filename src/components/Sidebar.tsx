@@ -59,6 +59,7 @@ export const SideBar = () => {
             sidebar__user: true,
             [`sidebar__user__training`]: location.pathname === '/training',
           })}
+          onClick={() => navigate('/profile')}
         >
           <img src={profileImg} className="profile_img" />
           <div className="profile__info">

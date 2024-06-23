@@ -29,6 +29,17 @@
             transform: rotate(-90deg);
         }
     }
+    &__right{
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+    &__span{
+        font-family: 'Satoshi-Light';
+        font-size: 16px;
+    }
 }
 .switch{
     height: 24px;

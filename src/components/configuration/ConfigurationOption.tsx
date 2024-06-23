@@ -5,7 +5,7 @@ import './configurationOption.scss';
 
 interface ConfigurationOptionsProps {
   tittle: string;
-  text: string;
+  text?: string;
   children?: ReactNode;
 }
 export const ConfigurationOption = (props: ConfigurationOptionsProps) => {
@@ -35,7 +35,7 @@ export const ConfigurationOption = (props: ConfigurationOptionsProps) => {
               option_info__active: isOptionInfoVisible,
             })}
           >
-            <p className="option_info__text">{text}</p>
+            {text && <p className="option_info__text">{text}</p>}
             {children}
           </div>
         )}

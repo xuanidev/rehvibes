@@ -1,5 +1,4 @@
 import { LogoWordmark } from '../components/branding';
-import { RightArrow } from '../components/icons';
 import ConfigurationOption from '../components/configuration/ConfigurationOption';
 import OptionExtended from '../components/configuration/OptionExtended';
 

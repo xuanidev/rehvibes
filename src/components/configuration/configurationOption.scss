@@ -28,7 +28,6 @@
     padding: 6px 12px 6px 24px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
     &_tittle{
         font-family: 'Satoshi-Medium';
         font-weight: 500;
@@ -66,5 +65,6 @@
     }
 }
 .option_info__text{
+    padding-top: 16px;
     padding-bottom: 16px;
 }

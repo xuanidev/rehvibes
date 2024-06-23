@@ -1,0 +1,70 @@
+@use '../../styles/abstracts/' as *;
+
+.profile_routines{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    &__tittle{
+        font-family: 'Satoshi-Bold';
+        font-size: 20px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+    &__content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+        &_tab_selector{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+        &_tab{
+            font-family: 'Satoshi-Regular';
+            background-color: white;
+            border: none;
+            font-size: 18px;
+            &_active{
+                font-family: 'Satoshi-Medium';
+                font-weight: 500;
+                font-size: 18px;
+            }
+        }
+    }
+    &__routines{
+        width: 100%;
+        height: auto;
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center; // Centrar las tarjetas horizontalmente en la cuadrícula
+    align-content: center; // Centrar las tarjetas verticalmente en la cuadrícula
+        gap: 16px;
+        @include breakpoint('md'){
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap:16px;
+        }
+    }
+}
+
+.vl {
+    border-left: 1px solid rgb(0, 0, 0);
+    height: 20px;
+}
+.routines_margin_auto{
+    margin: auto;
+    @include breakpoint('md'){
+        margin: initial;
+        max-width: 200px;
+    }
+}
