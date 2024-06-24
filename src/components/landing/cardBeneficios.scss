@@ -12,10 +12,13 @@
     font-size: 18px;
     opacity: 0;
     transition: opacity ease 0.7s;
-    h3 {
-      font-family:poppins;
-      font-size: 30px;
-    }
+  }
+
+  .beneficios__tittleh3 {
+   font-family: 'Satoshi-Medium';
+   font-weight: 500;
+   letter-spacing: -0.6px;
+   font-size: 30px;
   }
   
   
@@ -50,7 +53,6 @@
     border-radius: 16px;
     transition: all 0.3s ease-in;
     transition-delay: 0.1s;
-    
   }
   
   .beneficios:hover:before {

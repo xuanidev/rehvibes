@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LogoWordmarkWhite } from '../branding';
 import './header.scss';
-import Btn from '../Btn';
 
 export const Header = () => {
   return (
@@ -26,15 +25,23 @@ export const Header = () => {
           </nav>
           <div className="buttons_app">
             <button className="login_web">Iniciar Sesión</button>
-            <Btn text="Registrarse" btnClass="primary" />
+            <button className="signup_web">Registrarse</button>
           </div>
         </div>
       </div>
-      <div className="container_header">
-        <h1 className="title_header">La plataforma que te ayuda a rehabilitarte por tu cuenta</h1>
-        <p className="text_header">Revibes es una plataforma digital que te ayuda a rehabilitarte a tu ritmo y sin necesidad de servicios sanitarios</p>
-        <button className="gotosignup">Empezar ya</button>
+
+      <div className='container_header'>
+        <div className="container_header_text">
+          <h1 className="title_header">La plataforma que te ayuda a rehabilitarte por tu cuenta</h1>
+          <p className="text_header">Revibes es una plataforma digital que te ayuda a rehabilitarte a tu ritmo y sin necesidad de servicios sanitarios</p>
+        </div>
+          <div className='container_btn'>
+            <button className="btn_header">Empieza ya</button>
+          </div>
+        
       </div>
+     
+      
     </header>
   );
 };

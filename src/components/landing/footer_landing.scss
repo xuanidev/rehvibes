@@ -1,0 +1,46 @@
+@use '../../styles/abstracts/' as *;
+
+.footer_section {
+    display: flex;
+    flex-direction:row;
+    width:100%;
+    justify-content:space-between;
+    background-color:#ffffff;
+    padding: 40px 120px 40px 120px;
+    border-top: solid 1px #FFBA6B;
+    font-family: 'Satoshi-Light';
+  }
+
+.container {
+    display:flex;
+    justify-content:flex-end;
+    column-gap:120px;
+  }
+  
+ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    list-style-type: none;
+    
+    
+  }
+  
+  li.contact_item {
+    display:flex;
+    flex-direction:row;
+    gap: 12px;
+  }
+  
+  li.contact-item, li.link_footer_item, li.footer_item {
+    padding-bottom: 0px;
+    line-height: 8px;
+  }
+  .contact_item {
+    align-items: center;
+  }
+  
+  .icon_footer {
+    height: 24px;
+    width: 24px;
+  }

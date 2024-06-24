@@ -14,7 +14,7 @@ export const BeneficiosData = [{
     tittle: 'Mejora tu descanso',
     text: 'Ten la posibilidad de poder entrenar cualquier parte de tu cuerpo'
 },{
-    tittle: 'fortalece tusalud mental',
+    tittle: 'Fortalece tu salud mental',
     text: 'Ten la posibilidad de poder entrenar cualquier parte de tu cuerpo'
 },];
 

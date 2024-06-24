@@ -1,14 +1,43 @@
 @use '../../styles/abstracts/' as *;
 
 .claim__section{
-    width: 100vh;
+    width: 100%;
     padding: 160px 240px;
-
+    height: auto;
 }
 
-.claim_ttitle1 {
+.claim__div {
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    gap:96px;
+    margin-bottom:32px;
+    margin-top: 96px;
+    align-items: last baseline;
+}
+
+.claim__tittle1 {
     font-family: 'Satoshi-Light';
     font-weight: 300;
     font-size: 48px;
     
+    
+}
+
+.claim__tittle2 {
+    font-family: 'Satoshi-Regular';
+    font-weight: 400;
+    font-size: 48px;
+    text-align: right;
+}
+
+.gotosignup {
+    padding: 12px 40px;
+    background-color: var(--color-fluorescent);
+    border-color: none;
+    color:white;
+    border-radius: 8px;
+    box-shadow: none;
+    border-width: 0px;
+    float: inline-end;
 }
