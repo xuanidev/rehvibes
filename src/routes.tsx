@@ -15,6 +15,7 @@ import Profile from './layouts/Profile';
 import Configuration from './layouts/Configuration';
 import EditProfile from './layouts/EditProfile';
 import { Library } from './layouts/Library';
+import { Premium } from './layouts/Premium';
 
 const loaderToLogin = () => {
   const uidCookie = getFromCookies('uid');
@@ -76,6 +77,12 @@ export const router = createBrowserRouter([
         element: <EditProfile />,
         loader: loaderToLogin,
       },
+
+      {
+        path: '/subscription',
+        element: <Premium />,
+        loader: loaderToLogin,
+      },
     ],
     loader: loaderToLogin,
   },
@@ -101,5 +108,10 @@ export const router = createBrowserRouter([
   {
     path: '/landing',
     element: <LandingProducto />,
+  },
+
+  {
+    path: '/subscription',
+    element: <Premium />,
   },
 ]);
