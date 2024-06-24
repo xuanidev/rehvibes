@@ -10,8 +10,8 @@ export const TopLibrary = () => {
       <div className="library_top__top">
         <h2 className="library_top__top_tittle">Librería</h2>
         <div className="library_header-btns__top">
-          <AddWorkoutBtn />
           <BtnFilter style="search-input" />
+          <AddWorkoutBtn />
           <BtnSearch style="exercise-filter" />
         </div>
         <LogoWordmark className="library_top__logo" />

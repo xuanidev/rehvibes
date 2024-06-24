@@ -8,7 +8,7 @@
     height: fit-content;
     padding: 22px 24px;
     padding-bottom: 96px;
-    @include breakpoint('md'){
+    @include breakpoint('xl'){
         padding-left: 282px;
         padding-right: 32px;
         padding-bottom: 16px;

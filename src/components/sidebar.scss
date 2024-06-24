@@ -216,12 +216,7 @@
         }
     }
 }
-.hidden_option{
-    display: none;
-    @include breakpoint('md'){
-        display: block;
-    }
-}
+
 .profile_img{
     border-radius: 50%;
     padding: 6px 12px;

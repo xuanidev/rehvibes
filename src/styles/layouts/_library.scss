@@ -45,10 +45,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    @include breakpoint('md'){
-      gap: 32px;
-    }
+    gap: 24px;
     .library_section {
       margin-bottom: 40px;
 

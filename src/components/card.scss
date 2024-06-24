@@ -14,8 +14,9 @@
     user-select: none;
     &--sm {
         min-width: 150px;
-        max-height: 250px;
+        max-height: 300px;
         max-width: 250px;
+        width: auto;
     }
     &--md {
         max-height: 240px;
