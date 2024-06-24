@@ -1,0 +1,27 @@
+@import '../../styles/abstracts/';
+
+.nombre_usuario{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.2em 0px;
+    font-size: 16px;
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    font-size: 18px;
+    border-bottom: 1px solid #E6E6E6;
+    gap: 12px;
+    &__input{
+        @include gradient-border(1.5px, 12px, var(--color-white));
+        padding: 6px 26px;
+        width: 300px;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        font-family: 'Satoshi-Medium';
+    }
+    &__input:hover{
+      background-color: var(--color-white);
+      color: var(--color-secondary-dark);
+    }
+}

@@ -1,6 +1,9 @@
 import { LogoWordmark } from '../components/branding';
 import ConfigurationOption from '../components/configuration/ConfigurationOption';
 import OptionExtended from '../components/configuration/OptionExtended';
+import FotoPerfil from '../components/editprofile/FotoPerfil';
+import NombreUsuario from '../components/editprofile/NombreUsuario';
+import SubmitButtonOption from '../components/editprofile/SubmitButtonOption';
 
 export const EditProfile = () => {
   return (
@@ -15,11 +18,21 @@ export const EditProfile = () => {
             tittle="Nombre de usuario"
             children={
               <>
-                <OptionExtended text="Tamaño de texto" type="button" textButton="Normal" />
+                <NombreUsuario text="Nombre de usuario" />
+                <SubmitButtonOption />
               </>
             }
           />
-          <ConfigurationOption tittle="Foto de perfil" children={<></>} />
+          <ConfigurationOption
+            tittle="Foto de perfil"
+            children={
+              <>
+                <FotoPerfil text="Nueva foto de perfil" />
+                <OptionExtended text="Subir una foto de perfil" type="button" textButton="Subir foto" />
+                <SubmitButtonOption />
+              </>
+            }
+          />
         </div>
         <div className="configuration__options_group">
           <ConfigurationOption
