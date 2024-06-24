@@ -54,7 +54,7 @@ const BtnFilter = ({ style }: BtnFilterProps) => {
         leftIcon={FiltersIcon}
         iconHeight={24}
         iconWidth={24}
-        iconClass="color-brand icon"
+        iconClass="color-brand icon height50"
         text="Filtros"
         onClick={() => setIsModalOpen(true)}
       />

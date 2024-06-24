@@ -39,12 +39,7 @@ export const ProfileContent = () => {
           tittle="Correo electrónico"
           children={
             <>
-              <OptionExtended
-                text="Correo electrónico"
-                type="button"
-                textButton="Editar"
-                leftButtonText="revibes@gmail.com"
-              />
+              <OptionExtended text="Correo" type="button" textButton="Editar" leftButtonText="revibes@gmail.com" />
             </>
           }
         />
