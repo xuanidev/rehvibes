@@ -1,0 +1,82 @@
+@use '../../styles/abstracts/' as *;
+
+.container-caracteristicas {
+    width: 100%;
+    height: auto;
+    position: relative;
+    justify-content: center;
+}
+
+.tab-content-caracteristicas {
+    display: none;
+    text-align: center;
+}
+
+.tab-content-caracteristicas img {
+    width: 500px;
+    height: 500px;
+}
+
+.tabs-caracteristicas {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.tab-title-caracteristicas {
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    width: 300px; 
+    border-top: solid 4px grey;
+}
+
+.tab-title-caracteristicas h3 {
+    margin: 10px 0;
+    font-weight: normal;
+    font-size: 20px; 
+}
+
+.tab-title-caracteristicas p {
+    margin: 0;
+    line-height: 22px;
+    font-weight: normal;
+    font-size: 16px; 
+}
+
+.radio-tab-caracteristicas {
+    display: none;
+}
+
+#tab1:checked ~ .tabs-caracteristicas label[for="tab1"],
+#tab2:checked ~ .tabs-caracteristicas label[for="tab2"],
+#tab3:checked ~ .tabs-caracteristicas label[for="tab3"],
+#tab4:checked ~ .tabs-caracteristicas label[for="tab4"] {
+    border-top: solid 4px orange;
+}
+
+#tab1:checked ~ .tabs-caracteristicas label[for="tab1"] h3,
+#tab2:checked ~ .tabs-caracteristicas label[for="tab2"] h3,
+#tab3:checked ~ .tabs-caracteristicas label[for="tab3"] h3,
+#tab4:checked ~ .tabs-caracteristicas label[for="tab4"] h3 {
+    color: orange;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+#tab1:checked ~ .tabs-caracteristicas label[for="tab1"] p,
+#tab2:checked ~ .tabs-caracteristicas label[for="tab2"] p,
+#tab3:checked ~ .tabs-caracteristicas label[for="tab3"] p,
+#tab4:checked ~ .tabs-caracteristicas label[for="tab4"] p {
+    font-weight: normal;
+    font-size: 18px;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+    display: block;
+}

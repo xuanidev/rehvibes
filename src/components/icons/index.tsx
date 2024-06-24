@@ -30,6 +30,10 @@ export { Funcionalidades_3 } from './Funcionalidades_3';
 export { Funcionalidades_4 } from './Funcionalidades_4';
 export { Funcionalidades_5 } from './Funcionalidades_5';
 export { Funcionalidades_6 } from './Funcionalidades_6';
+export { Icono_Footer_Mail } from './Icono_Footer_Mail';
+export { Icono_Footer_Location } from './Icono_Footer_Location';
+export { Icono_Footer_Call } from './Icono_Footer_Call';
+export { Points_Claim } from './Points_Claim';
 
 export { FindReplace } from './FindReplace';
 export { Alert } from './Alert';

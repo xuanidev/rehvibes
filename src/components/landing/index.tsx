@@ -5,3 +5,6 @@ export { Slides } from "./Slides";
 export { Funcionalidades } from "./Funcionalidades";
 export { Video } from "./Video";
 export { Claim } from "./Claim";
+export { Caracteristicas } from "./Caracteristicas";
+export { Formulario } from "./Formulario";
+export { Footer_landing } from "./Footer_landing";

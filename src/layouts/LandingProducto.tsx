@@ -1,4 +1,4 @@
-import { Beneficios, Header, Slides, Funcionalidades , Video, Claim} from "../components/landing"
+import { Beneficios, Header, Slides, Funcionalidades , Video, Claim, Caracteristicas, Formulario,  Footer_landing } from "../components/landing"
 import { BeneficiosData } from "../components/landing/beneficiosData";
 
 export const LandingProducto = () => {
@@ -10,6 +10,9 @@ export const LandingProducto = () => {
         <Funcionalidades/>
         <Video/>
         <Claim/>
+        <Caracteristicas/>
+        <Formulario/>
+        <Footer_landing/>
 
         </>
     )
