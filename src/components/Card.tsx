@@ -1,3 +1,4 @@
+import React from 'react';
 import './card.scss';
 import { Time, Level, AddToFavorites, Share } from './icons';
 import classNames from 'classnames';
@@ -8,99 +9,95 @@ interface CardProps {
   text: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   duration: string;
-  difficulty: 'Principiante' | 'Intermedio' | 'Avanzado';
-  style?: string;
+  // difficulty: "BÃ¡sico" | "Intermedia" | "Alta";
+  difficulty: string;
 }
 
 export const Card = (props: CardProps) => {
-  const { size, img, text, onClick, difficulty, duration, style } = props;
+  const { size, img, text, onClick, difficulty, duration } = props;
 
   return (
-    <button
-      className={classNames({
-        card: true,
-        [`card--${size}`]: size,
-        [`${style}`]: style != undefined,
-      })}
-      onClick={onClick}
-      disabled={true}
-    >
-      <img src={img} className="card__img" />
-      <div className="shadow_img" />
-      <div
+    <>
+      <button
         className={classNames({
-          card__content: true,
-          [`card__content--${size}`]: size,
+          card: true,
+          [`card--${size}`]: size,
         })}
+        onClick={onClick}
       >
-        <h4
-          className={classNames({
-            card__text: true,
-            [`card__text--${size}`]: size,
-          })}
-        >
-          {text}
-        </h4>
+        <img src={img} className="card__img" />
+        <div className="shadow_img" />
         <div
           className={classNames({
-            card__info: true,
-            [`card__info--${size}`]: size,
+            card__content: true,
+            [`card__content--${size}`]: size,
           })}
         >
-          <div
+          <h4
             className={classNames({
-              card__info__content: true,
-              [`card__info__content--${size}`]: size,
+              card__text: true,
+              [`card__text--${size}`]: size,
             })}
           >
-            <Time
-              fill="white"
-              className={classNames({
-                card__icon_size: true,
-                [`card__icon_size--${size}`]: size,
-              })}
-            />
-            {duration}
-          </div>
+            {text}
+          </h4>
           <div
             className={classNames({
-              card__info__content: true,
-              [`card__info__content--${size}`]: size,
+              card__info: true,
+              [`card__info--${size}`]: size,
             })}
           >
-            <Level
-              fill="white"
+            <div
               className={classNames({
-                card__icon_size: true,
-                [`card__icon_size--${size}`]: size,
+                card__info__content: true,
+                [`card__info__content--${size}`]: size,
               })}
-            />
-            {difficulty}
+            >
+              <Time
+                className={classNames({
+                  card__icon_size: true,
+                  [`card__icon_size--${size}`]: size,
+                })}
+              />
+              {duration}
+            </div>
+            <div
+              className={classNames({
+                card__info__content: true,
+                [`card__info__content--${size}`]: size,
+              })}
+            >
+              <Level
+                className={classNames({
+                  card__icon_size: true,
+                  [`card__icon_size--${size}`]: size,
+                })}
+              />
+              {difficulty}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={classNames({
-          card__icons_top: true,
-          [`card__icons_top--${size}`]: size,
-        })}
-      >
-        <AddToFavorites
-          fill="white"
+        <div
           className={classNames({
-            card__icons_top_size: true,
-            [`card__icons_top_size--${size}`]: size,
+            card__icons_top: true,
+            [`card__icons_top--${size}`]: size,
           })}
-        />
-        <Share
-          fill="white"
-          className={classNames({
-            card__icons_top_size: true,
-            [`card__icons_top_size--${size}`]: size,
-          })}
-        />
-      </div>
-    </button>
+        >
+          <AddToFavorites
+            className={classNames({
+              card__icons_top_size: true,
+              [`card__icons_top_size--${size}`]: size,
+            })}
+          />
+          <Share
+            className={classNames({
+              card__icons_top_size: true,
+              [`card__icons_top_size--${size}`]: size,
+            })}
+          />
+        </div>
+      </button>
+    </>
   );
 };
 

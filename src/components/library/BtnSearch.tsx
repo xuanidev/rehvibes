@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './btnSearch.scss';
 import SearchIcon from '../icons/SearchIcon.js';
 import Card from '../Card.js';
-import { getExercisesLibraryFilter } from '../../api/exercises.js';
+// import { getExercisesLibraryFilter } from '../../api/exercises.js';
 import { Exercise } from '../../models/exercises.js';
+import { getFirestore, collection, getDocs, query as firestoreQuery, where, DocumentData } from 'firebase/firestore';
 
 interface BtnSearchProps {
   style?: string;
@@ -17,7 +18,6 @@ export const BtnSearch = ({ style }: BtnSearchProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
-
   const handleExpand = () => {
     setIsExpanded(true);
   };
@@ -29,14 +29,38 @@ export const BtnSearch = ({ style }: BtnSearchProps) => {
   useEffect(() => {
     const searchExercises = async () => {
       if (searchTerm !== '') {
-        console.log(searchTerm);
-        const auxExercises = await getExercisesLibraryFilter(searchTerm);
-        console.log(auxExercises);
-        setSearchResults(auxExercises);
+        try {
+          const db = getFirestore();
+          const exercisesRef = collection(db, 'exercises');
+          const exercisesQuery = firestoreQuery(
+            exercisesRef,
+            where('name', '>=', searchTerm),
+            // where("mainAreas", ">", searchTerm),
+            // where("type", ">", searchTerm),
+          );
+          const exercisesSnapshot = await getDocs(exercisesQuery);
+          const exercisesList = exercisesSnapshot.docs.map((doc: DocumentData) => {
+            const data = doc.data();
+            return {
+              id: doc.id,
+              name: data.name || '',
+              description: data.description || '',
+              type: data.type || '',
+              difficulty: data.difficulty || '',
+              equipment: data.equipment || [],
+              image: data.image || '',
+              series: data.series || 0,
+            } as Exercise;
+          });
+          setSearchResults(exercisesList);
+        } catch (error) {
+          console.error('Error searching exercises:', error);
+        }
       } else {
         setSearchResults([]);
       }
     };
+
     searchExercises();
   }, [searchTerm]);
 

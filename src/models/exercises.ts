@@ -1,7 +1,8 @@
 export interface ExerciseFromApiFirebase {
     description: string,
     type: string,
-    difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
+    // difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
+    difficulty: string,
     equipment:string[],
     frequency: number,
     id: number,
@@ -23,7 +24,8 @@ export interface ExerciseFromApiFirebase {
 export interface Exercise {
     description: string,
     type: string,
-    difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
+    // difficulty: 'Principiante' | 'Intermedio' | 'Avanzado',
+    difficulty: string,
     equipment:string[],
     frequency: number,
     id: number,
