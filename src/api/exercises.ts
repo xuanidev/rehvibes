@@ -78,7 +78,7 @@ export const getExercisesLibraryFilter = async (searchTerm:string): Promise<Exer
         const exercisesCollection = collection(db, "exercises");
         const exercisesSnapshot = await getDocs(query(exercisesCollection, where('name', '>=', searchTerm), where('name', '<=', searchTerm)));
 
-
+console.log(exercisesSnapshot);
         const exercisesData: ExerciseFromApiFirebase[] = [];
         exercisesSnapshot.forEach((doc) => {
             const usersData = doc.data() as ExerciseFromApiFirebase;

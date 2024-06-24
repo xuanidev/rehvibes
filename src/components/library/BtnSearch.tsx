@@ -41,8 +41,8 @@ export const BtnSearch = ({ style }: BtnSearchProps) => {
   }, [searchTerm]);
 
   return (
-    <div className={`search-input ${style}  ${isExpanded ? 'expanded' : ''}`}>
-      <div className="search-icon" onClick={handleExpand}>
+    <div className={`btn_search-input borderGradientSearch ${style}  ${isExpanded ? 'expanded' : ''}`}>
+      <div className="btn_search-icon" onClick={handleExpand}>
         <SearchIcon className="icon" />
       </div>
       <input
@@ -51,9 +51,9 @@ export const BtnSearch = ({ style }: BtnSearchProps) => {
         value={searchTerm}
         onChange={handleChange}
         onBlur={handleCollapse}
-        className={`search-input-field ${isExpanded ? 'expanded' : ''}`}
+        className={`btn_search-input-field ${isExpanded ? 'expanded' : ''}`}
       />
-      <div className="search-results">
+      <div className="btn_search-results">
         {searchResults.map(exercise => (
           <Card
             key={exercise.id}

@@ -1,4 +1,10 @@
+@import '../../styles/abstracts/';
+
 .filter-container {
+  margin-left: 20px;
+  @include breakpoint('md'){
+    margin-left: 0px;
+  }
     .filter-modal {
       position: fixed;
       top: 50%;

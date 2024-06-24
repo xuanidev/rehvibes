@@ -4,12 +4,14 @@ import BtnNtf from './BtnNtf';
 import { Greet } from './WelcomeMsg';
 import profileImg from '../assets/profileImg.png';
 import { LogoWordmark } from './branding';
+import { useNavigate } from 'react-router-dom';
 
 interface TopBarProps {
   uid: string;
   user: string;
 }
 export const TopBar = (props: TopBarProps) => {
+  const navigate = useNavigate();
   const { user, uid } = props;
   const greetingUser = Greet(user);
 
@@ -18,7 +20,7 @@ export const TopBar = (props: TopBarProps) => {
       <div className="top_up">
         <div className="welcome">
           <div className="welcome__left">
-            <div className="top_bar__user">
+            <div className="top_bar__user" onClick={() => navigate('/profile')}>
               <img src={profileImg} className="top_bar__img" />
               <div className="top_bar__info">
                 <span className="top_bar__name">Vicente Torner</span>

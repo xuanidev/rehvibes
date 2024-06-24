@@ -80,6 +80,9 @@
         }
     }
 }
+.sidebar__user:hover{
+    cursor: pointer;
+}
 .profile__info{
     display: flex;
     flex-direction: column;

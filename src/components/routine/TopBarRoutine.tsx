@@ -3,6 +3,7 @@ import profileImg from '../../assets/profileImg.png';
 import { LogoWordmarkWhite } from '../branding';
 import { AddToFavorites, Share } from '../icons';
 import SelectComponent from '../SelectComponent';
+import { useNavigate } from 'react-router-dom';
 
 interface TopBarRoutineProps {
   user: string;
@@ -10,6 +11,7 @@ interface TopBarRoutineProps {
   setSelectedOption: (selectedOption: { value: string; label: string } | null) => void;
 }
 export const TopBarRoutine = (props: TopBarRoutineProps) => {
+  const navigate = useNavigate();
   const { user, selectedOption, setSelectedOption } = props;
 
   return (
@@ -28,7 +30,7 @@ export const TopBarRoutine = (props: TopBarRoutineProps) => {
           </div>
         </div>
         <div className="welcome_routine">
-          <div className="routine__top_bar__user">
+          <div className="routine__top_bar__user" onClick={() => navigate('/profile')}>
             <img src={profileImg} className="routine__top_bar__img" />
             <div className="routine__top_bar__info">
               <span className="routine__top_bar__name">Vicente Torner</span>

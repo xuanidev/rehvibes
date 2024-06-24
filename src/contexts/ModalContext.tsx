@@ -7,6 +7,8 @@ interface ModalContextProps {
   setShowModalTraining: (show: boolean) => void;
   showModalExercise: boolean;
   setShowModalExercise: (show: boolean) => void;
+  showModalLibrary: boolean;
+  setShowModalLibrary: (show: boolean) => void;
   pendingPath: string;
   setPendingPath: (path: string) => void;
 }
@@ -17,6 +19,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [showModal, setShowModal] = useState(false);
   const [showModalTraining, setShowModalTraining] = useState(false);
   const [showModalExercise, setShowModalExercise] = useState(false);
+  const [showModalLibrary, setShowModalLibrary] = useState(false);
   const [pendingPath, setPendingPath] = useState('');
 
   return (
@@ -28,6 +31,8 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setShowModalTraining,
         showModalExercise,
         setShowModalExercise,
+        showModalLibrary,
+        setShowModalLibrary,
         pendingPath,
         setPendingPath,
       }}

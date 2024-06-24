@@ -1,6 +1,6 @@
 @import "../../styles/base";
 
-.search-input {
+.btn_search-input {
   position: relative;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
     width: 280px;
   }
 
-  .search-icon {
+  .btn_search-icon {
     width: 50px;
     height: 50px;
     display: flex;
@@ -30,7 +30,7 @@
     }
   }
 
-  .search-input-field {
+  .btn_search-input-field {
     width: 0;
     height: 100%;
     border: none;
@@ -54,7 +54,7 @@
     }
   }
 
-  .search-results {
+  .btn_search-results {
     position: absolute;
     top: 100%;
     left: 0;
@@ -68,7 +68,21 @@
     display: none;
   }
 
-  &.expanded .search-results {
+  &.expanded .btn_search-results {
     display: block;
   }
+}
+
+.borderGradientSearch{
+    @include gradient-border(1.5px, 12px, var(--color-white));
+    &:hover {
+        &_fill {
+          fill: white;
+          color: white;
+        }
+      }   
+}
+.borderGradientSearch:hover{
+    @include gradient-border(1.5px, 12px, var(--color-white));
+    color: white;
 }

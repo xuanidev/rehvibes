@@ -44,7 +44,7 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
   const [play, setPlay] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { setShowModalExercise } = useModal();
+  const { setShowModalExercise, setShowModalLibrary } = useModal();
   const handleShare = () => {
     return;
   };
@@ -69,6 +69,7 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
   };
   const handleClose = () => {
     setShowModalExercise(false);
+    setShowModalLibrary(false);
   };
   useEffect(() => {
     if (videoRef.current) {
