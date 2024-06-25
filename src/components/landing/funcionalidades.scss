@@ -13,7 +13,7 @@
     font-weight: 600;
     margin-block-start: 0em;
     margin-block-end: 0em;
-    padding: 12px 12px 24px 12px;
+    padding: 12px 12px 12px 12px;
 }
 
 .text_landing {
@@ -30,7 +30,7 @@
     padding: 24px 26px;
     padding-bottom: 12px;
     @include breakpoint('md') {
-        padding: 160px 240px;
+        padding: 64px 64px 0px 64px;
         flex-direction: initial;
         justify-content: space-between;
       }

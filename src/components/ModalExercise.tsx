@@ -45,9 +45,6 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { setShowModalExercise, setShowModalLibrary } = useModal();
-  const handleShare = () => {
-    return;
-  };
 
   const handleAddToFavorites = async () => {
     await getFavorites(getFromCookies('uid'));

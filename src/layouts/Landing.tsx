@@ -9,7 +9,7 @@ import {
 } from '../components';
 import { getFromCookies, retrieveDates } from '../utils/helpers';
 import { useContext, useEffect, useState } from 'react';
-import { Exercise, RehabilitationProgramProps, RoutineInfo, cualidadesUser } from '../models';
+import { Exercise, RehabilitationProgramProps, RoutineInfo } from '../models';
 import { cualidadesDefault, toastError } from '../constants';
 import { ToastContainer, toast } from 'react-toastify';
 import { getUser } from '../api/users';
@@ -27,15 +27,11 @@ const initialRoutineInfo = {
 };
 
 export const Landing = () => {
-  const [cualidades, setCualidades] = useState<cualidadesUser[]>(cualidadesDefault);
-  const [horas, setHoras] = useState<number>(0);
-  const [sessions, setSessions] = useState<number>(0);
-  const [achievements, setAchievements] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
   const {
-    username,
     setUsername,
     setUserInfo,
+    userInfo,
     setPrograms,
     setMainProgram,
     currentProgramId,
@@ -45,6 +41,13 @@ export const Landing = () => {
     routineInfo,
     setRoutineInfo,
   } = useContext(UserContext);
+
+  console.log({ userInfo });
+  const username = userInfo?.name ?? '';
+  const sessions = userInfo?.sesiones ?? 0;
+  const achievements = userInfo.logros ?? 0;
+  const horas = userInfo.horas ?? 0;
+  const cualidades = userInfo.cualidades ?? cualidadesDefault;
 
   const [exercises, setExercises] = useState<Exercise[]>();
   const uid = getFromCookies('uid');
@@ -86,11 +89,7 @@ export const Landing = () => {
   const getUserData = async () => {
     try {
       const userResponse = await getUser(uid);
-      setUsername(userResponse.name);
-      setCualidades(userResponse.cualidades ?? []);
-      setHoras(userResponse.horas ?? 0);
-      setSessions(userResponse.sesiones ?? 0);
-      setAchievements(userResponse.logros ?? 0);
+      console.log(userResponse);
       setUserInfo(userResponse);
     } catch {
       const toastIdAux = toast.error('No se han podido cargar el usuario', toastError);
