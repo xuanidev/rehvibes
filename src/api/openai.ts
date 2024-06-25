@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 const openai = new OpenAI({
-  apiKey: 'patata', //import.meta.env.VITE_OPENAI_API_KEY,
+  apiKey: 'esto es falso', //import.meta.env.VITE_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 

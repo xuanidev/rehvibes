@@ -2,7 +2,6 @@ import './topLibrary.scss';
 import { LogoWordmark } from '../branding';
 import BtnFilter from './BtnFilter';
 import BtnSearch from './BtnSearch';
-import AddWorkoutBtn from '../AddWorkoutBtn';
 
 export const TopLibrary = () => {
   return (
@@ -11,7 +10,6 @@ export const TopLibrary = () => {
         <h2 className="library_top__top_tittle">Librería</h2>
         <div className="library_header-btns__top">
           <BtnFilter style="search-input" />
-          <AddWorkoutBtn />
           <BtnSearch style="exercise-filter" />
         </div>
         <LogoWordmark className="library_top__logo" />
