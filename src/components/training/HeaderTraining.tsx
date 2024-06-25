@@ -24,7 +24,7 @@ export const HeaderTraining = (props: HeaderTrainingProps) => {
           <span className="header_training__buttons_span">Especial para {user}</span>
         </div>
       </div>
-      <LogoWordmarkWhite className="wordmark" />
+      <LogoWordmarkWhite className="wordmark logowordmark_icon_hover_pointer" onClick={() => navigate('/')} />
     </div>
   );
 };

@@ -43,7 +43,10 @@ export const TopBarRoutine = (props: TopBarRoutineProps) => {
             style="selector_on_top"
           />
           <h2 className="top_bar_tittle">Mi entrenamiento</h2>
-          <LogoWordmarkWhite className="routine__wordmark" />
+          <LogoWordmarkWhite
+            className="routine__wordmark logowordmark_icon_hover_pointer"
+            onClick={() => navigate('/')}
+          />
         </div>
       </div>
       <div className="routine__top__bottom">

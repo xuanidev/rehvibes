@@ -4,6 +4,8 @@
     width: 100%;
     height: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 160px 240px;/* Añadido para dar margen superior a la imagen */
 }
@@ -11,40 +13,168 @@
 .tab-content-caracteristicas {
     display: none;
     text-align: center;
-    margin-bottom: 100px; /* Añadido para dar margen inferior a la imagen */
     width: 500px;
     height: 500px;
     background-size: cover;
     background-position: center;
-    margin: 0 auto 100px auto; /* Center the div and add bottom margin */
+    margin: 0 auto 50px auto; /* Center the div and add bottom margin */
 }
-
+.upper_text_caracteristicas{ 
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 'Satoshi-Bold';
+    font-weight: 900;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    span{
+        display: block;
+    }
+}
 .content1 {
-    background-image: url("@/assets/landing/caracteristicas_coordinacion.jpg");
-    border-radius: 16px;
+    background-image: url("@/assets/landing/caracterisiticas_coordinacion.jpg");
     width: 900px;
     height: 700px;
+    border-radius: 12px;
+    position: relative;
+    &_shadow{
+        position: absolute;
+        display: grid;
+        place-content: center;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+    &_img{
+        border-radius: 12px 12px 0px 0px;
+        background-image: url("@/assets/landing/caracterisiticas_coordinacion.jpg");
+        background-size: cover;
+        background-position: center;
+        width: 500px;
+        height: 400px;
+    }
+    &_span{
+        width: 500px;
+        background-color: var(--color-white);
+        padding: 24px 0px;
+        border-radius: 0px 0px 12px 12px;
+        font-family: 'Satoshi-Bold';
+        font-size: 24px;
+    }
 }
 
 .content2 {
     background-image: url("@/assets/landing/caracteristicas_fuerza.jpg");
-    border-radius: 16px;
     width: 900px;
     height: 700px;
+    border-radius: 12px;
+    position: relative;
+    &_shadow{
+        position: absolute;
+        display: grid;
+        place-content: center;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+    &_img{
+        border-radius: 12px 12px 0px 0px;
+        background-image: url("@/assets/landing/caracteristicas_fuerza.jpg");
+        background-size: cover;
+        background-position: center;
+        width: 500px;
+        height: 400px;
+    }
+    &_span{
+        width: 500px;
+        background-color: var(--color-white);
+        padding: 24px 0px;
+        border-radius: 0px 0px 12px 12px;
+        font-family: 'Satoshi-Bold';
+        font-size: 24px;
+    }
 }
 
 .content3 {
     background-image: url("@/assets/landing/caracteristicas_flexibilidad.jpg");
-    border-radius: 16px;
     width: 900px;
     height: 700px;
+    border-radius: 12px;
+    position: relative;
+    &_shadow{
+        position: absolute;
+        display: grid;
+        place-content: center;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+    &_img{
+        border-radius: 12px 12px 0px 0px;
+        background-image: url("@/assets/landing/caracteristicas_flexibilidad.jpg");
+        background-size: cover;
+        background-position: center;
+        width: 500px;
+        height: 400px;
+    }
+    &_span{
+        width: 500px;
+        background-color: var(--color-white);
+        padding: 24px 0px;
+        border-radius: 0px 0px 12px 12px;
+        font-family: 'Satoshi-Bold';
+        font-size: 24px;
+    }
 }
 
 .content4 {
     background-image: url("@/assets/landing/caracteristicas_resistencia.jpg");
-    border-radius: 16px;
     width: 900px;
     height: 700px;
+    border-radius: 12px;
+    position: relative;
+    &_shadow{
+        position: absolute;
+        display: grid;
+        place-content: center;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+    }
+    &_img{
+        border-radius: 12px 12px 0px 0px;
+        background-image: url("@/assets/landing/caracteristicas_resistencia.jpg");
+        background-size: cover;
+        background-position: center;
+        width: 500px;
+        height: 400px;
+    }
+    &_span{
+        width: 500px;
+        background-color: var(--color-white);
+        padding: 24px 0px;
+        border-radius: 0px 0px 12px 12px;
+        font-family: 'Satoshi-Bold';
+        font-size: 24px;
+    }
 }
 
 .tabs-caracteristicas {

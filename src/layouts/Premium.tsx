@@ -1,14 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import { LogoWordmark } from '../components/branding';
 import { Basic } from '../components/icons/Basic';
 import { PremiumIcon } from '../components/icons/Premium';
 
 export const Premium = () => {
+  const navigate = useNavigate();
   return (
     <div className="premium__container">
       <div className="premium__content">
         <div className="premium__top">
           <h2 className="premium__top_tittle">Premium</h2>
-          <LogoWordmark className="configuration__top_logo" />
+          <LogoWordmark
+            className="configuration__top_logo logowordmark_icon_hover_pointer"
+            onClick={() => navigate('/')}
+          />
         </div>
         <div className="premium__main">
           <div className="premium__cta">

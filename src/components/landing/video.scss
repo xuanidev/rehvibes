@@ -1,15 +1,67 @@
 @use '../../styles/abstracts/' as *;
 
 
-.video-container {
+.video_landing_container {
     width: 100%;
     height: 700px;
     overflow: hidden;
     position: relative;
+    &__active{
+        cursor: pointer;
+    }
 }
 
-.video-container video {
+.video_container_video{
+    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 10;
+}
+
+.icon_container_video{
+    position: absolute;
+    top: calc(50% - 59px);
+    left: calc(50% - 59px);
+    height: 118px;
+    height: 118px;
+    object-fit: cover;
+    z-index: 20;
+    transition: all ease-out 0.1s;
+    opacity: 1;
+    &__active{
+        opacity: 0;
+    }
+    &__active:hover{
+        cursor: default !important;
+    }
+}
+.icon_container_video:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.text_container_video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0px 350px;
+    text-align: center;
+    display: grid;
+    place-content: center;
+    object-fit: cover;
+    z-index: 15;
+    transition: all ease-out 0.05s;
+
+    opacity: 0;
+    font-family: 'Satoshi-Bold';
+    color:white;
+    font-size: 66px;
+
+    &__active{
+        transition: all ease-out 0.8s;
+        opacity: 1;
+    }
+    &__active:hover{
+        cursor: default !important;
+    }
 }

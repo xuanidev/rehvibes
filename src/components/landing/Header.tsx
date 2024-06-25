@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogoWordmarkWhite } from '../branding';
 import './header.scss';
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -40,8 +41,12 @@ export const Header = () => {
             </ul>
           </nav>
           <div className="buttons_app">
-            <button className="login_web">Iniciar Sesión</button>
-            <button className="signup_web">Registrarse</button>
+            <button className="login_web logowordmark_icon_hover_pointer" onClick={() => navigate('/login')}>
+              Iniciar Sesión
+            </button>
+            <button className="signup_web logowordmark_icon_hover_pointer" onClick={() => navigate('/signup')}>
+              Registrarse
+            </button>
           </div>
         </div>
       </div>

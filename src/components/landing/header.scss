@@ -161,7 +161,7 @@
   @include breakpoint('3xl') {
     flex-direction: column;
     ustify-content: flex-end;
-    padding-bottom: 128px;
+    padding-bottom: 0px;
   }
 }
 
@@ -172,7 +172,7 @@
     width: 40%;
   }
   @include breakpoint('3xl') {
-    width: 30%;
+    width: 50%;
   }
 }
 
@@ -192,12 +192,13 @@
   }
   
   @include breakpoint('3xl') {
-    font-size: 88px;
+    font-size: 70px;
   }
 
 }
 
 .text_header {
+  width: 70%;
   font-size: 24px;
   font-family: 'Satoshi-Regular';
   color: #ffffff;

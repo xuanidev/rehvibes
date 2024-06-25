@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { LogoWordmark } from '../components/branding';
 import ConfigurationOption from '../components/configuration/ConfigurationOption';
 import OptionExtended from '../components/configuration/OptionExtended';
@@ -6,11 +7,15 @@ import NombreUsuario from '../components/editprofile/NombreUsuario';
 import SubmitButtonOption from '../components/editprofile/SubmitButtonOption';
 
 export const EditProfile = () => {
+  const navigate = useNavigate();
   return (
     <div className="configuration">
       <div className="configuration__top">
         <h2 className="configuration__top_tittle">Editar mi perfil</h2>
-        <LogoWordmark className="configuration__top_logo" />
+        <LogoWordmark
+          className="configuration__top_logo logowordmark_icon_hover_pointer"
+          onClick={() => navigate('/')}
+        />
       </div>
       <div className="configuration__options">
         <div className="configuration__options_group">

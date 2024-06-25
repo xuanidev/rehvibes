@@ -8,9 +8,7 @@
   margin-left: auto;
   text-transform: uppercase;
 }
-.contact-form {
-  justify-content: center;
-}
+
 .title-form {
   font-size: 36px;
   font-weight: 600;
@@ -30,27 +28,34 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.form-row {
-  display: flex;
   gap: 48px;
 }
 
-.form-left {
+.form-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+}
+.form-left{
+  width:65%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.form-right{
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.form__item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.form-right {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
 
 .input_landing, textarea {
   width: 100%;
@@ -64,8 +69,13 @@
 }
 
 textarea {
+  margin-top: 12px;
+  background-color: #F7F7F7;
   height: 150px;
   resize: none;
+  padding: 12px 24px 0px 24px;
+  border-radius: 8px;
+  color: black;
 }
 
 label {
@@ -97,6 +107,9 @@ label {
 }
 .rrss {
   width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .text_redes {
@@ -104,4 +117,32 @@ label {
   font-family: "Satoshi-Regular";
   font-weight: 32px;
   width: 40%;
+  margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.redes_sociales_iconos{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+.icono_rrss{
+  width: 40px;
+  height: 40px;
+}
+.inverse{
+  margin-top: 40px;
+  background-color: white;
+  color: var(--color-secondary);
+  font-size: 16px;
+  border: 1.5px solid var(--color-secondary-dark);
+  border-radius: 8px;
+  padding: 14px 50px;
+  font-family: 'Satoshi-Medium';
+  text-transform: uppercase;
+  font-size: 18px;
+}
+.inverse:hover{
+  background-color: white;
+  color: var(--color-secondary);
 }

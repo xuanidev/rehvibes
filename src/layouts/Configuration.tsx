@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import { LogoWordmark } from '../components/branding';
 import ConfigurationOption from '../components/configuration/ConfigurationOption';
 import OptionExtended from '../components/configuration/OptionExtended';
 
 export const Configuration = () => {
+  const navigate = useNavigate();
   return (
     <div className="configuration">
       <div className="configuration__top">
         <h2 className="configuration__top_tittle">Configuración</h2>
-        <LogoWordmark className="configuration__top_logo" />
+        <LogoWordmark
+          className="configuration__top_logo logowordmark_icon_hover_pointer"
+          onClick={() => navigate('/')}
+        />
       </div>
       <div className="configuration__options">
         <div className="configuration__options_group">
