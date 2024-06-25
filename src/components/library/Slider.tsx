@@ -157,7 +157,6 @@ export const Slider = (props: SliderProps) => {
               onClick={() => setCurrentExerciseId(exercise.id)}
               size="sm"
               text={exercise.name}
-              style="routines_margin_auto max-height"
             />
           ))}
         </div>
