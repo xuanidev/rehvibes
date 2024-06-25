@@ -10,6 +10,7 @@ import { redirect } from 'react-router-dom';
 import { LandingProducto } from './layouts/LandingProducto';
 import { getFromCookies } from './utils/helpers';
 import Routine from './layouts/Routine';
+import { MiEntrenamiento } from './layouts/MiEntrenamiento';
 import { Training } from './layouts/Training';
 import Profile from './layouts/Profile';
 import Configuration from './layouts/Configuration';
@@ -46,6 +47,11 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
+      },
+      {
+        path: '/routine',
+        element: <MiEntrenamiento />,
+        loader: loaderToLogin,
       },
       {
         path: '/routine/:programId',

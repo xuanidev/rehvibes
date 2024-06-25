@@ -1,5 +1,9 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Exercise, RehabilitationDay, RehabilitationProgramProps, RoutineInfo, UserFromApi } from '../models';
+import { toast } from 'react-toastify';
+import { getUser } from '../api/users';
+import { getFromCookies } from '../utils/helpers';
+import { toastError } from '../constants';
 
 interface UserContextModel {
   username?: string;
@@ -87,8 +91,23 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
   const [currentExercises, setCurrentExercises] = useState<Exercise[]>([]);
   const [currentExerciseId, setCurrentExerciseId] = useState<number>(0);
 
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const uid = getFromCookies('uid');
+        const userResponse = await getUser(uid);
+        console.log(userResponse);
+        setUserInfo(userResponse);
+      } catch {
+        const toastIdAux = toast.error('No se han podido cargar el usuario', toastError);
+        toast(toastIdAux);
+      }
+    };
+    getUserData();
+  }, []);
+
   const contextValue = {
-    username,
+    username: userInfo.name,
     setUsername,
     userInfo,
     setUserInfo,

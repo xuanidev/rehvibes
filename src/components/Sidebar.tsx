@@ -12,7 +12,7 @@ import classNames from 'classnames';
 
 export const SideBar = () => {
   const { showModal, setShowModal, setShowModalTraining, setPendingPath } = useModal();
-  const { userInfo, username, currentProgramId } = useContext(UserContext);
+  const { userInfo, username } = useContext(UserContext);
   const usernameSidebar = username ? username : getFromCookies('username');
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,11 +99,11 @@ export const SideBar = () => {
             })}
           >
             <NavLink
-              to={`/routine/${currentProgramId}`}
+              to={`/routine}`}
               className={({ isActive }) => (isActive || location.pathname === '/training' ? 'active' : '')}
               onClick={e => {
                 e.preventDefault();
-                handleNavigationAttempt(`/routine/${currentProgramId}`);
+                handleNavigationAttempt(`/routine`);
               }}
             >
               <DumbBell fill="#FF662D" className="sidebar__icon" />
