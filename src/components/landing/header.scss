@@ -20,6 +20,7 @@
   @include breakpoint('3xl') {
     background-image: url("@/assets/landing/Header_3xl.jpg");
   }
+
 }
 
 .top_nav_web {
@@ -150,12 +151,27 @@
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 48px;
+
+  @include breakpoint('md') {
+    flex-direction: column;
+    ustify-content: flex-end;
+    padding-bottom: 80px;
+  }
+
+  @include breakpoint('3xl') {
+    flex-direction: column;
+    ustify-content: flex-end;
+    padding-bottom: 128px;
+  }
 }
 
 .container_header_text {
   width: 80%;
 
   @include breakpoint('md') {
+    width: 40%;
+  }
+  @include breakpoint('3xl') {
     width: 30%;
   }
 }
@@ -172,8 +188,13 @@
   font-size: 32px;
 
   @include breakpoint('md') {
-    font-size: 72px;
+    font-size: 48px;
   }
+  
+  @include breakpoint('3xl') {
+    font-size: 88px;
+  }
+
 }
 
 .text_header {
@@ -182,9 +203,16 @@
   color: #ffffff;
   line-height: 1.1em;
   padding: 0px;
+
   @include breakpoint('md') {
+    font-size: 26px;
+  }
+
+  @include breakpoint('3xl') {
     font-size: 32px;
   }
+
+
 }
 
 .container_btn {
@@ -201,10 +229,17 @@
   border-width: 0px;
   font-size: 18px;
   padding: 14px 26px;
+
   @include breakpoint('md') {
-    font-size: 24px;
-    padding: 18px 72px;
+    font-size: 18px;
+    padding: 16px 32px;
   }
+  @include breakpoint('3xl') {
+    font-size: 24px;
+    padding: 20px 64px;
+  }
+
+  
 }
 
 .signup_web {
