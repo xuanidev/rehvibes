@@ -1,4 +1,4 @@
-import { Beneficios, Header, Slides, Funcionalidades , Video, Claim, Caracteristicas, Formulario,  Footer_landing } from "../components/landing"
+import { Header, Beneficios, Funcionalidades , Slides,  Video, Claim, Caracteristicas, Formulario,  Footer_landing } from "../components/landing"
 import { BeneficiosData } from "../components/landing/beneficiosData";
 
 export const LandingProducto = () => {

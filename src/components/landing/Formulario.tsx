@@ -10,18 +10,18 @@ export const Formulario = () => {
                 <div className="form-row">
                     <div className="form-left">
                         <label>Nombre y apellidos</label>
-                        <input type="text" placeholder="Nombre y apellidos" />
+                        <input className='input_landing' type="text" placeholder="Nombre y apellidos" />
                         
                         <label>Correo electrónico</label>
-                        <input type="email" placeholder="Correo electrónico" />
+                        <input className='input_landing' type="email" placeholder="Correo electrónico" />
                     </div>
                     
                     <div className="form-right">
                         <label>Fecha de nacimiento</label>
-                        <input type="date" placeholder="Fecha de nacimiento" />
+                        <input className='input_landing' type="date" placeholder="Fecha de nacimiento" />
                         
                         <label>Teléfono</label>
-                        <input type="tel" placeholder="Teléfono" />
+                        <input className='input_landing' type="tel" placeholder="Teléfono" />
                     </div>
                 </div>
                 
