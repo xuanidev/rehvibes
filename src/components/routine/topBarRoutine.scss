@@ -1,174 +1,172 @@
-@import '../../styles/abstracts';
+@import "../../styles/abstracts";
 
-.routine__top_up{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 32px;
-    @include breakpoint('xl'){
-        margin-bottom: 40px;
-    }
+.routine__top_up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+  @include breakpoint("xl") {
+    margin-bottom: 40px;
+  }
 }
-.routine__top__bottom{
+.routine__top__bottom {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  @include breakpoint("md") {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  @include breakpoint("xl") {
     display: none;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    @include breakpoint('md'){
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    @include breakpoint('xl'){
-        display: none;
-    }
+  }
 }
-.welcome_routine{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @include breakpoint('xl'){
-        width: auto;
-    }
+.welcome_routine {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include breakpoint("xl") {
+    width: auto;
+  }
 }
 
-.routine__top_bar__user{
-    display: grid;
-    place-content: center;
-    border-radius: 50%;
-    @include breakpoint('xl'){
-        display: none;
-    }
-}
-.routine__top_bar__img{
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
-.routine__top_bar__info{
+.routine__top_bar__user {
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  @include breakpoint("xl") {
     display: none;
-    margin-top: -18px;
-    gap: 8px;
-    @include breakpoint('xl'){
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  }
 }
-.top_bar__icons{
+.routine__top_bar__img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.routine__top_bar__info {
+  display: none;
+  margin-top: -18px;
+  gap: 8px;
+  @include breakpoint("xl") {
     display: flex;
-    flex-direction: row;
-    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+  }
 }
-.selector_on_top{
+.top_bar__icons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.selector_on_top {
+  display: block;
+  @include breakpoint("md") {
+    display: none;
+  }
+}
+.routine__wordmark {
+  width: 100px;
+  @include breakpoint("md") {
+    width: 178px;
+  }
+  @include breakpoint("lg") {
+    width: 200px;
+  }
+}
+
+.routine__top_bar__name {
+  display: none;
+  font-family: "Satoshi-Bold";
+  background-color: var(--color-white);
+  border: 1px solid var(--color-secondary);
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+.top_bar_tittle {
+  display: none;
+  @include breakpoint("md") {
     display: block;
-    @include breakpoint('md'){
-        display: none;
-    }
-}
-.routine__wordmark{
-    width: 100px;
-    @include breakpoint('md'){
-        width: 178px;
-    }
-    @include breakpoint('lg'){
-        width: 200px;
-    }
-}
-
-.routine__top_bar__name{
-    display: none;
-    font-family: 'Satoshi-Bold';
-    background-color: var(--color-white);
-    border: 1px solid var(--color-secondary);
-    padding: 6px 12px;
-    border-radius: 8px;
-}
-.top_bar_tittle{
-    display: none;
-    @include breakpoint('md'){
-        display: block;
-        font-family: 'Satoshi-Bold';
-        color: var(--color-white);
-        font-size: 26px;
-        margin-block-start: 0em;
-    margin-block-end: 0em;
-    }
-    @include breakpoint('xl'){
-        display: none;
-    }     
-
-}
-.header_routine__top{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    @include breakpoint('md'){
-        gap: 22px;
-    }  
-}
-.header_routine__top__desktop{
-    display: none;
-    @include breakpoint('xl'){
-        display: block;
-        width: auto;
-        display: flex;
-        flex-direction: row;
-        gap:20px;
-    }
-}
-.header_routine__top_span{
-    width: max-content;
-    height: min-content;
-    padding: 7px 20px;
-    border: 1px solid var(--color-white);
-    border-radius: 67px;
+    font-family: "Satoshi-Bold";
     color: var(--color-white);
+    font-size: 26px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+  @include breakpoint("xl") {
+    display: none;
+  }
 }
-
-.header_routine__top_icons{
+.header_routine__top {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  @include breakpoint("md") {
+    gap: 22px;
+  }
+}
+.header_routine__top__desktop {
+  display: none;
+  @include breakpoint("xl") {
+    display: block;
+    width: auto;
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 20px;
+  }
+}
+.header_routine__top_span {
+  width: max-content;
+  height: min-content;
+  padding: 7px 20px;
+  border: 1px solid var(--color-white);
+  border-radius: 67px;
+  color: var(--color-white);
 }
 
-.header_routine__top_icon{
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-content: center;
-    border: 1px solid var(--color-white);
-    border-radius: 8px;
+.header_routine__top_icons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }
 
-.header_routine__top_svg{
-    height: 18px;
-    width: 18px;
-    fill: white;
+.header_routine__top_icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
 }
 
+.header_routine__top_svg {
+  height: 18px;
+  width: 18px;
+  fill: white;
+}
 
 .header_routine__top_select {
-    width: auto;
-    height: 100%;
-    border: 1px solid var(--color-white);
-    border-radius: 8px;
-    background-color: transparent;
-    color: white;
-    text-align: center;
-    appearance: none;
-    padding: 0 10px;
-    font-size: 14px;
+  width: auto;
+  height: 100%;
+  border: 1px solid var(--color-white);
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  appearance: none;
+  padding: 0 10px;
+  font-size: 14px;
 }
-.header_routine__top_select:focus-visible{
-    outline: none;
+.header_routine__top_select:focus-visible {
+  outline: none;
 }
 .header_routine__top_select option {
-    padding: 8px;
-    background-color: transparent;
-    color: var(--color-black);
+  padding: 8px;
+  background-color: transparent;
+  color: var(--color-black);
 }

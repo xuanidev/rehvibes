@@ -44,7 +44,6 @@ export const Configuration = () => {
         <div className="configuration__options_group">
           <ConfigurationOption
             tittle="Idioma y región"
-            text="Activa las notificaciones para recibir recordatorios de tus sesiones, consejos personalizados y actualizaciones importantes de Revibes. ¡Mantén tu rehabilitación en marcha y sin interrupciones!"
             children={
               <>
                 <OptionExtended text="Idioma" type="select" textButton="Español" />

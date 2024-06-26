@@ -11,8 +11,8 @@ export const TopLibrary = () => {
       <div className="library_top__top">
         <h2 className="library_top__top_tittle">Librería</h2>
         <div className="library_header-btns__top">
-          <BtnFilter style="search-input" />
           <BtnSearch style="exercise-filter" />
+          <BtnFilter style="search-input" />
         </div>
         <LogoWordmark className="library_top__logo logowordmark_icon_hover_pointer" onClick={() => navigate('/')} />
       </div>

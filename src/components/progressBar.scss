@@ -1,4 +1,4 @@
-@import '../styles/base';
+@import "../styles/base";
 
 .progress-container {
   height: 240px;
@@ -12,15 +12,15 @@
   justify-content: center;
   gap: 10px;
   padding: 0px 10px 0px 10px;
-  h2{
+  h2 {
     margin-block-start: 0.83em;
     margin-block-end: 0em;
     font-size: 18px;
-    font-family: 'Satoshi-Bold';
+    font-family: "Satoshi-Bold";
   }
-  @include breakpoint('md'){
+  @include breakpoint("md") {
     width: 350px;
-    h2{
+    h2 {
       margin-block-start: 0em;
       font-size: 22px;
     }
@@ -32,6 +32,6 @@
 }
 
 .progress-percentage {
-  font-size: 24px;
-  font-family: 'Satoshi-Bold';
+  font-size: 20px;
+  font-family: "Satoshi-Medium";
 }
