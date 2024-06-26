@@ -19,8 +19,7 @@ export const ProfileContent = () => {
       </div>
       <div className="profile__options_group">
         <ConfigurationOption
-          tittle="Sobre mi"
-          text="Activa las notificaciones para recibir recordatorios de tus sesiones, consejos personalizados y actualizaciones importantes de Revibes. ¡Mantén tu rehabilitación en marcha y sin interrupciones!"
+          tittle="Sobre mí"
           children={
             <>
               <OptionExtended text="Nombre" type="button" textButton="Editar" leftButtonText="Vicente Torner" />

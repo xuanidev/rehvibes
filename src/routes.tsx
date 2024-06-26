@@ -28,7 +28,7 @@ const loaderToLogin = () => {
 };
 const loaderToMain = () => {
   if (Cookies.get('uid') !== undefined && Cookies.get('uid') !== '') {
-    return redirect('/app');
+    return redirect('/');
   }
   return null;
 };

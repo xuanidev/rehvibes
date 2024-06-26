@@ -18,7 +18,21 @@
    font-family: 'Satoshi-Medium';
    font-weight: 500;
    letter-spacing: -0.6px;
-   font-size: 30px;
+   font-size: 20px;
+
+   @include breakpoint('md'){
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    letter-spacing: -0.6px;
+    font-size: 24px;
+   }
+   @include breakpoint('3xl'){
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    letter-spacing: -0.6px;
+    font-size: 30px;
+   }
+
   }
   
   
@@ -30,11 +44,25 @@
     color: white;
     display: flex;
     align-items: center;
-    padding: 24px;
-    overflow: hidden; 
+    padding: 12px;
+    overflow: hidden;
+    height: 288px;
+    width: 288px; 
+
     @include breakpoint('md'){
-      height: 425px;
-      width: 458px;
+      height: 375px;
+      width: 325px;
+      column-gap: 24px;
+      row-gap: 24px;
+      padding:16px
+    }
+    
+    @include breakpoint('3xl'){
+        height: 425px;
+        width: 458px;
+        column-gap: 32px;
+        row-gap: 32px;
+        padding: 24px;
     }
   }
   
@@ -60,6 +88,7 @@
   }
   
   .beneficios:hover:before {
+
     inset:-10px;
   }
 
@@ -117,6 +146,7 @@
   
   .beneficios__container {
     transform: translateY(40%);
+    
     @include breakpoint('md') {
       transform: translateY(90%);
     }

@@ -35,6 +35,11 @@ export { Icono_Footer_Location } from './Icono_Footer_Location';
 export { Icono_Footer_Call } from './Icono_Footer_Call';
 export { Points_Claim } from './Points_Claim';
 
+export { Linkedin } from './Linkedin';
+export { Youtube } from './Youtube';
+export { Instagram } from './Instagram';
+export { Facebook } from './Facebook';
+
 export { FindReplace } from './FindReplace';
 export { Alert } from './Alert';
 export { Type } from './Type';

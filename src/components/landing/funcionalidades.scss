@@ -7,22 +7,29 @@
       }
 }
 
-.tittle_h2 {
+.tittle_h2_funcionalidades {
     font-family: 'Satoshi-Bold';
     font-size: 36px;
     font-weight: 600;
     margin-block-start: 0em;
     margin-block-end: 0em;
     padding: 12px 12px 12px 12px;
+    @include breakpoint('md') {
+        padding: 0px 12px 12px 64px;
+    }
 }
 
-.text_landing {
+.text_landing_funcionalidades {
     font-family: 'Satoshi-Regular';
     font-weight: 500;
     font-size: 22px;
     margin-block-start: 0em;
     margin-block-end: 0em;
-
+    padding-left: 0px;
+    @include breakpoint('md') {
+        padding-left: 64px;
+    }
+    text-align: left;
 }
 .icon-text_funcionalidades-section{   
     display: flex;

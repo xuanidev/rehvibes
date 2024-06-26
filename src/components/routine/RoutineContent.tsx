@@ -15,7 +15,7 @@ interface RoutineContentProps {
   zones?: string[];
 }
 export const RoutineContent = (props: RoutineContentProps) => {
-  const { day, materials = ['Estorilla'], exercises = [], series = 4, srcImg } = props;
+  const { day, materials = ['Esterilla'], exercises = [], series = 4, srcImg } = props;
   return (
     <div className="routine_content">
       <MaterialsContainer materials={materials} srcImg={srcImg || Esterilla} />

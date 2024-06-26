@@ -1,49 +1,49 @@
-@import '../../styles/abstracts';
+@import "../../styles/abstracts";
 
 .routine__container {
-    width: 100%;
-    height: auto;
-    background-size: cover;
-    background-position: center;
-    background-image: url(../../assets/backgroundFigma.png);
-    background-color: rgba(0, 0, 0, 0.5);
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 26px 24px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    @include breakpoint('md'){
-      padding: 20px;
-    }
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../../assets/backgroundFigma.png);
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 24px;
+  color: #ffffff;
+  @include breakpoint("md") {
+    padding: 20px;
+  }
 }
 
 .routine__info {
-  font-family: 'Satoshi-Regular';
+  font-family: "Satoshi-Light";
   display: flex;
   flex-direction: column;
   gap: 16px;
   h2 {
-    font-size: 20px;
+    font-family: "Satoshi-Medium";
+    font-size: 18px;
     margin-bottom: 10px;
     margin-block-start: 0em;
     margin-block-end: 0em;
-  } 
+  }
   p {
     font-size: 16px;
     margin-bottom: 20px;
-    span{
-      font-family: 'Satoshi-Medium';
+    span {
+      font-family: "Satoshi-Medium";
     }
   }
-  @include breakpoint('md'){
+  @include breakpoint("md") {
     gap: initial;
     h2 {
-      font-size: 24px;
-    } 
+      font-size: 22px;
+    }
   }
 }
 
@@ -58,14 +58,14 @@
   grid-column-gap: 20px;
   grid-row-gap: 12px;
 }
-.stat{
+.stat {
   margin-right: 10px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.stat__text{
+.stat__text {
   font-size: 14px;
 }
 .separation_line {

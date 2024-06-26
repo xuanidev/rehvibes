@@ -32,7 +32,7 @@ export const TopBar = (props: TopBarProps) => {
           <BtnNtf userId={uid} style="ntf_btn__desktop" />
           <AddWorkoutBtn style="workout_btn__desktop" />
         </div>
-        <LogoWordmark className="wordmark" />
+        <LogoWordmark className="wordmark logowordmark_icon_hover_pointer" onClick={() => navigate('/')} />
       </div>
       <div className="top__bottom">
         <div className="welcome__bottom">

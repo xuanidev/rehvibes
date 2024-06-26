@@ -4,7 +4,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
   color: white;
   padding-block: 0px;
   padding-inline: 0px;
@@ -13,18 +12,16 @@
   overflow: hidden;
   user-select: none;
   &--sm {
-    min-width: 150px;
-    max-height: 300px;
-    max-width: 250px;
-    width: auto;
+    height: 240px;
+    width: 200px;
   }
   &--md {
-    max-height: 240px;
-    max-width: 240px;
+    height: 250px;
+    width: 300px;
   }
   &--lg {
-    max-height: 335px;
-    max-width: 335px;
+    height: 280px;
+    width: 330px;
   }
 }
 
@@ -57,11 +54,11 @@
 .shadow_img {
   position: absolute;
   bottom: 0;
-  height: 50%;
+  height: 100%;
   width: 100%;
   z-index: 10;
   object-fit: cover;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 125%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
 }
 .card__text {
   margin-block-start: 0em;
@@ -69,7 +66,7 @@
   font-family: "Satoshi-Bold";
   text-align: start;
   &--sm {
-    font-size: 12px;
+    font-size: 15px;
   }
   &--md {
     font-size: 16px;
@@ -98,11 +95,11 @@
   display: flex;
   flex-direction: row;
   &--sm {
-    font-size: 12px;
+    font-size: 13px;
     gap: 4px;
   }
   &--md {
-    font-size: 12px;
+    font-size: 13px;
     gap: 4px;
   }
   &--lg {
@@ -111,17 +108,18 @@
   }
 }
 .card__icon_size {
+  fill: white;
   margin: auto 0px;
   &--sm {
-    height: 12px;
+    height: 14px;
     width: auto;
   }
   &--md {
-    height: 12px;
+    height: 14px;
     width: auto;
   }
   &--lg {
-    height: 15px;
+    height: 16px;
     width: auto;
   }
 }
@@ -145,23 +143,19 @@
     gap: 12px;
   }
 }
-
 .card__icons_top_size {
+  fill: white;
   margin: auto 0px;
   &--sm {
-    height: 16px;
+    height: 20px;
     width: auto;
   }
   &--md {
-    height: 16px;
+    height: 20px;
     width: auto;
   }
   &--lg {
-    height: 18px;
+    height: 22px;
     width: auto;
-  }
-
-  &--active {
-    background-color: red;
   }
 }
