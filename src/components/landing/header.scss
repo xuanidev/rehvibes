@@ -8,7 +8,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 3rem;
-  padding: 24px 26px;
+  padding: 24px 24px 48px 24px;
 
   @include breakpoint('md') {
     background-image: url("@/assets/landing/Header_md.jpg");
@@ -112,7 +112,13 @@
   @include breakpoint('md') {
     justify-content: flex-end;
     flex-direction: row;
-    gap: 4rem;
+    gap: 24px;
+  }
+
+  @include breakpoint('3xl') {
+    justify-content: flex-end;
+    flex-direction: row;
+    gap: 64px;
   }
 }
 
@@ -123,14 +129,32 @@
   padding: 0.25rem;
 
   @include breakpoint('md') {
-    font-size: 1.375rem;
+    font-size: 20px;
   }
+  @include breakpoint('3xl') {
+    font-size: 20px;
+  }
+
 }
 
 .nav_items_links {
+  font-family: 'Satoshi-Regular';
+  font-weight: 400;
   color: #ffffff;
   text-decoration: none;
-  font-weight: 300;
+  font-size: 16px;
+
+  @include breakpoint('md') {
+    font-family: 'Satoshi-Regular';
+  font-weight: 400;
+    font-size: 20px;
+  }
+  @include breakpoint('3xl') {
+    font-family: 'Satoshi-Regular';
+  font-weight: 400;
+    font-size: 22px;
+  }
+  
 }
 
 .buttons_app {
@@ -146,6 +170,7 @@
 }
 
 .container_header {
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -156,25 +181,17 @@
     flex-direction: column;
     ustify-content: flex-end;
     padding-bottom: 80px;
+    width: 50%;
   }
 
   @include breakpoint('3xl') {
     flex-direction: column;
-    ustify-content: flex-end;
+    justify-content: flex-end;
     padding-bottom: 0px;
-  }
-}
-
-.container_header_text {
-  width: 80%;
-
-  @include breakpoint('md') {
-    width: 40%;
-  }
-  @include breakpoint('3xl') {
     width: 50%;
   }
 }
+
 
 .title_header {
   font-weight: 700;
@@ -198,15 +215,14 @@
 }
 
 .text_header {
-  width: 70%;
-  font-size: 24px;
+  font-size: 18px;
   font-family: 'Satoshi-Regular';
   color: #ffffff;
   line-height: 1.1em;
   padding: 0px;
 
   @include breakpoint('md') {
-    font-size: 26px;
+    font-size: 20px;
   }
 
   @include breakpoint('3xl') {
@@ -222,25 +238,31 @@
 
 .btn_header {
   position: relative;
-  background-color: var(--color-fluorescent);
-  border-color: none;
-  color: white;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-size: 16px;
+  border: 1.5px solid var(--color-fluorescent);
   border-radius: 8px;
-  box-shadow: none;
-  border-width: 0px;
-  font-size: 18px;
+  font-family: "Satoshi-Medium";
   padding: 14px 26px;
 
   @include breakpoint('md') {
     font-size: 18px;
-    padding: 16px 32px;
+    padding: 16px 48px;
+    border-radius: 10px;
   }
   @include breakpoint('3xl') {
     font-size: 24px;
-    padding: 20px 64px;
+    padding: 18px 64px;
+    border-radius: 12px;
   }
 
   
+}
+.btn_header:hover {
+  background-color: var(--color-fluorescent);
+  border: 1.5px solid var(--color-fluorescent);
+
 }
 
 .signup_web {
@@ -250,7 +272,33 @@
   border: 1.5px solid var(--color-secondary-dark);
   border-radius: 8px;
   font-family: "Satoshi-Medium";
-  padding: 12px 32px;
+  font-weight: 500;
+  padding: 8px 16px;
+
+  @include breakpoint('sm') {
+    font-size: 16px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
+
+  
+  @include breakpoint('md') {
+    font-size: 18px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
+  @include breakpoint('3xl') {
+    font-size: 18px;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
+
 }
 
 .signup_web:hover {
@@ -266,7 +314,31 @@
   border: 1.5px solid var(--color-fluorescent);
   border-radius: 8px;
   font-family: "Satoshi-Medium";
-  padding: 12px 32px;
+  padding: 8px 162px;
+
+  @include breakpoint('sm') {
+    font-size: 16px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
+
+
+  @include breakpoint('md') {
+    font-size: 18px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
+  @include breakpoint('3xl') {
+    font-size: 18px;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-family: "Satoshi-Medium";
+    font-weight: 500;
+  }
 }
 
 .login_web:hover {

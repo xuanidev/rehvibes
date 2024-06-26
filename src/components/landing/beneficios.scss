@@ -5,10 +5,20 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(6, auto);
+    
     @include breakpoint('md') {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
+        rid-column-gap: 16px;
+        grid-row-gap: 16px;
+        padding: 32px 0px;
+        margin-left: auto;
+        margin-right: auto;
     }
+
+    @include breakpoint('3xl') {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 32px;
     grid-row-gap: 32px;
     margin-left: auto;
@@ -16,16 +26,44 @@
     padding: 80px 0px;
     
 }
+}
 
-.section_Beneficios{
-    padding: 64px 26px;
+.section_Beneficios {
+    padding: 64px 24px;
+    
     @include breakpoint('md') {
+        padding: 80px 28px;
+      }
+      @include breakpoint('3xl') {
         padding: 160px 240px;
       }
 }
 
 
 .tittle_h2 {
+
+        font-family: 'Satoshi-Bold';
+        font-size:24px;
+        font-weight: 600;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-bottom: 16px;
+        justify-content: center;
+        text-align: center;
+
+
+    @include breakpoint('md') {
+        font-family: 'Satoshi-Bold';
+        font-size: 30px;
+        font-weight: 600;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-bottom: 16px;
+        justify-content: center;
+        text-align: center;
+    }
+
+@include breakpoint('3xl') {
     font-family: 'Satoshi-Bold';
     font-size: 36px;
     font-weight: 600;
@@ -35,15 +73,37 @@
     justify-content: center;
     text-align: center;
 }
+}
 
 .text_landing {
     font-family: 'Satoshi-Regular';
     font-weight: 500;
-    font-size: 22px;
+    font-size: 18px;
     margin-block-start: 0em;
     margin-block-end: 0em;
     justify-content: center;
     text-align: center;
 
+    @include breakpoint('md') {
+        font-family: 'Satoshi-Regular';
+        font-size: 20px;
+        font-weight: 600;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-bottom: 16px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    @include breakpoint('3xl') {
+        font-family: 'Satoshi-Regular';
+        font-size: 22px;
+        font-weight: 600;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding-bottom: 16px;
+        justify-content: center;
+        text-align: center;
+    }
 }
 

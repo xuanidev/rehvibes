@@ -59,9 +59,9 @@
 }
 
 .text h3 {
+    font-family: 'Satoshi-Medium';
     margin: 0;
     font-size: 36px;
-    text-transform: uppercase;
 
 }
 
@@ -70,6 +70,29 @@
     font-size: 20px;
     line-height: normal;
 }
+
+.btn_slide {
+    padding-top: 24px;
+    float: inline-start;
+    
+}
+
+.gotosignup_slides {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    font-size: 18px;
+    border: 1.5px solid var(--color-fluorescent);
+    border-radius: 8px;
+    font-family: "Satoshi-Medium";
+    padding: 12px 32px;
+}
+
+.gotosignup_slides:hover {
+    background-color: var(--color-fluorescent);
+    border: 1.5px solid var(--color-fluorescent);
+    color: var(--color-white);
+}
+
 
 @keyframes cambio {
     0% { margin-left: 0; }
