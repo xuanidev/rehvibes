@@ -1,114 +1,113 @@
-@import '../styles/base';
+@import "../styles/base";
 
-
-.btnIcon{
-    padding: 10px 10px;
-    border-radius: 12px;
-    width: max-content;
-    font-family: 'Satoshi-Medium';
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    transition: color 0.15s;
-    &:hover {
-        .icon {
-          fill: white;
-        }
-      }
-      
-      .icon {
-        fill: var(--color-secondary);
-        transition: color 0.15s;
-      }
-    @include breakpoint('md'){
-      padding: 12px 12px;
+.btnIcon {
+  padding: 10px 10px;
+  border-radius: 12px;
+  width: max-content;
+  font-family: "Satoshi-Medium";
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: color 0.15s;
+  &:hover {
+    .icon {
+      fill: white;
     }
+  }
+
+  .icon {
+    fill: var(--color-secondary);
+    transition: color 0.15s;
+  }
+  @include breakpoint("md") {
+    padding: 12px 12px;
+  }
 }
-.btnIcon:hover{
-    background-color: var(--color-primary);
-    cursor: pointer;
+.btnIcon:hover {
+  background-color: var(--color-primary);
+  cursor: pointer;
 }
-.primary{
-    background-color: var(--color-secondary);
-    color: white;
-    font-size: 16px;
-    border: 1.5px solid var(--color-secondary-dark);
-    border-radius: 8px;
-    font-family: 'Satoshi-Medium';
+.primary {
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 16px;
+  border: 1.5px solid var(--color-secondary-dark);
+  border-radius: 8px;
+  font-family: "Satoshi-Medium";
 }
 
-.full{
+.full {
   width: 100%;
   text-align: center;
 }
-.heighFit{
+.heighFit {
   height: fit-content;
 }
-.primary:hover{
-    background-color: var(--color-white);
-    color: var(--color-secondary-dark);
+.primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-secondary-dark);
 }
 
-.primary_long{
+.primary_long {
   padding: 6px 26px;
   background-color: var(--color-secondary);
   color: white;
   font-size: 16px;
   border: 1.5px solid var(--color-secondary-dark);
   border-radius: 8px;
-  font-family: 'Satoshi-Medium';
+  font-family: "Satoshi-Medium";
 }
-.primary_long:hover{
+.primary_long:hover {
   background-color: var(--color-white);
   color: var(--color-secondary-dark);
 }
-.borderGradient{
-    @include gradient-border(1.5px, 12px, var(--color-white));
-    &:hover {
-        &_fill {
-          fill: white;
-          color: white;
-        }
-      }   
+.borderGradient {
+  @include gradient-border(1.5px, 12px, var(--color-white));
+  &:hover {
+    &_fill {
+      fill: white;
+      color: white;
+    }
+  }
 }
-.borderGradient:hover{
-    @include gradient-border(1.5px, 12px, transparent);
-    color: white;
+.borderGradient:hover {
+  @include gradient-border(1.5px, 12px, transparent);
+  color: white;
 }
-.disabled{
-    background-color: var(--color-secondary-light);
-    border: 2px solid var(--color-secondary-dark-disabled);
-    color: var(--color-white);
+.disabled {
+  background-color: var(--color-secondary-light);
+  border: 2px solid var(--color-secondary-dark-disabled);
+  color: var(--color-white);
 }
-.disabled:hover{
-    background-color: var(--color-secondary-light);
-    cursor: default;
+.disabled:hover {
+  background-color: var(--color-secondary-light);
+  cursor: default;
 }
-.routine_cta{
+.routine_cta {
   height: min-content;
   color: white;
   @include gradient-border(1.5px, 8px, transparent);
   padding: 10px 16px;
-  font-size: 13px;
+  font-size: 14px;
 }
-.routine_cta:hover{
+.routine_cta:hover {
   background-image: none;
   background-color: transparent;
   border: 1px solid white;
   color: white;
 }
-.primary_opposite{
+.primary_opposite {
   background-color: var(--color-white);
   color: var(--color-secondary-dark);
   font-size: 16px;
   border: 1.5px solid var(--color-secondary-dark);
   border-radius: 8px;
-  font-family: 'Satoshi-Medium';
+  font-family: "Satoshi-Medium";
   font-weight: 500;
 }
-.primary_opposite:hover{
+.primary_opposite:hover {
   background-color: var(--color-secondary-light);
   color: var(--color-white);
 }

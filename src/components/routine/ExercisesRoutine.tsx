@@ -1,7 +1,6 @@
 import './exercisesRoutine.scss';
 import { Exercise } from '../../models';
 import { FindReplace } from '../icons';
-import Sentadillas from '../../../public/assets/routinesLibrary/sentadillas.jpg';
 
 interface ExerciseRoutineProps {
   day: number;
@@ -21,7 +20,7 @@ export const ExerciseRoutine = (props: ExerciseRoutineProps) => {
         {exercises.map((exercise: Exercise) => {
           return (
             <li className="exercises_routine__item" key={exercise.name}>
-              <img src={Sentadillas} className="item_img" />
+              <img src={exercise.image} className="item_img" />
               <div className="item_info">
                 <div className="item_name">
                   <h4>{exercise.name}</h4>
