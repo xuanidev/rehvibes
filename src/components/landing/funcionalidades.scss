@@ -15,7 +15,7 @@
     margin-block-end: 0em;
     padding: 12px 12px 12px 12px;
     @include breakpoint('md') {
-        padding: 0px 12px 12px 64px;
+        padding: 0px 100px 12px 100px;
     }
 }
 
@@ -27,7 +27,7 @@
     margin-block-end: 0em;
     padding-left: 0px;
     @include breakpoint('md') {
-        padding-left: 64px;
+        padding-left: 100px;
     }
     text-align: left;
 }
@@ -37,7 +37,7 @@
     padding: 24px 26px;
     padding-bottom: 12px;
     @include breakpoint('md') {
-        padding: 64px 64px 0px 64px;
+        padding: 64px 100px 0px 100px;
         flex-direction: initial;
         justify-content: space-between;
       }

@@ -1,20 +1,11 @@
-import { getFromCookies, retrieveDates } from '../utils/helpers';
+import { getFromCookies } from '../utils/helpers';
 import { useContext, useEffect } from 'react';
-import { RehabilitationProgramProps, RoutineInfo } from '../models';
 import { UserContext } from '../contexts/UserContextProvider';
 import { getProgramsByUserID } from '../api/programs';
 import { useNavigate } from 'react-router-dom';
 
 export const MiEntrenamiento = () => {
-  const {
-    setPrograms,
-    setMainProgram,
-    currentProgramId,
-    setCurrentProgramId,
-    setRehabDays,
-    routineInfo,
-    setRoutineInfo,
-  } = useContext(UserContext);
+  const { currentProgramId, setCurrentProgramId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -32,7 +23,7 @@ export const MiEntrenamiento = () => {
         const programsResponse = await getProgramsByUserID(uid);
         setCurrentProgramId(programsResponse[0]?.uid ?? '');
       } catch {
-        // TODO
+        console.log('error');
       }
     };
     getProgramsData();

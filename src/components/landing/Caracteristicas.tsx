@@ -1,13 +1,16 @@
 import './caracteristicas.scss';
 
-export const Caracteristicas = () => {
+interface CaracteristicasProps {
+  id: string;
+}
+export const Caracteristicas = ({ id }: CaracteristicasProps) => {
   return (
     <div className="container-caracteristicas">
       <input type="radio" name="tabs" id="tab1" className="radio-tab-caracteristicas" defaultChecked />
       <input type="radio" name="tabs" id="tab2" className="radio-tab-caracteristicas" />
       <input type="radio" name="tabs" id="tab3" className="radio-tab-caracteristicas" />
       <input type="radio" name="tabs" id="tab4" className="radio-tab-caracteristicas" />
-      <h2 className="upper_text_caracteristicas">
+      <h2 className="upper_text_caracteristicas" id={id}>
         Cuando te mueves y realizas ejercicio, <span>tu cuerpo mejora y desarrolla:</span>
       </h2>
       <div className="tab-content-caracteristicas content1">

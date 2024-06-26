@@ -11,6 +11,13 @@ export const Header = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="header">
       <div className="top_nav_web">
@@ -24,18 +31,18 @@ export const Header = () => {
           <nav className="nav_menu">
             <ul className="nav_links">
               <li className="nav_item">
-                <a className="nav_items_links" href="#beneficios">
+                <a className="nav_items_links" onClick={() => scrollToSection('beneficios')}>
                   Beneficios
                 </a>
               </li>
               <li className="nav_item">
-                <a className="nav_items_links" href="#funcionamiento">
-                  ¿Cómo funciona?
+                <a className="nav_items_links" onClick={() => scrollToSection('funcionalidades')}>
+                  Funcionalidades
                 </a>
               </li>
               <li className="nav_item">
-                <a className="nav_items_links" href="#funcionalidades">
-                  Funcionalidades
+                <a className="nav_items_links" onClick={() => scrollToSection('entrenamientos')}>
+                  Entrenamientos
                 </a>
               </li>
             </ul>
@@ -60,7 +67,9 @@ export const Header = () => {
           </p>
         </div>
         <div className="container_btn">
-          <button className="btn_header">Empieza ya</button>
+          <button className="btn_header" onClick={() => navigate('/')}>
+            Empieza ya
+          </button>
         </div>
       </div>
     </header>

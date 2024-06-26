@@ -95,6 +95,7 @@ export const NewRoutines = ({ exercises }: NewRoutinesProps) => {
               onClick={() => handleClick(exercise.id)}
               size="sm"
               text={exercise.name}
+              exerciseId={exercise.id}
             />
           ))}
         </div>

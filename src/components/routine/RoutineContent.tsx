@@ -1,6 +1,6 @@
 import { Exercise } from '../../models';
 import './routineContent.scss';
-import Esterilla from '../../../public/assets/routinesLibrary/sentadillas.jpg';
+import Esterilla from '../../assets/materials/esterilla.png';
 import ExerciseRoutine from './ExercisesRoutine';
 import MaterialsContainer from './MaterialsContainer';
 import Cuello from '../../assets/cuello.png';
@@ -18,7 +18,7 @@ export const RoutineContent = (props: RoutineContentProps) => {
   const { day, materials = ['Esterilla'], exercises = [], series = 4, srcImg } = props;
   return (
     <div className="routine_content">
-      <MaterialsContainer materials={materials} srcImg={srcImg || Esterilla} />
+      <MaterialsContainer materials={materials} srcImg={srcImg ?? Esterilla} />
       <ExerciseRoutine exercises={exercises} day={day} series={series} />
       <div className="working_zones">
         <h4 className="routine_content__section_tittle">Lo que vas a trabajar</h4>

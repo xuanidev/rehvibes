@@ -163,6 +163,7 @@ export const Slider = (props: SliderProps) => {
               }}
               size="sm"
               text={exercise.name}
+              exerciseId={exercise.id}
             />
           ))}
         </div>

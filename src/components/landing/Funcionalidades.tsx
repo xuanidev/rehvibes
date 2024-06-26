@@ -8,9 +8,13 @@ import {
 } from '../icons';
 import './funcionalidades.scss';
 
-export const Funcionalidades = () => {
+interface FuncionalidadesProps {
+  id: string;
+}
+
+export const Funcionalidades = ({ id }: FuncionalidadesProps) => {
   return (
-    <section className="funcionalidades_section">
+    <section className="funcionalidades_section" id={id}>
       <h2 className="tittle_h2_funcionalidades">Funcionalidades de la plataforma</h2>
       <p className="text_landing_funcionalidades">
         {' '}

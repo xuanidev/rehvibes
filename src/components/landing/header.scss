@@ -15,6 +15,7 @@
     padding-bottom: 10rem;
     padding-right: 7.5rem;
     padding-left: 7.5rem;
+    padding-top: 48px;
   }
 
   @include breakpoint('3xl') {
@@ -137,6 +138,10 @@
 
 }
 
+.nav_item:hover{
+  cursor: pointer;
+}
+
 .nav_items_links {
   font-family: 'Satoshi-Regular';
   font-weight: 400;
@@ -188,7 +193,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding-bottom: 0px;
-    width: 50%;
+    width: 45%;
   }
 }
 
@@ -209,7 +214,7 @@
   }
   
   @include breakpoint('3xl') {
-    font-size: 70px;
+    font-size: 64px;
   }
 
 }
@@ -262,14 +267,15 @@
 .btn_header:hover {
   background-color: var(--color-fluorescent);
   border: 1.5px solid var(--color-fluorescent);
+  cursor: pointer;
 
 }
 
 .signup_web {
-  background-color: var(--color-white);
-  color: var(--color-fluorescent);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
   font-size: 16px;
-  border: 1.5px solid var(--color-secondary-dark);
+  border: 1.5px solid  var(--color-secondary-dark);
   border-radius: 8px;
   font-family: "Satoshi-Medium";
   font-weight: 500;
@@ -308,10 +314,10 @@
 }
 
 .login_web {
-  background-color: var(--color-secondary);
+  background-color: transparent;
   color: var(--color-white);
   font-size: 16px;
-  border: 1.5px solid var(--color-fluorescent);
+  border: 1.5px solid var(--color-white);
   border-radius: 8px;
   font-family: "Satoshi-Medium";
   padding: 8px 162px;
@@ -342,8 +348,9 @@
 }
 
 .login_web:hover {
-  background-color: var(--color-fluorescent);
-  border: 1.5px solid var(--color-fluorescent);
+  cursor: pointer;
+  background-color: hsla(0, 0%, 100%, 0.10);
+      color: white;
 }
 
 

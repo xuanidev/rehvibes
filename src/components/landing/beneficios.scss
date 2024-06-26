@@ -7,9 +7,10 @@
     grid-template-rows: repeat(6, auto);
     
     @include breakpoint('md') {
+
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        rid-column-gap: 16px;
+        grid-column-gap: 16px;
         grid-row-gap: 16px;
         padding: 32px 0px;
         margin-left: auto;
@@ -17,14 +18,15 @@
     }
 
     @include breakpoint('3xl') {
+        width: 100%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 32px;
-    grid-row-gap: 32px;
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
     margin-left: auto;
     margin-right: auto;
-    padding: 80px 0px;
-    
+    padding: 80px 100px;
+
 }
 }
 
@@ -41,7 +43,6 @@
 
 
 .tittle_h2 {
-
         font-family: 'Satoshi-Bold';
         font-size:24px;
         font-weight: 600;
@@ -64,6 +65,8 @@
     }
 
 @include breakpoint('3xl') {
+    width: 100%;
+    padding: 0px 100px;
     font-family: 'Satoshi-Bold';
     font-size: 36px;
     font-weight: 600;
@@ -71,7 +74,7 @@
     margin-block-end: 0em;
     padding-bottom: 16px;
     justify-content: center;
-    text-align: center;
+    text-align: left;
 }
 }
 
@@ -96,14 +99,16 @@
     }
 
     @include breakpoint('3xl') {
+        width: 100%;
         font-family: 'Satoshi-Regular';
         font-size: 22px;
-        font-weight: 600;
+        font-weight: 400;
         margin-block-start: 0em;
         margin-block-end: 0em;
         padding-bottom: 16px;
         justify-content: center;
-        text-align: center;
+        text-align: left;
+        padding: 0px 100px;
     }
 }
 

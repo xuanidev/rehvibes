@@ -146,9 +146,16 @@
 .card__icons_top_size {
   fill: white;
   margin: auto 0px;
+  transition: all linear 0.2s;
   &--sm {
     height: 20px;
     width: auto;
+    transition: all linear 0.1s;
+  }
+  &--sm:hover{
+      transform: scale(1.2);
+      width: auto;
+      filter: drop-shadow(1px 1px 4px #4c4c4c);
   }
   &--md {
     height: 20px;
@@ -158,4 +165,13 @@
     height: 22px;
     width: auto;
   }
+  &--loading {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 2px;
+    border-radius: 50%;
+  }
+}
+
+.slider-inner-slider button {
+  box-shadow: none !important;
 }

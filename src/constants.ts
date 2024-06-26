@@ -15,6 +15,21 @@ const toastError: ToastOptions<ToastPosition> = {
     },
   };
 
+const toastDefault: ToastOptions<ToastPosition> = {
+    position: "top-center",
+    hideProgressBar: true,
+    closeOnClick: true,
+    autoClose: 40000,
+    draggable: true,
+    style: {
+      fontFamily: "Satoshi-Medium",
+      color: "black",
+      border: "1px solid white",
+      backgroundColor: "#ffffff",
+      borderRadius: "12px",
+    },
+};
+
 const bodyPartsMap = {
   'Cuello': ['neck'],
   'Muñeca': ['forearm'],
@@ -54,4 +69,4 @@ const cualidadesDefault = [
   },
 ];
 
-export {toastError, bodyPartsMap, cualidadesDefault} 
+export {toastError, toastDefault, bodyPartsMap, cualidadesDefault} 

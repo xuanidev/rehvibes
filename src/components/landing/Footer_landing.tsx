@@ -24,7 +24,7 @@ export const Footer_landing = () => {
             </li>
             <li className="contact_item">
               <Icono_Footer_Call className="icon_footer" />
-              <h5 className="footer_tittle">666 666 666</h5>
+              <h5 className="footer_tittle">(+34) 123 45 67 89</h5>
             </li>
           </ul>
         </div>

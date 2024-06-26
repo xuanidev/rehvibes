@@ -160,6 +160,7 @@ export const DesignSystem = () => {
             }}
             size="sm"
             text="Pecho Superior"
+            exerciseId={1}
           ></Card>
         </div>
       </section>

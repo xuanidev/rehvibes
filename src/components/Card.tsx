@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './card.scss';
 import { Time, Level, AddToFavorites, Share } from './icons';
 import classNames from 'classnames';
+import { ToastContainer, toast } from 'react-toastify';
+import { toastDefault, toastError } from '../constants';
+import { ExercisesContext } from '../contexts/ExercisesContextProvider';
 
 interface CardProps {
   size: 'sm' | 'md' | 'lg';
@@ -11,12 +14,27 @@ interface CardProps {
   text: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   duration: string;
-  // difficulty: "BÃ¡sico" | "Intermedia" | "Alta";
   difficulty: string;
+  exerciseId: number;
 }
 
 export const Card = (props: CardProps) => {
-  const { size, img, text, isFav, onFavClick, onClick, difficulty, duration } = props;
+  const { size, img, text, isFav, onFavClick, onClick, difficulty, duration, exerciseId } = props;
+  const { isLoadingAddToFav } = useContext(ExercisesContext);
+
+  const handleShareClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    event.stopPropagation();
+    const urls = 'https://www.revibes.netlify.app/';
+    navigator.clipboard
+      .writeText(urls)
+      .then(() => {
+        toast.success('Copiado correctamente', { ...toastDefault, containerId: `modalCard${text}` });
+      })
+      .catch(() => {
+        toast.error('Failed to copy', toastError);
+      });
+  };
+
   return (
     <>
       <button
@@ -90,9 +108,9 @@ export const Card = (props: CardProps) => {
                 card__icons_top_size: true,
                 [`card__icons_top_size--${size}`]: size,
                 [`card__icons_top_size--active`]: isFav,
+                [`card__icons_top_size--loading`]: isLoadingAddToFav(exerciseId),
               })}
               onClick={event => {
-                console.log(event);
                 event.stopPropagation();
                 onFavClick();
               }}
@@ -103,7 +121,9 @@ export const Card = (props: CardProps) => {
               card__icons_top_size: true,
               [`card__icons_top_size--${size}`]: size,
             })}
+            onClick={handleShareClick}
           />
+          <ToastContainer containerId={`modalCard${text}`} />
         </div>
       </button>
     </>

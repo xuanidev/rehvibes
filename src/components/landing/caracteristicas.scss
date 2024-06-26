@@ -8,6 +8,9 @@
     flex-direction: column;
     justify-content: center;
     padding: 160px 240px 0px 240px;/* Añadido para dar margen superior a la imagen */
+    @include breakpoint('3xl'){
+        padding: 160px 340px 0px 340px;/* Añadido para dar margen superior a la imagen */
+    }
 }
 
 .tab-content-caracteristicas {
@@ -180,7 +183,7 @@
 
 .tabs-caracteristicas {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative; /* Cambiado de absolute a relative */
     margin-top: 20px; /* Añadido para dar margen superior a las pestañas */
     width: 100%;
@@ -191,7 +194,6 @@
     cursor: pointer;
     text-align: left;
     width: calc(25% - 32px); /* Ajusta el ancho para cada pestaña */
-    margin: 0 16px; /* Ajusta el margen para reducir el espacio entre pestañas */
     border-top: solid 4px grey;
 }
 

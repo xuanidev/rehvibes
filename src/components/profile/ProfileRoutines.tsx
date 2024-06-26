@@ -62,6 +62,7 @@ export const ProfileRoutines = () => {
                 onClick={() => console.log(`Clicked on routine ${routine.id}`)}
                 size="sm"
                 text={routine.name}
+                exerciseId={routine.id}
               />
             ))}
           </div>
@@ -75,6 +76,7 @@ export const ProfileRoutines = () => {
               onClick={() => console.log(`Clicked on routine ${routina.id}`)}
               size="sm"
               text={routina.name}
+              exerciseId={routina.id}
             />
           </div>
         )}

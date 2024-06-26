@@ -79,6 +79,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
     finished: false,
     rehabilitation_program: [] as RehabilitationDay[],
   });
+
   const [currentProgramId, setCurrentProgramId] = useState<string>('');
   const [rehabDays, setRehabDays] = useState<Date[]>([]);
   const [routineInfo, setRoutineInfo] = useState<RoutineInfo>({
@@ -107,7 +108,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps): JSX
   }, []);
 
   const contextValue = {
-    username: userInfo.name,
+    username: userInfo.name ?? username,
     setUsername,
     userInfo,
     setUserInfo,

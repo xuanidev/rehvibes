@@ -4,6 +4,9 @@
     width: 100%;
     padding: 160px 240px;
     height: auto;
+    @include breakpoint('3xl'){
+        padding: 160px 340px;
+    }
 }
 
 .claim__div {
@@ -45,4 +48,5 @@
     background-color: var(--color-fluorescent);
     border: 1.5px solid var(--color-fluorescent);
     color: var(--color-white);
+    cursor: pointer;
 }

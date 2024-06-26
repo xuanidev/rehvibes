@@ -7,6 +7,9 @@
   margin-right: auto;
   margin-left: auto;
   text-transform: uppercase;
+  @include breakpoint('3xl'){
+    padding: 160px 340px;
+}
 }
 
 .title-form {

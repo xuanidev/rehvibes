@@ -15,8 +15,10 @@
     display:flex;
     justify-content:flex-end;
     column-gap:120px;
+    font-family: 'Satoshi-Regular';
+    font-size: 20px;
   }
-  
+
 ul {
     display: flex;
     flex-direction: column;
@@ -46,4 +48,12 @@ ul {
   .icon_footer {
     height: 24px;
     width: 24px;
+  }
+  .footer_tittle{
+    font-family: 'Satoshi-Regular';
+    font-weight: 400;
+  }
+  .footer_link{
+    font-family: 'Satoshi-Regular';
+    font-weight: 400;
   }
