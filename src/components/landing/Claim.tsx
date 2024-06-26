@@ -11,7 +11,7 @@ export const Claim = () => {
         <Points_Claim className="icon_claim" />
         <span className="claim__tittle2">una rehabilitación dinámica, efectiva y fácil de consumir.</span>
       </div>
-      <button className="gotosignup">Comienza ahora</button>
+      <button className="gotosignup_claim">Comienza ahora</button>
     </div>
   );
 };

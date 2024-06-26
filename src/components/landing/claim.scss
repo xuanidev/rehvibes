@@ -30,13 +30,19 @@
     text-align: right;
 }
 
-.gotosignup {
-    padding: 12px 40px;
-    background-color: var(--color-fluorescent);
-    border-color: none;
-    color:white;
+.gotosignup_claim{
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    font-size: 18px;
+    border: 1.5px solid var(--color-fluorescent);
     border-radius: 8px;
-    box-shadow: none;
-    border-width: 0px;
+    font-family: "Satoshi-Medium";
+    padding: 12px 32px;
     float: inline-end;
+}
+
+.gotosignup_claim:hover {
+    background-color: var(--color-fluorescent);
+    border: 1.5px solid var(--color-fluorescent);
+    color: var(--color-white);
 }

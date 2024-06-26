@@ -7,9 +7,9 @@ export const Caracteristicas = () => {
       <input type="radio" name="tabs" id="tab2" className="radio-tab-caracteristicas" />
       <input type="radio" name="tabs" id="tab3" className="radio-tab-caracteristicas" />
       <input type="radio" name="tabs" id="tab4" className="radio-tab-caracteristicas" />
-      <div className="upper_text_caracteristicas">
+      <h2 className="upper_text_caracteristicas">
         Cuando te mueves y realizas ejercicio, <span>tu cuerpo mejora y desarrolla:</span>
-      </div>
+      </h2>
       <div className="tab-content-caracteristicas content1">
         <div className="content1_shadow">
           <div className="content1_img"></div>
