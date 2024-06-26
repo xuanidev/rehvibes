@@ -46,6 +46,15 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { setShowModalExercise, setShowModalLibrary } = useModal();
 
+  useEffect(() => {
+    const checkFav = async () => {
+      const favExercises = await getFavorites(getFromCookies('uid'));
+      setIsFavorite(favExercises.includes(id));
+    };
+
+    checkFav();
+  }, [id]);
+
   const handleAddToFavorites = async () => {
     await getFavorites(getFromCookies('uid'));
   };
@@ -54,6 +63,7 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
     try {
       if (isFavorite) {
         await removeExerciseFromFavorites(getFromCookies('uid'), currentExerciseId);
+        console.log('holi');
       } else {
         await addExerciseToFavorites(getFromCookies('uid'), currentExerciseId);
       }
