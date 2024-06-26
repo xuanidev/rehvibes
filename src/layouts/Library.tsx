@@ -1,14 +1,12 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import '../styles/layouts/_library.scss';
-import { getExercises, getExercisesById } from '../api/exercises';
 import { Exercise } from '../models';
 import Slider from '../components/library/Slider';
-import { getFromCookies } from '../utils/helpers';
-import { getFavorites } from '../api/users';
 import ModalExercise from '../components/ModalExercise';
 import { useModal } from '../contexts/ModalContext';
 import { TopLibrary } from '../components/library/TopLibrary';
 import { SearchContext } from '../contexts/SearchContext';
+import { ExercisesContext } from '../contexts/ExercisesContextProvider';
 
 const exerciseMatchesFilter = (exercise: Exercise, normalizedSearch: string) => {
   const { name, description, mainAreas } = exercise;
@@ -24,23 +22,9 @@ const exerciseMatchesFilter = (exercise: Exercise, normalizedSearch: string) => 
 
 export const Library = () => {
   const { search } = useContext(SearchContext);
-  const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [favorites, setFavorites] = useState<Exercise[]>([]);
+  const { exercises, favorites } = useContext(ExercisesContext);
   const { showModalLibrary, setShowModalLibrary } = useModal();
   const [clickedExerciseId, setClickedExerciseId] = useState<number>(0);
-
-  useEffect(() => {
-    const fetchAndSetExercises = async () => {
-      const auxExercises = await getExercises();
-      setExercises(auxExercises);
-      const favorites = await getFavorites(getFromCookies('uid'));
-      const stringArray: string[] = favorites.map(String);
-      const auxFavorites = await getExercisesById(stringArray);
-      setFavorites(auxFavorites);
-    };
-
-    fetchAndSetExercises();
-  }, []);
 
   const filteredExercises = useMemo(() => {
     const normalizedSearch = search.toLowerCase();

@@ -5,6 +5,8 @@ import classNames from 'classnames';
 
 interface CardProps {
   size: 'sm' | 'md' | 'lg';
+  isFav?: boolean;
+  onFavClick?: () => void;
   img: string;
   text: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -14,8 +16,7 @@ interface CardProps {
 }
 
 export const Card = (props: CardProps) => {
-  const { size, img, text, onClick, difficulty, duration } = props;
-
+  const { size, img, text, isFav, onFavClick, onClick, difficulty, duration } = props;
   return (
     <>
       <button
@@ -83,12 +84,20 @@ export const Card = (props: CardProps) => {
             [`card__icons_top--${size}`]: size,
           })}
         >
-          <AddToFavorites
-            className={classNames({
-              card__icons_top_size: true,
-              [`card__icons_top_size--${size}`]: size,
-            })}
-          />
+          {onFavClick && (
+            <AddToFavorites
+              className={classNames({
+                card__icons_top_size: true,
+                [`card__icons_top_size--${size}`]: size,
+                [`card__icons_top_size--active`]: isFav,
+              })}
+              onClick={event => {
+                console.log(event);
+                event.stopPropagation();
+                onFavClick();
+              }}
+            />
+          )}
           <Share
             className={classNames({
               card__icons_top_size: true,

@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { Exercise } from '../../models';
 import Card from '../Card';
 import { UserContext } from '../../contexts/UserContextProvider';
+import { ExercisesContext } from '../../contexts/ExercisesContextProvider';
 
 interface SliderProps {
   tittle: string;
@@ -14,6 +15,7 @@ interface SliderProps {
 export const Slider = (props: SliderProps) => {
   const { exercises, tittle, setShowModalLibrary, setClickedExerciseId } = props;
   const { setCurrentExerciseId } = useContext(UserContext);
+  const { isExerciseFav, toggleFav } = useContext(ExercisesContext);
   const sliderContainer = useRef<HTMLDivElement>(null);
   const isDown = useRef(false);
   const startX = useRef<number | null>(null);
@@ -59,7 +61,6 @@ export const Slider = (props: SliderProps) => {
 
         const mouseUp = clientX;
         if (startClicked && mouseUp < startClicked.current + 6 && mouseUp > startClicked.current - 6) {
-          handleClick(1);
         }
         isDown.current = false;
         setIsGrabbing(false);
@@ -151,10 +152,15 @@ export const Slider = (props: SliderProps) => {
           {exercises.map((exercise: Exercise) => (
             <Card
               key={exercise.id}
+              isFav={isExerciseFav(exercise.id)}
+              onFavClick={() => toggleFav(exercise.id)}
               img={exercise.image}
               difficulty={exercise.difficulty}
               duration={'40min' + '.'}
-              onClick={() => setCurrentExerciseId(exercise.id)}
+              onClick={() => {
+                handleClick(exercise.id);
+                setCurrentExerciseId(exercise.id);
+              }}
               size="sm"
               text={exercise.name}
             />
