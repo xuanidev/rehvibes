@@ -4,13 +4,14 @@ import Esterilla from '../assets/materials/esterilla.png';
 import { ExerciseWarning } from './ExerciseWarning';
 import { useContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { addExerciseToFavorites, getFavorites, removeExerciseFromFavorites } from '../api/users';
+import { getFavorites } from '../api/users';
 import { getFromCookies } from '../utils/helpers';
 import { UserContext } from '../contexts/UserContextProvider';
 import { getExercisesById } from '../api/exercises';
 import { Exercise } from '../models';
 import MaterialsLandingContainer from './MaterialsLandingContainer';
 import { useModal } from '../contexts/ModalContext';
+import { ExercisesContext } from '../contexts/ExercisesContextProvider';
 
 interface ModalExerciseProps {
   id: number;
@@ -40,25 +41,19 @@ const defaultExercise: Exercise = {
 
 export const ModalExercise = ({ id }: ModalExerciseProps) => {
   const { currentExerciseId = 0 } = useContext(UserContext);
+  const { isExerciseFav, toggleFav } = useContext(ExercisesContext);
   const [exercise, setExercise] = useState<Exercise>(defaultExercise);
   const [play, setPlay] = useState<boolean>(false);
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { setShowModalExercise, setShowModalLibrary } = useModal();
+  const isFavorite = isExerciseFav(id);
 
   const handleAddToFavorites = async () => {
     await getFavorites(getFromCookies('uid'));
   };
 
   const handleFavorites = async () => {
-    try {
-      if (isFavorite) {
-        await removeExerciseFromFavorites(getFromCookies('uid'), currentExerciseId);
-      } else {
-        await addExerciseToFavorites(getFromCookies('uid'), currentExerciseId);
-      }
-      setIsFavorite(!isFavorite);
-    } catch (error) {}
+    toggleFav(id);
   };
 
   const handleClick = () => {
@@ -68,6 +63,7 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
     setShowModalExercise(false);
     setShowModalLibrary(false);
   };
+
   useEffect(() => {
     if (videoRef.current) {
       if (play) {
@@ -78,12 +74,14 @@ export const ModalExercise = ({ id }: ModalExerciseProps) => {
       }
     }
   }, [play]);
+
   const getExercise = async () => {
     const exercises = await getExercisesById([`${id}`]);
     if (exercises && exercises.length > 0) {
       setExercise(exercises[0]);
     }
   };
+
   useEffect(() => {
     getExercise();
   }, [currentExerciseId]);
