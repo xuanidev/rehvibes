@@ -93,7 +93,11 @@ export const Configuration = () => {
         <div className="configuration__options_group margin_bottom_option">
           <ConfigurationOption
             tittle="Eliminar cuenta"
-            text="Activa las notificaciones para recibir recordatorios de tus sesiones, consejos personalizados y actualizaciones importantes de Revibes. ¡Mantén tu rehabilitación en marcha y sin interrupciones!"
+            children={
+              <>
+                <OptionExtended text="Eliminar cuenta definitivamente" type="delete" textButton="Eliminar" />
+              </>
+            }
           />
         </div>
       </div>
