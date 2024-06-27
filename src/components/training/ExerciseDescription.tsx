@@ -21,7 +21,7 @@ export const ExerciseDescription = (props: ExerciseDescriptionProps) => {
       <div className="exercise_description__info">
         <div className="exercise_description__top">
           <Type className="exercise_description__top_icon" />
-          <h3 className="exercise_description__top_type">Ejercicio de {type}</h3>
+          <h3 className="exercise_description__top_type">{type}</h3>
         </div>
         <p className="exercise_description__observations">{objective}</p>
         <div className="exercise_description__data">
