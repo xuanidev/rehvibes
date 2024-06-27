@@ -36,6 +36,9 @@
     @include breakpoint('md') {
         height: 450px;
       }
+      @include breakpoint('2xl') {
+        height: 650px;
+      }
   }
 
   &__video {
