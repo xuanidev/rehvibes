@@ -21,11 +21,10 @@ export const Configuration = () => {
             text="Activa las notificaciones para recibir recordatorios de tus sesiones, consejos personalizados y actualizaciones importantes de Revibes. ¡Mantén tu rehabilitación en marcha y sin interrupciones!"
             children={
               <>
-                <OptionExtended text="Tamaño de texto" type="button" textButton="Normal" />
                 <OptionExtended text="Permitir notificaciones" type="switch" />
-                <OptionExtended text="Modo alto contraste" type="switchOff" />
-                <OptionExtended text="Control por voz" type="switchOff" />
-                <OptionExtended text="Descripciones" type="switchOff" />
+                <OptionExtended text="Recordatorio de entrenamiento" type="switch" />
+                <OptionExtended text="Notificaciones de programa" type="switch" />
+                <OptionExtended text="Tamaño de texto" type="button" textButton="Normal" />
               </>
             }
           />
@@ -35,8 +34,9 @@ export const Configuration = () => {
             children={
               <>
                 <OptionExtended text="Permitir notificaciones" type="switch" />
-                <OptionExtended text="Recordatorio de entrenamiento" type="switch" />
-                <OptionExtended text="Notificaciones de programa" type="switch" />
+                <OptionExtended text="Modo alto contraste" type="switchOff" />
+                <OptionExtended text="Control por voz" type="switchOff" />
+                <OptionExtended text="Descripciones" type="switchOff" />
               </>
             }
           />
