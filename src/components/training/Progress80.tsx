@@ -51,7 +51,7 @@ export const Progress80 = (props: ProgresProps) => {
           }}
         />
         <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="progress_percentage__text">
-          {progress}%
+          {progress.toFixed(2)}%
         </text>
         <defs>
           <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">

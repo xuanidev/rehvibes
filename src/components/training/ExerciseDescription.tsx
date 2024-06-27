@@ -16,8 +16,8 @@ export const ExerciseDescription = (props: ExerciseDescriptionProps) => {
   const { type, maxReps, minReps, series, progress, objective } = props;
   return (
     <div className="exercise_description">
-      <Progress80 progress={Number(progress.toFixed(2))} style="exercise_description__progress" />
-      <Progress110 progress={Number(progress.toFixed(2))} style="exercise_description__progress_xl" />
+      <Progress80 progress={progress} style="exercise_description__progress" />
+      <Progress110 progress={progress} style="exercise_description__progress_xl" />
       <div className="exercise_description__info">
         <div className="exercise_description__top">
           <Type className="exercise_description__top_icon" />
